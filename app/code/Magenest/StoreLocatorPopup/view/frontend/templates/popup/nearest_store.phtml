@@ -1,0 +1,26 @@
+<?php
+/* @var NearestStorePopup $block */
+/* @var Magento\Framework\Escaper $escaper */
+use Magenest\StoreLocatorPopup\Block\NearestStorePopup;
+?>
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=<?= $escaper->escapeHtml($block->getApiKey())?>"></script>
+<div id="nearest-store" data-bind="scope:'nearest-store'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <script type="text/x-magento-init">
+    {
+        "#nearest-store": {
+            "Magento_Ui/js/core/app": {
+               "components": {
+                    "nearest-store": {
+                        "component": "Magenest_StoreLocatorPopup/js/nearestStore",
+                        "urlSearchAddress": "<?= $block->getUrl('store/ajax/searchAddress') ?>",
+                        "urlSelectStore": "<?= $block->getUrl('store/ajax/selectStore') ?>",
+                        "baseUrlStore":  "<?= $block->getBaseUrlStore() ?>"
+                    }
+                }
+            }
+        }
+    }
+
+    </script>
+</div>

@@ -1,0 +1,12 @@
+<div class="amdelivery-main-container fieldset" if="visible()">
+    <span class="amdelivery-rules value"
+          data-bind="html: showDeliveryRulesBlock()" if="showDeliveryRulesBlock()"></span>
+    <each args="data: elems, as: 'element'">
+        <render if="hasTemplate()"></render>
+    </each>
+</div>
+<!--ko if: isChannelSetExist()-->
+<div if="noAvailableDates() && isAnyChildRequired()" class="amdelivery-nodates-message message notice">
+    <span translate="'No delivery time slots available for the selected shipping method at the moment. Please, try another shipping method or get in touch with the store administrator.'"></span>
+</div>
+<!--/ko-->

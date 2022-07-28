@@ -1,0 +1,158 @@
+<?php
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket Private Sales and Flash Sales v4.x.x
+ * @copyright   Copyright (c) 2020 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+?>
+
+<?php
+$htmlId = $block->getHtmlId() ? $block->getHtmlId() : '_' . uniqid();
+$tableId = $block->getElement()->getId() . $htmlId;
+$colspan = $block->isAddAfter() ? 2 : 1;
+?>
+
+<div class="design_theme_ua_regexp" id="grid<?= $block->escapeHtmlAttr($htmlId) ?>">
+    <div id="addTable<?= $block->escapeHtmlAttr($htmlId) ?>" class="admin__control-table-wrapper"></div>
+    <?php if ($block->isAddAfter()) :?>
+        <button class="action-primary" type="button" id="addAfterBtn<?= $tableId ?>">
+            <span><?= $block->escapeHtml(__('Add Permission')) ?></span>
+        </button>
+    <?php endif ?>
+    <input type="hidden" name="<?= $block->escapeHtmlAttr($block->getElement()->getName()) ?>[__empty]" value="" />
+    <script>
+        require([
+            'mage/template',
+            'Plumrocket_PrivateSale/js/validation/permission',
+            'prototype'
+        ], function (mageTemplate, permissionValidator) {
+            // create row creator
+            window.arrayRow<?= $block->escapeJs($htmlId) ?> = {
+
+                // define row Underscore template
+                template: mageTemplate(
+                    '<tr id="<%- _id %>">'
+                    <?php foreach ($block->getColumns() as $columnName => $column) : ?>
+                        + '<% if (obj.<?= $columnName ?> !== undefined) { %>'
+                            + '<td rowspan="<?= isset($column['rowspan']) ? $column['rowspan'] : 1 ?>">'
+                            + '<?= $block->escapeJs($block->renderCellTemplate($columnName)) ?>'
+                            + '<\/td>'
+                        + '<% } %>'
+                    <?php endforeach; ?>
+                    +'<\/tr>'
+                ),
+
+                skeleton: mageTemplate(
+                    '<table class="admin__control-table" id="<?= $block->escapeHtmlAttr($tableId) ?>">'
+                    + '<thead>'
+                    + '<tr>'
+                    <?php foreach ($block->getColumns() as $columnName => $column) : ?>
+                    + '<th><?= $block->escapeHtml($column['label']) ?></th>'
+                    <?php endforeach; ?>
+                    + '</tr>'
+                    + '</thead>'
+                    + '<tbody class="addRow<?= $block->escapeHtmlAttr($htmlId) ?>"></tbody>'
+                    + '</table>'
+                ),
+
+                add: function(rowData, insertAfterId, fillData = true) {
+                    // generate default template data
+                    var templateValues;
+
+                    // Prepare template values
+                    if (rowData) {
+                        templateValues = rowData;
+                    } else {
+                        var d = new Date();
+                        templateValues = {
+                            <?php foreach ($block->getColumns() as $columnName => $column) : ?>
+                            <?= $block->escapeJs($columnName) ?>: '',
+                                'option_extra_attrs': {},
+                            <?php endforeach; ?>
+                            _id: '_' + d.getTime() + '_' + d.getMilliseconds()
+                        };
+                    }
+
+                    // Insert new row after specified row or at the bottom
+                    if (insertAfterId) {
+                        Element.insert($(insertAfterId), {after: this.template(templateValues)});
+                    } else {
+                        Element.insert($$('.addRow<?= $block->escapeJs($htmlId) ?>').last(), {bottom: this.template(templateValues)});
+                    }
+
+                    // Fill controls with data
+                    if (rowData && fillData) {
+                        var rowInputElementNames = Object.keys(rowData.column_values), column;
+                        for (var i = 0; i < rowInputElementNames.length; i++) {
+                            if ($(rowInputElementNames[i])) {
+                                column = rowData.column_values[rowInputElementNames[i]];
+                                $(rowInputElementNames[i]).setValue(column ? column.value : null);
+                            }
+                        }
+                    }
+                },
+
+                addHeader: function () {
+                    Element.insert($('addTable<?= $block->escapeJs($htmlId) ?>'), {bottom: this.skeleton()});
+                },
+
+                addTable: function () {
+                    var defaultValues = JSON.parse(this.getDataForNewTable());
+                    this.addHeader();
+
+                    for (var row of defaultValues) {
+                        this.addTableRow(row);
+                    }
+                },
+
+                addTableRow: function (row) {
+                    setTimeout(function () {
+                        var date = new Date();
+                        row['_id'] = '_' + date.getTime() + '_' + date.getMilliseconds();
+                        this.add(row, null, false);
+                    }.bind(this), 1);
+                },
+
+                getDataForNewTable: function () {
+                    return '<?= $block->getDefaultTableValues()->toJson()?>';
+                }
+            }
+
+            <?php if ($block->isAddAfter()) :?>
+                Event.observe('addAfterBtn<?= $tableId ?>', 'click', window
+                    .arrayRow<?= $block->escapeJs($htmlId) ?>
+                    .addTable
+                    .bind(arrayRow<?= $block->escapeJs($htmlId) ?>, false));
+            <?php endif ?>
+
+            // add existing rows
+            <?php
+                if ($block->getArrayRows()) {
+                    echo /** @noEscape */ "arrayRow{$block->escapeJs($htmlId)}.addHeader();\n";
+                }
+
+                $counter = 0;
+
+                foreach ($block->getArrayRows() as $_rowId => $_row) {
+                    if ($counter === 3) {
+                        echo /** @noEscape */ "arrayRow{$block->escapeJs($htmlId)}.addHeader();\n";
+                        $counter = 0;
+                    }
+
+                    $counter++;
+                    echo /** @noEscape */ "arrayRow{$block->escapeJs($htmlId)}.add(" . /** @noEscape */ $_row->toJson() . ");\n";
+                }
+            ?>
+        });
+    </script>
+</div>

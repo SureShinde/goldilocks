@@ -1,0 +1,398 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="amasty_deliverydate_order_limit" resource="default" engine="innodb"
+           comment="Amasty DeliveryDate Order limits table">
+        <column xsi:type="int" name="limit_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Time Limit ID"/>
+        <column xsi:type="varchar" name="name" nullable="true" length="255" default="" comment="Name"/>
+        <column xsi:type="int" name="day_limit" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Order limit for a day"/>
+        <column xsi:type="int" name="interval_limit" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Order limit for an interval"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="limit_id"/>
+        </constraint>
+    </table>
+
+    <table name="amasty_deliverydate_delivery_channel" resource="default" engine="innodb"
+           comment="Amasty DeliveryDate Delivery Channels">
+        <column xsi:type="int" name="channel_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Channel ID"/>
+        <column xsi:type="int" name="limit_id" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Order limit relation"/>
+        <column xsi:type="int" name="config_id" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Delivery Channel Configuration ID"/>
+        <column xsi:type="boolean" name="is_active" nullable="false" default="0" comment="Enabled"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="255" default="" comment="Name"/>
+        <column xsi:type="boolean" name="has_order_counter" nullable="false" default="false"
+                comment="Does the channel have an order counter"/>
+        <column xsi:type="int" name="priority" padding="11" unsigned="false" nullable="false" identity="false"
+                default="0" comment="Channel priority"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="channel_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_69B03F430DD7A48CFD257E1C63C0C8A5"
+                    table="amasty_deliverydate_delivery_channel" column="limit_id"
+                    referenceTable="amasty_deliverydate_order_limit" referenceColumn="limit_id" onDelete="SET NULL"/>
+        <index referenceId="AMASTY_DELIVERYDATE_DELIVERY_CHANNEL_LIMIT_ID" indexType="btree">
+            <column name="limit_id"/>
+        </index>
+        <constraint xsi:type="foreign" referenceId="FK_AMASTY_DELIVERYDATE_DELIVERY_CHANNEL_CONFIG_ID"
+                    table="amasty_deliverydate_delivery_channel" column="config_id"
+                    referenceTable="amasty_deliverydate_channel_configuration" referenceColumn="id" onDelete="SET NULL"/>
+        <index referenceId="AMASTY_DELIVERYDATE_DELIVERY_CHANNEL_CONFIG_ID" indexType="btree">
+            <column name="config_id"/>
+        </index>
+        <index referenceId="AMASTY_DELIVERYDATE_DELIVERY_CHANNEL_HAS_ORDER_COUNTER" indexType="btree">
+            <column name="has_order_counter"/>
+        </index>
+        <index referenceId="AMASTY_DELIVERYDATE_DELIVERY_CHANNEL_PRIORITY" indexType="btree">
+            <column name="priority"/>
+        </index>
+    </table>
+
+    <table name="amasty_deliverydate_delivery_channel_store" resource="default" engine="innodb"
+           comment="Amasty DeliveryDate Store scope for Delivery Channel">
+        <column xsi:type="int" name="scope_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Scope ID"/>
+        <column xsi:type="int" name="channel_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Channel ID"/>
+        <column xsi:type="smallint" name="store_id" padding="5" unsigned="true" nullable="false" identity="false"
+                comment="Store View ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="scope_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_D83FF99251AC3C0F598FBC3F9900213E"
+                    table="amasty_deliverydate_delivery_channel_store" column="channel_id"
+                    referenceTable="amasty_deliverydate_delivery_channel" referenceColumn="channel_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="FK_BA5823BE9D97A04F4D36D471C6FF903A"
+                    table="amasty_deliverydate_delivery_channel_store" column="store_id" referenceTable="store"
+                    referenceColumn="store_id" onDelete="CASCADE"/>
+        <index referenceId="AMASTY_DELIVERYDATE_DELIVERY_CHANNEL_STORE_CHANNEL_ID" indexType="btree">
+            <column name="channel_id"/>
+        </index>
+        <index referenceId="AMASTY_DELIVERYDATE_DELIVERY_CHANNEL_STORE_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+    </table>
+
+    <table name="amasty_deliverydate_delivery_channel_shipping_method" resource="default" engine="innodb"
+           comment="Amasty DeliveryDate Shipping Method scope for Delivery Channel">
+        <column xsi:type="int" name="scope_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Scope ID"/>
+        <column xsi:type="int" name="channel_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Channel ID"/>
+        <column xsi:type="varchar" name="shipping_method" nullable="false" length="255"
+                comment="Full shipping method code"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="scope_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_0530A03D0BCE048C9D7207016AA1EB6D"
+                    table="amasty_deliverydate_delivery_channel_shipping_method" column="channel_id"
+                    referenceTable="amasty_deliverydate_delivery_channel" referenceColumn="channel_id"
+                    onDelete="CASCADE"/>
+        <index referenceId="AMASTY_DELIVERYDATE_DELIVERY_CHANNEL_SHPP_METHOD_CHANNEL_ID" indexType="btree">
+            <column name="channel_id"/>
+        </index>
+        <index referenceId="IDX_5411656394A8241FB77591E4AD954BF0" indexType="btree">
+            <column name="shipping_method"/>
+        </index>
+    </table>
+
+    <table name="amasty_deliverydate_delivery_channel_group" resource="default" engine="innodb"
+           comment="Amasty DeliveryDate Customer Group scope for Delivery Channel">
+        <column xsi:type="int" name="scope_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Scope ID"/>
+        <column xsi:type="int" name="channel_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Channel ID"/>
+        <column xsi:type="int" name="group_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Group ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="scope_id"/>
+        </constraint>
+        <constraint xsi:type="foreign"
+                    referenceId="FK_AMASTY_DELIVERYDATE_DELIVERY_CHANNEL_GROUP"
+                    table="amasty_deliverydate_delivery_channel_group" column="channel_id"
+                    referenceTable="amasty_deliverydate_delivery_channel" referenceColumn="channel_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="FK_AMASTY_DELIVERYDATE_CUSTOMER_GROUP"
+                    table="amasty_deliverydate_delivery_channel_group" column="group_id"
+                    referenceTable="customer_group" referenceColumn="customer_group_id"
+                    onDelete="CASCADE"/>
+        <index referenceId="AMASTY_DELIVERYDATE_DELIVERY_CHANNEL_GROUP_CHANNEL_ID" indexType="btree">
+            <column name="channel_id"/>
+        </index>
+        <index referenceId="AMASTY_DELIVERYDATE_DELIVERY_CHANNEL_GROUP_GROUP_ID" indexType="btree">
+            <column name="group_id"/>
+        </index>
+    </table>
+
+    <table name="amasty_deliverydate_date_schedule" resource="default" engine="innodb"
+           comment="Amasty Promotions Rules Table">
+        <column xsi:type="int" name="schedule_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Date ID"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="255" default="" comment="Name"/>
+        <column xsi:type="int" name="limit_id" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Order limit relation"/>
+        <column xsi:type="smallint" name="type" padding="6" unsigned="false" nullable="false" identity="false"
+                default="0" comment="Date schedule type"/>
+        <column xsi:type="date" name="from" comment="Date range from"/>
+        <column xsi:type="date" name="to" comment="Date range to"/>
+        <column xsi:type="boolean" name="is_available" nullable="false" default="true"
+                comment="Is days available for delivery"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="schedule_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_9582C2EA4EEABCA4CAF304DA7609E446"
+                    table="amasty_deliverydate_date_schedule" column="limit_id"
+                    referenceTable="amasty_deliverydate_order_limit" referenceColumn="limit_id" onDelete="SET NULL"/>
+        <index referenceId="AMASTY_DELIVERYDATE_DATE_SCHEDULE_LIMIT_ID" indexType="btree">
+            <column name="limit_id"/>
+        </index>
+        <index referenceId="AMASTY_DELIVERYDATE_DATE_SCHEDULE_TYPE" indexType="btree">
+            <column name="type"/>
+        </index>
+    </table>
+
+    <table name="amasty_deliverydate_time_interval" resource="default" engine="innodb"
+           comment="Amasty DeliveryDate Time intervals">
+        <column xsi:type="int" name="interval_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Time Interval ID"/>
+        <column xsi:type="int" name="limit_id" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Order limit relation"/>
+        <column xsi:type="smallint" name="from" padding="6" unsigned="false" nullable="false" identity="false"
+                comment="Start of an interval in minutes"/>
+        <column xsi:type="smallint" name="to" padding="6" unsigned="false" nullable="false" identity="false"
+                comment="End of an interval in minutes"/>
+        <column xsi:type="varchar" name="label" nullable="false" length="255" default="" comment="Label"/>
+        <column xsi:type="smallint"  name="position" unsigned="true" nullable="false" default="0" identity="false"
+                comment="Position in interval list"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="interval_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_F19F74838DC40625B8CA863E84D08C0D"
+                    table="amasty_deliverydate_time_interval" column="limit_id"
+                    referenceTable="amasty_deliverydate_order_limit" referenceColumn="limit_id" onDelete="SET NULL"/>
+        <index referenceId="AMASTY_DELIVERYDATE_TIME_INTERVAL_LIMIT_ID" indexType="btree">
+            <column name="limit_id"/>
+        </index>
+    </table>
+
+    <table name="amasty_deliverydate_time_interval_label" resource="default" engine="innodb"
+           comment="Amasty DeliveryDate Time interval labels">
+        <column xsi:type="int" name="interval_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Date ID"/>
+        <column xsi:type="smallint" name="store_id" padding="5" unsigned="true" nullable="false" identity="false"
+                comment="Order limit relation"/>
+        <column xsi:type="varchar" name="label" nullable="false" length="255" comment="Time Interval label"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="interval_id"/>
+            <column name="store_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_44D435843DCCD1264688B5455A618D9B"
+                    table="amasty_deliverydate_time_interval_label" column="interval_id"
+                    referenceTable="amasty_deliverydate_time_interval" referenceColumn="interval_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="FK_3E6B9346547F46DBDED3016239352927"
+                    table="amasty_deliverydate_time_interval_label" column="store_id" referenceTable="store"
+                    referenceColumn="store_id" onDelete="CASCADE"/>
+    </table>
+
+    <table name="amasty_deliverydate_time_interval_date_schedule" resource="default" engine="innodb"
+           comment="Amasty DeliveryDate relation table between a date schedule and a time interval">
+        <column xsi:type="int" name="relation_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Relation_id"/>
+        <column xsi:type="int" name="date_schedule_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Date_schedule_id"/>
+        <column xsi:type="int" name="time_interval_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Time_interval_id"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="relation_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_1ADA0E2F1768179E563322702131868E"
+                    table="amasty_deliverydate_time_interval_date_schedule" column="date_schedule_id"
+                    referenceTable="amasty_deliverydate_date_schedule" referenceColumn="schedule_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="FK_1FA3B2CF79C7AB4EB721AC733B1877F1"
+                    table="amasty_deliverydate_time_interval_date_schedule" column="time_interval_id"
+                    referenceTable="amasty_deliverydate_time_interval" referenceColumn="interval_id"
+                    onDelete="CASCADE"/>
+        <index referenceId="IDX_6D1573925BA8A4755C10DD199231A126" indexType="btree">
+            <column name="date_schedule_id"/>
+        </index>
+        <index referenceId="IDX_30C71F34C3D2B38A79A22126104533DD" indexType="btree">
+            <column name="time_interval_id"/>
+        </index>
+    </table>
+
+    <table name="amasty_deliverydate_date_schedule_delivery_channel" resource="default" engine="innodb"
+           comment="Amasty DeliveryDate Delivery Channels">
+        <column xsi:type="int" name="relation_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Channel ID"/>
+        <column xsi:type="int" name="delivery_channel_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Delivery_channel_id"/>
+        <column xsi:type="int" name="date_schedule_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Date_schedule_id"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="relation_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_09595A42E6A860661CE6BF5565D4ADAD"
+                    table="amasty_deliverydate_date_schedule_delivery_channel" column="delivery_channel_id"
+                    referenceTable="amasty_deliverydate_delivery_channel" referenceColumn="channel_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="FK_329A5C2F0791FCCC0B38748A82A4EEA2"
+                    table="amasty_deliverydate_date_schedule_delivery_channel" column="date_schedule_id"
+                    referenceTable="amasty_deliverydate_date_schedule" referenceColumn="schedule_id"
+                    onDelete="CASCADE"/>
+        <index referenceId="IDX_3EB538DE0CC6D074C83CC97B081CB517" indexType="btree">
+            <column name="date_schedule_id"/>
+        </index>
+        <index referenceId="IDX_7974196A0857BB0560531665F8E14FA9" indexType="btree">
+            <column name="delivery_channel_id"/>
+        </index>
+    </table>
+
+    <table name="amasty_deliverydate_time_interval_delivery_channel" resource="default" engine="innodb"
+           comment="Amasty DeliveryDate Time Interval Delivery Channels">
+        <column xsi:type="int" name="relation_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Channel ID"/>
+        <column xsi:type="int" name="delivery_channel_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Delivery_channel_id"/>
+        <column xsi:type="int" name="time_interval_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Time_interval_id"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="relation_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_B329338493DB3D2E342C78248F1497F9"
+                    table="amasty_deliverydate_time_interval_delivery_channel" column="delivery_channel_id"
+                    referenceTable="amasty_deliverydate_delivery_channel" referenceColumn="channel_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="FK_8ED679CF39EE98F3736B4688E18AEA89"
+                    table="amasty_deliverydate_time_interval_delivery_channel" column="time_interval_id"
+                    referenceTable="amasty_deliverydate_time_interval" referenceColumn="interval_id"
+                    onDelete="CASCADE"/>
+        <index referenceId="IDX_ECE8F1657882F6763E4B8E7C640C3362" indexType="btree">
+            <column name="time_interval_id"/>
+        </index>
+        <index referenceId="IDX_C2C2D5B08B42676CC1F748EDFF012A09" indexType="btree">
+            <column name="delivery_channel_id"/>
+        </index>
+    </table>
+
+    <table name="amasty_deliverydate_deliverydate_order" resource="default" engine="innodb"
+           comment="amasty_deliverydate_deliverydate_order">
+        <column xsi:type="int" name="deliverydate_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Deliverydate_id"/>
+        <column xsi:type="int" name="counter_id" padding="10" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Delivery Channel ID with counter"/>
+        <column xsi:type="int" name="order_id" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Order_id"/>
+        <column xsi:type="varchar" name="increment_id" nullable="false" length="50" comment="Increment_id"/>
+        <column xsi:type="date" name="date" comment="Date"/>
+        <column xsi:type="smallint" name="time_from" padding="6" unsigned="false" nullable="true" identity="false"
+                comment="Time_from"/>
+        <column xsi:type="smallint" name="time_to" padding="6" unsigned="false" nullable="true" identity="false"
+                comment="Time_to"/>
+        <column xsi:type="text" name="comment" nullable="false" comment="Comment"/>
+        <column xsi:type="boolean" name="reminder" nullable="false" comment="Reminder"/>
+        <column xsi:type="int" name="time_interval_id" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Time_interval_id"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="deliverydate_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_2000586219E15F1664180FC06C094264"
+                    table="amasty_deliverydate_deliverydate_order" column="order_id" referenceTable="sales_order"
+                    referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="AMASTY_DELIVERYDATE_DELIVERYDATE_ORDER_ORDER_ID">
+            <column name="order_id"/>
+        </constraint>
+        <index referenceId="AMASTY_DELIVERYDATE_DELIVERYDATE_ORDER_DATE" indexType="btree">
+            <column name="date"/>
+        </index>
+        <index referenceId="IDX_3B961BE145ADE87966820B61399327A4" indexType="btree">
+            <column name="counter_id"/>
+            <column name="date"/>
+            <column name="time_from"/>
+            <column name="time_to"/>
+        </index>
+        <index referenceId="AMASTY_DELIVERYDATE_DELIVERYDATE_ORDER_TIME_INTERVAL_ID" indexType="btree">
+            <column name="time_interval_id"/>
+        </index>
+    </table>
+
+    <table name="amasty_deliverydate_deliverydate_quote" resource="default" engine="innodb"
+           comment="Amasty DeliveryDate Quote table">
+        <column xsi:type="int" name="delivery_quote_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Delivery_quote_id"/>
+        <column xsi:type="int" name="quote_id" padding="11" unsigned="false" nullable="false" identity="false"
+                comment="Quote_id"/>
+        <column xsi:type="int" name="quote_address_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Quote Address Id"/>
+        <column xsi:type="date" name="date" comment="Date"/>
+        <column xsi:type="text" name="comment" nullable="true" comment="comment"/>
+        <column xsi:type="int" name="time_interval_id" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="comment"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="delivery_quote_id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="AMASTY_DELIVERYDATE_DELIVERYDATE_QUOTE_QUOTE_ADDRESS_ID">
+            <column name="quote_address_id"/>
+        </constraint>
+    </table>
+
+    <table name="amasty_deliverydate_channel_configuration" resource="default"
+           comment="Amasty DeliveryDate Configurations Groups">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Configuration ID"/>
+        <column xsi:type="varchar" name="name" nullable="false" comment="Name of Configuration"/>
+        <column xsi:type="int" name="min" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Min Delivery Period"/>
+        <column xsi:type="int" name="max" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Max Delivery Period"/>
+        <column xsi:type="boolean" name="is_same_day_available" nullable="true"
+                comment="Is Same Day Delivery Allowed"/>
+        <column xsi:type="int" name="same_day_cutoff" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Same day pickup cutoff time"/>
+        <column xsi:type="int" name="order_time" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Mit Time Required to Handle an Order"/>
+        <column xsi:type="int" name="backorder_time" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Mit Time Required to Handle a Backorder"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+
+    <table name="amasty_deliverydate_time_intervals_set" resource="default" comment="Amasty DeliveryDate Time Sets">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Configuration ID"/>
+        <column xsi:type="varchar" name="name" nullable="false" comment="Name of Time Set"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+
+    <table name="amasty_deliverydate_time_intervals_set_relation" resource="default"
+           comment="Amasty DeliveryDate Time Sets">
+        <column xsi:type="int" name="set_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Configuration ID"/>
+        <column xsi:type="smallint" name="relation_type" unsigned="true" nullable="false" identity="false"
+                comment="Relation type (channel, time or schedule)"/>
+        <column xsi:type="int" name="relation_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Relation ID (channel ID, time ID or schedule ID)"/>
+
+        <constraint xsi:type="foreign" referenceId="amasty_deliverydate_time_intervals_set_id"
+                    table="amasty_deliverydate_time_intervals_set_relation" column="set_id"
+                    referenceTable="amasty_deliverydate_time_intervals_set" referenceColumn="id" onDelete="CASCADE"/>
+        <index referenceId="AM_DELIVERYDATE_INTERVAL_SET_RELATION_ID" indexType="btree">
+            <column name="set_id"/>
+        </index>
+        <index referenceId="AM_DELIVERYDATE_INTERVAL_SET_RELATION" indexType="btree">
+            <column name="relation_type"/>
+            <column name="relation_id"/>
+        </index>
+    </table>
+</schema>

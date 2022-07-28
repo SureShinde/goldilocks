@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Amasty\DeliveryDateManager\Block\Checkout\LayoutProcessor">
+        <arguments>
+            <argument name="components" xsi:type="array">
+                <item name="deliverydate_date" xsi:type="object">Amasty\DeliveryDateManager\Block\Component\CalendarComponent</item>
+                <item name="deliverydate_time" xsi:type="object">Amasty\DeliveryDateManager\Block\Component\TimeSelectComponent</item>
+                <item name="deliverydate_comment" xsi:type="object">Amasty\DeliveryDateManager\Block\Component\CommentComponent</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Checkout\Block\Onepage">
+        <arguments>
+            <argument name="layoutProcessors" xsi:type="array">
+                <item name="deliveryDate" xsi:type="object">Amasty\DeliveryDateManager\Block\Checkout\LayoutProcessor</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Checkout\Model\CompositeConfigProvider">
+        <arguments>
+            <argument name="configProviders" xsi:type="array">
+                <item name="deliveryDate" xsi:type="object">Amasty\DeliveryDateManager\Model\CheckoutConfigProvider</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Customer\Block\SectionConfig">
+        <arguments>
+            <argument name="clientSideSections" xsi:type="array">
+                <item name="amasty-deliverydate" xsi:type="const">\Amasty\DeliveryDateManager\Block\Checkout\LayoutProcessor::STORAGE_SECTION_NAME</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Sales\Block\Items\AbstractItems">
+        <plugin name="Amasty_DeliveryDateManager::OrderInfo" type="Amasty\DeliveryDateManager\Plugin\Sales\Block\Items\AbstractItems\AddBlockToOrder" />
+    </type>
+
+    <!-- validator is edit on front -->
+    <virtualType name="Amasty\DeliveryDateManager\Model\DeliveryOrder\Edit\Validator\Rule\BothRule"
+                 type="Amasty\DeliveryDateManager\Model\DeliveryOrder\Edit\Validator\Rule\CombineRule">
+        <arguments>
+            <argument name="mode" xsi:type="const">Amasty\DeliveryDateManager\Model\DeliveryOrder\Edit\Validator\Rule\CombineRule::ALL</argument>
+            <argument name="rules" xsi:type="array">
+                <item name="date_rule" xsi:type="object" sortOrder="10">Amasty\DeliveryDateManager\Model\DeliveryOrder\Edit\Validator\Rule\DateRule</item>
+                <item name="order_status_rule" xsi:type="object" sortOrder="10">Amasty\DeliveryDateManager\Model\DeliveryOrder\Edit\Validator\Rule\OrderStatusRule</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Amasty\DeliveryDateManager\Model\DeliveryOrder\Edit\Validator\Rule\OneOfRule"
+                 type="Amasty\DeliveryDateManager\Model\DeliveryOrder\Edit\Validator\Rule\CombineRule">
+        <arguments>
+            <argument name="mode" xsi:type="const">Amasty\DeliveryDateManager\Model\DeliveryOrder\Edit\Validator\Rule\CombineRule::ONE</argument>
+            <argument name="rules" xsi:type="array">
+                <item name="date_rule" xsi:type="object" sortOrder="10">Amasty\DeliveryDateManager\Model\DeliveryOrder\Edit\Validator\Rule\DateRule</item>
+                <item name="order_status_rule" xsi:type="object" sortOrder="20">Amasty\DeliveryDateManager\Model\DeliveryOrder\Edit\Validator\Rule\OrderStatusRule</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Amasty\DeliveryDateManager\Model\DeliveryOrder\Edit\Validator\EditableOnFront">
+        <arguments>
+            <argument name="rules" xsi:type="array">
+                <item name="both" xsi:type="string">Amasty\DeliveryDateManager\Model\DeliveryOrder\Edit\Validator\Rule\BothRule</item>
+                <item name="one_of" xsi:type="string">Amasty\DeliveryDateManager\Model\DeliveryOrder\Edit\Validator\Rule\OneOfRule</item>
+                <item name="status" xsi:type="string">Amasty\DeliveryDateManager\Model\DeliveryOrder\Edit\Validator\Rule\OrderStatusRule</item>
+                <item name="date" xsi:type="string">Amasty\DeliveryDateManager\Model\DeliveryOrder\Edit\Validator\Rule\DateRule</item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- end validator is edit on front -->
+
+    <!-- editor controller request validator -->
+    <type name="Amasty\DeliveryDateManager\Controller\Deliverydate\Edit">
+        <arguments>
+            <argument name="editValidator" xsi:type="object">Amasty\DeliveryDateManager\Request\Validator\DDEditCustomerValidator</argument>
+        </arguments>
+    </type>
+    <type name="Amasty\DeliveryDateManager\Controller\Deliverydate\Save">
+        <arguments>
+            <argument name="editValidator" xsi:type="object">Amasty\DeliveryDateManager\Request\Validator\DDEditCustomerValidator</argument>
+        </arguments>
+    </type>
+    <type name="Amasty\DeliveryDateManager\Controller\Guest\Edit">
+        <arguments>
+            <argument name="editValidator" xsi:type="object">Amasty\DeliveryDateManager\Request\Validator\DDEditGuestValidator</argument>
+        </arguments>
+    </type>
+    <type name="Amasty\DeliveryDateManager\Controller\Guest\Save">
+        <arguments>
+            <argument name="editValidator" xsi:type="object">Amasty\DeliveryDateManager\Request\Validator\DDEditGuestValidator</argument>
+        </arguments>
+    </type>
+    <!-- end editor controller request validator -->
+
+    <type name="Amasty\DeliveryDateManager\Block\Deliverydate\Edit">
+        <arguments>
+            <argument name="layoutProcessors" xsi:type="array">
+                <item name="deliveryDateConfig" xsi:type="object">Amasty\DeliveryDateManager\Block\Deliverydate\Processor\EditFormProcessor</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\DeliveryDateManager\Block\Deliverydate\Processor\EditFormProcessor">
+        <arguments>
+            <argument name="components" xsi:type="array">
+                <item name="deliverydate_date" xsi:type="object">Amasty\DeliveryDateManager\Block\Component\CalendarComponent</item>
+                <item name="deliverydate_time" xsi:type="object">Amasty\DeliveryDateManager\Block\Component\TimeSelectComponent</item>
+                <item name="deliverydate_comment" xsi:type="object">Amasty\DeliveryDateManager\Block\Component\CommentComponent</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

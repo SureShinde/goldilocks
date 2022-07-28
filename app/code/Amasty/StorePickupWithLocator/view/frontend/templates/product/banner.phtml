@@ -1,0 +1,15 @@
+<?php
+/**
+ * @var \Magento\Catalog\Block\Product\View $block
+ * @var Magento\Framework\Escaper $escaper
+ * @var \Amasty\StorePickupWithLocator\ViewModel\Catalog\Product\Banner $viewModel
+ */
+
+$viewModel = $block->getViewModel();
+?>
+
+<?php if ($viewModel && $viewModel->shouldDisplayBanner($block->getProduct())): ?>
+    <div class="amlocator-curbside-banner-wrapper">
+        <?= $viewModel->getBannerBlockHtml($block->getLayout()) ?>
+    </div>
+<?php endif; ?>

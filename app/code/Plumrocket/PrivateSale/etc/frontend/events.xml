@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!--
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket Private Sales and Flash Sales v4.x.x
+ * @copyright   Copyright (c) 2020 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="layout_load_before">
+        <observer name="privatesale_add_preview_top_panel" instance="Plumrocket\PrivateSale\Observer\Preview\AddPreviewPanel" />
+        <observer name="privatesale_homepage" instance="Plumrocket\PrivateSale\Observer\EventCheck" />
+    </event>
+
+    <event name="controller_action_predispatch">
+        <observer name="privatesale_preview_check" instance="Plumrocket\PrivateSale\Observer\Preview\CheckPreview" />
+        <observer name="privatesale_splashpage_check" instance="Plumrocket\PrivateSale\Observer\SplashPageCheck" />
+    </event>
+
+    <event name="sales_quote_item_qty_set_after">
+        <observer name="privatesale_sales_quote_item_qty_set_after_check" instance="Plumrocket\PrivateSale\Observer\PrivateEvent\CheckCartItem" />
+    </event>
+
+    <event name="controller_action_postdispatch_catalog_category_view">
+        <observer name="privatesale_controller_action_postdispatch_catalog_category_view" instance="Plumrocket\PrivateSale\Observer\PrivateEvent\CheckCategory" />
+    </event>
+
+    <event name="controller_action_postdispatch_catalog_product_view">
+        <observer name="privatesale_controller_action_postdispatch_catalog_product_view" instance="Plumrocket\PrivateSale\Observer\PrivateEvent\CheckProduct" />
+    </event>
+
+    <event name="controller_action_predispatch_catalog_product_compare_add">
+        <observer name="privatesale_controller_action_predispatch_catalog_product_compare_add" instance="Plumrocket\PrivateSale\Observer\PrivateEvent\CheckCompareProduct" />
+    </event>
+
+    <event name="controller_action_predispatch_checkout_cart_add">
+        <observer name="privatesale_controller_action_controller_action_predispatch_checkout_cart_add" instance="Plumrocket\PrivateSale\Observer\Checkout\Cart\BeforeAddToCart" />
+    </event>
+
+    <event name="checkout_onepage_controller_success_action">
+        <observer name="privatesale_controller_action_checkout_onepage_controller_success_action" instance="Plumrocket\PrivateSale\Observer\Checkout\PlaceOrder" />
+    </event>
+
+    <event name="customer_register_success">
+        <observer name="privatesale_customer_register_success" instance="Plumrocket\PrivateSale\Observer\CustomerCreate" />
+    </event>
+</config>

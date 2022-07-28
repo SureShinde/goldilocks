@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="product.info.social.form">
+            <block class="Magento\Wishlist\Block\Catalog\Product\View\AddTo\Wishlist" name="view.addto.wishlist.form"
+                   template="Magento_Wishlist::catalog/product/view/addto/wishlist.phtml" />
+        </referenceContainer>
+        <referenceContainer name="product.info.social.form.additional">
+            <block class="Magento\Wishlist\Block\Catalog\Product\View\AddTo\Wishlist" name="view.addto.wishlist.form.additional"
+                   template="Magento_Wishlist::catalog/product/view/addto/wishlist.phtml" />
+        </referenceContainer>
+    </body>
+</page>

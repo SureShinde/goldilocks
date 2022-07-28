@@ -1,0 +1,68 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<!--@subject {{trans "Invoice for your %store_name order" store_name=$store.frontend_name}} @-->
+<!--@vars {
+"var formattedBillingAddress|raw":"Billing Address",
+"var order_data.customer_name":"Guest Customer Name",
+"var comment|escape|nl2br":"Invoice Comment",
+"var invoice.increment_id":"Invoice Id",
+"layout handle=\"sales_email_order_invoice_items\" invoice=$invoice order=$order":"Invoice Items Grid",
+"var order.increment_id":"Order Id",
+"var payment_html|raw":"Payment Details",
+"var formattedShippingAddress|raw":"Shipping Address",
+"var order.shipping_description":"Shipping Description",
+"var store.frontend_name":"Store Frontend Name",
+"var store_phone":"Store Phone",
+"var store_email":"Store Email",
+"var store_hours":"Store Hours",
+"var invoice": "Invoice",
+"var order": "Order",
+"var order_id": "Order DB Id",
+"var invoice_id": "Invoice DB Id",
+"var order_data.is_not_virtual": "Order Type"
+} @-->
+{{template config_path="design/email/header_template"}}
+<p class="header-bottom">
+    <span>{{trans 'Order #%order_id' order_id=$order.increment_id}}</span>
+    <span>{{trans "Has Been Delivered"}}</span>
+</p>
+
+<table>
+    <tr class="email-intro">
+        <td>
+            <p class="name-text">
+                <strong>{{trans "Dear"}} {{trans "%name," name=$order_data.customer_name}}</strong>
+            </p>
+            <p class="text">
+                <span>{{trans "Your order has been delivered to"}}</span>
+                {{depend order_data.is_not_virtual}}
+                <strong>{{var formattedShippingAddress|raw}}</strong>
+                {{/depend}}
+            </p>
+            <p class="text">
+                {{trans "Thank you for ordering at Goldilocks Delivery!"}}
+            </p>
+            <p class="text">
+                {{trans "Celebrate with us online! Post a photo of your Goldilocks favorites on your social media accounts with the hashtag <a>#GoldilocksPH</a>! "}}
+            </p>
+            <p class="text">
+                {{trans "For your other concerns, contact us at"}} {{depend store_phone}} {{trans "<a class="email" href="tel:%store_phone">%store_phone</a>." store_phone=$store_phone |raw}}{{/depend}}
+            </p>
+            <p class="text">
+                {{trans "You can also email us at <a href="mailto:%store_email" class="email">%store_email</a>" store_email=$store_email |raw}}
+            </p>
+            <p class="text">
+                {{trans "Thank you,"}}
+            </p>
+            <p class="text">
+                {{trans "Goldilocks Delivery"}}
+            </p>
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

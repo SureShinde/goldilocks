@@ -1,0 +1,16 @@
+<?php
+
+?>
+<?php /** @var $block \Magenest\GoogleTagManager\Block\Checkout */ ?>
+<?php // phpcs:ignore MEQP2.Templates.RawJavaScript.FoundRawJS ?>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "google-tag-manager/checkout": {
+                "currencyCode" : "<?= /** @noEscape */ $block->getCurrencyCode() ?>",
+                "products": <?= /** @noEscape */ $block->jsonEncode($block->getProducts()) ?>,
+                "checkoutSteps": <?= /** @noEscape */ $block->jsonEncode($block->getCheckoutSteps()) ?>
+            }
+        }
+    }
+</script>

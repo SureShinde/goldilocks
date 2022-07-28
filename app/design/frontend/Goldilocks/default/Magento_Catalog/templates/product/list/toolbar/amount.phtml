@@ -1,0 +1,35 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php
+/**
+ * Product list toolbar
+ *
+ * @var $block \Magento\Catalog\Block\Product\ProductList\Toolbar
+ */
+?>
+<p class="toolbar-amount" id="toolbar-amount">
+    <span class="toolbar-number">
+        <?= __('Total:') ?>
+        <b>
+            <?php if ($block->getLastPageNum() > 1): ?>
+                <?= $block->escapeHtml(__('%1 items', $block->getTotalNum())) ?>
+                <?php $textNumberProduct = __("%1 products", $block->getTotalNum())?>
+            <?php elseif ($block->getTotalNum() == 1): ?>
+                <?= $block->escapeHtml(__('%1 item', $block->getTotalNum())) ?>
+                <?php $textNumberProduct = __("%1 product", $block->getTotalNum())?>
+            <?php else: ?>
+                <?= $block->escapeHtml(__('%1 items', $block->getTotalNum())) ?>
+                <?php $textNumberProduct = __("%1 products", $block->getTotalNum())?>
+            <?php endif; ?>
+        </b>
+    </span>
+    <script type="text/javascript">
+        require(['jquery'], function($){
+            $(".number-product").html('<?= $textNumberProduct ?>')
+        });
+    </script>
+</p>

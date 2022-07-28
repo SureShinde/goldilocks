@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <listingToolbar name="listing_top">
+        <filters name="listing_filters">
+            <filterRange name="amasty_deliverydate_time_from"
+                         class="Amasty\DeliveryDateManager\Ui\Component\Grid\Filters\Type\Time"
+                         template="ui/grid/filters/elements/group"
+                         component="Magento_Ui/js/grid/filters/range"
+                         provider="${ $.parentName }">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="templates" xsi:type="array">
+                            <item name="datetime" xsi:type="array">
+                                <item name="component" xsi:type="string">Amasty_DeliveryDateManager/js/view/form/element/time-picker</item>
+                                <item name="shiftedValue" xsi:type="string">filter</item>
+                                <item name="options" xsi:type="array">
+                                    <item name="showsDate" xsi:type="boolean">false</item>
+                                    <item name="showsTime" xsi:type="boolean">true</item>
+                                    <item name="timeOnly" xsi:type="boolean">true</item>
+                                    <item name="closeText" xsi:type="string" translate="true">OK</item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <rangeType>datetime</rangeType>
+                    <label translate="true">Delivery Time From</label>
+                    <dataScope>amasty_deliverydate_time_from</dataScope>
+                </settings>
+            </filterRange>
+            <filterRange name="amasty_deliverydate_time_to"
+                         class="Amasty\DeliveryDateManager\Ui\Component\Grid\Filters\Type\Time"
+                         template="ui/grid/filters/elements/group"
+                         component="Magento_Ui/js/grid/filters/range"
+                         provider="${ $.parentName }">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="templates" xsi:type="array">
+                            <item name="datetime" xsi:type="array">
+                                <item name="component" xsi:type="string">Amasty_DeliveryDateManager/js/view/form/element/time-picker</item>
+                                <item name="shiftedValue" xsi:type="string">filter</item>
+                                <item name="options" xsi:type="array">
+                                    <item name="showsDate" xsi:type="boolean">false</item>
+                                    <item name="showsTime" xsi:type="boolean">true</item>
+                                    <item name="timeOnly" xsi:type="boolean">true</item>
+                                    <item name="closeText" xsi:type="string" translate="true">OK</item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <rangeType>datetime</rangeType>
+                    <label translate="true">Delivery Time To</label>
+                    <dataScope>amasty_deliverydate_time_to</dataScope>
+                </settings>
+            </filterRange>
+        </filters>
+    </listingToolbar>
+    <columns name="sales_order_columns">
+        <column name="increment_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="index" xsi:type="string">main_table.increment_id</item>
+                </item>
+            </argument>
+        </column>
+        <column name="amasty_deliverydate_date" class="Amasty\DeliveryDateManager\Ui\Component\Grid\Columns\Date"
+                component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <visible>true</visible>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label>Delivery Date</label>
+                <timezone>false</timezone>
+            </settings>
+        </column>
+        <column name="amasty_deliverydate_time_from">
+            <settings>
+                <visible>true</visible>
+                <filter>false</filter>
+                <label>Delivery Time From</label>
+            </settings>
+        </column>
+        <column name="amasty_deliverydate_time_to">
+            <settings>
+                <visible>true</visible>
+                <filter>false</filter>
+                <label>Delivery Time To</label>
+            </settings>
+        </column>
+        <column name="amasty_deliverydate_comment">
+            <settings>
+                <visible>false</visible>
+                <filter>text</filter>
+                <label>Delivery Comments</label>
+            </settings>
+        </column>
+    </columns>
+</listing>

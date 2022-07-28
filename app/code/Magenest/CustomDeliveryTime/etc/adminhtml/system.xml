@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="magenest" translate="label">
+            <label>Magenest</label>
+        </tab>
+        <section id="magenest_bulk_order" translate="label" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Bulk Order Configuration</label>
+            <tab>magenest</tab>
+            <resource>Magenest_CustomDelivery::configuration</resource>
+            <group id="general" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Bulk Order Settings</label>
+                <field id="bulk_order_limit_subtotal" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Limitation Subtotal</label>
+                    <validate>validate-not-negative-number</validate>
+                    <comment>When the order's subtotal reach the above number, minimum delivery time will be applied.</comment>
+                </field>
+                <field id="bulk_order_minimum_delivery_time" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Delivery Minimum Time (Hours)</label>
+                    <validate>validate-not-negative-number</validate>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

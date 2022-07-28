@@ -1,0 +1,32 @@
+<!--
+/**
+* Plumrocket Inc.
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the End-user License Agreement
+* that is available through the world-wide-web at this URL:
+* http://wiki.plumrocket.net/wiki/EULA
+* If you are unable to obtain it through the world-wide-web, please
+* send an email to support@plumrocket.com so we can send you a copy immediately.
+*
+* @package     Plumrocket Private Sales and Flash Sales
+* @copyright   Copyright (c) 2020 Plumrocket Inc. (http://www.plumrocket.com)
+* @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+*/
+-->
+
+<div class="admin__field" attr="'data-index': index" visible="! $data.visible || visible">
+    <legend class="admin__field-label" if="showLabel">
+        <span translate="label" attr="'data-config-scope': $data.scopeLabel"></span>
+    </legend>
+
+    <div class="admin__field-control"
+         css="$data.additionalClasses"
+         each="data: elems, as: 'element'"
+         render=""></div>
+
+    <div class="admin__field-note prr-admin-field-note" if="$data.notice">
+        <span html="$t(notice)"></span>
+    </div>
+</div>

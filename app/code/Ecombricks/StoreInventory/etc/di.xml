@@ -1,0 +1,184 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © eComBricks. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Ecombricks\StoreInventory\Api\InventorySalesApi\GetDefaultStockInterface" type="Ecombricks\StoreInventory\Model\InventorySales\GetDefaultStock"/>
+    <preference for="Ecombricks\StoreInventory\Api\InventorySalesApi\GetStockByStoreInterface" type="Ecombricks\StoreInventory\Model\InventorySales\GetStockByStore"/>
+    <preference for="Ecombricks\StoreInventory\Api\InventorySalesApi\GetStockIdByStoreInterface" type="Ecombricks\StoreInventory\Model\InventorySales\GetStockIdByStore"/>
+    <type name="Magento\CatalogInventoryGraphQl\Model\Resolver\OnlyXLeftInStockResolver">
+        <plugin name="3d874899ccd99cc3814ca67ff494460f" type="Ecombricks\StoreInventory\Plugin\Model\CatalogInventoryGraphQl\Resolver\OnlyXLeftInStockResolver" sortOrder="100"/>
+    </type>
+    <type name="Magento\CatalogInventory\Api\RegisterProductSaleInterface">
+        <plugin name="process_register_products_sale" disabled="true"/>
+        <plugin name="27945b66a0a9477d3be902b9a3f4d790" type="Ecombricks\StoreInventory\Plugin\Api\CatalogInventory\RegisterProductSaleInterface" sortOrder="100"/>
+    </type>
+    <type name="Magento\CatalogInventory\Api\StockRegistryInterface">
+        <plugin name="adapt_get_stock_status" disabled="true"/>
+        <plugin name="adapt_get_stock_status_by_sku" disabled="true"/>
+        <plugin name="adapt_get_product_stock_status" disabled="true"/>
+        <plugin name="adapt_get_product_stock_status_by_sku" disabled="true"/>
+        <plugin name="98297a156466709312cad947cba6f9d7" type="Ecombricks\StoreInventory\Plugin\Api\CatalogInventory\StockRegistryInterface" sortOrder="100"/>
+    </type>
+    <type name="Magento\CatalogInventory\Api\StockStateInterface">
+        <plugin name="check_quote_item_qty" disabled="true"/>
+        <plugin name="suggest_qty" disabled="true"/>
+        <plugin name="871a4d6c381206f87c5790fef67377bd" type="Ecombricks\StoreInventory\Plugin\Api\CatalogInventory\StockStateInterface" sortOrder="100"/>
+    </type>
+    <type name="Magento\CatalogInventory\Block\Stockqty\AbstractStockqty">
+        <plugin name="magentoInventorySalesFrontendUiAbstractStockqty" disabled="true"/>
+        <plugin name="e54d015aa931e1f639d7b503b7ff64fd" type="Ecombricks\StoreInventory\Plugin\Block\CatalogInventory\Stockqty\AbstractStockqty" sortOrder="100"/>
+    </type>
+<!--    <type name="Magento\CatalogInventory\Model\Indexer\ProductPriceIndexFilter">-->
+<!--        <plugin name="a8f0f06c2cbf6d1ab593ce46dba128d0" disabled="true"/>-->
+<!--    </type>-->
+    <type name="Magento\CatalogInventory\Model\Quote\Item\QuantityValidator">
+        <plugin name="efd7e38acbfc49090684b4efd29d56d9" type="Ecombricks\StoreInventory\Plugin\Model\CatalogInventory\Quote\Item\QuantityValidator" sortOrder="100"/>
+    </type>
+    <type name="Magento\CatalogInventory\Model\Quote\Item\QuantityValidator\Initializer\Option">
+        <plugin name="5dc7fb7289ed3b7ff4ebbbfe9166fb3b" type="Ecombricks\StoreInventory\Plugin\Model\CatalogInventory\Quote\Item\QuantityValidator\Initializer\Option" sortOrder="100"/>
+    </type>
+    <type name="Magento\CatalogInventory\Model\Quote\Item\QuantityValidator\Initializer\StockItem">
+        <plugin name="7ae064b67aa4143f6f11223b98b84494" type="Ecombricks\StoreInventory\Plugin\Model\CatalogInventory\Quote\Item\QuantityValidator\Initializer\StockItem" sortOrder="100"/>
+    </type>
+    <type name="Magento\CatalogInventory\Model\ResourceModel\Stock\Status">
+        <plugin name="adapt_add_stock_status_to_select" disabled="true"/>
+        <plugin name="a1d96507d03c22f85a84f765445ec5c3" type="Ecombricks\StoreInventory\Plugin\Model\CatalogInventory\ResourceModel\Stock\Status" sortOrder="100"/>
+    </type>
+    <type name="Magento\CatalogInventory\Model\StockManagement">
+        <plugin name="process_back_item_qty" disabled="true"/>
+        <plugin name="process_revert_products_sale" disabled="true"/>
+        <plugin name="dafd05a219ba459d8745420d01c9ddff" type="Ecombricks\StoreInventory\Plugin\Model\CatalogInventory\StockManagement" sortOrder="100"/>
+    </type>
+<!--    <type name="Magento\CatalogSearch\Model\Adapter\Mysql\Aggregation\DataProvider\SelectBuilderForAttribute\ApplyStockConditionToSelect">-->
+<!--&lt;!&ndash;        <plugin name="adapt_apply_stock_condition_to_select" disabled="true"/>&ndash;&gt;-->
+<!--        <plugin name="7ceaffde73c9feac0264f0edb7ec39b0" type="Ecombricks\StoreInventory\Plugin\Model\CatalogSearch\Adapter\Mysql\Aggregation\DataProvider\SelectBuilderForAttribute\ApplyStockConditionToSelect" sortOrder="100"/>-->
+<!--    </type>-->
+    <type name="Magento\CatalogSearch\Model\Indexer\Fulltext\Action\DataProvider">
+        <plugin name="stockedProductFilterByInventoryStockPlugin" disabled="true"/>
+        <plugin name="7ffec758f4b11aa812fc422b93cf6a18" type="Ecombricks\StoreInventory\Plugin\Model\CatalogSearch\Indexer\Fulltext\Action\DataProvider" sortOrder="100"/>
+    </type>
+<!--    <type name="Magento\CatalogSearch\Model\Search\FilterMapper\StockStatusFilter">-->
+<!--        <plugin name="adapt_stock_status_filter" disabled="true"/>-->
+<!--        <plugin name="e780af0be356713c0e337aa89750b2f1" type="Ecombricks\StoreInventory\Plugin\Model\CatalogSearch\Search\FilterMapper\StockStatusFilter" sortOrder="100"/>-->
+<!--    </type>-->
+<!--    <type name="Magento\CatalogSearch\Model\Search\FilterMapper\TermDropdownStrategy\ApplyStockConditionToSelect">-->
+<!--&lt;!&ndash;        <plugin name="adapt_apply_stock_condition_to_select" disabled="true"/>&ndash;&gt;-->
+<!--        <plugin name="5f94711bc2e5d0e246ddb97938a17d89" type="Ecombricks\StoreInventory\Plugin\Model\CatalogSearch\Search\FilterMapper\TermDropdownStrategy\ApplyStockConditionToSelect" sortOrder="100"/>-->
+<!--    </type>-->
+    <type name="Magento\InventoryCatalog\Model\GetStockIdForCurrentWebsite">
+        <plugin name="edba92f72c0d9002ed79d78db0dad83b" type="Ecombricks\StoreInventory\Plugin\Model\InventoryCatalog\GetStockIdForCurrentWebsite" sortOrder="100"/>
+    </type>
+    <type name="Magento\InventoryConfigurableProduct\Model\ResourceModel\Product\StockStatusBaseSelectProcessor">
+        <plugin name="94f5dabb00e62d075950050625c2c79d" type="Ecombricks\StoreInventory\Plugin\Model\InventoryConfigurableProduct\ResourceModel\Product\StockStatusBaseSelectProcessor" sortOrder="100"/>
+    </type>
+    <type name="Magento\InventoryConfigurableProduct\Pricing\Price\LowestPriceOptionsProvider\StockStatusBaseSelectProcessor">
+        <plugin name="faf839eebd2bd86cea5290e784966da5" type="Ecombricks\StoreInventory\Plugin\Pricing\InventoryConfigurableProduct\Price\LowestPriceOptionsProvider\StockStatusBaseSelectProcessor" sortOrder="100"/>
+    </type>
+    <type name="Magento\InventoryExportStock\Model\ExportStockIndexDataBySalesChannel">
+        <plugin name="1d6daf6199e422e9c5eac4820d8301ba" type="Ecombricks\StoreInventory\Plugin\Model\InventoryExportStock\ExportStockIndexDataBySalesChannel" sortOrder="100"/>
+    </type>
+    <type name="Magento\InventoryExportStock\Model\ResourceModel\StockIndexDumpProcessor">
+        <plugin name="b20e8f79dbaf95debb437b7c92c6560e" type="Ecombricks\StoreInventory\Plugin\Model\InventoryExportStock\ResourceModel\StockIndexDumpProcessor" sortOrder="100"/>
+    </type>
+    <type name="Magento\InventoryProductAlert\Block\Adminhtml\Product\Edit\Tab\Alerts\Stock">
+        <plugin name="a128611c248028e62e88e75c00fa1740" type="Ecombricks\StoreInventory\Plugin\Block\InventoryProductAlert\Adminhtml\Product\Edit\Tab\Alerts\Stock" sortOrder="100"/>
+    </type>
+    <type name="Magento\InventoryReservationCli\Model\SalableQuantityInconsistency\AddExpectedReservations">
+        <plugin name="a82b0e3f7666f077671bbf6b4fd99798" type="Ecombricks\StoreInventory\Plugin\Model\InventoryReservationCli\SalableQuantityInconsistency\AddExpectedReservations" sortOrder="100"/>
+    </type>
+    <type name="Magento\InventoryReservationCli\Model\SalableQuantityInconsistency\Collector">
+        <plugin name="541e97c144aa60c79395e13f19b38860" type="Ecombricks\StoreInventory\Plugin\Model\InventoryReservationCli\SalableQuantityInconsistency\Collector" sortOrder="100"/>
+    </type>
+    <type name="Magento\InventorySales\Model\GetUnassignedSalesChannelsForStock">
+        <plugin name="43cfa6ddceb3fc45311498090d22f1f2" type="Ecombricks\StoreInventory\Plugin\Model\InventorySales\GetUnassignedSalesChannelsForStock" sortOrder="100"/>
+    </type>
+    <type name="Magento\InventorySales\Model\ResourceModel\DeleteSalesChannelToStockLink">
+        <plugin name="ac101b3a4e141125b211b6b2fb5f49b7" type="Ecombricks\StoreInventory\Plugin\Model\InventorySales\ResourceModel\DeleteSalesChannelToStockLink" sortOrder="100"/>
+    </type>
+    <type name="Magento\InventorySales\Model\ResourceModel\GetAssignedSalesChannelsDataForStock">
+        <plugin name="a82eaa4ec5a3c117b84a1af8f0547490" type="Ecombricks\StoreInventory\Plugin\Model\InventorySales\ResourceModel\GetAssignedSalesChannelsDataForStock" sortOrder="100"/>
+    </type>
+    <type name="Magento\InventorySales\Model\ResourceModel\ReplaceSalesChannelsDataForStock">
+        <plugin name="d56039b9403c079244f75e529c5c13cc" type="Ecombricks\StoreInventory\Plugin\Model\InventorySales\ResourceModel\ReplaceSalesChannelsDataForStock" sortOrder="100"/>
+    </type>
+    <type name="Magento\InventorySales\Model\ResourceModel\StockIdResolver">
+        <plugin name="9c47dfba323bd49a31b710a00fd0deba" type="Ecombricks\StoreInventory\Plugin\Model\InventorySales\ResourceModel\StockIdResolver" sortOrder="100"/>
+    </type>
+    <type name="Magento\InventorySales\Model\ReturnProcessor\GetInvoicedItemsPerSourceByPriority">
+        <plugin name="8623c0d8698806fd2cd3a546861f76af" type="Ecombricks\StoreInventory\Plugin\Model\InventorySales\ReturnProcessor\GetInvoicedItemsPerSourceByPriority" sortOrder="100"/>
+    </type>
+    <type name="Magento\InventorySales\Model\ReturnProcessor\GetSourceDeductionRequestFromSourceSelection">
+        <plugin name="a6f0cc80fcf30505cbbdc59afa1dc86f" type="Ecombricks\StoreInventory\Plugin\Model\InventorySales\ReturnProcessor\GetSourceDeductionRequestFromSourceSelection" sortOrder="100"/>
+    </type>
+    <type name="Magento\InventorySales\Model\ReturnProcessor\ProcessRefundItems">
+        <plugin name="e0b68dcc4e746be4154bdad7cd3c5874" type="Ecombricks\StoreInventory\Plugin\Model\InventorySales\ReturnProcessor\ProcessRefundItems" sortOrder="100"/>
+    </type>
+    <type name="Magento\InventorySales\Model\Stock\Validator\SalesChannelsValidator">
+        <plugin name="3816e49fd1e51e3806cde3af150eea08" type="Ecombricks\StoreInventory\Plugin\Model\InventorySales\Stock\Validator\SalesChannelsValidator" sortOrder="100"/>
+    </type>
+    <type name="Magento\InventorySales\Observer\CatalogInventory\CancelOrderItemObserver">
+        <plugin name="cd6d6067fa35dc76451bdfd274c0832b" type="Ecombricks\StoreInventory\Plugin\Observer\InventorySales\CatalogInventory\CancelOrderItemObserver" sortOrder="100"/>
+    </type>
+    <type name="Magento\InventorySales\Observer\Stock\PopulateWithWebsiteSalesChannelsObserver">
+        <plugin name="8b729a6b00e0dc3eab811b9457817733" type="Ecombricks\StoreInventory\Plugin\Observer\InventorySales\Stock\PopulateWithWebsiteSalesChannelsObserver" sortOrder="100"/>
+    </type>
+    <type name="Magento\InventoryShippingAdminUi\Block\Adminhtml\Order\View\ShipButton">
+        <plugin name="2f4134c8c147e65fa629888358dd1930" type="Ecombricks\StoreInventory\Plugin\Block\InventoryShippingAdminUi\Adminhtml\Order\View\ShipButton" sortOrder="100"/>
+    </type>
+    <type name="Magento\InventoryShippingAdminUi\Observer\NewShipmentLoadBefore">
+        <plugin name="4a6c8609ba93af8446c32ef32c12d6a6" type="Ecombricks\StoreInventory\Plugin\Observer\InventoryShippingAdminUi\NewShipmentLoadBefore" sortOrder="100"/>
+    </type>
+    <type name="Magento\InventoryShipping\Model\ReturnProcessor\GetShippedItemsPerSourceByPriority">
+        <plugin name="14bfa52b932982d32b4a6c6d0003820c" type="Ecombricks\StoreInventory\Plugin\Model\InventoryShipping\ReturnProcessor\GetShippedItemsPerSourceByPriority" sortOrder="100"/>
+    </type>
+    <type name="Magento\InventoryShipping\Model\SourceDeductionRequestFromShipmentFactory">
+        <plugin name="48e04d6f0e4ab2471cb147888ec35869" type="Ecombricks\StoreInventory\Plugin\Model\InventoryShipping\SourceDeductionRequestFromShipmentFactory" sortOrder="100"/>
+    </type>
+    <type name="Magento\InventoryShipping\Model\SourceDeductionRequestsFromSourceSelectionFactory">
+        <plugin name="62ba75c76f8199a3e9f6809405551640" type="Ecombricks\StoreInventory\Plugin\Model\InventoryShipping\SourceDeductionRequestsFromSourceSelectionFactory" sortOrder="100"/>
+    </type>
+    <type name="Magento\InventoryShipping\Observer\VirtualSourceDeductionProcessor">
+        <plugin name="5a25f305779053f833d5df336a8ee3ab" type="Ecombricks\StoreInventory\Plugin\Observer\InventoryShipping\VirtualSourceDeductionProcessor" sortOrder="100"/>
+    </type>
+    <type name="Magento\InventorySourceSelectionApi\Model\GetInventoryRequestFromOrder">
+        <plugin name="737c61b6ffe5bb4a71c9d6512ad1a4e5" type="Ecombricks\StoreInventory\Plugin\Model\InventorySourceSelectionApi\GetInventoryRequestFromOrder" sortOrder="100"/>
+    </type>
+    <type name="Magento\ProductAlert\Model\ProductSalability">
+        <plugin name="product_alert_adapt_salability" disabled="true"/>
+        <plugin name="a59ef45ab6f22089e754a0b4bc4edeee" type="Ecombricks\StoreInventory\Plugin\Model\ProductAlert\ProductSalability" sortOrder="100"/>
+    </type>
+    <type name="Magento\Sales\Api\OrderManagementInterface">
+        <plugin name="inventory_reservations_placement" disabled="true"/>
+        <plugin name="a6f3f33c7c588e56abfb63ec26340ba4" type="Ecombricks\StoreInventory\Plugin\Api\Sales\OrderManagementInterface" sortOrder="100"/>
+    </type>
+    <type name="Magento\Sales\Block\Adminhtml\Order\Create\Items\Grid">
+        <plugin name="35242f6d495da5b291d8bf320ebe22eb" type="Ecombricks\StoreInventory\Plugin\Block\Sales\Adminhtml\Order\Create\Items\Grid" sortOrder="100"/>
+    </type>
+    <type name="Magento\Sales\Model\Order\ShipmentFactory">
+        <plugin name="assign_source_code_to_shipment" disabled="true"/>
+        <plugin name="bd4f3bbc97ea8a41ddafcd75f73f6502" type="Ecombricks\StoreInventory\Plugin\Model\Sales\Order\ShipmentFactory" sortOrder="100"/>
+    </type>
+    <type name="Magento\Store\Model\ResourceModel\Store">
+        <plugin name="63f30845c89d3f2beffea8e7f4b18638" type="Ecombricks\StoreInventory\Plugin\Model\Store\ResourceModel\Store" sortOrder="100"/>
+    </type>
+    <type name="Magento\InventorySales\Model\PlaceReservationsForSalesEvent">
+        <plugin name="schedule_reservation_place" disabled="true"/>
+        <plugin name="Ecombricks_StoreInventory::schedule_reservation_place" type="Ecombricks\StoreInventory\Plugin\Model\EnqueueAfterPlaceReservationsForSalesEvent" />
+    </type>
+    <type name="Magento\Store\Model\ResourceModel\Website">
+        <plugin name="assign_website_to_default_stock" disabled="true"/>
+        <plugin name="delete_website_to_stock_link" disabled="true"/>
+        <plugin name="update_sales_channel_website_code" disabled="true"/>
+    </type>
+    <type name="Amasty\StorePickupWithLocatorMSI\Model\StockIdResolver">
+        <plugin name="Ecombricks_StoreInventory::store_locator_msi_level_store" type="Ecombricks\StoreInventory\Plugin\Model\StockIdResolverPlugin" sortOrder="100"/>
+    </type>
+    <type name="Magento\Bundle\Model\Product\Type">
+        <plugin name="adapt_is_product_salable" disabled="true"/>
+        <plugin name="Ecombricks_StoreInventory::adapt_is_product_salable" type="Ecombricks\StoreInventory\Plugin\Bundle\Model\Product\Type\AdaptIsSalablePlugin"/>
+    </type>
+</config>

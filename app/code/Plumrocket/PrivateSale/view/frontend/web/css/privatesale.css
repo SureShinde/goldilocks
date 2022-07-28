@@ -1,0 +1,929 @@
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket Private Sales and Flash Sales v4.x.x
+ * @copyright   Copyright (c) 2016 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+
+.privatesale-event-container .privatesale-countdown-timer:before,
+.catalog-product-view .header-one .privatesale-countdown-timer:before,
+.catalog-product-view .header-two .privatesale-countdown-timer:before,
+.catalog-product-view
+  .product-top-timer
+  .privatesale-event-container
+  .privatesale-countdown-timer:before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-image: url("../images/timer.svg");
+  background-size: 16px;
+  position: absolute;
+  left: 0;
+  background-repeat: no-repeat;
+  background-position: 0 center;
+  opacity: 0.7;
+}
+
+.catalog-product-view .product-info-main .privatesale-countdown-timer:before {
+  width: 41px;
+  height: 41px;
+  background-size: 41px 41px;
+  background-image: url("../images/timer-big.svg");
+}
+
+.privatesale-event-container .privatesale-countdown-timer,
+.catalog-product-view .header-one .privatesale-countdown-timer {
+  position: relative;
+  padding-left: 22px;
+  font-size: 14px;
+}
+
+.privatesale-event-container .privatesale-countdown-timer:before,
+.catalog-product-view .header-one .privatesale-countdown-timer:before {
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+}
+
+.privatesale-event-container .privatesale-countdown-timer .hasCountdown,
+.privatesale-event-container .privatesale-countdown-timer .static-date,
+.catalog-product-view .header-one .privatesale-countdown-timer .hasCountdown {
+  font-size: 1.6rem;
+  line-height: 1.4;
+  color: #d10000;
+}
+
+.header-one
+  .privatesale-event-container
+  .privatesale-countdown-timer
+  .static-date
+  span,
+.header-five
+  .privatesale-event-container
+  .privatesale-countdown-timer
+  .static-date
+  span {
+  color: #717171;
+}
+
+.product-info-main
+  .privatesale-event-container
+  .privatesale-countdown-timer
+  .static-date
+  span {
+  display: block;
+  font-weight: 600;
+  font-size: 1.6rem;
+  line-height: 1.5rem;
+  text-transform: uppercase;
+  color: #343434;
+}
+
+.product-top-timer
+  .privatesale-event-container
+  .privatesale-countdown-timer
+  .static-date
+  span {
+  display: inline;
+  text-transform: initial;
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: #717171;
+}
+
+.catalog-product-view .header-one .privatesale-countdown-timer .hasCountdown {
+  font-weight: 400;
+  text-transform: none;
+}
+
+.privatesale-event-container .privatesale-countdown-timer .hasCountdown span,
+.catalog-product-view
+  .header-one
+  .privatesale-countdown-timer
+  .hasCountdown
+  span {
+  color: #717171;
+}
+
+.catalog-product-view .header-one .privatesale-countdown-timer span {
+  display: inline-block;
+}
+
+.catalog-product-view .header-one .privatesale-event-container {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* Slider */
+.banner-wrapper {
+  position: relative;
+  display: none;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.banner-wrapper .prcarousel-content-wrapp {
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+}
+
+.banner-wrapper .prcarousel {
+  position: relative;
+  display: flex;
+}
+
+.prcarousel .prslide {
+  flex-shrink: 0;
+  display: flex;
+  width: 100%;
+}
+
+.prcarousel .prslide-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 30px;
+  color: #fff;
+}
+
+.prcarousel .prslide-content {
+  padding: 8px 0;
+}
+
+.prcarousel .prslide-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.transition {
+  transition: 0.4s;
+}
+
+.banner-wrapper .prcarousel_buttons {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.banner-wrapper .prcarousel_prev,
+.banner-wrapper .prcarousel_next {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  pointer-events: all;
+}
+
+.prcarousel_prev:before,
+.prcarousel_next:after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 21px;
+}
+
+.prcarousel_prev:before {
+  background-image: url("../images/arrow-left.svg");
+}
+
+.prcarousel_next:after {
+  background-image: url("../images/arrow-right.svg");
+}
+
+.prcarousel_prev:hover:before,
+.prcarousel_next:hover:after {
+  opacity: 0.7;
+}
+
+.prcarousel .prslide-link {
+  min-width: 90px;
+  flex-shrink: 0;
+  display: inline-block;
+  padding: 2px 11px;
+  font-size: 1.2rem;
+  line-height: 1.1;
+  font-weight: bold;
+  color: #8fe4ff;
+  border: 2px solid #8fe4ff;
+  box-sizing: border-box;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.prcarousel .prslide-link:hover {
+  color: #77c0d7;
+  border-color: #77c0d7;
+}
+
+.prcarousel .prslide-text {
+  margin-right: 18px;
+  margin-bottom: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.prcarousel .prslide-description {
+  display: flex;
+  align-items: center;
+}
+
+.prslide-description .prslide-text {
+  margin-left: 10px;
+}
+
+.prslide-wrap-two .prslide-link,
+.prslide-wrap-two .prslide-link:hover {
+  color: #fff;
+  background: #2b2b2b;
+  border-color: #2b2b2b;
+}
+
+.prslide-wrap-two .prslide-link:hover {
+  background-color: #515152;
+  border-color: #515152;
+}
+
+.prslide-wrap-three .prslide-link,
+.prslide-wrap-three .prslide-link:hover {
+  color: #3a3a3a;
+  background-color: #f8f8f8;
+  border-color: #f8f8f8;
+}
+
+.prslide-wrap-three .prslide-link:hover {
+  background-color: #e0e0e0;
+  border-color: #e0e0e0;
+}
+
+.prprivatesale-category-header,
+.prprivatesale-prod-header {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.prprivatesale-category-header.product-top-timer {
+  margin-bottom: 15px;
+}
+
+.prprivatesale-header-bg {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.header-two .prprivatesale-header-bg,
+.header-three .prprivatesale-header-bg {
+  display: block;
+}
+
+.header-three .prprivatesale-header-bg {
+  width: 31.18%;
+  top: -1px;
+  bottom: -1px;
+  left: -1px;
+  height: auto;
+}
+
+.prprivatesale-category-header.header-three {
+  min-height: 107px;
+  box-sizing: border-box;
+  padding-top: 8px;
+  padding-right: 10px;
+  padding-bottom: 9px;
+  background-size: 30%;
+  background-position: 0 center;
+  background-repeat: no-repeat;
+  border: 1px solid #c8c8c8;
+  display: flex;
+  align-items: center;
+}
+
+.prprivatesale-header-event-name {
+  margin-bottom: 0;
+  font-size: 2.4rem;
+  line-height: 1.1;
+  font-weight: 400;
+  color: #2e2e2e;
+}
+
+.header-three .prprivatesale-header-content {
+  display: flex;
+  flex-direction: column;
+  margin-left: calc(31.18% + 8px);
+}
+
+.header-three .privatesale-countdown-timer {
+  margin: 0;
+}
+
+.prprivatesale-event-timer {
+  flex-shrink: 0;
+  margin-top: 5px;
+  min-height: 20px;
+}
+
+.header-one .prprivatesale-event-timer {
+  min-height: 22px;
+}
+
+.prprivatesale-category-header.header-two,
+.prprivatesale-prod-header.header-two {
+  display: flex;
+  align-items: center;
+  min-height: 172px;
+  box-sizing: border-box;
+  padding: 14px 10px;
+}
+
+.header-two .prprivatesale-header-bg {
+  left: 0;
+}
+
+.header-two .prprivatesale-header-event-name {
+  width: 70%;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 2px 9px #000000;
+}
+
+.header-two .prprivatesale-header-content {
+  position: relative;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header-two .prprivatesale-header-desc {
+  margin: 10px 0;
+  font-size: 1.2rem;
+  line-height: 1.14;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 2px 2px #000000;
+}
+
+.header-two .privatesale-countdown-timer .hasCountdown,
+.header-two .privatesale-countdown-timer .hasCountdown span,
+.header-two .privatesale-countdown-timer .static-date {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #ffe588;
+  text-transform: uppercase;
+}
+
+.header-two .privatesale-countdown-timer:before,
+.catalog-product-view .header-two .privatesale-countdown-timer:before {
+  background-image: url("../images/timer-gold.svg");
+}
+
+.header-two .prprivatesale-event-timer {
+  margin-top: 15px;
+}
+
+.header-three .prprivatesale-header-event-name {
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 1;
+  color: #262626;
+}
+
+.header-three .prprivatesale-header-desc {
+  margin: 0;
+  margin-top: 5px;
+  font-size: 1.2rem;
+  color: #656565;
+}
+
+.header-three .prprivatesale-event-timer {
+  margin-top: 2px;
+}
+
+.header-three .privatesale-countdown-timer .hasCountdown,
+.header-three .privatesale-countdown-timer .static-date,
+.header-three .privatesale-countdown-timer .hasCountdown span {
+  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #cb0000;
+}
+
+.header-three .privatesale-countdown-timer {
+  padding-left: 11px;
+}
+
+.header-three .privatesale-countdown-timer:before {
+  background-image: url("../images/timer-red.svg");
+  background-size: 7px;
+  margin-top: 1px;
+}
+
+.header-three .prprivatesale-header-desc button,
+.header-three .prprivatesale-header-desc button:hover {
+  height: initial;
+  padding: 0;
+  font-weight: 400;
+  line-height: 1.1;
+  border: none;
+  box-shadow: none;
+  font-size: 1.2rem;
+  background-color: transparent;
+  color: #3b76ac;
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+.prprivatesale-category-header.header-four .prprivatesale-event-timer {
+  min-height: 37px;
+  box-sizing: border-box;
+  padding: 7.5px 12px;
+  background-color: #fff2f2;
+}
+
+.prprivatesale-category-header.header-four .prprivatesale-header-event-name {
+  font-weight: 300;
+  font-size: 2.6rem;
+  margin-bottom: 45px;
+}
+
+.header-four .prprivatesale-event-timer {
+  margin-top: 0;
+}
+
+.header-four .privatesale-event-container {
+  display: flex;
+  justify-content: center;
+}
+
+.header-four .privatesale-countdown-timer .hasCountdown span,
+.header-four .privatesale-countdown-timer .static-date {
+  color: #bd1f1f;
+}
+
+.header-four .privatesale-countdown-timer:before {
+  width: 22px;
+  height: 22px;
+  background-size: 22px;
+  background-image: url("../images/timer-red.svg");
+}
+
+.header-four .privatesale-countdown-timer .hasCountdown,
+.header-four .privatesale-countdown-timer .static-date {
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.header-four .privatesale-countdown-timer {
+  padding-left: 33px;
+}
+
+.prprivatesale-category-header.header-five {
+  padding-bottom: 17px;
+  border-bottom: 1px solid #c0c0c0;
+}
+
+.header-five .prprivatesale-header-event-name {
+  font-size: 2.1rem;
+  text-align: center;
+}
+
+.header-five .prprivatesale-header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header-five .prprivatesale-event-timer {
+  margin-top: 7px;
+  min-height: 22px;
+}
+
+.product-info-main .privatesale-event-container .privatesale-countdown-timer {
+  padding-left: 48px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-top: 35px;
+  margin-bottom: 15px;
+}
+
+.product-info-main
+  .privatesale-event-container
+  .privatesale-countdown-timer
+  .timer,
+.product-info-main
+  .privatesale-event-container
+  .privatesale-countdown-timer
+  .static-date {
+  font-size: 2.1rem;
+  line-height: 1;
+}
+
+.product-info-main
+  .privatesale-event-container
+  .privatesale-countdown-timer
+  .timer
+  span {
+  display: block;
+  color: #343434;
+  line-height: 1;
+  font-size: 1.6rem;
+}
+
+.product-top-timer .privatesale-event-container .privatesale-countdown-timer {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 22px;
+}
+
+.product-top-timer
+  .privatesale-event-container
+  .privatesale-countdown-timer
+  .hasCountdown
+  span {
+  color: #717171;
+  display: inline-block;
+  text-transform: none;
+  font-size: 1.4rem;
+  font-weight: 400;
+}
+
+.product-top-timer
+  .privatesale-event-container
+  .privatesale-countdown-timer
+  .timer,
+.product-top-timer
+  .privatesale-event-container
+  .privatesale-countdown-timer
+  .static-date {
+  font-size: 1.4rem;
+  font-weight: 400;
+  text-transform: initial;
+}
+
+.header-three .prprivatesale-header-desc div {
+  display: none;
+  line-height: 1.1;
+}
+
+.header-three .prprivatesale-header-desc div p {
+  display: inline;
+  line-height: 1.1;
+}
+
+.product-item-details .prprivatesale_product_msg {
+  font-weight: 700;
+}
+
+.product-info-price .prprivatesale_product_msg {
+  margin-left: 10px; 
+  font-weight: 600;
+}
+
+.prprivatesale-splashpage-login .form.create.account > .fieldset {
+  width: 100%;
+  padding: 0;
+}
+
+.prprivatesale-splashpage-login .form.create.account {
+  border: none;
+  box-shadow: none;
+}
+
+.catalog-product-view .product-info-price .prprivatesale_product_msg {
+  margin-left: 0;
+}
+
+.catalog-product-view .product-info-price .prprivatesale_product_msg a {
+  display: inline-block;
+  padding: 5px 13px;
+  background: #1979c3;
+  border: 1px solid #1979c3;
+  color: #fff;
+  text-align: center;
+  border-radius: 3px;
+  text-decoration: none;
+}
+
+.catalog-product-view .product-info-price .prprivatesale_product_msg a:hover {
+  background: #006bb4;
+}
+
+@media (max-width: 767px) {
+  .page-products #maincontent > .page-title-wrapper h1 {
+    padding-right: 0;
+  }
+
+  .privatesale-countdown-timer {
+    float: none;
+  }
+
+  .prprivatesale-splashpage-login .form.create.account {
+    padding: 0;
+  }
+}
+
+@media (min-width: 640px) {
+  .banner-wrapper {
+    display: block;
+  }
+
+  .prprivatesale-category-header.header-three{
+    display: block;
+  }
+
+  .prprivatesale-category-header.header-four .prprivatesale-header-event-name {
+    margin-bottom: 0;
+  }
+
+  .prprivatesale-category-header.header-five {
+    padding-bottom: 27px;
+  }
+
+  .catalog-product-view .header-five .prprivatesale-header-content {
+    margin-top: 15px;
+  }
+
+  .prprivatesale-header-bg {
+    display: block;
+  }
+
+  .header-one .prprivatesale-header-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    box-sizing: border-box;
+    padding: 41px 13px 50px;
+    background-color: rgba(255, 255, 255, 0.75);
+  }
+
+  .prprivatesale-category-header.header-one,
+  .prprivatesale-prod-header.header-one {
+    display: flex;
+    align-items: center;
+    padding: 45px 0;
+    min-height: 285px;
+    box-sizing: border-box;
+  }
+
+  .prprivatesale-category-header.header-two,
+  .prprivatesale-prod-header.header-two {
+    min-height: 211px;
+    padding: 24px 15px;
+    box-sizing: border-box;
+  }
+
+  .prprivatesale-event-timer {
+    margin-top: 21px;
+  }
+
+  .prprivatesale-header-event-name {
+    font-size: 2.8rem;
+  }
+
+  .header-two .prprivatesale-header-event-name {
+    font-size: 2.6rem;
+  }
+
+  .header-two .prprivatesale-header-desc {
+    font-size: 1.6rem;
+  }
+
+  .header-two .prprivatesale-event-timer {
+    margin-top: 19px;
+  }
+
+  .header-two .prprivatesale-header-content {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .prprivatesale-category-header.header-three {
+    min-height: 216px;
+    padding: 50px 0;
+    padding-right: 20px;
+    box-sizing: border-box;
+  }
+
+  .header-three .prprivatesale-header-bg {
+    top: 10px;
+    left: 10px;
+    bottom: 10px;
+    width: 24.234%;
+  }
+
+  .header-three .prprivatesale-header-content {
+    margin-left: calc(24.234% + 36px);
+  }
+
+  .prprivatesale-category-header.header-three {
+    padding: 50px 0;
+    padding-right: 20px;
+    box-sizing: border-box;
+  }
+
+  .header-three .prprivatesale-header-event-name {
+    font-size: 2.6rem;
+    line-height: 1.1;
+  }
+
+  .header-three .prprivatesale-header-desc {
+    margin-top: 12px;
+    font-size: 1.4rem;
+  }
+
+  .header-three .privatesale-countdown-timer .hasCountdown,
+  .header-three .privatesale-countdown-timer .static-date,
+  .header-three .privatesale-countdown-timer .hasCountdown span {
+    font-size: 1.4rem;
+  }
+
+  .header-three .prprivatesale-event-timer {
+    margin-top: 22px;
+  }
+
+  .header-three .privatesale-countdown-timer:before {
+    background-size: 12px;
+    margin-top: 0;
+  }
+
+  .header-three .privatesale-countdown-timer {
+    padding-left: 18px;
+  }
+
+  .prprivatesale-category-header.header-four {
+    display: flex;
+    align-items: center;
+  }
+
+  .prprivatesale-category-header.header-four .prprivatesale-header-event-name {
+    font-size: 3.5rem;
+  }
+
+  .prprivatesale-category-header.header-four .prprivatesale-event-timer {
+    margin-left: auto;
+  }
+
+  .header-five .prprivatesale-header-event-name {
+    font-size: 2.8rem;
+  }
+
+  .header-five .prprivatesale-event-timer {
+    margin-top: 3px;
+  }
+
+  .header-three .prprivatesale-header-desc button {
+    display: none;
+  }
+
+  .header-three .prprivatesale-header-desc div {
+    display: block;
+  }
+}
+
+@media (min-width: 768px) {
+  .prprivatesale-header-event-name {
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .header-two .prprivatesale-header-content {
+    width: 75%;
+  }
+
+  .header-two .prprivatesale-header-desc {
+    width: 80%;
+  }
+
+  .header-one .prprivatesale-header-content {
+    width: 37%;
+  }
+}
+
+/* Styles for Weltpixel theme */
+.theme-pearl .prprivatesale-category-header {
+  margin-bottom: 15px;
+}
+
+.theme-pearl .prprivatesale-header-event-name {
+  text-transform: initial;
+}
+
+.theme-pearl .header-one .prprivatesale-header-event-name {
+  font-size: 2.4rem;
+  line-height: 1.1;
+}
+
+.theme-pearl .header-two .prprivatesale-header-event-name {
+  font-size: 1.8rem;
+}
+
+.theme-pearl .header-three .prprivatesale-header-event-name {
+  font-size: 1.4rem;
+}
+
+.theme-pearl .header-five .prprivatesale-header-event-name {
+  font-size: 2.1rem;
+}
+
+.theme-pearl .page-footer .shops-holder .pps-item figcaption .pps-item-title {
+  color: #fff;
+}
+
+.theme-pearl .product-item-details .prprivatesale_product_msg {
+  text-align: center;
+}
+
+.theme-pearl.store-view-default
+  #prpop-pop-up-bg.simple-form-logo
+  .prpop-col2-set
+  .prpop-buttons-set-bottom
+  .prpop-button
+  span
+  span {
+  color: #4092de;
+}
+
+.theme-pearl.store-view-default
+  #prpop-pop-up-bg.simple-form-logo
+  .prpop-col2-set
+  .prpop-buttons-set-bottom
+  .prpop-button:hover
+  span {
+  color: #000;
+}
+
+.theme-pearl.store-view-default .prcarousel_buttons button,
+.theme-pearl.store-view-default .prcarousel_buttons button:hover {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+@media (min-width: 640px) {
+  .theme-pearl .prprivatesale-category-header {
+    max-width: 1400px;
+    margin: 15px auto;
+  }
+
+  .theme-pearl .header-one .prprivatesale-header-event-name,
+  .theme-pearl .header-five .prprivatesale-header-event-name {
+    font-size: 2.8rem;
+  }
+
+  .theme-pearl .header-two .prprivatesale-header-event-name {
+    font-size: 2.6rem;
+  }
+
+  .theme-pearl .header-three .prprivatesale-header-event-name {
+    font-size: 2.6rem;
+  }
+}
+
+/* Styles for Ultimo theme */
+.pl-thm-infortis-ultimo .prprivatesale-category-header.header-three {
+  max-width: 1140px;
+  margin: 0 auto;
+  margin-bottom: 24px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+/* Styles for Porto theme */
+.pl-thm-smartwave:not(.customer-account-create) .form.create.account > .fieldset {
+  width: 100%;
+  padding: 0;
+}

@@ -1,0 +1,810 @@
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket Private Sales and Flash Sales v4.x.x
+ * @copyright   Copyright (c) 2019 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+
+html {
+  -ms-overflow-style: scrollbar;
+}
+
+#bg {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  vertical-align: top;
+  position: fixed;
+  overflow: hidden;
+  outline: none;
+  z-index: -1;
+  padding: 0;
+  margin: 0;
+  top: 0;
+  left: 0;
+}
+
+#prpop-pop-up-bg {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 1600px;
+  font-size: 12px;
+  padding: 5% 5% 5% 5%;
+  margin: 0 auto;
+  color: #444;
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+}
+
+#prpop-pop-up-bg:before,
+#prpop-pop-up-bg:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+#prpop-pop-up-bg * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+#prpop-pop-up-bg ul.prpop-form-list {
+  padding-left: 0px;
+  list-style: none;
+}
+
+/*=== main styles ===*/
+#prpop-pop-up-bg a {
+  color: #3399cc;
+  text-decoration: underline;
+}
+
+#prpop-pop-up-bg label {
+  font-size: 12px;
+  line-height: 12px;
+  font-family: Arial, Helvetica, sans-serif;
+  vertical-align: middle !important;
+  display: inline-block;
+}
+
+#prpop-pop-up-bg .prpop-cf {
+  display: block;
+}
+
+#prpop-pop-up-bg .simple-form-logo-text {
+  display: none;
+}
+
+#prpop-pop-up-bg .prpop-cf:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+
+#prpop-pop-up-bg .prpop-mobile {
+  display: none;
+}
+
+#prpop-pop-up-bg .fright {
+  float: right;
+}
+
+#prpop-pop-up-bg .form-top-logo {
+  display: none;
+}
+
+#prpop-pop-up-bg .prpop-col2-set {
+  width: 50%;
+  padding: 0px;
+  margin: 21px 0;
+}
+
+#prpop-pop-up-bg .prpop-account-login {
+  background-color: white;
+}
+
+#prpop-pop-up-bg .prpop-col2-set.right-block {
+  border-left: 1px solid #ddd;
+}
+
+#prpop-pop-up-bg .prpop-col2-set .prpop-formholder {
+  min-height: 270px;
+  padding: 0 21px 18px 21px;
+  position: relative;
+}
+
+#prpop-pop-up-bg .prpop-col2-set .prpop-formholder p.prpop-forgot-password {
+  margin-top: 10px;
+  text-align: right;
+  font-size: 11px;
+}
+
+#prpop-pop-up-bg .prpop-col2-set .prpop-formholder ul.prpop-form-list {
+  margin-top: 20px;
+}
+
+#prpop-pop-up-bg .prpop-col2-set .prpop-formholder ul.prpop-form-list li {
+  margin-top: 12px;
+  margin-bottom: 0;
+}
+
+#prpop-pop-up-bg .prpop-account-forgot #forgot-form .input-text,
+#prpop-pop-up-bg .prpop-account-create #register-form .prpop-columb .input-text,
+#prpop-pop-up-bg .prpop-col2-set .prpop-formholder .input-text,
+#prpop-pop-up-bg div.field .input-text {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: 1px solid #c2c2c2;
+  background: #ffffff;
+  width: 100%;
+  padding: 0 13px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  height: 40px;
+  font-size: 1.4rem;
+  line-height: 1.6rem;
+  color: #262626;
+}
+
+.prpop-account-login input::placeholder,
+.prpop-account-create input::placeholder{
+  color: #a3a3a3;
+}
+
+#prpop-pop-up-bg .prpop-formholder .input-box-email .input-text,
+#prpop-pop-up-bg .prpop-formholder .input-box-password .input-text {
+  padding-left: 35px;
+}
+
+#prpop-pop-up-bg .prpop-buttons-set {
+  padding: 0;
+  position: relative;
+  margin: 15px auto 0;
+}
+
+.prpop-ajax-loader-wrapper {
+  width: 120px;
+  position: absolute;
+  right: 21px;
+  top: -15px;
+  text-align: right;
+  display: none;
+  height: 25px;
+}
+
+#prpop-pop-up-bg .prpop-button,
+#prpop-pop-up-bg .actions-toolbar button {
+  min-width: 120px;
+  background-color: #3399cc;
+  display: inline-block;
+  padding: 7px 15px;
+  height: 35px;
+  border: 0;
+  color: #ffffff;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 1.6rem;
+  text-align: center;
+  text-transform: uppercase;
+  vertical-align: middle;
+  white-space: nowrap;
+  transition: 0.3s;
+}
+
+#prpop-pop-up-bg.simple-form-logo .prpop-button:hover,
+#prpop-pop-up-bg.simple-form-logo .action:hover {
+  background-color: #3172ae;
+}
+
+#prpop-pop-up-bg .prpop-col2-set .prpop-buttons-set .prpop-button {
+  float: right;
+}
+
+/*=== account create ===*/
+#prpop-pop-up-bg .prpop-account-create {
+  background-color: white;
+  padding: 21px 0;
+}
+
+/*=== account forgot ===*/
+#prpop-pop-up-bg .prpop-forgot-success,
+#prpop-pop-up-bg .prpop-account-forgot {
+  background-color: white;
+  padding: 21px 0;
+}
+
+#prpop-pop-up-bg #prpop-for_messages_popup {
+  background-color: #ffbaba;
+  margin-bottom: 15px;
+  padding: 8px;
+  padding-left: 25px;
+  color: #a21313;
+}
+
+#prpop-pop-up-bg #prpop-for_messages_popup .error-msg {
+  background-color: inherit;
+  background-image: none;
+  padding: 0;
+  padding-top: 3px;
+  border: none;
+  font-style: normal;
+  color: #e42f4e;
+  font-size: 12px;
+  word-spacing: -1px;
+}
+
+#prpop-pop-up-bg #prpop-for_messages_popup .messages li {
+  margin: 0;
+  display: inline-block;
+}
+#prpop-pop-up-bg #prpop-for_messages_popup .messages li.close {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  left: 0;
+  top: 50%;
+  transform: translatey(-50%);
+  background-image: url("../images/close.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 10px;
+  cursor: pointer;
+}
+
+#prpop-pop-up-bg #prpop-for_messages_popup .messages li.close a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+#prpop-pop-up-bg #prpop-for_messages_popup .messages {
+  margin: 0;
+  background: inherit;
+  color: #fff;
+  padding: 0;
+}
+
+#prpop-pop-up-bg #prpop-for_messages_popup .messages ul {
+  text-align: center;
+  background: inherit;
+}
+
+#prpop-pop-up-bg #prpop-for_messages_popup .messages li li {
+  background: inherit;
+  padding: 5px 0 0 0;
+  display: inline-block;
+  margin-right: 20px;
+}
+
+#prpop-pop-up-bg #prpop-for_messages_popup .messages li li:before,
+#prpop-pop-up-bg #prpop-for_messages_popup .messages li li:after,
+#prpop-pop-up-bg #prpop-for_messages_popup .messages .error-msg li {
+  border: none;
+  border-left: none;
+  background: none;
+}
+
+#prpop-pop-up-bg .prpop-col2-set .prpop-buttons-set .pslogin-spacer,
+#prpop-pop-up-bg .prpop-col2-set .prpop-buttons-set .pslogin-buttons {
+  width: 100%;
+}
+
+#prpop-pop-up-bg .prpop-col2-set .prpop-buttons-set table td {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/*=== simple-logo ===*/
+#prpop-pop-up-bg.simple-form-logo .simple-form-logo-text {
+  display: block;
+  font-weight: 600;
+  font-size: 1.8rem;
+  line-height: 2.1rem;
+  color: #262626;
+}
+
+#prpop-pop-up-bg.simple-form-logo .prpop-col2-set .prpop-formholder {
+  min-height: 210px;
+  padding: 0;
+}
+
+#prpop-pop-up-bg.simple-form-logo p {
+  text-align: center;
+  margin: 0 auto 25px auto;
+}
+
+.prpop-ajax-loader-wrapper {
+  right: auto;
+  left: 50%;
+  top: -19px;
+  margin-left: -60px;
+}
+
+#prpop-pop-up-bg.simple-form-logo .prpop-account-login,
+#prpop-pop-up-bg.simple-form-logo .prpop-forgot-success,
+#prpop-pop-up-bg.simple-form-logo .prpop-account-forgot,
+#prpop-pop-up-bg.simple-form-logo .prpop-account-create,
+#prpop-pop-up-bg.simple-form-logo .prpop-reg-success {
+  width: 350px;
+  margin: 0;
+  float: right;
+}
+
+#prpop-pop-up-bg.simple-form-logo #prpop-for_messages_popup {
+  position: relative;
+  min-width: 290px;
+  max-width: 350px;
+  width: 100%;
+  float: none;
+  display: none;
+}
+
+#prpop-pop-up-bg.simple-form-logo label {
+  display: none;
+}
+
+#prpop-pop-up-bg.simple-form-logo .prpop-account-login,
+#prpop-pop-up-bg.simple-form-logo .prpop-account-create,
+#prpop-pop-up-bg.simple-form-logo .prpop-forgot-success,
+#prpop-pop-up-bg.simple-form-logo .prpop-account-forgot,
+#prpop-pop-up-bg.simple-form-logo .prpop-reg-success {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.02);
+  background-color: #fff;
+  padding: 50px;
+  padding-top: 36px;
+  padding-bottom: 38px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+#prpop-pop-up-bg.simple-form-logo .prpop-button,
+#prpop-pop-up-bg.simple-form-logo .action {
+  background-color: #4092de;
+  border-radius: 5px;
+  height: 40px;
+  line-height: 18px;
+  width: 100%;
+}
+
+/**/
+#prpop-pop-up-bg.simple-form-logo label {
+  color: #565656;
+  font-weight: 400;
+}
+
+#prpop-pop-up-bg.simple-form-logo .form-top-logo {
+  margin: 0 auto 38px auto;
+  display: block;
+  text-align: center;
+}
+
+#prpop-pop-up-bg.simple-form-logo .form-top-logo img {
+  width: auto;
+  max-width: 130px;
+}
+
+#prpop-pop-up-bg.simple-form-logo .prpop-col2-set.right-block {
+  border: none;
+  width: 100%;
+  margin: 0;
+}
+
+#prpop-pop-up-bg.simple-form-logo .prpop-formholder h2,
+#prpop-pop-up-bg.simple-form-logo .legend {
+  margin: 0 auto 18px auto;
+  padding: 0;
+  background: none;
+  border: none;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.8rem;
+  line-height: 2.1rem;
+  color: #262626;
+  text-transform: capitalize;
+}
+
+#prpop-pop-up-bg.simple-form-logo .prpop-buttons-set-bottom {
+  display: block;
+  margin: 25px auto 0 auto;
+  padding-bottom: 0;
+  text-align: center;
+}
+
+#prpop-pop-up-bg.simple-form-logo .prpop-buttons-set-top {
+  padding-bottom: 28px;
+}
+
+#prpop-pop-up-bg.simple-form-logo .prpop-buttons-set-top:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: -50px;
+  height: 1px;
+  background-color: #e2e2e2;
+  width: 350px;
+}
+
+#prpop-pop-up-bg.simple-form-logo
+  .prpop-col2-set
+  .prpop-buttons-set-bottom
+  .prpop-button {
+  color: #4092de;
+  box-shadow: none;
+  height: auto;
+  width: 100%;
+  margin-top: 10px;
+  padding-top: 11px;
+  padding-bottom: 11px;
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  line-height: 1.6rem;
+  background: #ffffff;
+  border: 1px solid #4092de;
+  box-sizing: border-box;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+#prpop-pop-up-bg.simple-form-logo
+  .prpop-col2-set
+  .prpop-buttons-set-bottom
+  .prpop-button:hover {
+  color: #000;
+  border-color: #000;
+}
+
+#prpop-pop-up-bg.simple-form-logo
+  .prpop-col2-set
+  .prpop-formholder
+  ul.prpop-form-list {
+  margin: 0 auto;
+}
+
+#prpop-pop-up-bg.simple-form-logo
+  .prpop-col2-set
+  .prpop-formholder
+  p.prpop-forgot-password {
+  margin: 4px 0 0 auto;
+}
+#prpop-pop-up-bg.simple-form-logo
+  .prpop-col2-set
+  .prpop-formholder
+  p.prpop-forgot-password:before,
+#prpop-pop-up-bg.simple-form-logo
+  .prpop-col2-set
+  .prpop-formholder
+  p.prpop-forgot-password:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+#prpop-pop-up-bg.simple-form-logo
+  .prpop-col2-set
+  .prpop-formholder
+  .input-text::-webkit-input-placeholder {
+  color: #aaaaaa;
+}
+
+#prpop-pop-up-bg.simple-form-logo
+  .prpop-account-forgot
+  .prpop-buttons-set
+  .prpop-button,
+#prpop-pop-up-bg.simple-form-logo
+  .prpop-col2-set
+  .prpop-buttons-set
+  .prpop-button {
+  float: none;
+}
+
+.prcarousel img {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+}
+
+#prpop-pop-up-bg .input-box-email,
+#prpop-pop-up-bg .input-box-password {
+  position: relative;
+}
+
+#prpop-pop-up-bg .input-box-email::before,
+#prpop-pop-up-bg .input-box-password::before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 13px;
+  height: 16px;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 1;
+}
+
+#prpop-pop-up-bg .input-box-email::before {
+  background-image: url("../images/user-icon.svg");
+}
+
+#prpop-pop-up-bg .input-box-password::before {
+  background-image: url("../images/pass-icon.svg");
+}
+
+#prpop-pop-up-bg .forgotpass {
+  width: 100%;
+  font-size: 1rem;
+  line-height: 1.2rem;
+  color: #2672b8;
+  text-transform: lowercase;
+  text-decoration: none;
+}
+
+#prpop-pop-up-bg .forgotpass:hover {
+  text-decoration: underline;
+}
+
+#prpop-pop-up-bg .form.create.account {
+  min-width: auto;
+  width: 100%;
+}
+
+#prpop-pop-up-bg.simple-form-logo .newsletter .label {
+  display: block;
+}
+
+#prpop-pop-up-bg.simple-form-logo .newsletter .label span {
+  font-size: 1.4rem;
+  line-height: 1.6rem;
+  color: #262626;
+}
+
+#prpop-pop-up-bg.simple-form-logo .newsletter {
+  display: flex;
+  align-items: center;
+}
+
+.pl-thm-infortis-ultimo #prpop-pop-up-bg.simple-form-logo .newsletter:before{
+  width: 0;
+  padding: 0;
+}
+
+#prpop-pop-up-bg.simple-form-logo .newsletter .checkbox {
+  top: 0;
+  margin-top: 0;
+  margin-right: 8px;
+}
+
+#prpop-pop-up-bg.simple-form-logo .legend span {
+  margin-right: 0;
+  font-weight: 600;
+  font-size: 1.8rem;
+  line-height: 2.1rem;
+}
+
+#prpop-pop-up-bg.simple-form-logo .create .legend {
+  margin-bottom: 12px;
+}
+
+#prpop-pop-up-bg .field {
+  margin-bottom: 11px;
+}
+
+#prpop-pop-up-bg .create.info {
+  margin-bottom: 25px;
+}
+
+#prpop-pop-up-bg .actions-toolbar .primary,
+#prpop-pop-up-bg .actions-toolbar .secondary {
+  display: block;
+  float: none;
+}
+
+#prpop-pop-up-bg .registration-description {
+  margin-bottom: 20px;
+}
+
+#prpop-pop-up-bg .prpop-back-hld {
+  margin-top: 49px;
+  text-align: center;
+}
+
+#prpop-pop-up-bg .prpop-back-hld .backtologin,
+#prpop-pop-up-bg .prpop-forgot-success .backtologin {
+  font-size: 1.4rem;
+  line-height: 1.6rem;
+  color: #2672b8;
+  text-decoration: none;
+}
+
+#prpop-pop-up-bg .prpop-back-hld .backtologin:hover,
+#prpop-pop-up-bg .prpop-forgot-success .backtologin:hover {
+  text-decoration: underline;
+}
+
+#prpop-pop-up-bg .form-create-account .fieldset.create.account:after {
+  display: none;
+}
+
+#prpop-pop-up-bg .create.account {
+  margin-bottom: 0;
+}
+
+#prpop-pop-up-bg div.mage-error[generated] {
+  margin-top: 4px;
+  font-size: 1.2rem;
+  line-height: 1.4rem;
+  color: #ee7a7a;
+}
+
+#prpop-pop-up-bg div.field .input-text.mage-error,
+#prpop-pop-up-bg .prpop-formholder .input-text.mage-error,
+#prpop-pop-up-bg .prpop-account-forgot #forgot-form .input-text.mage-error {
+  border-color: #ee7a7a;
+}
+
+#prpop-pop-up-bg div.field .input-text::placeholder {
+  color: #a3a3a3;
+}
+
+#prpop-pop-up-bg .prpop-account-forgot .prpop-formholder h2 {
+  margin-bottom: 10px;
+  font-size: 1.7rem;
+}
+
+#prpop-pop-up-bg .prpop-account-forgot .prpop-back-hld {
+  margin-bottom: 10px;
+}
+
+.prprivatesale-splashpage-login .fieldset > .field:not(.choice) > .control {
+  width: 100%;
+}
+
+.registration-description {
+  text-align: center;
+  font-size: 15px;
+}
+
+#prpop-pop-up-bg .registration-description h2 {
+  font-weight: 700;
+  padding-left: 0;
+  color: #262626;
+}
+
+.reg-success .prpop-reg-success {
+  text-align: center;
+  font-size: 15px;
+}
+
+#prpop-pop-up-bg .reg-success .prpop-reg-success .prpop-formholder h2 {
+  font-size: 15px;
+  font-weight: 700;
+  padding-left: 0;
+  color: #262626;
+  text-transform: uppercase;
+}
+
+.prprivatesale-splashpage-login .create.account .actions-toolbar {
+  margin-top: 30px;
+}
+
+.prprivatesale-splashpage-login #prpop-pop-up-bg.simple-form-logo .pslogin-block li a span.pslogin-button-auto,
+.prprivatesale-splashpage-login #prpop-pop-up-bg.simple-form-logo .pslogin-block li a span.pslogin-button-icon {
+  box-shadow: none;
+}
+
+.password-strength-meter {
+  background-color: #f4f4f4;
+  height: 32px;
+  line-height: 32px;
+  padding: 0 9px;
+  position: relative;
+  z-index: 1;
+}
+
+.password-none .password-strength-meter:before {
+  background-color: #f4f4f4;
+  width: 100%;
+}
+
+.password-strength-meter:before {
+  content: '';
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  z-index: -1;
+}
+
+.password-weak .password-strength-meter:before {
+  background-color: #ffafae;
+  width: 25%;
+}
+
+.password-medium .password-strength-meter:before {
+  background-color: #ffd6b3;
+  width: 50%;
+}
+
+.password-strong .password-strength-meter:before {
+  background-color: #c5eeac;
+  width: 75%;
+}
+
+.password-very-strong .password-strength-meter:before {
+  background-color: #81b562;
+  width: 100%;
+}
+
+@media (max-width: 640px) {
+  #prpop-pop-up-bg.simple-form-logo .prpop-account-login,
+  #prpop-pop-up-bg.simple-form-logo .prpop-forgot-success,
+  #prpop-pop-up-bg.simple-form-logo .prpop-account-forgot,
+  #prpop-pop-up-bg.simple-form-logo .prpop-account-create,
+  #prpop-pop-up-bg.simple-form-logo .prpop-reg-success {
+    margin: 0 auto;
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+
+  #prpop-pop-up-bg.simple-form-logo .prpop-buttons-set-top:before {
+    left: -40px;
+  }
+}
+
+@media (max-width: 425px) {
+  #prpop-pop-up-bg.simple-form-logo .prpop-account-login,
+  #prpop-pop-up-bg.simple-form-logo .prpop-forgot-success,
+  #prpop-pop-up-bg.simple-form-logo .prpop-account-forgot,
+  #prpop-pop-up-bg.simple-form-logo .prpop-account-create,
+  #prpop-pop-up-bg.simple-form-logo .prpop-reg-success {
+    width: 97.72%;
+  }
+}
+
+/* Social login integrations styles */
+.prprivatesale-splashpage-login .pslogin-clearfix,
+.prprivatesale-splashpage-login #prpop-pop-up-bg .pslogin-block,
+.prprivatesale-splashpage-login
+  #prpop-pop-up-bg.simple-form-logo
+  .pslogin-block
+  .pslogin-buttons.pslogin-buttons-showfull
+  li:last-child {
+  margin-bottom: 0;
+}
+
+#prpop-pop-up-bg.simple-form-logo .prpop-buttons-set-bottom {
+    padding-top: 25px;
+    margin: 0 auto;
+}
+#prpop-pop-up-bg.simple-form-logo .prpop-buttons-set-top:before {
+    display: none;
+}
+#prpop-pop-up-bg.simple-form-logo .prpop-buttons-set-bottom::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -50px;
+    height: 1px;
+    background-color: #e2e2e2;
+    width: 350px;
+}
+
+/* Styles for Porto theme */
+.pl-thm-smartwave #prpop-pop-up-bg .create.account {
+  box-shadow: none;
+  border: none;
+}

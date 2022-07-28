@@ -1,0 +1,87 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php /** @var $block \Magento\Sales\Block\Order\Info */
+/** @var \Magenest\Sales\ViewModel\Order\DeliveryDate $viewModel */
+$viewModel = $block->getViewModel();
+$_order = $block->getOrder();
+$date = $viewModel->getDeliveryDate($_order);
+$time = $viewModel->getDeliveryTime($_order);
+?>
+<div class="block block-order-details-view">
+    <div class="block-title">
+        <strong class="mobile-hide"><?= $block->escapeHtml(__('Infor Order')) ?></strong>
+        <strong class="desktop-hide"><?= $block->escapeHtml(__('Order Information')) ?></strong>
+    </div>
+    <div class="block-content">
+        <?php if (!$_order->getIsVirtual()) : ?>
+            <div class="box box-order-shipping-address">
+                <strong class="box-title">
+                    <span class="mobile-hide"><?= $block->escapeHtml(__('Order information')) ?></span>
+                    <span class="desktop-hide"><?= $block->escapeHtml(__('Delivery Address')) ?></span>
+                </strong>
+                <div class="box-content">
+                    <address><?= /* @noEscape */ $block->getFormattedAddress($_order->getShippingAddress()) ?></address>
+                </div>
+            </div>
+
+            <div class="box box-delivery" style="padding-left: 16px">
+                <div class="box box-order-shipping-method">
+                    <strong class="box-title">
+                        <span><?= $block->escapeHtml(__('Delivery Method')) ?></span>
+                    </strong>
+                    <div class="box-content">
+                        <?php if ($_order->getShippingDescription()) : ?>
+                            <?= $block->escapeHtml($_order->getShippingDescription()) ?>
+                        <?php else : ?>
+                            <?= $block->escapeHtml(__('No shipping information available')) ?>
+                        <?php endif; ?>
+                    </div>
+                </div>
+                <?php if ($date): ?>
+                    <div class="box box-order-delivery-date">
+                        <strong class="box-title">
+                            <span><?= $block->escapeHtml(__('Delivery Date')) ?></span>
+                        </strong>
+                        <div class="box-content">
+                            <?= $date ?>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <?php if ($time): ?>
+                <div class="box box-order-delivery-time desktop-hide" >
+                    <strong class="box-title">
+                        <span><?= $block->escapeHtml(__('Delivery Time')) ?></span>
+                    </strong>
+                    <div class="box-content">
+                        <?= $time ?>
+                    </div>
+                </div>
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
+
+        <div class="box box-order-billing-method desktop-hide">
+            <strong class="box-title">
+                <span><?= $block->escapeHtml(__('Payment Method')) ?></span>
+            </strong>
+            <div class="box-content">
+                <?= $block->getPaymentInfoHtml() ?>
+            </div>
+        </div>
+
+        <?php if ($time): ?>
+        <div class="box box-order-delivery-time mobile-hide" style="padding-left: 0" >
+            <strong class="box-title">
+                <span><?= $block->escapeHtml(__('Delivery Time')) ?></span>
+            </strong>
+            <div class="box-content">
+                <?= $time ?>
+            </div>
+        </div>
+        <?php endif; ?>
+    </div>
+</div>

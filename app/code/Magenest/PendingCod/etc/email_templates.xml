@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="new_pending_cod_order_create" label="New Pending COD Order" file="order_cod_new.html" type="html" module="Magenest_PendingCod" area="frontend"/>
+</config>

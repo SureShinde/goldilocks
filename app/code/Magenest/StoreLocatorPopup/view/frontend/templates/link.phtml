@@ -1,0 +1,16 @@
+<?php
+/**/
+?>
+<li class="link nearest-store-link" data-label="Nearest Store Link">
+    <a href="javascript:void(0)"><?= __('Nearest store') ?><span id="current-store"></span></a>
+</li>
+<script type="text/javascript">
+    require(['jquery','uiRegistry','jquery/jquery.cookie'], function($, registry){
+        if($.cookie("nearest_store_name")) {
+            $("#current-store").text($.cookie("nearest_store_name"));
+        }
+        $(".nearest-store-link").click(function (){
+            registry.get('index=nearest-store').showPopup(true);
+        });
+    });
+</script>

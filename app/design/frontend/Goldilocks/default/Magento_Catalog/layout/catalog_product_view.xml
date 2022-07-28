@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="breadcrumbs" template="Magento_Theme::html/breadcrumbs.phtml"/>
+        <block class="Magento\Catalog\Block\Breadcrumbs"/>
+        <referenceContainer name="alert.urls">
+            <container name="vat-inclusive" htmlTag="div" htmlClass="vat-inclusive">
+                <block class="Magento\Framework\View\Element\Text" name="vat-inclusive-text">
+                    <arguments>
+                        <argument translate="true" name="text" xsi:type="string">*VAT Inclusive</argument>
+                    </arguments>
+                </block>
+            </container>
+        </referenceContainer>
+        <referenceBlock name="product.info.addtocart">
+            <container name="product.info.social.form" htmlTag="div" htmlClass="product-addto-links"/>
+        </referenceBlock>
+        <referenceBlock name="product.info.addtocart.additional">
+            <container name="product.info.social.form.additional" htmlTag="div" htmlClass="product-addto-links"/>
+        </referenceBlock>
+        <referenceBlock name="product.info.description">
+            <arguments>
+                <argument name="title" translate="true" xsi:type="string">Long Description</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="product.attributes">
+            <arguments>
+                <argument name="title" translate="true" xsi:type="string">Product Information</argument>
+            </arguments>
+        </referenceBlock>
+
+        <move element="page.main.title" destination="product.info.main" before="-"/>
+        <move element="product.info.overview" destination="product.info.main" before="-" after="alert.urls"/>
+        <move element="bundle.options.container" destination="product.info.main" after="product.info"/>
+        <move element="product.info.social" destination="product.info"/>
+        <move element="product.info.review" destination="reviews.tab"/>
+        <referenceContainer name="product.info.stock.sku" remove="true"/>
+        <referenceContainer name="amlocator.link" remove="true"/>
+        <referenceContainer name="comments.tab" remove="true"/>
+    </body>
+</page>

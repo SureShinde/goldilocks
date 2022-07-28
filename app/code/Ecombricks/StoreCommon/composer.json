@@ -1,0 +1,21 @@
+{
+    "name": "ecombricks/module-store-common",
+    "description": "N/A",
+    "require": {
+        "magento/framework": "102.0.*",
+        "ecombricks/module-common": "102.3.*"
+    },
+    "type": "magento2-module",
+    "version": "102.3.7",
+    "license": [
+        "OSL-3.0"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Ecombricks\\StoreCommon\\": ""
+        }
+    }
+}

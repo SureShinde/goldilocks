@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:amasty:module:Amasty_Base:etc/less_to_css.xsd">
+    <module name="Amasty_DeliveryDateManager">
+        <handle name="checkout_index_index" />
+        <handle name="deliverydate_deliverydate_edit" />
+        <handle name="deliverydate_guest_edit" />
+        <cssOptions fileName="amdelivery" path="css/source/mkcss" />
+        <ifconfig>amdeliverydate/general/enabled</ifconfig>
+    </module>
+</config>

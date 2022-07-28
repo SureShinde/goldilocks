@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="amasty_preorder_order_preorder" resource="sales" engine="innodb" comment="Amasty Preorder Order Table">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="Id"/>
+        <column xsi:type="int" name="order_id" padding="10" unsigned="true" nullable="false" identity="false" comment="Order_id"/>
+        <column xsi:type="boolean" name="is_preorder" nullable="false" comment="Is_preorder"/>
+        <column xsi:type="text" name="warning" nullable="true" comment="Warning"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="AMASTY_PREORDER_ORDER_PREORDER_ORDER_ID_SALES_ORDER_ENTT_ID" table="amasty_preorder_order_preorder" column="order_id" referenceTable="sales_order" referenceColumn="entity_id" onDelete="CASCADE"/>
+    </table>
+
+    <table name="amasty_preorder_order_item_preorder" resource="sales" engine="innodb" comment="Amasty Preorder Order Item Table">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="Id"/>
+        <column xsi:type="int" name="order_item_id" padding="10" unsigned="true" nullable="false" identity="false" comment="Order_item_id"/>
+        <column xsi:type="boolean" name="is_preorder" nullable="false" comment="Is_preorder"/>
+        <column xsi:type="text" name="preorder_note" nullable="false" comment="Preorder Note"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="AMASTY_PREORDER_ORDER_ITEM_PREORDER_ORDR_ITM_ID_SALES_ORDR_ITM_ITM_ID" table="amasty_preorder_order_item_preorder" column="order_item_id" referenceTable="sales_order_item" referenceColumn="item_id" onDelete="CASCADE"/>
+    </table>
+
+    <table name="amasty_preorder_product_index" resource="default" engine="innodb" comment="Preorder Products Index">
+        <column xsi:type="int" name="product_id" padding="10" unsigned="true" nullable="false" comment="Product ID" />
+        <column xsi:type="smallint" name="website_id" unsigned="true" nullable="false" comment="Website ID" />
+    </table>
+
+    <table name="amasty_preorder_product_index_replica" resource="default" engine="innodb" comment="Preorder Products Index Replica">
+        <column xsi:type="int" name="product_id" padding="10" unsigned="true" nullable="false" comment="Product ID" />
+        <column xsi:type="smallint" name="website_id" unsigned="true" nullable="false" comment="Website ID"/>
+    </table>
+</schema>

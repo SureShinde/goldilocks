@@ -1,0 +1,242 @@
+{
+    "_readme": [
+        "When adding change-log records, take into consideration the following guide:",
+        "https://docs.vaimo.com/workflow-module/guides.html#changelog-usage"
+    ],
+    "5.0.1-RC3": {
+        "fix": [
+            "Setting the ‘list’ variable, before ProductObjectGenerator collectors are called, so that it can be overwritten by the collectors",
+            "Setting a sortOrder for vaimo_gtm_add_cart_url_purchase_category plugin to control which order the plugins are executed"
+        ]
+    },
+    "5.0.1-RC2": {
+        "fix": [
+            "Merge quote items correctly on user login when `purchase_category` is different in two items that should otherwise be merged"
+        ],
+        "maintenance": [
+            "Update code-quality modules"
+        ]
+    },
+    "5.0.1-RC1": {
+        "fix": [
+            "The event productClick would sometimes trigger on the wrong product, is now rewritten and fixed."
+        ],
+        "breaking": [
+            "Removed actionField from the event productDetail, since it will give attribution to product page rather than category page (which is where I came from)",
+            "Removed listPosition, this was a missunderstanding, it should only be list and position"
+        ]
+    },
+    "5.0.0-RC1": {
+        "feature": [
+            "Product impressions for search results",
+            "Adding and removing items from the minicart now reports correct events"
+        ],
+        "breaking": [
+            "Removed deprecated methods",
+            "Changed visibility of some fields in block classes",
+            "Removed Block\\CategoryGtm::LIST_NAME in favor of using methods to determine the name",
+            "Removed product data from cart action response data"
+        ]
+    },
+    "4.1.0": {
+        "feature": [
+            "Purchase category (`category` field) will now also be reported for items added to the cart from a list of products"
+        ]
+    },
+    "4.0.1": {
+        "fix": [
+            "Rework category listing impressions template to use same logic/pattern as for other blocks",
+            "Moved generation of `position` and `listposition` to block",
+            "Fix exception when rendering purchase category form field",
+            "`listposition` field now starts at 1 instead of 0"
+        ]
+    },
+    "4.0.0": {
+        "breaking": [
+            "New constructor arguments have been added to some classes",
+            "Upgrading from 3.x to 4.x should be a relatively small task for most users of this module",
+            "Block/Checkoutsteps::getPageRenderer no longer visible for child classes",
+            "Helper/AttributeCodes::prepareValue no longer visible for child classes",
+            "Properties no longer visible for child classes of Product/Attributes, Backend/Checkoutsteps, Backend/Attributes, Attributes/Code, Block/Gtm, CustomerData/ProductInfo, Helper/CatalogSession, Helper/AttributeCodes, Helper/Checkoutsteps, Block/Checkoutsteps, Block/AbstractGtmBlock",
+            "Attributes/Code::_toHtml visibility changed to protected",
+            "Attributes/Code::prepareCollection visibility changed to private",
+            "Block/Product/Attributes::getRenderer visibility changed to private"
+        ],
+        "feature": [
+            "Add option for reporting category path (e.g. Apparel/Men/T-Shirt instead of 'T-shirt')",
+            "Add option for reporting which category a product was purchased from"
+        ],
+        "maintenance": [
+            "Introduced general pattern for collecting product object fields in a less intrusive way. See docs for details.",
+            "Pipeline configuration improvements (synced with latest of Workflow V2)",
+            "Code style improvements (changed introduced where reported by the analyser)",
+            "Tests improved (used methods that made test shorter) + coverage improved (1 new test scenario)",
+            "Introduced frontend linters and code improvements that relate to such a move"
+        ]
+    },
+    "3.0.4": {
+        "fix": [
+            "Fix reporting of quantity when qty is missing in request-info"
+        ],
+        "maintenance": [
+            "Replace plugin with observer for registering added products",
+            "Use quote item data instead of raw request info when registering added products"
+        ]
+    },
+    "3.0.3": {
+        "fix": [
+            "Fix missing Factory on \\Magento\\Catalog\\Model\\ResourceModel\\Category\\Collection in Block/Purchases.php, previously it failed on success page if setting: Purchase Settings -> Category Name to Product Detail was Yes"
+        ]
+    },
+    "3.0.2": {
+        "fix": [
+            "Fix undefined JS variable"
+        ]
+    },
+    "3.0.1": {
+        "maintenance": [
+            "small cleanup for cart plugins di.xml"
+        ]
+    },
+    "3.0.0": {
+        "feature": [
+            "Products impressions for Related and Up-sell products, the data layer is populated according to Google implementation guide. [PRO-1195] [PRO-1196]"
+        ]
+    },
+    "2.3.6": {
+        "fix": [
+            "Fix aroundUpdateItems plugin to check first if quote item is loaded and then get product from it, fixes a bug when wrap order as a gift in cart page [EDC003-411]"
+        ]
+    },
+    "2.3.5": {
+        "fix": [
+            "Missing method coverage for cart update causes cart state to be reported incorrectly in some situations [BBMM-942]"
+        ]
+    },
+    "2.3.4": {
+        "fix": [
+            "Restored backwards compatibility of the module by backporting escapeJs utility function that is not available on pre 2.3 releases of Magento"
+        ]
+    },
+    "2.3.3": {
+        "fix": [
+            "Data Layer Product Detail Impressions was missing event 'productDetail' which is required to be able to fire GTM at the correct time [PRO-1209]"
+        ]
+    },
+    "2.3.2": {
+        "fix": [
+            "Data Layer product lists quantity key had a wrong name which resulted the data not being passed on correctly in it's full form (qty => quantity) [PRO-1203]"
+        ]
+    },
+    "2.3.1": {
+        "fix": [
+            "fix compatibility issue detected on Magento 2.2.5 EE related to product_list_impression block"
+        ]
+    },
+    "2.3.0": {
+        "feature": [
+            "under purchase data-layer, get lowest category name for every product (universalanalytics/purchase/category) [VEK-890]"
+        ],
+        "fix": [
+            "fix issue related to Vaimo\\GoogleTagManager\\Model\\CartState::registerProduct assumes product to be configurable if super_attributes request parameter is present on addToCart [PRONB2B-85]"
+        ],
+        "maintenance": [
+            "introduce code quality tools",
+            "updated documentation to have references to workflows and guides on how to create new releases",
+            "codebase normalized"
+        ]
+    },
+    "2.2.11": {
+        "fix": [
+            "compatibility with Magento 2.3 (deprecated/removed dependencies pulled out from the code)"
+        ]
+    },
+    "2.2.10": {
+        "maintenance": [
+            "updated Jenkins pipeline to work with Slack channels",
+            "added base docs.vaimo.com with generated changelog"
+        ]
+    },
+    "2.2.9": {
+        "fix": [
+            "some M2 EE GTM features not properly exposed (clicks on related products)"
+        ]
+    },
+    "2.2.8": {
+        "maintenance": [
+            "additional changes (package updates) to make sure that the module builds correctly in CI (failed tests did not trigger build failure)"
+        ]
+    },
+    "2.2.7": {
+        "maintenance": [
+            "Updated composer.lock to get back to green builds in Jenkins"
+        ]
+    },
+    "2.2.6": {
+        "fix": [
+            "allow product attribute to be 'false' or '0' or '' when collecting product attribute values"
+        ]
+    },
+    "2.2.5": {
+        "maintenance": [
+            "testing-tools updated to latest version + tests updated accordingly",
+            "Updated composer.lock to get back to green builds in Jenkins"
+        ]
+    },
+    "2.2.4": {
+        "maintenance": [
+            "Updated composer.lock to get back to green builds in Jenkins"
+        ]
+    },
+    "2.2.3": {
+        "fix": [
+            "Added config check if module is enabled when adding block"
+        ]
+    },
+    "2.2.2": {
+        "maintenance": [
+            "copyright disclaimers updated",
+            "testing-tools min dependency increased"
+        ]
+    },
+    "2.2.1": {
+        "maintenance": [
+            "package meta-data changes"
+        ]
+    },
+    "2.2.0": {
+        "feature": [
+            "allow extra data collector models to be added to order data generation on success page",
+            "allow gift wrap information on checkout success page",
+            "add customer group to success page data layer"
+        ],
+        "maintenance": [
+            "increased test coverage"
+        ]
+    },
+    "2.1.3": {
+        "maintenance": [
+            "configured the module tests to be usable in CI"
+        ]
+    },
+    "2.1.2": {
+        "fix": [
+            "moved EE gtm blocks to after.body due to having them before.body cauing un-configured product collections being used (without paging being applied)"
+        ]
+    },
+    "2.1.1": {
+        "maintenance": [
+            "bad testing-tools dependency fixed"
+        ]
+    },
+    "2.1.0": {
+        "fix": [
+            "enterprise support reworked. Avoiding re-defining arguments for EE blocks",
+            "reduced logic branching (less comparisons) in context info generation in the EE support"
+        ],
+        "maintenance": [
+            "added changelog + keywords",
+            "updated tests and added new ones"
+        ]
+    }
+}

@@ -1,0 +1,49 @@
+& when (@media-common = true) {
+    .sales-order-history {
+
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .sales-order-history {
+        .orders-history {
+            .table-order-items {
+                th, td {
+                    &.id {
+                        width: 18%;
+                    }
+
+                    &.date {
+                        width: 15%;
+                    }
+
+                    &.address {
+                        width: 32%;
+                    }
+
+                    &.status {
+                        width: 15%;
+                    }
+
+                    &.actions {
+                        width: 20%;
+                        text-align: right;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    body.account.sales-order-history {
+        .page-main {
+            background-color: #fff;
+        }
+
+        .column.main {
+            margin: 49px -9px 12px;
+            border-radius: 0;
+        }
+    }
+}

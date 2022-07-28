@@ -1,0 +1,60 @@
+<?php
+/** @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer */
+$viewModel = $block->getViewModel();
+?>
+<div class="customer-sidebar">
+    <div class="sidebar-info">
+        <strong>
+            <?= $block->escapeHtml(!$viewModel ? '' : $viewModel->getName()) ?>
+        </strong>
+    </div>
+    <div class="block block-collapsible-nav">
+        <div class="content block-collapsible-nav-content">
+            <ul class="nav items">
+                <li class="nav item"><a href="<?= $block->getUrl('customer/account') ?>"><?= __('My Account') ?> </a></li>
+                <li class="nav item"><a href="<?= $block->getUrl('sales/order/history') ?>"><?= __('My Orders') ?></a></li>
+                <li class="nav item"><a href="<?= $block->getUrl('wishlist') ?>"><?= __('My Wish List') ?></a></li>
+                <li class="nav item">
+                    <span class="delimiter"></span>
+                </li>
+                <li class="nav item address"><a href="<?= $block->getUrl('customer/address') ?>"><?= __('My Address') ?></a></li>
+                <li class="nav item"><a href="<?= $block->getUrl('vault/cards/listaction') ?>"><?= __('Payment Methods') ?></a></li>
+                <li class="nav item"><a href="<?= $block->getUrl('') ?>"><?= __('Saved Coupons') ?></a></li>
+                <li class="nav item">
+                    <span class="delimiter"></span>
+                </li>
+
+                <li class="nav item"><a href="<?= $block->getUrl('customer/account/edit') ?>"><?= __('Account Information') ?></a></li>
+                <li class="nav item">
+                    <span class="delimiter"></span>
+                </li>
+                <li class="nav item"><a href="<?= $block->getUrl('review/customer/index') ?>"><?= __('Reviews') ?></a></li>
+                <li class="nav item"><a href="<?= $block->getUrl('newsletter/manage') ?>"><?= __('Newsletter Subscriptions') ?></a></li>
+                <li class="nav item"><a href="<?= $block->getUrl('affiliate/account/setting') ?>"><?= __('Affiliate Program') ?></a></li>
+                <li class="nav item">
+                    <span class="delimiter"></span>
+                </li>
+                <li class="nav item logout"><a href="<?= $block->getUrl('customer/account/logout') ?>"><?= __('Logout') ?></a></li>
+                <li class="nav item">
+                    <span class="delimiter"></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<?php $scriptString = <<<script
+    require([
+        'jquery',
+        "Magento_Ui/js/modal/modal"
+    ], function ($, modal) {
+        let item = $('.nav.item a');
+
+        item.each(function (index, item) {
+            if ($(item).attr('href') === window.location.href) {
+                $(item).parent().addClass('current');
+            }
+        })
+    });
+script;
+?>
+<?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false) ?>

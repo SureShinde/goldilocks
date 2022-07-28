@@ -1,0 +1,21 @@
+<?php
+/**
+ * @var $block \Magento\Framework\View\Element\Template
+ */
+?>
+<?php
+/** @var \Amasty\Preorder\ViewModel\Product\ProductList\Preorder $preorderListViewModel */
+$preorderListViewModel = $block->getData('preorder_list_view_model');
+/** @var \Magento\Catalog\Api\Data\ProductInterface[] $products */
+$products = $block->getData('items');
+?>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Amasty_Preorder/js/product/preorder_list": {
+                "jsonConfig" : <?= /** @noEscape  */ $preorderListViewModel->generateJsonConfig($products) ?>
+            }
+        }
+    }
+</script>

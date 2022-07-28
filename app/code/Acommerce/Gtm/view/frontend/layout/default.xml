@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="after.body.start">
+            <block ifconfig="Acommerce_Gtm/general/enable"
+                   name="gtm.nonjs.code"
+                   class="Acommerce\Gtm\Block\Core"
+                   template="Acommerce_Gtm::nonjs_code.phtml"
+                   before="-"
+            />
+        </referenceContainer>
+        <container name="gtm.before.body.end" as="gtm_before_body_end" label="Gtm Before Body End" after="before.body.end">
+            <block ifconfig="Acommerce_Gtm/general/enable" class="Acommerce\Gtm\Block\Core" name="weltpixel_gtm_footer" after="-" template="Acommerce_Gtm::gtm_footer.phtml" ttl="0" />
+        </container>
+        <referenceBlock name="require.js" template="Acommerce_Gtm::page/js/require_js.phtml" />
+        <!-- impressions -->
+        <!--<referenceBlock name="category.products.list" >-->
+            <!--<action method="setTemplate" ifconfig="Acommerce_Gtm/general/enable">-->
+                <!--<argument name='template' xsi:type='string'>Acommerce_Gtm::product/list.phtml</argument>-->
+            <!--</action>-->
+        <!--</referenceBlock>-->
+        <!--<referenceBlock name="search_result_list" >-->
+            <!--<action method="setTemplate" ifconfig="Acommerce_Gtm/general/enable">-->
+                <!--<argument name='template' xsi:type='string'>Acommerce_Gtm::product/list.phtml</argument>-->
+            <!--</action>-->
+        <!--</referenceBlock>-->
+        <!--&lt;!&ndash; impressions &ndash;&gt;-->
+        <!--&lt;!&ndash; product clicks for cross, related, upsell &ndash;&gt;-->
+        <!--<referenceBlock name="checkout.cart.crosssell" >-->
+            <!--<action method="setTemplate" ifconfig="Acommerce_Gtm/general/enable">-->
+                <!--<argument name='template' xsi:type='string'>Acommerce_Gtm::product/list/items.phtml</argument>-->
+            <!--</action>-->
+        <!--</referenceBlock>-->
+        <!--<referenceBlock name="product.info.upsell" >-->
+            <!--<action method="setTemplate" ifconfig="Acommerce_Gtm/general/enable">-->
+                <!--<argument name='template' xsi:type='string'>Acommerce_Gtm::product/list/items.phtml</argument>-->
+            <!--</action>-->
+        <!--</referenceBlock>-->
+        <!--<referenceBlock name="catalog.product.related" >-->
+            <!--<action method="setTemplate" ifconfig="Acommerce_Gtm/general/enable">-->
+                <!--<argument name='template' xsi:type='string'>Acommerce_Gtm::product/list/items.phtml</argument>-->
+            <!--</action>-->
+        <!--</referenceBlock>-->
+        <!-- product clicks for cross, related, upsell -->
+    </body>
+</page>

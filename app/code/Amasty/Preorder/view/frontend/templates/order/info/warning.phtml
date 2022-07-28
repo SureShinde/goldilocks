@@ -1,0 +1,18 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+<?php
+/** @var \Amasty\Preorder\ViewModel\Order\View\Preorder $preorderViewModel */
+$preorderViewModel = $block->getData('preorder_view_model');
+$order = $preorderViewModel->getCurrentOrder();
+$preorderInformation = $preorderViewModel->getPreorderInformation($order);
+?>
+
+<?php if (!$preorderViewModel->isOrderComplete($order) && $preorderInformation->isPreorder()): ?>
+<div class="note-msg"><?= $preorderViewModel->getWarningHtml($order) ?></div>
+<br>
+<?php endif; ?>
+

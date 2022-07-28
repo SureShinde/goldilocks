@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket_PrivateSale
+ * @copyright   Copyright (c) 2020 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ -->
+
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">prprivatesale_event_listing.prprivatesale_event_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="add" class="Plumrocket\PrivateSale\Block\Adminhtml\Event\Grid\AddButton" />
+        </buttons>
+        <spinner>privatesale_events</spinner>
+        <deps>
+            <dep>prprivatesale_event_listing.prprivatesale_event_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="prprivatesale_event_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">entity_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+            <filterUrlParams>
+                <param name="status">*</param>
+                <param name="category_event">*</param>
+                <param name="product_event">*</param>
+            </filterUrlParams>
+        </settings>
+        <aclResource>Plumrocket_PrivateSale::manage_events</aclResource>
+        <dataProvider class="Plumrocket\PrivateSale\Ui\DataProvider\Event\Listing\ExtendedDataProvider" name="prprivatesale_event_listing_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <filters name="listing_filters">
+            <settings>
+                <imports>
+                    <link name="apply">prprivatesale_event_timeline.prprivatesale_event_timeline.listing_top.listing_filters:applied</link>
+                </imports>
+            </settings>
+        </filters>
+        <columnsControls name="columns_controls"/>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="privatesale_events" class="Plumrocket\PrivateSale\Ui\Component\Listing\Columns">
+        <column name="entity_id" sortOrder="10">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+            </settings>
+        </column>
+        <column name="category_event" component="Magento_Ui/js/grid/columns/link" class="Plumrocket\PrivateSale\Ui\Component\Listing\Columns\CategoryEvent" sortOrder="20">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="link" xsi:type="string">categoryLink</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Category Id</label>
+            </settings>
+        </column>
+        <column name="event_name" sortOrder="30">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Event Name</label>
+            </settings>
+        </column>
+        <column name="sale_type" class="Plumrocket\PrivateSale\Ui\Component\Listing\Columns\EventType" sortOrder="40" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <dataType>select</dataType>
+                <bodyTmpl>Plumrocket_PrivateSale/grid/cells/sale-type</bodyTmpl>
+                <options class="Plumrocket\PrivateSale\Model\Config\Source\SaleType"/>
+                <label translate="true">Event Type</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="event_homepage" sortOrder="50">
+            <settings>
+                <label translate="true">Event Homepage</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="event_from" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date" sortOrder="60">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">Start Date</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        <column name="event_to" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date" sortOrder="70">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">End Date</label>
+            </settings>
+        </column>
+        <column name="status" class="Plumrocket\PrivateSale\Ui\Component\Listing\Columns\Status"
+                component="Plumrocket_PrivateSale/js/grid/columns/status" sortOrder="80">
+            <settings>
+                <options class="Plumrocket\PrivateSale\Model\Config\Source\EventStatus"/>
+                <bodyTmpl>Plumrocket_PrivateSale/grid/cells/status</bodyTmpl>
+                <dataType>select</dataType>
+                <label translate="true">Status</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="products" class="Plumrocket\PrivateSale\Ui\Component\Listing\Columns\ProductCount" sortOrder="90">
+            <settings>
+                <label translate="true">Products</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="order_count" sortOrder="100">
+            <settings>
+                <label translate="true">Order Count</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="total_revenue" sortOrder="110">
+            <settings>
+                <label translate="true">Total Revenue</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="new_users" sortOrder="120">
+            <settings>
+                <label translate="true">New Users</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="priority" sortOrder="130">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Priority</label>
+            </settings>
+        </column>
+        <column name="enable" sortOrder="140" class="Plumrocket\PrivateSale\Ui\Component\Listing\Columns\Status"
+                component="Plumrocket_PrivateSale/js/grid/columns/status-enable">
+            <settings>
+                <dataType>select</dataType>
+                <bodyTmpl>Plumrocket_PrivateSale/grid/cells/status</bodyTmpl>
+                <options class="Magento\Config\Model\Config\Source\Yesno"/>
+                <label translate="true">Enabled</label>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="Plumrocket\PrivateSale\Ui\Component\Listing\Columns\Action" sortOrder="500">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="viewUrlPath" xsi:type="string">prprivatesale/event/edit</item>
+                    <item name="urlEntityParamName" xsi:type="string">entity_id</item>
+                </item>
+            </argument>
+            <settings>
+                <indexField>entity_id</indexField>
+                <visible>true</visible>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

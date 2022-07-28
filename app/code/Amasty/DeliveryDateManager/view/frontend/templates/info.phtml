@@ -1,0 +1,22 @@
+<?php /** @var $block \Amasty\DeliveryDateManager\Block\Sales\Order\Info\Deliverydate */ ?>
+<?php /** @var $escaper \Magento\Framework\Escaper */ ?>
+<?php $list = $block->getList() ?>
+<?php if (!empty($list)): ?>
+    <div class="block block-comment">
+        <div class="block-title"><strong><?= $escaper->escapeHtml(__('Comment')) ?></strong></div>
+        <div class="block-content">
+            <?php foreach ($list as $fieldCode => $field): ?>
+                <div class="box-content <?= $fieldCode ?>">
+                    <p><?= $escaper->escapeHtml($field['value'], ['br']); ?>
+                        <?php if ($block->isFieldEditable($fieldCode)): ?>
+                            <a href="<?= $escaper->escapeUrl($block->getEditUrl()) ?>">
+                                <?= $escaper->escapeHtml(__('Edit')) ?>
+                            </a>
+                        <?php endif; ?>
+                    </p>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+<?php endif; ?>
+

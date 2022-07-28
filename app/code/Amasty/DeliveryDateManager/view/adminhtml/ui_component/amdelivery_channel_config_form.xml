@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd"
+      component="Amasty_DeliveryDateManager/js/view/modal/abstract-modal-form">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider"
+                  xsi:type="string">amdelivery_channel_config_form.amdelivery_channel_config_form_data_source
+            </item>
+        </item>
+        <item name="config" xsi:type="array">
+            <item name="deleteConfirmationMessage" translate="true" xsi:type="string">Are you sure you want to delete this configuration?</item>
+            <item name="notSelectedEntityMessage" translate="true" xsi:type="string">Please, select configuration to delete.</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="cancel" class="Amasty\DeliveryDateManager\Block\Adminhtml\Channel\Modal\CancelButton"/>
+            <button name="delete" class="Amasty\DeliveryDateManager\Block\Adminhtml\Channel\Modal\DeleteButton"/>
+            <button name="save_and_continue" class="Amasty\DeliveryDateManager\Block\Adminhtml\GeneralButtons\SaveAndContinueButton"/>
+            <button name="save" class="Amasty\DeliveryDateManager\Block\Adminhtml\GeneralButtons\SaveButton"/>
+        </buttons>
+        <namespace>amdelivery_channel_config_form</namespace>
+        <ajaxSave>true</ajaxSave>
+        <ajaxSaveType>simple</ajaxSaveType>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>amdelivery_channel_config_form.amdelivery_channel_config_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="amdelivery_channel_config_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="amasty_deliverydate/channel_configuration/save"/>
+        </settings>
+        <dataProvider class="Amasty\DeliveryDateManager\Ui\Component\Form\Channel\Modal\ChannelConfigDataProvider"
+                      name="amdelivery_channel_config_form_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general" sortOrder="10">
+        <settings>
+            <label/>
+        </settings>
+        <field name="id" formElement="hidden">
+            <settings>
+                <dataType>text</dataType>
+            </settings>
+        </field>
+        <field name="name" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Title</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="max_text_length" xsi:type="number">50</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="min" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Min. Delivery Period (Days)</label>
+                <validation>
+                    <rule name="validate-digits" xsi:type="boolean">true</rule>
+                    <rule name="validate-digits-range" xsi:type="string">0-999</rule>
+                </validation>
+                <notice translate="true">Set minimum delivery period in calendar days available for customers on the storefront, e.g: 1</notice>
+                <tooltip>
+                    <description translate="true"><![CDATA[Define the offset in calendar days from current day after which the days the the Delivery Date selector become available for customers on the storefront. All the days before the specified value will be shown as disabled in the Delivery Date selector.<br/>
+                    To provide the same day delivery, the option should be set to '0'.<br/>
+                    To provide the next day delivery, the option should be set to '0' or '1'.]]></description>
+                </tooltip>
+            </settings>
+        </field>
+        <field name="max" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Max. Delivery Period (Days)</label>
+                <validation>
+                    <rule name="validate-digits" xsi:type="boolean">true</rule>
+                    <rule name="validate-digits-range" xsi:type="string">0-999</rule>
+                </validation>
+                <notice translate="true">Set maximum delivery period in calendar  days available for customers on the storefront, e.g: 14. The value cannot be more than 365 days, if empty the value will be = 180 days</notice>
+                <tooltip>
+                    <description translate="true"><![CDATA[Define the maximum length of the delivery period available for the customers on the storefront. All the days after the specified value will be shown as disabled in the Delivery Date selector.<br/>
+                    Max. applicable value is '365'.<br/>
+                    If empty, the value is 180 days by default.]]></description>
+                </tooltip>
+            </settings>
+        </field>
+        <field name="is_same_day_available" formElement="checkbox">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Allow Same Day Delivery</label>
+                <visible>true</visible>
+                <dataType>boolean</dataType>
+                <dataScope>is_same_day_available</dataScope>
+                <tooltip>
+                    <description translate="true">Set 'Yes' if you want to offer the same day delivery</description>
+                </tooltip>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="string">0</map>
+                            <map name="true" xsi:type="string">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="same_day_cutoff" formElement="date"
+               class="Amasty\DeliveryDateManager\Ui\Component\Form\Element\DataType\TimePicker"
+               component="Amasty_DeliveryDateManager/js/view/modal/form/element/time-picker"
+               template="ui/form/field">
+            <settings>
+                <dataType>text</dataType>
+                <dataScope>same_day_cutoff</dataScope>
+                <label translate="true">Same Day Delivery Cut-off Time</label>
+                <validation>
+                    <rule name="amasty-time" xsi:type="boolean">true</rule>
+                </validation>
+                <tooltip>
+                    <description translate="true"><![CDATA[Set the time after that the same day delivery option gets unavailable for customers.<br/>
+                     If customers place their orders after this time, they won't be able to choose today as the delivery day.<br/>
+                     To use the option the 'Min. Delivery Period (Days)' field should be set to '0'.]]></description>
+                </tooltip>
+                <imports>
+                    <link name="visible">${$.parentName}.is_same_day_available:checked</link>
+                </imports>
+            </settings>
+            <formElements>
+                <date>
+                    <settings>
+                        <options>
+                            <option name="showsDate" xsi:type="boolean">false</option>
+                            <option name="showsTime" xsi:type="boolean">true</option>
+                            <option name="timeOnly" xsi:type="boolean">true</option>
+                            <option name="timeFormat" xsi:type="string">HH:mm</option>
+                            <option name="closeText" xsi:type="string" translate="true">OK</option>
+                        </options>
+                    </settings>
+                </date>
+            </formElements>
+        </field>
+        <field name="order_time" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Time Required to Handle Order (Minutes)</label>
+                <imports>
+                    <link name="visible">${$.parentName}.is_same_day_available:checked</link>
+                </imports>
+                <validation>
+                    <rule name="validate-digits" xsi:type="boolean">true</rule>
+                    <rule name="validate-digits-range" xsi:type="string">0-999999</rule>
+                </validation>
+                <tooltip>
+                    <description translate="true"><![CDATA[Specify the time required to handle an order. This way you set a minimal time period that makes a gap before current time and the closes available Time Interval on the storefront. Works based on minutes. Applicable for products 'In Stock'.<br/>
+                    <br/>
+                    Example:
+                          <ul class="amdelivery-tooltip-list">
+                             <li>the option set to '45';</li>
+                             <li>available time intervals are: 10:00 AM - 11:00 AM, 11:00 AM - 12:00 AM;</li>
+                             <li>a customer is trying to choose the closest available time interval on the storefront at 09:30 AM;</li>
+                          </ul>
+                    Result: the closest available intervals for the customer is 11:00 AM - 12:00 AM (since there is not enough time to fulfill the delivery at 10:00 - 11:00 AM)]]></description>
+                </tooltip>
+                <notice translate="true">Set time in minutes, e.g: 17</notice>
+            </settings>
+        </field>
+        <field name="backorder_time" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Time Required to Handle Backorder (Minutes)</label>
+                <imports>
+                    <link name="visible">${$.parentName}.is_same_day_available:checked</link>
+                </imports>
+                <validation>
+                    <rule name="validate-digits" xsi:type="boolean">true</rule>
+                    <rule name="validate-digits-range" xsi:type="string">0-999999</rule>
+                </validation>
+                <tooltip>
+                    <description translate="true"><![CDATA[Specify the time required to handle a backorder. This way you set a minimal time period that makes a gap before current time and the closes available Time Interval on the storefront.<br/>
+                    Works based on minutes. Applicable for products 'Out of Stock'.]]></description>
+                </tooltip>
+                <notice translate="true">Set time in minutes, e.g: 3600 (60 h x 60 minutes = 3600 minutes)</notice>
+            </settings>
+        </field>
+    </fieldset>
+</form>

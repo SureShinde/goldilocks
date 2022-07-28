@@ -1,0 +1,31 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Catalog\Block\Product\View\Details $block */
+?>
+<?php if ($detailedInfoGroup = $block->getGroupSortedChildNames('detailed_info', 'getChildHtml')) :?>
+    <div class="page-main-details">
+        <?php $layout = $block->getLayout(); ?>
+        <?php foreach ($detailedInfoGroup as $name) :?>
+            <?php
+            $html = $layout->renderElement($name);
+            if (!trim($html)) {
+                continue;
+            }
+            $alias = $layout->getElementAlias($name);
+            $label = $block->getChildData($alias, 'title');
+            ?>
+            <div class="product-full-width-section" id="<?= $block->escapeHtmlAttr($alias) ?>" role="list">
+                <h2 class="product-section-title">
+                    <?= /* @noEscape */ $label ?>
+                </h2>
+                <div class="product-section-content">
+                    <?= /* @noEscape */ $html ?>
+                </div>
+            </div>
+        <?php endforeach;?>
+    </div>
+<?php endif; ?>

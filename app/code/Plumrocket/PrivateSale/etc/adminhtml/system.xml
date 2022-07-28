@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<!--
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket Private Sales and Flash Sales v4.x.x
+ * @copyright   Copyright (c) 2020 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="prprivatesale" translate="label" type="text" sortOrder="9599884" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Private Sales &amp; Flash Sales</label>
+            <tab>plumrocket</tab>
+            <resource>Plumrocket_PrivateSale::config_privatesale</resource>
+
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <attribute type="expanded">1</attribute>
+                <field id="version" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>Plumrocket\Base\Block\Adminhtml\System\Config\Form\Version</frontend_model>
+                    <attribute type="pr_extension_name">PrivateSale</attribute>
+                </field>
+                <field id="enabled" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Extension</label>
+                    <backend_model>Plumrocket\PrivateSale\Model\Config\Backend\Enable</backend_model>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="serial" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <frontend_model>Plumrocket\Base\Block\Adminhtml\System\Config\Form\Serial</frontend_model>
+                    <label>Serial Key</label>
+                    <attribute type="pr_extension_name">PrivateSale</attribute>
+                </field>
+            </group>
+            <group id="main" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Main Settings</label>
+                <attribute type="expanded">0</attribute>
+                <field id="index_page" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Website Index Page</label>
+                    <config_path>web/default/cms_home_page</config_path>
+                    <source_model>Magento\Cms\Model\Config\Source\Page</source_model>
+                    <comment><![CDATA[Here you can set "Private Sales & Flash Sales Index Page" as your store homepage. The same setting is available at "General > Web > Default Pages > CMS Home Page".]]></comment>
+                </field>
+                <field id="event_statistic" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <source_model>Plumrocket\PrivateSale\Model\Config\Source\Enableddisabled</source_model>
+                    <label>Event Statistics</label>
+                    <comment><![CDATA[By enabling event statistics, you can track event performance and analyze order count, total revenue, the number of new user registrations, etc. for each event.]]></comment>
+                </field>
+                <field id="cookie_lifetime" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Cookie Lifetime (days)</label>
+                    <comment><![CDATA[A number of days before a tracking cookie will expire. Cookies are used for event statistics to track all new user registrations coming from the private sale event.]]></comment>
+                    <depends>
+                        <field id="event_statistic">1</field>
+                    </depends>
+                </field>
+                <field id="coming_soon_days" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Coming Soon Events (days)</label>
+                    <comment><![CDATA[A number of days before the event starts to display this event as "Coming Soon."]]></comment>
+                </field>
+                <field id="ending_soon_days" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Ending Soon Events (days)</label>
+                    <comment><![CDATA[A number of days before the event ends to display this event as "Ending Soon."]]></comment>
+                </field>
+            </group>
+            <group id="permission" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Permissions</label>
+                <attribute type="expanded">0</attribute>
+                <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>General Permissions</label>
+                    <attribute type="expanded">1</attribute>
+                    <field id="before_starts" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Before Event Starts</label>
+                        <frontend_model>Plumrocket\PrivateSale\Block\Adminhtml\Form\Field\GeneralPermissions</frontend_model>
+                        <backend_model>Plumrocket\PrivateSale\Model\Config\Backend\BeforeStarts</backend_model>
+                        <comment>The same permissions will apply to all customer groups. Changing "Browsing Event" permissions will enable/disable category or product status.</comment>
+                    </field>
+                    <field id="after_ends" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>After Event Ends</label>
+                        <frontend_model>Plumrocket\PrivateSale\Block\Adminhtml\Form\Field\GeneralPermissions</frontend_model>
+                        <backend_model>Plumrocket\PrivateSale\Model\Config\Backend\AfterEnds</backend_model>
+                        <comment>The same permissions will apply to all customer groups. Changing "Browsing Event" permissions will enable/disable category or product status.</comment>
+                    </field>
+                </group>
+                <group id="private_sale" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Private Sale Permissions</label>
+                    <attribute type="expanded">1</attribute>
+                    <field id="customer_group" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Permission By Customer Group</label>
+                        <frontend_model>Plumrocket\PrivateSale\Block\Adminhtml\Form\Field\PrivateSalePermissions</frontend_model>
+                        <backend_model>Plumrocket\PrivateSale\Model\Config\Backend\PrivateSalePermissions</backend_model>
+                        <comment>Configure access for selected customer groups to a private event.</comment>
+                    </field>
+                    <field id="landing_page" translate="label comment" type="Plumrocket\PrivateSale\Block\Adminhtml\Form\Element\MarketplaceSelect" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Landing Page</label>
+                        <source_model>Plumrocket\PrivateSale\Model\Config\Source\SystemEventLandingPage</source_model>
+                        <comment><![CDATA[Prevent unauthorized access to the private event by redirecting to a login page, registration page, or CMS page. %s]]></comment>
+                    </field>
+                    <field id="disallow_search_by_group" translate="label comment" type="multiselect" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Disallow Catalog Search By</label>
+                        <source_model>Plumrocket\PrivateSale\Model\Config\Source\CustomerGroup</source_model>
+                        <comment>Hide private events from the catalog search results for the selected customer groups.</comment>
+                    </field>
+                </group>
+            </group>
+            <group id="design" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Design</label>
+                <attribute type="expanded">0</attribute>
+                <group id="timer" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Countdown Timer</label>
+                    <attribute type="expanded">1</attribute>
+                    <field id="homepage_timer" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Homepage Timer</label>
+                        <source_model>Plumrocket\PrivateSale\Model\Config\Source\DesignTimer</source_model>
+                        <comment><![CDATA[Examples: <br />
+                            Option "Countdown (Days & Hours)" - "Ends in 3 days" or "Ends in 2 days and 3 hours" <br />
+                            Option "Countdown (Days/Hours/Minutes/Seconds)" - "Ending in 3 days, 05:06:37" <br />
+                            Option "Static End Date" - "Until Saturday February 22, 2020 at 9 a.m."]]></comment>
+                    </field>
+                    <field id="event_category_timer" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Event Category Timer</label>
+                        <source_model>Plumrocket\PrivateSale\Model\Config\Source\DesignTimer</source_model>
+                    </field>
+                    <field id="product_timer" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Product Timer</label>
+                        <source_model>Plumrocket\PrivateSale\Model\Config\Source\DesignTimer</source_model>
+                    </field>
+                </group>
+                <group id="category_event_header" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Category Event Header</label>
+                    <attribute type="expanded">1</attribute>
+
+                    <field id="style" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label comment" type="Plumrocket\PrivateSale\Block\Adminhtml\System\Config\RadiosWithImage">
+                        <label>Style</label>
+                        <source_model>Plumrocket\PrivateSale\Model\Config\Source\CategoryEventHeaderStyle</source_model>
+                    </field>
+                </group>
+                <group id="product_event_header" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Product Event Header</label>
+                    <attribute type="expanded">1</attribute>
+
+                    <field id="style" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label comment" type="Plumrocket\PrivateSale\Block\Adminhtml\System\Config\RadiosWithImage">
+                        <label>Style</label>
+                        <source_model>Plumrocket\PrivateSale\Model\Config\Source\ProductEventHeaderStyle</source_model>
+                    </field>
+                </group>
+            </group>
+        </section>
+    </system>
+</config>
+

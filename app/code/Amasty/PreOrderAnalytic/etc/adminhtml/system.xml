@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="ampreorder">
+            <group id="analytic" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Analytics Page</label>
+
+                <field id="pending_order_status" translate="label" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Pending Orders Statuses</label>
+                    <source_model>Amasty\PreOrderAnalytic\Model\Source\Config\Order\Status</source_model>
+                    <frontend_model>Amasty\PreOrderAnalytic\Block\Adminhtml\System\Config\Element\Multiselect</frontend_model>
+                    <backend_model>Amasty\PreOrderAnalytic\Model\Config\Backend\Order\PendingStatus</backend_model>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+
+                <field id="revenue_order_status" translate="label comment" type="multiselect" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Revenue Orders Statuses</label>
+                    <source_model>Amasty\PreOrderAnalytic\Model\Source\Config\Order\Status</source_model>
+                    <frontend_model>Amasty\PreOrderAnalytic\Block\Adminhtml\System\Config\Element\Multiselect</frontend_model>
+                    <backend_model>Amasty\PreOrderAnalytic\Model\Config\Backend\Order\RevenueStatus</backend_model>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

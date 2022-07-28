@@ -1,0 +1,21 @@
+<!--
+/**
+ * @package     Plumrocket_PrivateSale
+ * @copyright   Copyright (c) 2020 Plumrocket Inc. (https://plumrocket.com)
+ * @license     https://plumrocket.com/license/  End-user License Agreement
+ */
+-->
+
+<div class="data-grid-cell-content" data-bind="foreach: { data: $col.getStatusData($row()), as: '$status' }">
+    <!-- ko if: $status.single_store_mode -->
+        <div class="data-grid-cell-content status-box"
+             data-bind="text: $col.getLabel($status), css: $col.getStatusCode($status) "></div>
+    <!-- /ko -->
+    <!-- ko ifnot: $status.single_store_mode -->
+        <div>
+            <strong data-bind="text: $status.website"></strong>:
+            <span data-bind="text: $col.getLabel($status)"></span>
+        </div>
+    <!-- /ko -->
+</div>
+

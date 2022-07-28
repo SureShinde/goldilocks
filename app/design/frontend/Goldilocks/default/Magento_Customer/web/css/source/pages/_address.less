@@ -1,0 +1,600 @@
+& when (@media-common = true) {
+    .customer-address-index {
+
+    }
+
+    .customer-address-form {
+        form.form-address-edit {
+            .fieldset {
+                > .legend {
+                    display: none;
+
+                    + br {
+                        display: none;
+                    }
+                }
+            }
+
+            .actions-toolbar {
+                .action.primary {
+                    padding: @button__padding;
+                    font-size: @button__font-size;
+                    line-height: @button__line-height;
+                    font-weight: @button__font-weight;
+                }
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .customer-address-index {
+        .column.main {
+            .block:not(.widget) {
+                &.block-addresses-title {
+                    margin-bottom: 0;
+                    padding: 0;
+
+                    > .block-title {
+                        .lib-vendor-prefix-display(flex);
+                        .lib-vendor-prefix-flex-wrap(wrap);
+                        margin-left: -20px;
+                        margin-right: -20px;
+                        padding: 20px;
+
+                        > strong {
+                            margin-top: 10px;
+                        }
+                    }
+
+                    .action.primary {
+                        min-width: 206px;
+                        margin-left: auto;
+                        font-weight: @font-weight__semibold;
+                    }
+                }
+
+                &.block-addresses-default {
+                    margin-top: 20px;
+                    padding-bottom: 16px;
+                    background: #F8F8F8;
+                    .lib-css(border-radius, 8px);
+
+                    .block-title {
+                        margin-top: 10px;
+                        margin-bottom: 8px;
+                        padding-bottom: 0;
+                        border-bottom: none;
+
+                        > strong {
+                            text-transform: none;
+                            font-size: 14px;
+                        }
+                    }
+
+                    .box {
+                        margin-bottom: 0;
+                    }
+
+                    .box-title {
+                        margin-bottom: 6px;
+                        color: #7D7D7D;
+                    }
+
+                    address {
+                        font-size: 12px;
+
+                        .block-flex {
+                            .lib-vendor-prefix-flex-direction(column);
+
+                            li {
+                                width: 100%;
+                                list-style: none;
+
+                                &.phone {
+                                    .lib-vendor-prefix-order(1);
+                                }
+                            }
+                        }
+
+                        .value {
+                            font: inherit;
+                        }
+                    }
+
+                    .box-actions {
+                        margin-top: 0;
+
+                        a,
+                        .alink {
+                            font-size: 12px;
+                            color: @color-red10;
+                        }
+                    }
+                }
+
+                &.block-addresses-list {
+                    margin: 0;
+                    padding: 0;
+
+                    > .block-title {
+                        display: none;
+                    }
+
+                    > .block-content {
+                        padding: 0;
+                    }
+
+                    .table-wrapper {
+                        margin-bottom: 0;
+                    }
+
+                    .col.actions {
+                        .action {
+                            margin-right: 17px;
+                            text-decoration: none;
+
+                            &:last-child {
+                                margin-right: 0;
+                            }
+
+                            &.delete {
+                                &:before {
+                                    content: "\e905";
+                                    font-family: 'goldilock-icon';
+                                    font-size: 20px;
+                                    color: #BFBFBF;
+                                }
+
+                                span {
+                                    display: none;
+                                }
+
+                                &:hover {
+                                    &:before {
+                                        color: @theme__color__primary;
+                                    }
+                                }
+                            }
+
+                            &.edit {
+                                &:before {
+                                    content: "\e928";
+                                    font-family: 'goldilock-icon';
+                                    font-size: 20px;
+                                    color: #BFBFBF;
+                                }
+
+                                span {
+                                    display: none;
+                                }
+
+                                &:hover {
+                                    &:before {
+                                        color: @theme__color__primary;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .toolbar {
+            margin: 0 -20px 2px;
+            padding: 16px 20px 0;
+            border-top: 1px solid #E8E8E8;
+        }
+    }
+
+    .customer-address-form {
+        .customer-sidebar {
+            .nav.items {
+                .nav.item {
+                    &.address {
+                        background: #FFFDD7;
+
+                        &:before {
+                            content: '';
+                            background-color: @primary__color;
+                            position: absolute;
+                            right: 0;
+                            height: auto;
+                            top: 0;
+                            bottom: 0;
+                            width: 8px;
+                            border-radius: 2px 0 0 2px;
+                        }
+                    }
+                }
+            }
+        }
+
+        form.form-address-edit {
+            textarea,
+            select,
+            input[type="text"], input[type="password"], input[type="url"], input[type="tel"], input[type="search"], input[type="number"], input[type*="date"], input[type="email"] {
+                color: #727272;
+            }
+
+            .actions-toolbar {
+                text-align: left;
+
+                .primary {
+                    .action {
+                        margin-right: 16px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    body.customer-address-index {
+        padding-bottom: 70px;
+
+        .column.main {
+            padding: 0 !important;
+            background: none !important;
+            .lib-css(border-radius, 0);
+
+            .block:not(.widget) {
+                padding: 0;
+                background: none;
+                .lib-css(border-radius, 0);
+
+                .block-title {
+                    display: none !important;
+                }
+
+                .block-content {
+                    padding: 0;
+                }
+
+                &.block-addresses-default {
+                    .box {
+                        position: relative;
+                        margin-bottom: 10px;
+                        background: @color-white;
+                        .lib-css(border-radius, 8px);
+
+                        .action.edit {
+                            display: block;
+                            position: absolute;
+                            top: 12px;
+                            right: 16px;
+                            line-height: 1;
+
+                            &:before {
+                                content: "\e928";
+                                font-family: 'goldilock-icon';
+                                font-size: 20px;
+                                color: #BFBFBF;
+                            }
+
+                            span {
+                                display: none;
+                            }
+                        }
+                    }
+
+                    .box-title {
+                        display: none;
+                    }
+
+                    .box-actions {
+                        margin-top: 0;
+                    }
+
+                    address {
+                        padding: 0 16px;
+
+                        .block-flex {
+                            .lib-vendor-prefix-display(flex);
+                            .lib-vendor-prefix-flex-direction(column);
+                        }
+
+                        li {
+                            display: block;
+                            padding-bottom: 12px;
+                            list-style: none;
+
+                            .value {
+                                margin-bottom: 0;
+
+                                &:before {
+                                    display: block;
+                                    margin-bottom: 4px;
+                                    content: attr(data-label-address);
+                                    font-size: 10px;
+                                    line-height: 1.2;
+                                    color: #4D4D4D;
+                                }
+                            }
+
+                            &.name {
+                                display: block;
+                                margin: 0 -16px 12px;
+                                padding: 14px 36px 14px 16px;
+                                line-height: 1.2;
+                                font-weight: @font-weight__semibold;
+                                border-bottom: 1px solid #E9E9E9;
+
+                                .value {
+                                    margin-bottom: 0;
+
+                                    &:before {
+                                        display: none;
+                                    }
+                                }
+                            }
+
+                            &.phone {
+                                .lib-vendor-prefix-order(1);
+                            }
+                        }
+                    }
+
+                    .box-address-shipping {
+                        address {
+                            li.name {
+                                &[data-label-shippingAddress] {
+                                    &:after {
+                                        content: attr(data-label-shippingAddress);
+                                        color: #FFC100;
+                                        display: inline-block;
+                                    }
+
+                                    .value {
+                                        display: inline;
+
+                                        &:after {
+                                            content: "";
+                                            display: inline-block;
+                                            width: 5px;
+                                            height: 5px;
+                                            margin: -1px 4px 0;
+                                            vertical-align: middle;
+                                            background: #E7E7E7;
+                                            .lib-css(border-radius, 5px);
+                                        }
+
+                                        br {
+                                            display: none;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .box-address-billing {
+                        address {
+                            li.name {
+                                &[data-label-billingAddress] {
+                                    &:after {
+                                        content: attr(data-label-billingAddress);
+                                        color: #FFC100;
+                                        display: inline-block;
+                                    }
+
+                                    .value {
+                                        display: inline;
+
+                                        &:after {
+                                            content: "";
+                                            display: inline-block;
+                                            width: 5px;
+                                            height: 5px;
+                                            margin: -1px 4px 0;
+                                            vertical-align: middle;
+                                            background: #E7E7E7;
+                                            .lib-css(border-radius, 5px);
+                                        }
+
+                                        br {
+                                            display: none;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                &.block-addresses-list {
+                    table.table-additional-addresses-items {
+                        > tbody {
+                            > tr {
+                                position: relative;
+                                margin-bottom: 10px;
+                                padding: 0 16px;
+                                background: @color-white;
+                                .lib-css(border-radius, 8px);
+
+                                td {
+                                    &[data-th] {
+                                        &:before {
+                                            color: #4D4D4D;
+                                        }
+                                    }
+
+                                    &.col {
+                                        padding: 0 0 12px;
+
+                                        &.name {
+                                            margin: 0 -16px 12px;
+                                            padding: 14px 72px 14px 16px;
+                                            font-weight: @font-weight__semibold;
+                                            border-bottom: 1px solid #E9E9E9;
+
+                                            &:before {
+                                                display: none;
+                                            }
+                                        }
+
+                                        &.actions {
+                                            padding: 0;
+
+                                            &:before {
+                                                display: none;
+                                            }
+
+                                            .action {
+                                                margin: 0;
+
+                                                &.delete {
+                                                    display: block;
+                                                    position: absolute;
+                                                    top: 12px;
+                                                    right: 16px;
+                                                    line-height: 1;
+
+                                                    &:before {
+                                                        content: "\e905";
+                                                        font-family: 'goldilock-icon';
+                                                        font-size: 20px;
+                                                        color: #BFBFBF;
+                                                    }
+
+                                                    span {
+                                                        display: none;
+                                                    }
+                                                }
+
+                                                &.edit {
+                                                    display: block;
+                                                    position: absolute;
+                                                    top: 12px;
+                                                    right: 52px;
+                                                    line-height: 1;
+
+                                                    &:before {
+                                                        content: "\e928";
+                                                        font-family: 'goldilock-icon';
+                                                        font-size: 20px;
+                                                        color: #BFBFBF;
+                                                    }
+
+                                                    span {
+                                                        display: none;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            > .actions-toolbar {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: 9;
+                padding: 15px 25px;
+                background: #FFFFFF;
+                border-top: 1px solid #EBEBEB;
+
+                .action.primary {
+                    font-weight: @font-weight__semibold;
+                }
+
+                > .primary,
+                > .secondary {
+                    margin-bottom: 0;
+                }
+
+                > .secondary {
+                    .action.back {
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        .pages {
+            .item {
+                margin: 0 4px;
+
+                &.current {
+                    strong.page {
+                        font-weight: @font-weight__semibold;
+                        color: @color-white;
+                        background: @theme__color__primary;
+                    }
+                }
+            }
+
+            .action,
+            strong.page,
+            a.page {
+                width: 33px;
+                height: 33px;
+                line-height: 33px;
+                margin: 0;
+                font-size: 16px;
+                font-weight: @font-weight__regular;
+                color: @color-black;
+                background: #D9D9D9;
+                .lib-css(border-radius, 4px);
+            }
+
+            .action.previous,
+            .action.next {
+                &:before {
+                    content: "\e925";
+                    font-family: 'goldilock-icon';
+                    font-size: 13px;
+                    color: @color-black;
+                    width: 100%;
+                    text-indent: 0;
+                }
+            }
+
+            .action.previous {
+                &:before {
+                    -webkit-transform: rotate(180deg);
+                    -ms-transform: rotate(180deg);
+                    transform: rotate(180deg);
+                }
+            }
+        }
+    }
+
+    body.customer-address-form {
+        .page-title-wrapper {
+            &:not(.desktop-hide) {
+                position: static;
+                display: block;
+                margin: 0 -16px 10px;
+                padding: 0 16px 6px;
+                background: none;
+                .lib-css(border-radius, 0);
+
+                .page-title {
+                    margin-right: 0;
+                    text-align: left;
+                    color: inherit;
+                    font-size: 12px;
+                    font-weight: @font-weight__semibold;
+                    text-transform: uppercase;
+                }
+            }
+        }
+
+        form.form-address-edit {
+            .actions-toolbar {
+                margin: -5px -16px 0;
+                padding: 12px 16px 0;
+                border-top: 1px solid #EBEBEB;
+            }
+        }
+    }
+}

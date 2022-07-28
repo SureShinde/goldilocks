@@ -1,0 +1,29 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+<?php
+/** @var \Amasty\Preorder\ViewModel\Product\View\Preorder $preorderViewModel */
+$preorderViewModel = $block->getData('preorder_view_model');
+/** @var \Amasty\Preorder\ViewModel\Product\View\PreorderConfigurable $preorderConfigurableViewModel */
+$preorderConfigurableViewModel = $block->getData('preorder_configurable_view_model');
+$configurableProduct = $preorderViewModel->getCurrentProduct();
+/** @var \Amasty\Preorder\Api\Data\ProductInformationInterface $preorderInformation */
+$preorderInformation = $preorderViewModel->getPreorderInformation($configurableProduct);
+?>
+
+<script type="text/javascript">
+    require(['jquery', 'Amasty_Preorder/js/product/preorder_configurable'], function($) {
+        $widget = $.mage.amastyPreorderConfigurable({
+            availabilityElement: '<?= $escaper->escapeHtml($preorderViewModel->getPreorderNotePosition()) ?>',
+            isAllProductsPreorder: <?= (int) $preorderConfigurableViewModel->getIsAllProductsPreorder($configurableProduct) ?>,
+            preOrderNote: '<?= /** @noEscape */ $preorderViewModel->escapeQuote($preorderInformation->getNote()) ?>',
+            addToCartLabel: '<?= /** @noEscape */$preorderViewModel->escapeQuote($preorderInformation->getCartLabel()) ?>',
+            map: <?= /** @noEscape */ $preorderConfigurableViewModel->getMap($configurableProduct) ?>,
+            currentAttributes: <?= /** @noEscape */ $preorderConfigurableViewModel->getJsonCurrentAttribute($configurableProduct) ?>,
+            originalNote: '<?= $escaper->escapeHtml($preorderViewModel->getOriginalNote($configurableProduct)) ?>'
+        });
+    });
+</script>

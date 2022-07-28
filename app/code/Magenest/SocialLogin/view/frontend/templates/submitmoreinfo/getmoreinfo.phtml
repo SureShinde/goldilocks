@@ -1,0 +1,69 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+/** @var \Magenest\SocialLogin\Block\SubmitMoreInfo\GetMoreInfo $block */
+/** @var \Magenest\SocialLogin\Helper\SocialLogin $helper */
+$helper = $this->helper('Magenest\SocialLogin\Helper\SocialLogin');
+?>
+<form class="form create account form-create-account" action="<?= $block->escapeUrl($block->getPostActionUrl()) ?>"
+      method="post" id="sociallogin-create-account" enctype="multipart/form-data" autocomplete="off" data-mage-init='{"validation":{}}'>
+    <fieldset class="fieldset create account" data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>">
+        <legend class="legend"><span><?= $block->escapeHtml(__('Submit More Info for Create Account')) ?></span>
+        </legend>
+        <br>
+        <div class="field email" <?= $block->getEmailUser() == '' ? '' : 'hidden' ?>>
+            <label for="email" class="label"><span><?= $block->escapeHtml(__('Email')) ?></span></label>
+            <div class="control">
+                <input type="text"
+                       name="email"
+                       id="email"
+                       value=""
+                       title="<?= $block->escapeHtmlAttr(__('Email')) ?>"
+                       class="input-text"
+                       data-validate="{'validate-email': true}"
+                >
+            </div>
+        </div>
+        <div class="field username required" <?= $helper->isCustomerAttribute('username') ? '' : 'hidden' ?>>
+            <label for="username" class="label"><span><?= $block->escapeHtml(__('Username')) ?></span></label>
+            <div class="control">
+                <input type="text"
+                       name="username"
+                       id="username"
+                       value=""
+                       title="<?= $block->escapeHtmlAttr(__('Username')) ?>"
+                       class="input-text required"
+                       data-validate="{required:true, 'username-validate': true}"
+                >
+            </div>
+        </div>
+        <div class="field telephone required" <?= $helper->isCustomerAttribute('telephone') ? '' : 'hidden' ?>>
+            <label class="label" for="telephone"><span><?= $block->escapeHtml(__('Telephone')) ?></span></label>
+            <div class="control">
+                <input type="text"
+                       id="telephone"
+                       name="telephone"
+                       value=""
+                       class="input-text"
+                       data-validate="{required:true,'phone-validate': true}"
+                >
+            </div>
+        </div>
+    </fieldset>
+    <div class="actions-toolbar">
+        <div class="primary">
+            <button type="submit" class="action submit primary" title="<?= $block->escapeHtmlAttr(__('Create an Account')) ?>">
+                <span><?= $block->escapeHtml(__('Create an Account')) ?></span>
+            </button>
+        </div>
+    </div>
+</form>
+<script type="text/x-magento-init">
+    {
+        "*": {
+           "validateMethod": {}
+       }
+    }
+</script>

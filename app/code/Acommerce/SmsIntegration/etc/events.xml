@@ -1,0 +1,15 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+
+ <!--   <event name="checkout_submit_all_after">
+        <observer name="acommerce_smsintegration_checkout_submit_all_after" instance="Acommerce\SmsIntegration\Observer\ProcessOrderSubmit" />
+    </event>
+-->
+    <!--<event name="sales_order_state_change_before">-->
+        <!--<observer name="acommerce_smsintegration_sales_change_status" instance="Acommerce\SmsIntegration\Observer\OrderChangeStatus" />-->
+    <!--</event>-->
+
+    <event name="sales_order_save_after">
+        <observer name="acommerce_smsintegration_sales_order_save" instance="Acommerce\SmsIntegration\Observer\OrderSaveAfter" />
+    </event>
+
+</config>

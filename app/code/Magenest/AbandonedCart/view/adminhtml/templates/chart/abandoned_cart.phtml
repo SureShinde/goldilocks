@@ -1,0 +1,114 @@
+<?php
+/** @var \Magenest\AbandonedCart\Block\Adminhtml\Chart\AbandonedCart $block */
+if (!$block->getAbandonedCarts()) {
+    echo '<div class=\'message message-warning warning\'>There are no abandoned carts for this period of time.</div>';
+} else {
+    ?>
+    <style>
+        th {
+            text-align: left;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+    </style>
+    <section class="admin__page-section">
+        <div class="admin__page-section-title">
+            <span class="title"><?php /* @escapeNotVerified */
+                echo 'Abandoned Cart Line Chart' ?></span>
+        </div>
+        <?php if ($block->getPeriodFromParam() || $block->getPeriodToParam()): ?>
+            <div>
+                <?php echo $block->getPeriodFromParam() ? '(From: ' . $block->getPeriodFromParam() : '(' ?>
+                <?php echo $block->getPeriodToParam() ? ' To: ' . $block->getPeriodToParam() . ')' : ')' ?>
+            </div>
+        <?php endif; ?>
+        <div class="admin__page-section-content">
+            <div id="abandoned_cart_line_chart" style="clear: both;"></div>
+        </div>
+    </section>
+    <section class="admin__page-section">
+        <div class="admin__page-section-title">
+                <span class="title"><?php /* @escapeNotVerified */
+                    echo __('Cart Abandonment Rate') ?>
+                </span>
+        </div>
+        <?php if ($block->getPeriodFromParam() || $block->getPeriodToParam()): ?>
+            <div>
+                <?php echo $block->getPeriodFromParam() ? '(From: ' . $block->getPeriodFromParam() : '(' ?>
+                <?php echo $block->getPeriodToParam() ? ' To: ' . $block->getPeriodToParam() . ')' : ')' ?>
+            </div>
+        <?php endif; ?>
+        <div class="admin__page-section-content" style="width: 100%; margin: auto">
+            <div id="abandoned_cart_chart" style="float: left"></div>
+            <div id="guest_abandoned_cart_chart" style="float: left"></div>
+            <div id="repurchased_cart_chart" style="float: left"></div>
+            <div id="abandoned_product_chart" style="float: left"></div>
+        </div>
+    </section>
+    <section class="admin__page-section">
+        <div class="admin__page-section-title">
+                <span class="title"><?php /* @escapeNotVerified */
+                    echo __('Abandoned Cart Statistics') ?>
+                </span>
+        </div>
+        <?php if ($block->getPeriodFromParam() || $block->getPeriodToParam()): ?>
+            <div>
+                <?php echo $block->getPeriodFromParam() ? '(From: ' . $block->getPeriodFromParam() : '(' ?>
+                <?php echo $block->getPeriodToParam() ? ' To: ' . $block->getPeriodToParam() . ')' : ')' ?>
+            </div>
+        <?php endif; ?>
+        <table id="statistical">
+            <tr>
+                <th><?= __(' Recovered Carts/Total Abandoned Carts') ?></th>
+                <td><?= $block->getTotalOrder() . '/' . ($block->getAbandonedCarts() + $block->getTotalOrder()); ?></td>
+            </tr>
+            <tr>
+                <th><?= __('Total Recovered Revenue') ?></th>
+                <td><?= $block->getGrandTotal(); ?></td>
+            </tr>
+        </table>
+    </section>
+    <section class="admin__page-section">
+        <div class="admin__page-section-title">
+                <span class="title"><?php /* @escapeNotVerified */
+                    echo __('Abandoned Product Statistics') ?>
+                </span>
+        </div>
+        <?php if ($block->getPeriodFromParam() || $block->getPeriodToParam()): ?>
+            <div>
+                <?php echo $block->getPeriodFromParam() ? '(From: ' . $block->getPeriodFromParam() : '(' ?>
+                <?php echo $block->getPeriodToParam() ? ' To: ' . $block->getPeriodToParam() . ')' : ')' ?>
+            </div>
+        <?php endif; ?>
+        <table id="statistical">
+            <tr>
+                <th><?= __('Total Abandoned Product') ?></th>
+                <td><?php /* @escapeNotVerified */
+                    echo $block->getTotalAbandonedProduct()?></td>
+            </tr>
+            <tr>
+                <th><?= __('Total Recovered Products') ?></th>
+                <td><?php /* @escapeNotVerified */
+                    echo $block->getTotalRecoveredProduct(); ?></td>
+            </tr>
+        </table>
+    </section>
+    <?php
+}
+?>
+<script>
+    require([
+        "jquery"
+    ], function ($) {
+        $(document).ready(function () {
+            getAbandonedCartChart();
+            getGuestAbandonedCartChart();
+            getRepurchasedCartChart();
+            getAbandonedCartLineChart();
+            getAbandonedProduct();
+        });
+    })
+</script>

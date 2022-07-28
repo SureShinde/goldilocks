@@ -1,0 +1,17 @@
+<?php
+
+
+/**
+ * @var $block \Magenest\GoogleTagManager\Block\ProductDetails
+ *
+ * Get name, id and category details from the product, except the price since we don't know the end
+ * price for the product on the product page, which might vary for product with options.
+ */
+?>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "google-tag-manager/product-detail-view": <?= /* @noEscape */ $block->getGtmJsonConfig() ?>
+        }
+    }
+</script>

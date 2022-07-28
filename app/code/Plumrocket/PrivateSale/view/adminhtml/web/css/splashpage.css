@@ -1,0 +1,49 @@
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket Private Sales and Flash Sales v4.x.x
+ * @copyright   Copyright (c) 2016 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+
+.prprivatesale-splashpage-index .file-uploader-preview {
+  width: 20vw;
+  height: 11.3vw;
+  box-sizing: border-box;
+}
+
+.pprs-upl-img-wrap .image-uploader {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+.pprs-upl-img-wrap .file-uploader-area {
+  margin-top: 12px;
+}
+
+.pprs-upl-img-wrap .admin__dynamic-rows td:nth-child(2) {
+  width: 45%;
+}
+
+.pprs-upl-img-wrap .image-uploader .image-placeholder {
+  margin-right: 25px;
+}
+
+.pprs-upl-img-wrap .image.image-placeholder,
+.pprs-upl-img-wrap .image .product-image-wrapper{
+  width: 200px;
+  height: 200px;
+}
+
+.pprs-upl-img-wrap .image.image-placeholder .product-image-wrapper:before {
+  top: 35px;
+}

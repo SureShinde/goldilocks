@@ -1,0 +1,26 @@
+{
+    "name": "amasty\/module-pre-order-pro",
+    "description": "Pre Order Pro by Amasty",
+    "require": {
+        "php": ">=7.3",
+        "amasty\/base": ">=1.13.4",
+        "amasty\/preorder": ">=2.0.4",
+        "amasty\/module-pre-order-mixed-cart": ">=1.0.2",
+        "amasty\/module-pre-order-analytic": ">=1.0.1",
+        "amasty\/module-pre-order-release": ">=1.0.1"
+    },
+    "homepage": "https:\/\/amasty.com\/",
+    "type": "magento2-module",
+    "version": "1.0.2",
+    "license": [
+        "Commercial"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Amasty\\PreOrderPro\\": ""
+        }
+    }
+}

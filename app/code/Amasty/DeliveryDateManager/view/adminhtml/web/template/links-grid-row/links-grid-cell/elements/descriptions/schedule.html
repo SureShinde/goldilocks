@@ -1,0 +1,25 @@
+<div class="amdelivery-description amdelivery-cell-description">
+    <div class="amdelivery-column">
+        <if args="hasData(descriptionData())">
+            <div class="amdelivery-item">
+                <span class="amdelivery-label" data-bind="i18n: 'Behavior: '"></span>
+                <span class="amdelivery-value" data-bind="html: descriptionData().is_available ? getItemValue('is_available', descriptionData().is_available) : '-'"></span>
+            </div>
+            <div class="amdelivery-item">
+                <span class="amdelivery-label" data-bind="i18n: 'Type: '"></span>
+                <span class="amdelivery-value" data-bind="html: descriptionData().type ? getItemValue('type', descriptionData().type) : '-'"></span>
+            </div>
+            <div class="amdelivery-item">
+                <span class="amdelivery-label" data-bind="i18n: 'From: '"></span>
+                <span class="amdelivery-value" data-bind="html: descriptionData().from ? descriptionData().from : '-'"></span>
+            </div>
+            <div class="amdelivery-item">
+                <span class="amdelivery-label" data-bind="i18n: 'To: '"></span>
+                <span class="amdelivery-value" data-bind="html: descriptionData().to ? descriptionData().to : '-'"></span>
+            </div>
+        </if>
+        <ifnot args="hasData(descriptionData())">
+            <span translate="'No Schedule Specified'"></span>
+        </ifnot>
+    </div>
+</div>

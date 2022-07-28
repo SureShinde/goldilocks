@@ -1,0 +1,658 @@
+& when (@media-common = true) {
+    .customer-account-login,
+    .customer-account-create,
+    .customer-account-forgotpassword,
+    .customer-account-createpassword,
+    .advancedlogin-otp-index {
+        .form.password.reset,
+        .form.send.confirmation,
+        .form.password.forget,
+        .form.create.account,
+        .form.search.advanced,
+        .form.form-orders-search {
+            min-width: unset;
+            width: auto;
+        }
+
+        .form-container {
+            &:before, &:after {
+                display: none;
+            }
+
+            .block {
+                &:nth-child(even), &:nth-child(odd) {
+                    float: unset;
+                    width: 100%;
+                }
+
+                &.block-customer-login {
+                    margin-bottom: 35px;
+                }
+
+                &.block-new-customer {
+                    margin-bottom: 20px;
+                }
+            }
+
+            .fieldset:after {
+                display: none;
+            }
+        }
+
+        .btn-snetwork {
+            margin-top: 0;
+            .lib-vendor-prefix-display(flex);
+            justify-content: center;
+            -webkit-justify-content: center;
+
+            .modal-socialogin {
+                height: 32px;
+                width: 32px;
+                padding: 0;
+                float: unset;
+                box-shadow: none;
+                display: block;
+                margin: 0 10px;
+                font-size: 0;
+                color: rgba(0, 0, 0, 0);
+
+                &.modal-facebook {
+                    background-image: url("../images/social-login/facebook.svg");
+                }
+            }
+        }
+
+        .actions-toolbar {
+            margin-top: 40px;
+
+            &:before, &:after {
+                display: none;
+            }
+
+            > .primary, > .secondary {
+                width: 100%;
+                margin: 0;
+                display: block;
+            }
+
+            .action {
+                &.primary {
+                    width: 100%;
+                }
+
+                &.remind {
+                    color: #E74949;
+                    margin-top: 18px;
+                    display: block;
+                }
+
+                &.create {
+                    margin-top: 0;
+                    text-decoration: underline;
+                    color: #005AE1;
+                }
+            }
+        }
+
+        .password-strength-meter {
+            background: #E0E0E0;
+            border-radius: 12px;
+            height: 8px;
+            font-size: 0;
+            line-height: 0;
+            color: rgba(0, 0, 0, 0);
+
+            &:before {
+                background: #E74949;
+                border-radius: 12px;
+            }
+        }
+
+        .fieldset > .field:not(.choice) > .control {
+            position: relative;
+        }
+
+        .show-password {
+            position: absolute;
+            top: 5px;
+            z-index: 9;
+            right: 8px;
+            width: 30px;
+            display: flex;
+            justify-content: center;
+            cursor: pointer;
+
+            &:before {
+                content: "\e915";
+                display: block;
+                color: #888888;
+                font-size: 20px;
+                font-family: 'goldilock-icon';
+            }
+
+            &.show {
+                top: 8px;
+
+                &:before {
+                    content: "\e908";
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+
+    .customer-account-create,
+    .customer-account-forgotpassword,
+    .customer-account-createpassword,
+    .advancedlogin-otp-index {
+        .column-wrapper {
+            > [data-content-type="row"] {
+                margin-left: 0 !important;
+            }
+        }
+    }
+
+    .customer-account-login {
+        .register-social-text {
+            display: none;
+        }
+
+        .actions-toolbar {
+            .action {
+                &.primary {
+                    text-transform: uppercase;
+                }
+            }
+        }
+    }
+
+    .customer-account-create,
+    .customer-account-createpassword {
+        .password-note {
+            font-size: 12px;
+            line-height: 16px;
+            color: #606060;
+            margin: 8px 0;
+        }
+    }
+
+    .customer-account-forgotpassword,
+    .advancedlogin-otp-index {
+        .actions-toolbar {
+            > .secondary {
+                margin-top: 12px;
+
+                .action.back {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    .customer-account-create {
+        .register-social-text {
+            font-size: 14px;
+            line-height: 20px;
+            color: #333333;
+            padding: 40px 0 12px;
+            text-align: center;
+        }
+    }
+
+    .customer-account-forgotpassword {
+        .forgot-password-tab {
+            .lib-vendor-prefix-display(flex);
+
+            &-item {
+                list-style: none;
+                font-weight: 600;
+                width: 100%;
+                text-align: center;
+                padding: 9px 12px 8px;
+                font-size: 14px;
+                line-height: 20px;
+                color: #333333;
+                border: 1.5px solid rgba(0, 0, 0, 0);
+                cursor: pointer;
+
+                &.active {
+                    background: #FFFFFF;
+                    border-color: @primary__color;
+                    border-radius: 6px;
+                }
+            }
+        }
+
+        .fieldset {
+            .telephone {
+                .control {
+                    .lib-vendor-prefix-display(flex);
+                    position: relative;
+                }
+
+                .control-input {
+                    width: calc(~'100% - 86px');
+                }
+
+                .input-text {
+                    z-index: 1;
+                }
+
+                .action {
+                    position: absolute;
+                    right: 0;
+                    border-radius: 0 6px 6px 0;
+                }
+            }
+        }
+
+        .otp-message {
+            clear: both;
+            padding-top: 5px;
+        }
+    }
+
+    .advancedlogin-otp-index {
+
+        .otp-message {
+            font-size: 12px;
+            line-height: 16px;
+            color: #E74949;
+            text-align: right;
+            margin-top: 8px;
+            font-weight: 400;
+
+        }
+
+        .resend-otp {
+            background: none;
+            padding: 0;
+            border: 0;
+            font-size: 14px;
+            line-height: 20px;
+            color: #005AE1;
+            font-weight: 500;
+            .lib-vendor-prefix-display(flex);
+            .lib-vendor-box-align(center);
+
+            &:after {
+                content: "\e927";
+                font-family: 'goldilock-icon';
+                font-size: 16px;
+                line-height: 16px;
+                padding-left: 4px;
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .customer-account-login,
+    .customer-account-create,
+    .customer-account-forgotpassword,
+    .customer-account-createpassword,
+    .advancedlogin-otp-index {
+        .column-wrapper {
+            padding: 82px 103px;
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .customer-account-login,
+    .customer-account-create,
+    .customer-account-forgotpassword,
+    .customer-account-createpassword,
+    .advancedlogin-otp-index {
+        .breadcrumbs {
+            margin-top: 1px;
+        }
+
+        .column-wrapper {
+            .lib-vendor-prefix-display(flex);
+            .lib-vendor-box-align(center);
+            margin: 1px 0 8px;
+            min-height: 931px;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            background: @primary__color;
+
+            &:before {
+                position: absolute;
+                content: '';
+                width: 1229px;
+                height: 1229px;
+                border-radius: 50%;
+                background-color: #fff;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                left: 11%;
+                z-index: 0;
+            }
+
+            > [data-content-type="row"], .form-container, .form-create-account {
+                z-index: 1;
+            }
+        }
+
+        .form-container {
+            max-width: 50%;
+            min-width: 370px;
+            padding: 32px 40px;
+            border-radius: 20px;
+            box-shadow: 0 12px 32px -2px rgba(40, 31, 4, 0.16);
+            width: 100%;
+            background: #FFFFFF;
+            margin-left: 50px;
+        }
+    }
+
+    .customer-account-login {
+        .column-wrapper {
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.16);
+        }
+    }
+
+    .customer-account-forgotpassword {
+        .forgot-password-tab {
+            background: #F5F5F5;
+            border-radius: 6px;
+        }
+
+        .form.password.forget {
+            padding: 20px 0 0;
+        }
+    }
+
+    .advancedlogin-otp-index {
+        #otp_code {
+            padding-right: 120px;
+        }
+
+        .resend-otp {
+            position: absolute;
+            right: 13px;
+            top: 10px;
+        }
+    }
+
+    .customer-account-create {
+        .btn-snetwork {
+            .modal-socialogin {
+                margin: 0;
+
+                &:not(:last-of-type) {
+                    margin-bottom: 10px;
+                }
+
+                &.modal-facebook {
+                    height: 40px;
+                    width: 100%;
+                    background: none;
+                    font-size: 14px;
+                    line-height: 16px;
+                    color: #FFFFFF;
+                    font-weight: 800;
+                    justify-content: center;
+                    -webkit-justify-content: center;
+                    position: relative;
+
+                    &:before {
+                        content: '';
+                        height: 40px;
+                        width: 40px;
+                        padding: 0;
+                        float: unset;
+                        box-shadow: none;
+                        display: block;
+                        margin: 0;
+                        position: absolute;
+                        top: 0;
+                        left: 6px;
+                        transform: none;
+                        transition: none;
+                        background-size: cover;
+                    }
+
+                    &.modal-facebook {
+                        width: 100%;
+                        border-radius: 68px;
+                        height: 40px;
+                        background: #1877F2;
+                        padding: 0;
+                        .lib-vendor-prefix-display(flex);
+                        .lib-vendor-box-align(center);
+
+                        &:before {
+                            background-image: url("../images/social-login/facebook.svg");
+                        }
+
+                        &:hover {
+                            transform: none;
+
+                            &:before {
+                                background-color: rgba(0, 0, 0, 0);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__l) {
+    @media (min-width: @screen__m) {
+        .customer-account-login,
+        .customer-account-create,
+        .customer-account-forgotpassword,
+        .customer-account-createpassword,
+        .advancedlogin-otp-index {
+            .column-wrapper {
+                padding: 82px 40px;
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .customer-account-login,
+    .customer-account-create,
+    .customer-account-forgotpassword,
+    .customer-account-createpassword,
+    .advancedlogin-otp-index {
+        .action-back {
+            background-color: rgba(0, 0, 0, 0);
+            border: 0;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 9;
+
+            &:before {
+                content: "\e923";
+                font-family: 'goldilock-icon';
+                font-size: 10px;
+                color: #fff;
+            }
+        }
+
+        .page-top-wrapper, .block.block-search, .nav-toggle, .minicart-wrapper {
+            display: none;
+        }
+
+        .page-main {
+            padding: 0;
+        }
+
+        .column-wrapper {
+            > [data-content-type="row"] {
+                display: none;
+            }
+        }
+    }
+
+    .customer-account-create,
+    .customer-account-forgotpassword,
+    .customer-account-createpassword,
+    .advancedlogin-otp-index {
+        .column.main {
+            background: #F5F5F5;
+            padding-bottom: 9px;
+        }
+
+        .page-header {
+            display: none;
+        }
+
+        .page-title-wrapper {
+            background: @primary__color;
+            border-radius: 0 0 8px 8px;
+            text-align: center;
+            padding: 12px;
+
+            &:not(.desktop-hide) {
+                display: none;
+            }
+
+            &.desktop-hide {
+                position: relative;
+            }
+
+            .page-title {
+                margin-bottom: 0;
+                font-size: 16px;
+                line-height: 24px;
+                text-align: center;
+                color: #FFFFFF;
+                font-weight: 700;
+            }
+        }
+
+        .form-create-account, .form.password.reset, .form.otp.confirm {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 9px 9px 0;
+        }
+    }
+
+    .customer-account-login {
+        .page-title-wrapper {
+            &.desktop-hide {
+                .page-title {
+                    display: none;
+                }
+            }
+        }
+
+        .page-header {
+            position: relative;
+
+            .header.content {
+                padding-top: 8px;
+                padding-bottom: 8px;
+            }
+        }
+
+        .column-wrapper {
+            padding: 32px 9px 0;
+            position: relative;
+
+            &:before {
+                content: '';
+                border-radius: 0 0 8px 8px;
+                position: absolute;
+                background-color: @primary__color;
+                min-height: 240px;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: -1;
+            }
+        }
+
+        .form-container {
+            min-height: calc(~'100vh - 120px');
+            .lib-vendor-prefix-display(flex);
+            .lib-vendor-prefix-flex-direction(column);
+            padding: 20px 20px 0;
+            border-radius: 12px;
+            background: #FFFFFF;
+
+            .block.block-new-customer {
+                margin-top: auto;
+            }
+        }
+    }
+
+    .customer-account-create {
+        .form-create-account {
+            border-radius: 8px 8px 0 0;
+        }
+
+        .social-login {
+            background: #fff;
+            border-radius: 0 0 8px 8px;
+            margin: 0 9px;
+            padding: 0 20px 40px;
+        }
+    }
+
+    .customer-account-forgotpassword {
+        .forgot-password-tab {
+            background: #fff;
+            margin: 9px 9px 0;
+            padding: 20px 20px 0;
+            border-radius: 8px 8px 0 0;
+            position: relative;
+
+            &:after {
+                content: '';
+                background-color: #F5F5F5;
+                position: absolute;
+                top: 20px;
+                left: 20px;
+                right: 20px;
+                height: calc(~'100% - 20px');
+                border-radius: 8px;
+            }
+
+            &-item {
+                z-index: 1;
+            }
+        }
+
+        .form.password.forget {
+            padding: 20px 20px;
+            background: #fff;
+            margin: 0 9px;
+            height: 100%;
+            min-height: calc(~'100vh - 126px');
+            border-radius: 0 0 8px 8px;
+        }
+
+        .form-container {
+            background: #f5f5f5;
+        }
+    }
+
+    .advancedlogin-otp-index {
+        .form.otp.confirm {
+            min-height: calc(~'100vh - 66px');
+        }
+
+        .resend-otp {
+            margin-left: auto;
+            margin-top: 8px;
+        }
+    }
+}
+
+
+

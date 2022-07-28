@@ -1,0 +1,47 @@
+//
+//  DatePicker Component
+//  ______________________________________________
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    .ampreorderan-date-picker {
+        & {
+            padding: @ampreorderan__indent 0 @ampreorderan__indent__l * 2;
+        }
+
+        .ampreorderan-text {
+            margin: 0 @ampreorderan__indent 0 0;
+        }
+
+        .ampreorderan-label {
+            & {
+                position: relative;
+                margin: 0 @ampreorderan__indent__xl 0 0;
+            }
+
+            &:hover svg {
+                fill: @ampreorderan-color__hover;
+            }
+        }
+
+        svg {
+            position: absolute;
+            top: 0;
+            right: 10px;
+            bottom: 0;
+            margin: auto;
+            width: 18px;
+            height: 18px;
+            fill: #5a5552;
+        }
+
+        .ui-datepicker-trigger {
+            position: absolute;
+            right: 0;
+            opacity: 0;
+        }
+    }
+}

@@ -1,0 +1,55 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+use Magenest\AbandonedCart\Block\Adminhtml\ABTestCampaigns\Edit\Tab as ABTestCampaignTab;
+use Magenest\AbandonedCart\Block\Adminhtml\ABTestCampaigns\GridRuleCollection;
+
+/** @var GridRuleCollection $block */
+/** @var ABTestCampaignTab $blockGrid */
+$blockGrid = $block->getBlockGrid();
+$gridJsObjectName = $blockGrid->getJsObjectName();
+?>
+<?php if ($block->isDisplay()): ?>
+
+    <!--session display campaign list-->
+    <section class="admin__page-section campaign-statistics" id="campaign-list">
+        <div class="admin__page-section-title">
+                <span class="title">
+                    <?php /* @escapeNotVerified */
+                    echo __('Rule List') ?>
+                </span>
+        </div>
+        <?= $block->getGridHtml() ?>
+    </section>
+
+    <div class="draw-chart-campaign" id="draw_chart_compare" data-bind="scope:'draw_chart_compare'">
+        <button type="button" class="primary" id="draw_pie_chart" data-bind="click:getSelectRule">Draw Chart</button>
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    </div>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/x-magento-init">
+            {
+                "#draw_chart_compare": {
+                    "Magento_Ui/js/core/app": {
+                        "components": {
+                            "draw_chart_compare": {
+                                "component": "Magenest_AbandonedCart/js/abtestcampaign/chart",
+                                "urlAjax" : "<?= $block->getUrl('*/*/getRecovered')?>"
+                            }
+                        }
+                    }
+                }
+            }
+
+
+    </script>
+
+    <script>
+        // save data collection rule in global variable
+        var data_grid = <?php /* @escapeNotVerified */ echo $block->getDataCollection()?>;
+    </script>
+
+<?php endif ?>

@@ -1,0 +1,10 @@
+<?php
+/** @var \Amasty\StorePickupWithLocator\ViewModel\Location\CurbsideLabel $viewModel */
+/** @var \Amasty\Storelocator\Block\View\Location $block */
+$location = $block->getCurrentLocation();
+$viewModel = $block->getViewModel();
+?>
+
+<?php if ($viewModel && $location): ?>
+    <?= $viewModel->getCurbsideLabelHtml($location) ?>
+<?php endif; ?>

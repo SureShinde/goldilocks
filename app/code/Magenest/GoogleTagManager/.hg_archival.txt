@@ -1,0 +1,6 @@
+repo: cfbfd04b8d4b5da636c2d0a4dc5f5b6ac27ef6f2
+node: 25a37cb6b51ce2bf77835531a30583442aaae67c
+branch: default
+latesttag: 5.0.1-RC3
+latesttagdistance: 1
+changessincelatesttag: 1

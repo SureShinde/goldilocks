@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket_PrivateSale
+ * @copyright   Copyright (c) 2020 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ -->
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">prprivatesale_splash_page_form.privatesale_splash_page_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Add New Event</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <namespace>prprivatesale_splash_page_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>prprivatesale_splash_page_form.privatesale_splash_page_form_data_source</dep>
+        </deps>
+        <buttons>
+            <button name="reset">
+                <label translate="true">Reset</label>
+            </button>
+            <button name="saveButton" class="Plumrocket\PrivateSale\Block\Adminhtml\SplashPage\Button\Save"/>
+        </buttons>
+    </settings>
+    <dataSource name="privatesale_splash_page_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="prprivatesale/splashpage/save"/>
+        </settings>
+        <dataProvider class="Plumrocket\PrivateSale\Ui\DataProvider\SplashPage\Form\DataProvider" name="privatesale_splash_page_form_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName/>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general" sortOrder="10">
+        <settings>
+            <label translate="true">Splash Page</label>
+            <collapsible>true</collapsible>
+            <opened>true</opened>
+            <dataScope/>
+        </settings>
+        <field name="enabled" sortOrder="10" formElement="checkbox">
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Enable Splash Page</label>
+                <notice>A splash page is a startup page that restricts access to a private sale website. If enabled, customers will be required to sign-in or register before accessing the members-only store.</notice>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="access" sortOrder="20" formElement="select">
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Restricted Access</label>
+                <notice><![CDATA[Enable the "Registration only" mode during "launching soon" phase of a private sale. "Login only" is often used at invitation-only membership websites. While the "Login & Registration" mode is used on established private sale stores.]]></notice>
+                <imports>
+                    <link name="visible">index=enabled:checked</link>
+                </imports>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Plumrocket\PrivateSale\Model\Config\Source\SplashPageAccess"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="landing_page" sortOrder="30" formElement="select" component="Plumrocket_PrivateSale/js/form/field/select">
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Landing Page</label>
+                <elementTmpl>Plumrocket_PrivateSale/form/element/select</elementTmpl>
+                <notice>Prevent unauthorized access to the Private Sale website by redirecting to a login page, registration page, or splash page.</notice>
+                <imports>
+                    <link name="visible">index=enabled:checked</link>
+                    <link name="disabledOption">index=access:value</link>
+                </imports>
+                <switcherConfig>
+                    <rules>
+                        <rule name="0">
+                            <value>1</value>
+                            <actions>
+                                <action name="0">
+                                    <target>prprivatesale_splash_page_form.prprivatesale_splash_page_form.meta</target>
+                                    <callback>visible</callback>
+                                    <params>
+                                        <param name="0" xsi:type="boolean">true</param>
+                                    </params>
+                                </action>
+                                <action name="1">
+                                    <target>prprivatesale_splash_page_form.prprivatesale_splash_page_form.media</target>
+                                    <callback>visible</callback>
+                                    <params>
+                                        <param name="0" xsi:type="boolean">true</param>
+                                    </params>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="1">
+                            <value>2</value>
+                            <actions>
+                                <action name="0">
+                                    <target>prprivatesale_splash_page_form.prprivatesale_splash_page_form.meta</target>
+                                    <callback>visible</callback>
+                                    <params>
+                                        <param name="0" xsi:type="boolean">false</param>
+                                    </params>
+                                </action>
+                                <action name="1">
+                                    <target>prprivatesale_splash_page_form.prprivatesale_splash_page_form.media</target>
+                                    <callback>visible</callback>
+                                    <params>
+                                        <param name="0" xsi:type="boolean">false</param>
+                                    </params>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="2">
+                            <value>3</value>
+                            <actions>
+                                <action name="0">
+                                    <target>prprivatesale_splash_page_form.prprivatesale_splash_page_form.meta</target>
+                                    <callback>visible</callback>
+                                    <params>
+                                        <param name="0" xsi:type="boolean">false</param>
+                                    </params>
+                                </action>
+                                <action name="1">
+                                    <target>prprivatesale_splash_page_form.prprivatesale_splash_page_form.media</target>
+                                    <callback>visible</callback>
+                                    <params>
+                                        <param name="0" xsi:type="boolean">false</param>
+                                    </params>
+                                </action>
+                            </actions>
+                        </rule>
+                    </rules>
+                    <enabled>true</enabled>
+                </switcherConfig>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Plumrocket\PrivateSale\Model\Config\Source\SplashPage"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="form_text" formElement="wysiwyg" template="ui/form/field">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="wysiwygConfigData" xsi:type="array">
+                        <item name="height" xsi:type="string">150px</item>
+                    </item>
+                    <item name="source" xsi:type="string">category</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Registration Form Text</label>
+                <imports>
+                    <link name="visible">index=enabled:checked</link>
+                </imports>
+            </settings>
+            <formElements>
+                <wysiwyg>
+                    <settings>
+                        <wysiwyg>true</wysiwyg>
+                    </settings>
+                </wysiwyg>
+            </formElements>
+        </field>
+        <field name="confirmation_text" formElement="wysiwyg" template="ui/form/field">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="wysiwygConfigData" xsi:type="array">
+                        <item name="height" xsi:type="string">150px</item>
+                    </item>
+                    <item name="source" xsi:type="string">category</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Registration Confirmation Text</label>
+                <imports>
+                    <link name="visible">index=enabled:checked</link>
+                </imports>
+            </settings>
+            <formElements>
+                <wysiwyg>
+                    <settings>
+                        <wysiwyg>true</wysiwyg>
+                    </settings>
+                </wysiwyg>
+            </formElements>
+        </field>
+    </fieldset>
+    <fieldset name="meta" sortOrder="20">
+        <settings>
+            <label translate="true">Meta Data</label>
+            <collapsible>true</collapsible>
+            <opened>false</opened>
+            <dataScope/>
+        </settings>
+        <field name="title" sortOrder="10" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <dataScope>meta_title</dataScope>
+                <label translate="true">Meta Title</label>
+            </settings>
+        </field>
+        <field name="keywords" sortOrder="20" formElement="textarea">
+            <settings>
+                <dataType>text</dataType>
+                <dataScope>meta_keywords</dataScope>
+                <label translate="true">Meta Keywords</label>
+            </settings>
+        </field>
+        <field name="description" sortOrder="30" formElement="textarea">
+            <settings>
+                <dataType>text</dataType>
+                <dataScope>meta_description</dataScope>
+                <label translate="true">Meta Description</label>
+            </settings>
+        </field>
+    </fieldset>
+    <fieldset name="media" sortOrder="30">
+        <settings>
+            <label translate="true">Background Media</label>
+            <collapsible>true</collapsible>
+            <opened>false</opened>
+            <dataScope/>
+        </settings>
+        <field name="style" sortOrder="10" formElement="select">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Background Style</label>
+                <scopeLabel>[STORE VIEW]</scopeLabel>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Plumrocket\PrivateSale\Model\Config\Source\BackgroundStyle"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <dynamicRows name="images" sortOrder="20" template="ui/dynamic-rows/templates/grid">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="deleteButtonLabel" xsi:type="string">Remove</item>
+                </item>
+            </argument>
+            <settings>
+                <addButtonLabel translate="true">Add Image</addButtonLabel>
+                <additionalClasses>
+                    <class name="admin__field-wide pprs-upl-img-wrap">true</class>
+                </additionalClasses>
+                <dndConfig>
+                    <param name="enabled" xsi:type="boolean">false</param>
+                </dndConfig>
+                <componentType>dynamicRows</componentType>
+            </settings>
+            <container name="record">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="isTemplate" xsi:type="boolean">true</item>
+                        <item name="is_collection" xsi:type="boolean">true</item>
+                        <item name="componentType" xsi:type="string">container</item>
+                    </item>
+                </argument>
+                <field name="image_id" formElement="hidden">
+                    <settings>
+                        <visible>false</visible>
+                        <label/>
+                    </settings>
+                </field>
+                <field name="image" formElement="imageUploader">
+                    <settings>
+                        <label translate="true">Image</label>
+                        <componentType>imageUploader</componentType>
+                    </settings>
+                </field>
+                <field name="active_from" formElement="date">
+                    <argument name="data" xsi:type="array">
+                    </argument>
+                    <settings>
+                        <validation>
+                            <rule name="validate-date" xsi:type="boolean">true</rule>
+                        </validation>
+                        <dataType>text</dataType>
+                        <label translate="true">Active From</label>
+                    </settings>
+                </field>
+                <field name="active_to" formElement="date">
+                    <argument name="data" xsi:type="array">
+                    </argument>
+                    <settings>
+                        <validation>
+                            <rule name="validate-date" xsi:type="boolean">true</rule>
+                        </validation>
+                        <dataType>text</dataType>
+                        <label translate="true">Active To</label>
+                    </settings>
+                </field>
+                <field name="exclude" formElement="checkbox">
+                    <settings>
+                        <label translate="true">Exclude</label>
+                    </settings>
+                    <formElements>
+                        <checkbox>
+                            <settings>
+                                <valueMap>
+                                    <map name="false" xsi:type="number">0</map>
+                                    <map name="true" xsi:type="number">1</map>
+                                </valueMap>
+                            </settings>
+                        </checkbox>
+                    </formElements>
+                </field>
+                <actionDelete>
+                    <settings>
+                        <dataType>text</dataType>
+                        <label>Actions</label>
+                        <componentType>actionDelete</componentType>
+                    </settings>
+                </actionDelete>
+            </container>
+        </dynamicRows>
+        <dynamicRows name="videos" sortOrder="30" template="Plumrocket_PrivateSale/dynamic-rows/templates/grid-with-note">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="deleteButtonLabel" xsi:type="string">Remove</item>
+                </item>
+            </argument>
+            <settings>
+                <notice>Supports videos from YouTube.com or Vimeo.com.</notice>
+                <addButtonLabel translate="true">Add Video</addButtonLabel>
+                <additionalClasses>
+                    <class name="admin__field-wide">true</class>
+                </additionalClasses>
+                <dndConfig>
+                    <param name="enabled" xsi:type="boolean">false</param>
+                </dndConfig>
+                <componentType>dynamicRows</componentType>
+            </settings>
+            <container name="record">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="isTemplate" xsi:type="boolean">true</item>
+                        <item name="is_collection" xsi:type="boolean">true</item>
+                        <item name="componentType" xsi:type="string">container</item>
+                    </item>
+                </argument>
+                <field name="preview" formElement="input" class="Plumrocket\PrivateSale\Ui\Component\Form\Preview">
+                    <settings>
+                        <elementTmpl>Plumrocket_PrivateSale/dynamic-rows/cells/image</elementTmpl>
+                        <label translate="true">Video</label>
+                    </settings>
+                </field>
+                <field name="url" formElement="input">
+                    <settings>
+                        <label translate="true">Video Url</label>
+                    </settings>
+                </field>
+                <field name="active_from" formElement="date">
+                    <argument name="data" xsi:type="array">
+                    </argument>
+                    <settings>
+                        <validation>
+                            <rule name="validate-date" xsi:type="boolean">true</rule>
+                        </validation>
+                        <dataType>text</dataType>
+                        <label translate="true">Active From</label>
+                    </settings>
+                </field>
+                <field name="active_to" formElement="date">
+                    <argument name="data" xsi:type="array">
+                    </argument>
+                    <settings>
+                        <validation>
+                            <rule name="validate-date" xsi:type="boolean">true</rule>
+                        </validation>
+                        <dataType>text</dataType>
+                        <label translate="true">Active To</label>
+                    </settings>
+                </field>
+                <field name="exclude" formElement="checkbox">
+                    <settings>
+                        <label translate="true">Exclude</label>
+                    </settings>
+                    <formElements>
+                        <checkbox>
+                            <settings>
+                                <valueMap>
+                                    <map name="false" xsi:type="number">0</map>
+                                    <map name="true" xsi:type="number">1</map>
+                                </valueMap>
+                            </settings>
+                        </checkbox>
+                    </formElements>
+                </field>
+                <actionDelete>
+                    <settings>
+                        <dataType>text</dataType>
+                        <label>Actions</label>
+                        <componentType>actionDelete</componentType>
+                    </settings>
+                </actionDelete>
+            </container>
+        </dynamicRows>
+    </fieldset>
+</form>

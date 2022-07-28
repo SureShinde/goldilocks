@@ -1,0 +1,16 @@
+<?php
+/** @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Amasty\PreOrderAnalytic\ViewModel\PreorderAnalytic $preorderAnalyticViewModel
+ */
+
+$preorderAnalyticViewModel = $block->getData('preorder_analytic_view_model');
+?>
+
+<?php if (!$preorderAnalyticViewModel->isDataExist()): ?>
+    <p class="message message-info">
+        <?= $escaper->escapeHtml('We couldn\'t find any records for preorder analytics (please make sure that the
+            settings values under Analytics Page fieldset in general extension configuration meet your requirements and
+            preorders of corresponding statuses exist in the system).') ?>
+    </p>
+<?php endif; ?>

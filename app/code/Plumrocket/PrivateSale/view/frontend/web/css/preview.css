@@ -1,0 +1,92 @@
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket Private Sales and Flash Sales v4.x.x
+ * @copyright   Copyright (c) 2020 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+.previewer-panel {
+  z-index: 100;
+  background-image: linear-gradient(135deg, #3b2667 10%, #bc78ec 100%);
+  left: 0;
+  top: 0;
+  width: 100%;
+  border-bottom: none;
+  box-shadow: 1px 1px 7px 0 #0000002e;
+}
+
+.panel-fixed {
+  position: fixed;
+}
+
+.previewer-panel a {
+  text-decoration: none;
+}
+.previewer-panel .holder {
+  padding: 10px 0;
+  position: relative;
+  text-align: center;
+}
+.previewer-panel span.h1-prew {
+  font-size: 16px;
+  color: #fff;
+  font-weight: 700;
+  vertical-align: middle;
+  text-shadow: 0 1px 1px #790003;
+}
+.previewer-panel a.button-view {
+  background: #000000;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 700;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 20px;
+  vertical-align: middle;
+  box-shadow: none;
+  background: #191919;
+  border: 1px solid #141414;
+  border-radius: 5px;
+}
+.previewer-panel a.button-view:hover {
+  background: #2d2d2d;
+  text-decoration: none;
+}
+.previewer-panel a.close-link {
+  position: absolute;
+  top: 15px;
+  font-size: 14px;
+  right: 17px;
+  color: #fff;
+  cursor: pointer;
+  text-shadow: 0 1px 1px #790003;
+  font-weight: 700;
+}
+.previewer-panel input {
+  border: none;
+  padding: 5px;
+  font-size: 16px;
+  width: 140px !important;
+  border-radius: 5px;
+  vertical-align: middle;
+}
+
+@media (max-width: 800px) {
+  .previewer-panel a.close-link {
+    position: static;
+    display: block;
+    white-space: nowrap;
+    width: 100%;
+    margin-top: 5px;
+  }
+}

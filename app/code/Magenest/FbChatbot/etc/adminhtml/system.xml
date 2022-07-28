@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="magenest" translate="label" sortOrder="500">
+            <label>Magenest</label>
+        </tab>
+        <section id="fb_chatbot" translate="label" type="text"
+                 sortOrder="100" showInDefault="1" showInWebsite="1"
+                 showInStore="1">
+            <label>Facebook Chatbot</label>
+            <tab>magenest</tab>
+            <resource>Magenest_FbChatbot::chatbot</resource>
+            <group id="connect" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="1" translate="label comment">
+                <label>Facebook Connection</label>
+                <field id="enable" translate="label comment" type="select" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="10">
+                    <label>Enable Chatbot</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable/Disable Facebook Chatbot module.</comment>
+                </field>
+                <field id="access_token" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Access Token</label>
+                    <comment><![CDATA[Enter Your Page Access Token <a href="https://developers.facebook.com/tools/explorer"> here</a>]]></comment>
+                </field>
+                <field id="verification_token" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Verification Token</label>
+                    <comment>This Token Verify The Facebook App</comment>
+                </field>
+            </group>
+            <group id="human_support" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Human Support</label>
+                <field id="enable" translate="label comment" type="select" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="40">
+                    <label>Enable Human Support</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <backend_model>Magenest\FbChatbot\Model\Config\Backend\SetupHumanSupport</backend_model>
+                </field>
+                <field id="email" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="50" translate="label">
+                    <label>Human Support Email</label>
+                    <validate>validate-email</validate>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="message" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Default Message</label>
+                <field id="greeting" translate="label comment" type="textarea" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Greeting Message</label>
+                </field>
+            </group>
+            <group id="fb_live_chat" translate="label" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="20">
+                <label>Display Chat Popup</label>
+                <comment><![CDATA[
+                Manually set up a Facebook chat popup on front end. Learn how to enable your facebook page chat <a href="https://medium.com/@jamesfuthey/how-to-add-facebook-live-chat-to-your-website-dd48fc8bb066" target="__BLANK">here</a>.
+                Alternatively, you can generate code snippet from <a href="https://developers.facebook.com/docs/messenger-platform/discovery/facebook-chat-plugin/" target="__BLANK">Facebook's setup tool</a>.
+                ]]></comment>
+                <field id="enable_fb" translate="label" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="0" >
+                    <label>Enable FacebookSupportLive</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Enable/Disable popup. Default: Yes]]></comment>
+                </field>
+                <field id="app_id_page" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="0" >
+                    <label>Facebook App ID</label>
+                    <depends>
+                        <field id="enable_fb">1</field>
+                    </depends>
+                </field>
+                <field id="link_page" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="0" >
+                    <label>Facebook Page Link</label>
+                    <comment><![CDATA[Input your facebook page. Example: <a href="https://www.facebook.com/Chatbot-Demo-105937914696813" target="__BLANK">https://www.facebook.com/Chatbot-Demo-105937914696813</a>]]></comment>
+                    <depends>
+                        <field id="enable_fb">1</field>
+                    </depends>
+                </field>
+                <field id="config_type" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Config Type</label>
+                    <source_model>Magenest\FbChatbot\Model\Config\Source\Type</source_model>
+                    <depends>
+                        <field id="enable_fb">1</field>
+                    </depends>
+                    <comment><![CDATA[<ul>
+                    <li>Use Settings: set up parameters manually</li>
+                    <li>Use Code: paste code snipped from Facebook's setup tool</li>
+                    </ul>]]></comment>
+                </field>
+                <field id="page_id" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0" >
+                    <label>Facebook Page ID</label>
+                    <comment><![CDATA[Find your facebook page id here: <a href="https://www.facebook.com/help/1503421039731588" target="__BLANK">https://www.facebook.com/help/1503421039731588</a>]]></comment>
+                    <depends>
+                        <field id="enable_fb">1</field>
+                        <field id="config_type">1</field>
+                    </depends>
+                </field>
+                <field id="settings" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Settings</label>
+                    <frontend_model>Magenest\FbChatbot\Block\Adminhtml\System\Config\Form\Field\Settings</frontend_model>
+                    <backend_model>Magenest\FbChatbot\Model\Config\Backend\LiveChatSettings</backend_model>
+                    <comment>
+                        <![CDATA[
+                        You can find settings explanation <a href="https://developers.facebook.com/docs/messenger-platform/discovery/customer-chat-plugin" target="_blank">here</a>.
+                        ]]>
+                    </comment>
+                    <depends>
+                        <field id="enable_fb">1</field>
+                        <field id="config_type">1</field>
+                    </depends>
+                </field>
+                <field id="code" translate="label" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Facebook Chat Code</label>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="enable_fb">1</field>
+                        <field id="config_type">2</field>
+                    </depends>
+                    <comment>Paste the code generated from Facebook setup tool</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

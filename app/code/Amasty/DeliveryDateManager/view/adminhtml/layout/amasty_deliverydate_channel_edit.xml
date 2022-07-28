@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <uiComponent name="amdelivery_channel_form"/>
+            <uiComponent name="amdelivery_channel_config_list"/>
+            <uiComponent name="amdelivery_channel_schedule_list"/>
+            <uiComponent name="amdelivery_channel_limit_list"/>
+            <uiComponent name="amdelivery_channel_interval_list"/>
+            <uiComponent name="amdelivery_channel_exception_list"/>
+        </referenceContainer>
+    </body>
+</page>

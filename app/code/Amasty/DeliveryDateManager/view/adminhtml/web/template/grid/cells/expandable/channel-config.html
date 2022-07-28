@@ -1,0 +1,30 @@
+<div class="amdelivery-cell-detailed data-grid-cell-expanded-content">
+    <!-- ko foreach: { data: $col.getDetailedInfoData($row()), as: 'detailed' } -->
+        <div if="$col.hasData(detailed)" class="amdelivery-column detailed-info">
+            <div class="amdelivery-item">
+                <span class="amdelivery-label" data-bind="i18n: 'Min Delivery period (days): '"></span>
+                <span class="amdelivery-value" data-bind="html: $col.getInfoValue(detailed.min)"></span>
+            </div>
+            <div class="amdelivery-item">
+                <span class="amdelivery-label" data-bind="i18n: 'Max Delivery period (days): '"></span>
+                <span class="amdelivery-value" data-bind="html: $col.getInfoValue(detailed.max)"></span>
+            </div>
+            <div class="amdelivery-item">
+                <span class="amdelivery-label" data-bind="i18n: 'Allow same day delivery: '"></span>
+                <span class="amdelivery-value" data-bind="i18n: +detailed.is_same_day_available ? 'Yes' : 'No'"></span>
+            </div>
+            <div class="amdelivery-item" if="detailed.is_same_day_available">
+                <span class="amdelivery-label" data-bind="i18n: 'Same day pickup cut-off time: '"></span>
+                <span class="amdelivery-value" data-bind="html: $col.getInfoValue(detailed.same_day_cutoff)"></span>
+            </div>
+            <div class="amdelivery-item" if="detailed.is_same_day_available">
+                <span class="amdelivery-label" data-bind="i18n: 'Time required to handle order (min.): '"></span>
+                <span class="amdelivery-value" data-bind="html: $col.getInfoValue(detailed.order_time)"></span>
+            </div>
+            <div class="amdelivery-item" if="detailed.is_same_day_available">
+                <span class="amdelivery-label" data-bind="i18n: 'Time required to handle backorder (min.): '"></span>
+                <span class="amdelivery-value" data-bind="html: $col.getInfoValue(detailed.backorder_time)"></span>
+            </div>
+        </div>
+    <!-- /ko -->
+</div>

@@ -1,0 +1,40 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**  @var $block \Magento\Checkout\Block\Cart */
+/** @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer */
+?>
+<div class="cart-empty">
+    <?= $block->getChildHtml('checkout_cart_empty_widget') ?>
+    <div class="cart-empty-image">
+        <img src="<?= $block->getViewFileUrl('images/cart-empty.png') ?>" alt="<?= __('Your tray is empty.') ?>"/>
+    </div>
+    <h2><?= $block->escapeHtml(__('Your tray is empty.')) ?></h2>
+    <p class="cart-empty-text"><?= $block->escapeHtml(__('Put your food into the tray and come back later.')) ?></p>
+    <div class="actions-toolbar mobile-hide">
+        <div class="primary">
+            <a href="<?= $block->escapeUrl($block->getContinueShoppingUrl()) ?>" class="action primary"><?= __('Go Back to Homepage') ?></a>
+        </div>
+    </div>
+    <?= $block->getChildHtml('shopping.cart.table.after') ?>
+</div>
+<?php $scriptString = <<<script
+        require([
+            "jquery"
+        ],function($) {
+            $('.checkout-cart-index').addClass('checkout-cart-empty');
+        });
+    script;
+?>
+<?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false) ?>
+<?= /* @noEscape */ $secureRenderer->renderTag('style', [], '.page-title-wrapper {display: none;}', false); ?>
+<script type="text/x-magento-init">
+{
+    "*": {
+        "Magento_Checkout/js/empty-cart": {}
+    }
+}
+</script>

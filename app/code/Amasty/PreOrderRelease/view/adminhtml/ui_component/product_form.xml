@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <modal name="advanced_inventory_modal">
+        <fieldset name="stock_data">
+            <field name="amasty_preorder_release_date">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Release Date</item>
+                        <item name="formElement" xsi:type="string">date</item>
+                        <item name="dataScope" xsi:type="string">amasty_preorder_release_date</item>
+                        <item name="sortOrder" xsi:type="number">811</item>
+                    </item>
+                </argument>
+            </field>
+        </fieldset>
+    </modal>
+</form>

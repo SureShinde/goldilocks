@@ -1,0 +1,13 @@
+<div class="data-grid-cell-content amdelivery-row-label"
+     css="'-expandable': $col.expandControl"
+     data-amdelivery-js="toggle-element"
+     data-bind="click: $col.toggleRow.bind($col, $row()._rowIndex)">
+    <div class="cell-content" text="$col.getLabel($row())"></div>
+</div>
+<div class="data-grid-cell-content amdelivery-expandable-cell">
+    <div class="amdelivery-content -detailed"
+         data-amdelivery-js="toggle-element"
+         if="$col.expandTmpl"
+         template="$col.expandTmpl">
+    </div>
+</div>

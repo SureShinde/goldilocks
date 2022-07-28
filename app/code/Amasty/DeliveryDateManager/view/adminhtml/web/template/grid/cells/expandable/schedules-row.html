@@ -1,0 +1,41 @@
+<div class="data-grid-cell-content amdelivery-expandable-cell amdelivery-schedule-cell">
+    <table class="amdelivery-table">
+        <thead>
+            <tr>
+                <th class="amdelivery-label" data-bind="i18n: 'Schedule'"></th>
+                <th class="amdelivery-label" data-bind="i18n: 'Limit'"></th>
+                <th class="amdelivery-label" data-bind="i18n: 'Time Set'"></th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: { data: $col.getDetailedInfoData($row()), as: 'detailed' }">
+            <tr if="$col.hasData(detailed)">
+                <td class="amdelivery-value -schedule">
+                    <div class="amdelivery-content -short"
+                         data-bind="text: detailed.name ? detailed.name : '-'"></div>
+                    <div class="amdelivery-content -detailed amdelivery-cell-detailed"
+                         data-amdelivery-js="toggle-element"
+                         data-bind="template: { name: $col.expandTmpl, data: {detailedMapIndex: 'schedule'} }">
+                    </div>
+                </td>
+                <td class="amdelivery-value -limit" if="detailed.is_available">
+                    <div class="amdelivery-content -short"
+                         data-bind="text: detailed.order_limit_name ? detailed.order_limit_name : '-'">
+                    </div>
+                    <div class="amdelivery-content -detailed amdelivery-cell-detailed"
+                         data-amdelivery-js="toggle-element"
+                         data-bind="template: { name: $col.expandTmpl, data: {detailedMapIndex: 'order_limit'} }">
+                    </div>
+                </td>
+                <td class="amdelivery-value -time-set" if="detailed.is_available">
+                    <div class="amdelivery-content -short"
+                         data-bind="text: detailed.time_set_name ? detailed.time_set_name : '-'">
+                    </div>
+                    <div class="amdelivery-content -detailed amdelivery-cell-detailed"
+                         data-amdelivery-js="toggle-element"
+                         data-bind="template: { name: $col.detailedIntervalsTmpl }">
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

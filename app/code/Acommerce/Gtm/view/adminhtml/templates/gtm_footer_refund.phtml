@@ -1,0 +1,15 @@
+<?php
+// @codingStandardsIgnoreFile
+?>
+<?php
+$_helper = $this->helper('Acommerce\Gtm\Helper\Data');
+?>
+<?php if ($_helper->isEnabled()) : ?>
+    <?php echo $_helper->getGtmCodeSnippet(); ?>
+    <?php $dataLayerObject = $this->getDataLayerAsJson(); ?>
+        <?php if ($dataLayerObject != '[]') : ?>
+            <script>
+                dataLayer.push(<?php echo $dataLayerObject ?>);
+            </script>
+    <?php endif; ?>
+<?php endif; ?>

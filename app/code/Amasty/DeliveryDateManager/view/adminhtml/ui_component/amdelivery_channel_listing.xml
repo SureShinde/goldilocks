@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">amdelivery_channel_listing.amdelivery_channel_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="add">
+                <url path="*/*/new"/>
+                <class>primary</class>
+                <label translate="true">Add New Configuration</label>
+            </button>
+        </buttons>
+        <spinner>configurations_columns</spinner>
+        <deps>
+            <dep>amdelivery_channel_listing.amdelivery_channel_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="amdelivery_channel_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">channel_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>Amasty_DeliveryDateManager::deliverydate_channel_grid</aclResource>
+        <dataProvider class="Amasty\DeliveryDateManager\Ui\Component\Grid\Channel\DataProvider" name="amdelivery_channel_listing_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>channel_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <massaction name="listing_massaction"
+                    component="Magento_Ui/js/grid/tree-massactions">
+            <action name="delete">
+                <settings>
+                    <confirm>
+                        <message translate="true">Delete selected items?</message>
+                        <title translate="true">Delete items</title>
+                    </confirm>
+                    <url path="amasty_deliverydate/channel/massDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                </settings>
+            </action>
+            <action name="status">
+                <settings>
+                    <type>status</type>
+                    <label translate="true">Change status</label>
+                    <actions>
+                        <action name="0">
+                            <type>enable</type>
+                            <label translate="true">Enable</label>
+                            <url path="amasty_deliverydate/channel/massStatus">
+                                <param name="status">1</param>
+                            </url>
+                        </action>
+                        <action name="1">
+                            <type>disable</type>
+                            <label translate="true">Disable</label>
+                            <url path="amasty_deliverydate/channel/massStatus">
+                                <param name="status">0</param>
+                            </url>
+                        </action>
+                    </actions>
+                </settings>
+            </action>
+        </massaction>
+        <paging name="listing_paging"/>
+        <filters name="listing_filters">
+            <filterRange name="min" provider="${ $.parentName }">
+                <settings>
+                    <rangeType>text</rangeType>
+                    <label translate="true">Min Delivery period (days)</label>
+                    <dataScope>min</dataScope>
+                </settings>
+            </filterRange>
+            <filterRange name="max" provider="${ $.parentName }">
+                <settings>
+                    <rangeType>text</rangeType>
+                    <label translate="true">Max Delivery period (days)</label>
+                    <dataScope>max</dataScope>
+                </settings>
+            </filterRange>
+            <filterSelect name="is_same_day_available" provider="${ $.parentName }">
+                <settings>
+                    <caption translate="true">Please select...</caption>
+                    <options class="Magento\Config\Model\Config\Source\Yesno"/>
+                    <label translate="true">Allow same day delivery</label>
+                    <dataScope>is_same_day_available</dataScope>
+                </settings>
+            </filterSelect>
+            <filterRange name="same_day_cutoff"
+                         class="Amasty\DeliveryDateManager\Ui\Component\Grid\Filters\Type\Time"
+                         template="ui/grid/filters/elements/group"
+                         component="Magento_Ui/js/grid/filters/range"
+                         provider="${ $.parentName }">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="templates" xsi:type="array">
+                            <item name="datetime" xsi:type="array">
+                                <item name="component" xsi:type="string">Amasty_DeliveryDateManager/js/view/form/element/time-picker</item>
+                                <item name="shiftedValue" xsi:type="string">filter</item>
+                                <item name="options" xsi:type="array">
+                                    <item name="showsDate" xsi:type="boolean">false</item>
+                                    <item name="showsTime" xsi:type="boolean">true</item>
+                                    <item name="timeOnly" xsi:type="boolean">true</item>
+                                    <item name="closeText" xsi:type="string" translate="true">OK</item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <rangeType>datetime</rangeType>
+                    <label translate="true">Same day delivery cut-off time</label>
+                    <dataScope>same_day_cutoff</dataScope>
+                </settings>
+            </filterRange>
+            <filterRange name="order_time" provider="${ $.parentName }">
+                <settings>
+                    <rangeType>text</rangeType>
+                    <label translate="true">Min time required to handle an order</label>
+                    <dataScope>order_time</dataScope>
+                </settings>
+            </filterRange>
+            <filterRange name="backorder_time" provider="${ $.parentName }">
+                <settings>
+                    <rangeType>text</rangeType>
+                    <label translate="true">Min time required to handle a backorder</label>
+                    <dataScope>backorder_time</dataScope>
+                </settings>
+            </filterRange>
+            <filterSelect name="shipping_method" provider="${ $.parentName }">
+                <settings>
+                    <captionValue>0</captionValue>
+                    <options class="Amasty\DeliveryDateManager\Ui\Component\Grid\Channel\Filter\Source\ShippingMethod"/>
+                    <label translate="true">Shipping Methods</label>
+                    <dataScope>shipping_method</dataScope>
+                </settings>
+            </filterSelect>
+            <filterSelect name="schedule_id" provider="${ $.parentName }">
+                <settings>
+                    <caption translate="true">Please select...</caption>
+                    <options class="Amasty\DeliveryDateManager\Ui\Component\Grid\Channel\Filter\Source\Schedule"/>
+                    <label translate="true">Days Schedule</label>
+                    <dataScope>schedule_id</dataScope>
+                </settings>
+            </filterSelect>
+            <filterSelect name="is_available" provider="${ $.parentName }">
+                <settings>
+                    <caption translate="true">Please select...</caption>
+                    <options class="Amasty\DeliveryDateManager\Ui\Component\Grid\Channel\Filter\Source\Schedule\Behavior"/>
+                    <label translate="true">Behavior</label>
+                    <dataScope>is_available</dataScope>
+                </settings>
+            </filterSelect>
+            <filterSelect name="schedule_type" provider="${ $.parentName }">
+                <settings>
+                    <caption translate="true">Please select...</caption>
+                    <options class="Amasty\DeliveryDateManager\Ui\Component\Grid\Channel\Filter\Source\Schedule\Type"/>
+                    <label translate="true">Schedule Type</label>
+                    <dataScope>schedule_type</dataScope>
+                </settings>
+            </filterSelect>
+            <filterRange name="day_limit" provider="${ $.parentName }">
+                <settings>
+                    <rangeType>text</rangeType>
+                    <label translate="true">Limit per day(s)</label>
+                    <dataScope>day_limit</dataScope>
+                </settings>
+            </filterRange>
+            <filterRange name="interval_limit" provider="${ $.parentName }">
+                <settings>
+                    <rangeType>text</rangeType>
+                    <label translate="true">Limit per intervals(s)</label>
+                    <dataScope>interval_limit</dataScope>
+                </settings>
+            </filterRange>
+            <filterSelect name="time_set_id" provider="${ $.parentName }">
+                <settings>
+                    <caption translate="true">Please select...</caption>
+                    <options class="Amasty\DeliveryDateManager\Ui\Component\Grid\Channel\Filter\Source\TimeSet"/>
+                    <label translate="true">Time Set</label>
+                    <dataScope>time_set_id</dataScope>
+                </settings>
+            </filterSelect>
+            <filterSelect name="interval_id" provider="${ $.parentName }">
+                <settings>
+                    <caption translate="true">Please select...</caption>
+                    <options class="Amasty\DeliveryDateManager\Ui\Component\Grid\Channel\Filter\Source\TimeSet\Interval"/>
+                    <label translate="true">Time Interval</label>
+                    <dataScope>interval_id</dataScope>
+                </settings>
+            </filterSelect>
+        </filters>
+    </listingToolbar>
+    <columns name="configurations_columns">
+        <selectionsColumn name="ids" sortOrder="10">
+            <settings>
+                <indexField>channel_id</indexField>
+                <fieldClass>
+                    <class name="amdelivery-grid-column">true</class>
+                </fieldClass>
+            </settings>
+        </selectionsColumn>
+        <column name="channel_id" sortOrder="20">
+            <settings>
+                <dataType>text</dataType>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <fieldClass>
+                    <class name="amdelivery-grid-column">true</class>
+                </fieldClass>
+            </settings>
+        </column>
+        <column name="name" component="Amasty_DeliveryDateManager/js/grid/columns/expandable" sortOrder="30">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="expandTmpl" xsi:type="string">Amasty_DeliveryDateManager/grid/cells/expandable/channel-config</item>
+                    <item name="detailedDataIndex" xsi:type="string">channel_config</item>
+                    <item name="expandControl" xsi:type="boolean">true</item>
+                </item>
+            </argument>
+            <settings>
+                <filter>text</filter>
+                <bodyTmpl>Amasty_DeliveryDateManager/grid/cells/expandable</bodyTmpl>
+                <label translate="true">Delivery Channel Title</label>
+                <fieldClass>
+                    <class name="amdelivery-grid-column">true</class>
+                </fieldClass>
+            </settings>
+        </column>
+        <column name="is_active" component="Magento_Ui/js/grid/columns/select" sortOrder="40">
+            <settings>
+                <options class="Amasty\DeliveryDateManager\Model\DeliveryChannel\Source\Status"/>
+                <dataType>select</dataType>
+                <filter>select</filter>
+                <label translate="true">Status</label>
+                <fieldClass>
+                    <class name="amdelivery-grid-column">true</class>
+                </fieldClass>
+            </settings>
+        </column>
+        <column name="store_id" class="Magento\Store\Ui\Component\Listing\Column\Store" sortOrder="50">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="allScopesValue" xsi:type="string" translate="true">All Store Views</item>
+                    <item name="filter" xsi:type="array">
+                        <item name="filterType" xsi:type="string">select</item>
+                        <item name="caption" xsi:type="string" translate="true">All Store Views</item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <options class="Magento\Store\Ui\Component\Listing\Column\Store\Options"/>
+                <bodyTmpl>Amasty_DeliveryDateManager/grid/cells/scope-cell</bodyTmpl>
+                <dataType>select</dataType>
+                <sortable>false</sortable>
+                <label translate="true">Store Views</label>
+                <fieldClass>
+                    <class name="amdelivery-grid-column">true</class>
+                </fieldClass>
+            </settings>
+        </column>
+        <column name="customer_group_id" component="Magento_Ui/js/grid/columns/select" sortOrder="60">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="allScopesValue" xsi:type="string" translate="true">All Customer Groups</item>
+                    <item name="filter" xsi:type="array">
+                        <item name="filterType" xsi:type="string">select</item>
+                        <item name="caption" xsi:type="string" translate="true">All Customer Groups</item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <options class="Magento\Customer\Ui\Component\Listing\Column\Group\Options"/>
+                <bodyTmpl>Amasty_DeliveryDateManager/grid/cells/scope-cell</bodyTmpl>
+                <dataType>select</dataType>
+                <sortable>false</sortable>
+                <label translate="true">Customer Groups</label>
+                <fieldClass>
+                    <class name="amdelivery-grid-column">true</class>
+                </fieldClass>
+            </settings>
+        </column>
+        <column name="shipping_method" component="Amasty_DeliveryDateManager/js/grid/columns/select-with-html-options" sortOrder="70">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="allScopesValue" xsi:type="string" translate="true">All Shipping Methods</item>
+                </item>
+            </argument>
+            <settings>
+                <options class="Amasty\DeliveryDateManager\Ui\Component\Grid\Channel\Column\Source\ShippingMethod"/>
+                <bodyTmpl>Amasty_DeliveryDateManager/grid/cells/scope-cell</bodyTmpl>
+                <dataType>select</dataType>
+                <sortable>false</sortable>
+                <label translate="true">Shipping Methods</label>
+                <fieldClass>
+                    <class name="amdelivery-grid-column">true</class>
+                </fieldClass>
+            </settings>
+        </column>
+        <column name="schedules_row" component="Amasty_DeliveryDateManager/js/grid/columns/expandable" sortOrder="80">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="expandTmpl" xsi:type="string">Amasty_DeliveryDateManager/grid/cells/expandable/schedules-row/default</item>
+                    <item name="detailedIntervalsTmpl" xsi:type="string">Amasty_DeliveryDateManager/grid/cells/expandable/schedules-row/time-intervals</item>
+                    <item name="detailedDataIndex" xsi:type="string">schedules_row</item>
+                    <item name="detailedDataMap" xsi:type="array">
+                        <item name="schedule" xsi:type="array">
+                            <item name="0" xsi:type="array">
+                                <item name="index" xsi:type="string">is_available</item>
+                                <item name="label" xsi:type="string" translate="true">Behavior</item>
+                                <item name="valuesMap" xsi:type="array">
+                                    <item name="false" xsi:type="string" translate="true">Prohibit delivery</item>
+                                    <item name="true" xsi:type="string" translate="true">Allow delivery</item>
+                                </item>
+                            </item>
+                            <item name="1" xsi:type="array">
+                                <item name="index" xsi:type="string">type</item>
+                                <item name="label" xsi:type="string" translate="true">Type</item>
+                                <item name="valuesMap" xsi:type="array">
+                                    <item name="0" xsi:type="string" translate="true">Specific Date Range</item>
+                                    <item name="1" xsi:type="string" translate="true">Days of Year</item>
+                                    <item name="2" xsi:type="string" translate="true">Days of Month</item>
+                                    <item name="3" xsi:type="string" translate="true">Days of Week</item>
+                                </item>
+                            </item>
+                            <item name="2" xsi:type="array">
+                                <item name="index" xsi:type="string">from</item>
+                                <item name="label" xsi:type="string" translate="true">From</item>
+                            </item>
+                            <item name="3" xsi:type="array">
+                                <item name="index" xsi:type="string">to</item>
+                                <item name="label" xsi:type="string" translate="true">To</item>
+                            </item>
+                        </item>
+                        <item name="order_limit" xsi:type="array">
+                            <item name="0" xsi:type="array">
+                                <item name="index" xsi:type="string">day_limit</item>
+                                <item name="label" xsi:type="string" translate="true">Limit per day(s)</item>
+                            </item>
+                            <item name="1" xsi:type="array">
+                                <item name="index" xsi:type="string">interval_limit</item>
+                                <item name="label" xsi:type="string" translate="true">Limit per interval(s)</item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <bodyTmpl>Amasty_DeliveryDateManager/grid/cells/expandable/schedules-row</bodyTmpl>
+                <label translate="true">Schedules, Limits, Time Sets</label>
+                <sortable>false</sortable>
+                <fieldClass>
+                    <class name="amdelivery-grid-column">true</class>
+                </fieldClass>
+            </settings>
+        </column>
+        <column name="priority" sortOrder="100">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Priority</label>
+                <fieldClass>
+                    <class name="amdelivery-grid-column">true</class>
+                </fieldClass>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="Amasty\DeliveryDateManager\Ui\Component\Grid\Columns\ConfigurationsActions" sortOrder="200">
+            <settings>
+                <indexField>channel_id</indexField>
+                <fieldClass>
+                    <class name="amdelivery-grid-column">true</class>
+                </fieldClass>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

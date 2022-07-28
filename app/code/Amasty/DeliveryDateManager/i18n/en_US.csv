@@ -1,0 +1,387 @@
+Delete,Delete
+"Are you sure you want to do this?","Are you sure you want to do this?"
+Duplicate,Duplicate
+Cancel,Cancel
+Reset,Reset
+"Save and Continue Edit","Save and Continue Edit"
+Save,Save
+"Delivery Date","Delivery Date"
+"'Delivery Time ' .","'Delivery Time ' ."
+"Delivery Comments","Delivery Comments"
+Back,Back
+OK,OK
+"Please update Amasty Base module. Re-upload it and replace all the files.","Please update Amasty Base module. Re-upload it and replace all the files."
+"Selected date is not available for delivery. Please select another one.","Selected date is not available for delivery. Please select another one."
+"Delivery Time Interval","Delivery Time Interval"
+"Delivery Date: Configurations","Delivery Date: Configurations"
+"You deleted the channel configuration.","You deleted the channel configuration."
+"We can't delete the channel configuration right now.","We can't delete the channel configuration right now."
+"You deleted the channel.","You deleted the channel."
+"This configuration no longer exists.","This configuration no longer exists."
+"Edit Delivery Channel Configuration","Edit Delivery Channel Configuration"
+"New Delivery Channel Configuration","New Delivery Channel Configuration"
+"Delivery Configuration","Delivery Configuration"
+"You deleted the time interval set.","You deleted the time interval set."
+"We can't delete the time interval set right now.","We can't delete the time interval set right now."
+"You deleted the order limit.","You deleted the order limit."
+"We can't delete the order limit right now.","We can't delete the order limit right now."
+"A total of %1 record(s) have been deleted.","A total of %1 record(s) have been deleted."
+"No record(s) have been deleted.","No record(s) have been deleted."
+"A total of %1 record(s) have been updated.","A total of %1 record(s) have been updated."
+"No record(s) have been updated.","No record(s) have been updated."
+"We can't duplicate entity right now.","We can't duplicate entity right now."
+"Configuration has been successfully saved","Configuration has been successfully saved"
+"The wrong configuration is specified.","The wrong configuration is specified."
+"Something went wrong while saving data. Please review the error log.","Something went wrong while saving data. Please review the error log."
+"You deleted the date schedule.","You deleted the date schedule."
+"We can't delete the date schedule right now.","We can't delete the date schedule right now."
+"Edit Delivery Date For The Order #%1","Edit Delivery Date For The Order #%1"
+"Delivery Information has been successfully saved","Delivery Information has been successfully saved"
+"Something went wrong while saving data.","Something went wrong while saving data."
+"Delivery Date has been successfully saved","Delivery Date has been successfully saved"
+"Order Information","Order Information"
+"Setup process has been stopped.","Setup process has been stopped."
+"Unable to remove channel configuration with ID %1. Error: %2","Unable to remove channel configuration with ID %1. Error: %2"
+"Unable to remove channel configuration. Error:%1","Unable to remove channel configuration. Error:%1"
+"Channel Configuration with ID ""%value"" does not exist.","Channel Configuration with ID ""%value"" does not exist."
+"Unable to save Channel Configuration with ID %1. Error: %2","Unable to save Channel Configuration with ID %1. Error: %2"
+"Unable to save Channel Configuration. Error: %1","Unable to save Channel Configuration. Error: %1"
+"Please select a static block.","Please select a static block."
+"Date and Order Status","Date and Order Status"
+"Date or Order Status","Date or Order Status"
+"Order Status","Order Status"
+Date,Date
+"Print Copy of Order Confirmation","Print Copy of Order Confirmation"
+"Order Confirmation E-mail","Order Confirmation E-mail"
+"Invoice E-mail","Invoice E-mail"
+"Shipment E-mail","Shipment E-mail"
+"Invoice PDF","Invoice PDF"
+"Shipment PDF (Packing Slip)","Shipment PDF (Packing Slip)"
+"Order View Page (Backend)","Order View Page (Backend)"
+"New/Edit/Reorder Order Page (Backend)","New/Edit/Reorder Order Page (Backend)"
+"Invoice View Page (Backend)","Invoice View Page (Backend)"
+"Shipment View Page (Backend)","Shipment View Page (Backend)"
+"Order Info Page (Frontend)","Order Info Page (Frontend)"
+"As is","As is"
+"Magento Notice","Magento Notice"
+"Delivery Information","Delivery Information"
+"Delivery Time","Delivery Time"
+"Unable to remove date schedule with ID %1. Error: %2","Unable to remove date schedule with ID %1. Error: %2"
+"Unable to remove date schedule. Error: %1","Unable to remove date schedule. Error: %1"
+"Date Schedule with ID ""%value"" does not exist.","Date Schedule with ID ""%value"" does not exist."
+"Unable to save schedule with ID %1. Error: %2","Unable to save schedule with ID %1. Error: %2"
+"Unable to save new schedule. Error: %1","Unable to save new schedule. Error: %1"
+"Unable to remove channel with ID %1. Error: %2","Unable to remove channel with ID %1. Error: %2"
+"Unable to remove channel. Error: %1","Unable to remove channel. Error: %1"
+"Channel with ID ""%value"" does not exist.","Channel with ID ""%value"" does not exist."
+"Unable to save channel with ID %1. Error: %2","Unable to save channel with ID %1. Error: %2"
+"Unable to save new channel. Error: %1","Unable to save new channel. Error: %1"
+Enabled,Enabled
+Disabled,Disabled
+"The schedule is already attached to another delivery channel. Please create another one.","The schedule is already attached to another delivery channel. Please create another one."
+"Delivery Date is required.","Delivery Date is required."
+"Delivery Time is required.","Delivery Time is required."
+"Delivery Comment is required.","Delivery Comment is required."
+"Time interval is not available.","Time interval is not available."
+"Delivery Date is not available due Order Limit of the day.","Delivery Date is not available due Order Limit of the day."
+"Delivery Date cannot be in the past.","Delivery Date cannot be in the past."
+"Current date is not available for delivery.","Current date is not available for delivery."
+"Date is not available for delivery.","Date is not available for delivery."
+"Delivery Date for specified order ID ""%1"" not found.","Delivery Date for specified order ID ""%1"" not found."
+"Unable to save Delivery Date order information with ID %1. Error: %2","Unable to save Delivery Date order information with ID %1. Error: %2"
+"Unable to save new delivery order. Error: %1","Unable to save new delivery order. Error: %1"
+"Delivery Date Validation Failed","Delivery Date Validation Failed"
+"Delivery Time Validation Failed","Delivery Time Validation Failed"
+"Delivery Comment field is too long.","Delivery Comment field is too long."
+"Delivery Quote with ID ""%value"" does not exist.","Delivery Quote with ID ""%value"" does not exist."
+"Unable to save delivery quote with ID %1. Error: %2","Unable to save delivery quote with ID %1. Error: %2"
+"Unable to save new delivery quote. Error: %1","Unable to save new delivery quote. Error: %1"
+"Shipping Address is not in quote","Shipping Address is not in quote"
+"The wrong resolver type.","The wrong resolver type."
+"Unable to remove order limit with ID %1. Error: %2","Unable to remove order limit with ID %1. Error: %2"
+"Unable to remove order limit. Error: %1","Unable to remove order limit. Error: %1"
+"Order Limit with ID ""%value"" does not exist.","Order Limit with ID ""%value"" does not exist."
+"Unable to save order limit with ID %1. Error: %2","Unable to save order limit with ID %1. Error: %2"
+"Unable to save new order limit. Error: %1","Unable to save new order limit. Error: %1"
+"Unable to remove time interval with ID %1. Error: %2","Unable to remove time interval with ID %1. Error: %2"
+"Unable to remove time interval. Error: %1","Unable to remove time interval. Error: %1"
+"Time Interval with ID ""%1"" does not exist.","Time Interval with ID ""%1"" does not exist."
+"Unable to save Time Interval with ID %1. Error: %2","Unable to save Time Interval with ID %1. Error: %2"
+"Unable to save new Time Interval. Error: %1","Unable to save new Time Interval. Error: %1"
+"Time Interval Set with ID ""%1"" does not exist.","Time Interval Set with ID ""%1"" does not exist."
+"Unable to save Time Interval Set with ID %1. Error: %2","Unable to save Time Interval Set with ID %1. Error: %2"
+"Unable to save new Time Interval Set. Error: %1","Unable to save new Time Interval Set. Error: %1"
+"Invoice # ","Invoice # "
+"Packing Slip # ","Packing Slip # "
+"Legacy version of Delivery Date detected.' . ""\n"" . 'Extension configuration will not be transferred from Legacy to current extension version - so backup relevant data as necessary prior to advancing with extension install.' . ""\n"" . 'Please run ‘composer remove amasty/delivery-date’ to uninstall Composer based version of legacy extension - or remove app/code/Amasty/Deliverydate folder in case of non-Composer based install. Then, restart extension’s current version install process.","Legacy version of Delivery Date detected.' . ""\n"" . 'Extension configuration will not be transferred from Legacy to current extension version - so backup relevant data as necessary prior to advancing with extension install.' . ""\n"" . 'Please run ‘composer remove amasty/delivery-date’ to uninstall Composer based version of legacy extension - or remove app/code/Amasty/Deliverydate folder in case of non-Composer based install. Then, restart extension’s current version install process."
+Monday,Monday
+Tuesday,Tuesday
+Wednesday,Wednesday
+Thursday,Thursday
+Friday,Friday
+Saturday,Saturday
+Sunday,Sunday
+"All Shipping Methods","All Shipping Methods"
+"Allow delivery","Allow delivery"
+"Prohibit delivery","Prohibit delivery"
+"Specific Date Range","Specific Date Range"
+"Days of Year","Days of Year"
+"Days of Month","Days of Month"
+"Days of Week","Days of Week"
+"All Methods","All Methods"
+Edit,Edit
+"* Required Fields","* Required Fields"
+"Order #","Order #"
+Email,Email
+"Current Delivery Date","Current Delivery Date"
+"Current Delivery Time Interval","Current Delivery Time Interval"
+"Current Delivery Comments","Current Delivery Comments"
+"Back to Order # %1","Back to Order # %1"
+"Delivery Date Info:","Delivery Date Info:"
+Generate,Generate
+"Min Delivery period (days): ","Min Delivery period (days): "
+"Max Delivery period (days): ","Max Delivery period (days): "
+"Allow same day delivery: ","Allow same day delivery: "
+"Same day pickup cut-off time: ","Same day pickup cut-off time: "
+"Time required to handle order (min.): ","Time required to handle order (min.): "
+"Time required to handle backorder (min.): ","Time required to handle backorder (min.): "
+Schedule,Schedule
+Limit,Limit
+"Time Set","Time Set"
+From:,From:
+To:,To:
+Limits:,Limits:
+Label:,Label:
+"Limit per Day: ","Limit per Day: "
+"Limit per Intervals: ","Limit per Intervals: "
+"No Order Limits Specified","No Order Limits Specified"
+"Behavior: ","Behavior: "
+"Type: ","Type: "
+"From: ","From: "
+"To: ","To: "
+"No Schedule Specified","No Schedule Specified"
+"No Time Intervals Specified","No Time Intervals Specified"
+"Delivery Comment","Delivery Comment"
+"No delivery time slots available for the selected shipping method at the moment. Please, try another shipping method or get in touch with the store administrator.","No delivery time slots available for the selected shipping method at the moment. Please, try another shipping method or get in touch with the store administrator."
+"Please enter a date greater than or equal to the current date.","Please enter a date greater than or equal to the current date."
+"Please enter a valid time.","Please enter a valid time."
+"Sorry, there has been an error processing your request. Please try again later.","Sorry, there has been an error processing your request. Please try again later."
+"Choose from list...","Choose from list..."
+"Select Date","Select Date"
+"First Available Day","First Available Day"
+"Delivery Date Manager","Delivery Date Manager"
+Information,Information
+General,General
+"Enable Module","Enable Module"
+"Delivery Date CMS Block","Delivery Date CMS Block"
+"Please make sure that CMS Block is created and enabled at <a target=""_blank"" href=""{blocks_url}"">Content > Elements > Blocks</a>","Please make sure that CMS Block is created and enabled at <a target=""_blank"" href=""{blocks_url}"">Content > Elements > Blocks</a>"
+"This setting will help you to add the custom CMS block on the Checkout Page.<br/><br/>
+                        Recommended do not use any interactive elements in the CMS blocks (e.g., redirection from the Checkout Page) since it may result in decreasing 'Checkout-to-order' conversion rate.","This setting will help you to add the custom CMS block on the Checkout Page.<br/><br/>
+                        Recommended do not use any interactive elements in the CMS blocks (e.g., redirection from the Checkout Page) since it may result in decreasing 'Checkout-to-order' conversion rate."
+"Delivery Date Field Settings","Delivery Date Field Settings"
+"Delivery Date Field Is Required","Delivery Date Field Is Required"
+"Include Prohibited Delivery Days into Min and Max Delivery Period Count","Include Prohibited Delivery Days into Min and Max Delivery Period Count"
+"This setting includes the non-working days (Exceptions) to the Min./Max. Delivery Period calculations.<br/>
+                        If 'No', the delivery period will be calculated by the working days only.<br/>
+                        If 'Yes', the days, which are not selected as the working days, will be added to the Delivery Period calculation. This might be helpful if you're going to process your orders during non-working days.","This setting includes the non-working days (Exceptions) to the Min./Max. Delivery Period calculations.<br/>
+                        If 'No', the delivery period will be calculated by the working days only.<br/>
+                        If 'Yes', the days, which are not selected as the working days, will be added to the Delivery Period calculation. This might be helpful if you're going to process your orders during non-working days."
+"Preselect Closest Day","Preselect Closest Day"
+"If 'yes', the closest available delivery date will be pre-selected during the checkout.","If 'yes', the closest available delivery date will be pre-selected during the checkout."
+"Placeholder Text","Placeholder Text"
+"Include Into Email Templates","Include Into Email Templates"
+"Display On","Display On"
+"Field Note Text","Field Note Text"
+"Will be displayed on the checkout page below the Delivery Date field.","Will be displayed on the checkout page below the Delivery Date field."
+"Allow Rescheduling Delivery Date","Allow Rescheduling Delivery Date"
+"Allow customers to edit the Delivery Date once an order is placed.","Allow customers to edit the Delivery Date once an order is placed."
+"Rule activation","Rule activation"
+"Define rule which allow/disallow delivery date editing by customer","Define rule which allow/disallow delivery date editing by customer"
+"Order status can be rescheduled","Order status can be rescheduled"
+"Lockdown period","Lockdown period"
+"Is time interval before order delivery date. When lockdown period is running - customer cannot edit delivery date","Is time interval before order delivery date. When lockdown period is running - customer cannot edit delivery date"
+"Recipient Email Address","Recipient Email Address"
+"Recipient email address for notifications when customer changes Delivery Date. Comma separated.","Recipient email address for notifications when customer changes Delivery Date. Comma separated."
+"Notification Email Sender","Notification Email Sender"
+"Notification Email Template","Notification Email Template"
+"Delivery Time Field Settings","Delivery Time Field Settings"
+"Enable Delivery Time Field","Enable Delivery Time Field"
+"Allow customers to choose suitable delivery time interval before placing order.<br/>
+                        Note: to make the option working properly your Delivery Channel configuration should contain Interval Sets.","Allow customers to choose suitable delivery time interval before placing order.<br/>
+                        Note: to make the option working properly your Delivery Channel configuration should contain Interval Sets."
+"Delivery Time Field Is Required","Delivery Time Field Is Required"
+"Preselect Closest Time","Preselect Closest Time"
+"If 'yes', the closest available delivery time interval will be pre-selected during the checkout.","If 'yes', the closest available delivery time interval will be pre-selected during the checkout."
+"Will be displayed on the checkout page below the Delivery Time field.","Will be displayed on the checkout page below the Delivery Time field."
+"Comments Field","Comments Field"
+"Enable Comments Field","Enable Comments Field"
+"Comments Field Is Required","Comments Field Is Required"
+"Limit for Comment","Limit for Comment"
+"In symbols. Set zero if it is not needed.","In symbols. Set zero if it is not needed."
+"Will be displayed on the checkout page below the Comments field.","Will be displayed on the checkout page below the Comments field."
+Reminder,Reminder
+Enable,Enable
+"Time Before","Time Before"
+"In hours.","In hours."
+"Are you sure you want to delete this configuration?","Are you sure you want to delete this configuration?"
+"Please, select configuration to delete.","Please, select configuration to delete."
+Title,Title
+"Min. Delivery Period (Days)","Min. Delivery Period (Days)"
+"Set minimum delivery period in calendar days available for customers on the storefront, e.g: 1","Set minimum delivery period in calendar days available for customers on the storefront, e.g: 1"
+"Define the offset in calendar days from current day after which the days the the Delivery Date selector become available for customers on the storefront. All the days before the specified value will be shown as disabled in the Delivery Date selector.<br/>
+                    To provide the same day delivery, the option should be set to '0'.<br/>
+                    To provide the next day delivery, the option should be set to '0' or '1'.","Define the offset in calendar days from current day after which the days the the Delivery Date selector become available for customers on the storefront. All the days before the specified value will be shown as disabled in the Delivery Date selector.<br/>
+                    To provide the same day delivery, the option should be set to '0'.<br/>
+                    To provide the next day delivery, the option should be set to '0' or '1'."
+"Max. Delivery Period (Days)","Max. Delivery Period (Days)"
+"Set maximum delivery period in calendar  days available for customers on the storefront, e.g: 14. The value cannot be more than 365 days, if empty the value will be = 180 days","Set maximum delivery period in calendar  days available for customers on the storefront, e.g: 14. The value cannot be more than 365 days, if empty the value will be = 180 days"
+"Define the maximum length of the delivery period available for the customers on the storefront. All the days after the specified value will be shown as disabled in the Delivery Date selector.<br/>
+                    Max. applicable value is '365'.<br/>
+                    If empty, the value is 180 days by default.","Define the maximum length of the delivery period available for the customers on the storefront. All the days after the specified value will be shown as disabled in the Delivery Date selector.<br/>
+                    Max. applicable value is '365'.<br/>
+                    If empty, the value is 180 days by default."
+"Allow Same Day Delivery","Allow Same Day Delivery"
+"Set 'Yes' if you want to offer the same day delivery","Set 'Yes' if you want to offer the same day delivery"
+"Same Day Delivery Cut-off Time","Same Day Delivery Cut-off Time"
+"Set the time after that the same day delivery option gets unavailable for customers.<br/>
+                     If customers place their orders after this time, they won't be able to choose today as the delivery day.<br/>
+                     To use the option the 'Min. Delivery Period (Days)' field should be set to '0'.","Set the time after that the same day delivery option gets unavailable for customers.<br/>
+                     If customers place their orders after this time, they won't be able to choose today as the delivery day.<br/>
+                     To use the option the 'Min. Delivery Period (Days)' field should be set to '0'."
+"Time Required to Handle Order (Minutes)","Time Required to Handle Order (Minutes)"
+"Specify the time required to handle an order. This way you set a minimal time period that makes a gap before current time and the closes available Time Interval on the storefront. Works based on minutes. Applicable for products 'In Stock'.<br/>
+                    <br/>
+                    Example:
+                          <ul class=""amdelivery-tooltip-list"">
+                             <li>the option set to '45';</li>
+                             <li>available time intervals are: 10:00 AM - 11:00 AM, 11:00 AM - 12:00 AM;</li>
+                             <li>a customer is trying to choose the closest available time interval on the storefront at 09:30 AM;</li>
+                          </ul>
+                    Result: the closest available intervals for the customer is 11:00 AM - 12:00 AM (since there is not enough time to fulfill the delivery at 10:00 - 11:00 AM)","Specify the time required to handle an order. This way you set a minimal time period that makes a gap before current time and the closes available Time Interval on the storefront. Works based on minutes. Applicable for products 'In Stock'.<br/>
+                    <br/>
+                    Example:
+                          <ul class=""amdelivery-tooltip-list"">
+                             <li>the option set to '45';</li>
+                             <li>available time intervals are: 10:00 AM - 11:00 AM, 11:00 AM - 12:00 AM;</li>
+                             <li>a customer is trying to choose the closest available time interval on the storefront at 09:30 AM;</li>
+                          </ul>
+                    Result: the closest available intervals for the customer is 11:00 AM - 12:00 AM (since there is not enough time to fulfill the delivery at 10:00 - 11:00 AM)"
+"Set time in minutes, e.g: 17","Set time in minutes, e.g: 17"
+"Time Required to Handle Backorder (Minutes)","Time Required to Handle Backorder (Minutes)"
+"Specify the time required to handle a backorder. This way you set a minimal time period that makes a gap before current time and the closes available Time Interval on the storefront.<br/>
+                    Works based on minutes. Applicable for products 'Out of Stock'.","Specify the time required to handle a backorder. This way you set a minimal time period that makes a gap before current time and the closes available Time Interval on the storefront.<br/>
+                    Works based on minutes. Applicable for products 'Out of Stock'."
+"Set time in minutes, e.g: 3600 (60 h x 60 minutes = 3600 minutes)","Set time in minutes, e.g: 3600 (60 h x 60 minutes = 3600 minutes)"
+"Enable Delivery Channel","Enable Delivery Channel"
+Priority,Priority
+"The lower the value the higher the priority","The lower the value the higher the priority"
+"Configuration Applicability Scope","Configuration Applicability Scope"
+"Store Views","Store Views"
+"Leave blank or select everything for all Store Views","Leave blank or select everything for all Store Views"
+"Shipping Methods","Shipping Methods"
+"Leave blank or select everything for all Shipping Methods","Leave blank or select everything for all Shipping Methods"
+"Customer Groups","Customer Groups"
+"Leave blank or select everything for all Customer Groups","Leave blank or select everything for all Customer Groups"
+"General Delivery Options","General Delivery Options"
+Add,Add
+"amdelivery-button
+                                        ","amdelivery-button
+                                        "
+Сору,Сору
+No,No
+Yes,Yes
+"Add Schedule","Add Schedule"
+"Manage Delivery Channel Schedule","Manage Delivery Channel Schedule"
+"amdelivery-button
+                                                ","amdelivery-button
+                                                "
+Exceptions,Exceptions
+"Add Exception","Add Exception"
+"Record Example","Record Example"
+"Manage Delivery Channel Exception","Manage Delivery Channel Exception"
+"Manage General Delivery Options","Manage General Delivery Options"
+"Manage Order Limits","Manage Order Limits"
+"Manage Time Intervals Set","Manage Time Intervals Set"
+"Are you sure you want to delete this time interval?","Are you sure you want to delete this time interval?"
+"Please, select time interval set to delete.","Please, select time interval set to delete."
+"Time intervals should not have intersections.","Time intervals should not have intersections."
+"At least one Time Interval is required.","At least one Time Interval is required."
+"Add New","Add New"
+"""From"" should be earlier than ""To"".","""From"" should be earlier than ""To""."
+From,From
+To,To
+Limits,Limits
+"Using this field you can set non-typical Order Limits for certain time intervals.<br/>
+                                The limits per interval set by this field have higher priority than the ones set via Order Limits settings.<br/><br/>
+                                If empty, the limits per intervals will be taken from the Order Limits settings.","Using this field you can set non-typical Order Limits for certain time intervals.<br/>
+                                The limits per interval set by this field have higher priority than the ones set via Order Limits settings.<br/><br/>
+                                If empty, the limits per intervals will be taken from the Order Limits settings."
+Label,Label
+"Set labels that will be shown next to the corresponding time intervals on the storefront.<br/>
+                                You can use the labels to highlight details of certain time intervals, e.g.: 'Express Delivery' or 'Peak hours - delays possible'","Set labels that will be shown next to the corresponding time intervals on the storefront.<br/>
+                                You can use the labels to highlight details of certain time intervals, e.g.: 'Express Delivery' or 'Peak hours - delays possible'"
+"Are you sure you want to delete this order limit?","Are you sure you want to delete this order limit?"
+"Please, select order limit to delete.","Please, select order limit to delete."
+"Limit per Day","Limit per Day"
+"Set the maximum number of deliveries per day in pieces, e.g: 110. Leave blank if unlimited","Set the maximum number of deliveries per day in pieces, e.g: 110. Leave blank if unlimited"
+"The setting allows adjusting the max quantity of deliveries per day according to the capacity of your delivery service.<br/>
+                        Once the Limit per Day is reached all the delivery options for a certain day (both the specific date in the calendar and all options in the Time Intervals selector) become unavailable for selection on the storefront.","The setting allows adjusting the max quantity of deliveries per day according to the capacity of your delivery service.<br/>
+                        Once the Limit per Day is reached all the delivery options for a certain day (both the specific date in the calendar and all options in the Time Intervals selector) become unavailable for selection on the storefront."
+"Limit per Time Interval","Limit per Time Interval"
+"Set the maximum number of deliveries per Time Interval in pieces, e.g: 20. Leave blank if no specific limits per Time Interval required","Set the maximum number of deliveries per Time Interval in pieces, e.g: 20. Leave blank if no specific limits per Time Interval required"
+"The setting allows adjusting the max quantity of deliveries per specific Time Interval.<br/>
+                    Once the Limit per Time Interval is reached the corresponding option in the Delivery Time Interval selector on the storefront becomes unavailable.<br/><br/>
+                    In case if you have some specific Time Intervals that should have non-typical limitations, the values set by this field can be overridden by the Limits value in the Time Intervals Set settings.","The setting allows adjusting the max quantity of deliveries per specific Time Interval.<br/>
+                    Once the Limit per Time Interval is reached the corresponding option in the Delivery Time Interval selector on the storefront becomes unavailable.<br/><br/>
+                    In case if you have some specific Time Intervals that should have non-typical limitations, the values set by this field can be overridden by the Limits value in the Time Intervals Set settings."
+"Add New Configuration","Add New Configuration"
+"Delete selected items?","Delete selected items?"
+"Delete items","Delete items"
+"Change status","Change status"
+Disable,Disable
+"Min Delivery period (days)","Min Delivery period (days)"
+"Max Delivery period (days)","Max Delivery period (days)"
+"Please select...","Please select..."
+"Allow same day delivery","Allow same day delivery"
+"Same day delivery cut-off time","Same day delivery cut-off time"
+"Min time required to handle an order","Min time required to handle an order"
+"Min time required to handle a backorder","Min time required to handle a backorder"
+"Days Schedule","Days Schedule"
+Behavior,Behavior
+"Schedule Type","Schedule Type"
+"Limit per day(s)","Limit per day(s)"
+"Limit per intervals(s)","Limit per intervals(s)"
+"Time Interval","Time Interval"
+ID,ID
+"Delivery Channel Title","Delivery Channel Title"
+Status,Status
+"All Store Views","All Store Views"
+"All Customer Groups","All Customer Groups"
+Type,Type
+"Limit per interval(s)","Limit per interval(s)"
+"Schedules, Limits, Time Sets","Schedules, Limits, Time Sets"
+"Are you sure you want to delete this date schedule?","Are you sure you want to delete this date schedule?"
+"Please, select date schedule to delete.","Please, select date schedule to delete."
+"Set the range start date, e.g.: 12/25/2021","Set the range start date, e.g.: 12/25/2021"
+"Set the range end date, e.g.: 12/27/2021.
+                        The 'Specific Date Range' option means that the specified period won't be repeated after the end date is reached","Set the range end date, e.g.: 12/27/2021.
+                        The 'Specific Date Range' option means that the specified period won't be repeated after the end date is reached"
+"Set the range start date, e.g.: 04/10","Set the range start date, e.g.: 04/10"
+"Set the range end date, e.g.: 04/24.
+                        The 'Days of Year' option means that the specified period is repeated annually","Set the range end date, e.g.: 04/24.
+                        The 'Days of Year' option means that the specified period is repeated annually"
+"Enter a number of a calendar day (from 1 to 31), e.g: 17","Enter a number of a calendar day (from 1 to 31), e.g: 17"
+"Enter a number of a calendar day (from 1 to 31), e.g: 31.
+                        The 'Days of Month' option means that the specified period is repeated monthly.
+                        Please note that if you set from 1 to 31 days and there are fewer than 31 days in a month, this value will be automatically changed to the maximum available days number in this month, i.e. February to 28","Enter a number of a calendar day (from 1 to 31), e.g: 31.
+                        The 'Days of Month' option means that the specified period is repeated monthly.
+                        Please note that if you set from 1 to 31 days and there are fewer than 31 days in a month, this value will be automatically changed to the maximum available days number in this month, i.e. February to 28"
+"Set the range start day, e.g.: Monday","Set the range start day, e.g.: Monday"
+"Set the range end day, e.g.: Friday.
+                        To choose only one day of week, the 'From' and 'To' values should be the same.
+                        The 'Days of Week' option means that the specified period is repeated weekly.","Set the range end day, e.g.: Friday.
+                        To choose only one day of week, the 'From' and 'To' values should be the same.
+                        The 'Days of Week' option means that the specified period is repeated weekly."
+"Delivery Time From","Delivery Time From"
+"Delivery Time To","Delivery Time To"
+"Notify Customer by Email","Notify Customer by Email"

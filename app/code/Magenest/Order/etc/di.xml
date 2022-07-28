@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Magento\Sales\Model\ResourceModel\Order\Grid" type="Magento\Sales\Model\ResourceModel\Grid">
+        <arguments>
+            <argument name="columns" xsi:type="array">
+                <item name="source_field" xsi:type="string">sales_order.source_field</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Sales\Model\Order\Email\Sender\OrderSender">
+        <plugin name="magenest_order_status_model_order_email_sender_order_sender"
+                type="Magenest\Order\Plugin\Model\Order\Email\Sender\OrderSender" />
+    </type>
+    <type name="Magento\Sales\Model\Order\Email\Container\OrderIdentity">
+        <plugin name="magenest_order_status_model_order_email_container_orderIdentity"
+                type="Magenest\Order\Plugin\Model\Order\Email\Container\OrderIdentity" />
+    </type>
+</config>

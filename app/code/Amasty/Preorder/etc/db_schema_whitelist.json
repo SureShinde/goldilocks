@@ -1,0 +1,26 @@
+{
+    "amasty_preorder_order_preorder": {
+        "column": {
+            "id": true,
+            "order_id": true,
+            "is_preorder": true,
+            "warning": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "AMASTY_PREORDER_ORDER_PREORDER_ORDER_ID_SALES_ORDER_ENTT_ID": true
+        }
+    },
+    "amasty_preorder_order_item_preorder": {
+        "column": {
+            "id": true,
+            "order_item_id": true,
+            "is_preorder": true,
+            "preorder_note": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "AMASTY_PREORDER_ORDER_ITEM_PREORDER_ORDR_ITM_ID_SALES_ORDR_ITM_ITM_ID": true
+        }
+    }
+}

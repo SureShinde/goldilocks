@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <magenest_order>
+            <general>
+                <source_fields>{"_1658110714153_153":{"source_fields":"Hotline"},"_1658110725906_906":{"source_fields":"Viber"}}</source_fields>
+            </general>
+        </magenest_order>
+    </default>
+</config>

@@ -1,0 +1,242 @@
+& when (@media-common = true) {
+    .customer-account-index {
+        .column.main {
+            padding-left: 0;
+
+            .block:not(.widget) {
+                &.block-dashboard-info,
+                &.block-dashboard-addresses {
+                    a.action {
+                        font-size: 12px;
+                        line-height: 1.24;
+                        color: #E74949;
+
+                        &:not(:first-of-type) {
+                            padding-left: 12px;
+                            margin-left: 12px;
+                            position: relative;
+
+                            &:before {
+                                content: '';
+                                background-color: #E74949;
+                                width: 1px;
+                                .lib-css(box-shadow, 0 0 0 0.25px);
+                                .lib-css(border-radius, 5px);
+                                height: 16px;
+                                position: absolute;
+                                left: 0;
+                                top: calc(~'50% - 1px');
+                                -webkit-transform: translateY(-50%);
+                                -ms-transform: translateY(-50%);
+                                -o-transform: translateY(-50%);
+                                transform: translateY(-50%);
+                            }
+                        }
+                    }
+
+                    .value {
+                        &:before {
+                            content: attr(data-label-customer);
+                            font-size: 10px;
+                            line-height: 1.2;
+                            color: #4D4D4D;
+                            font-weight: 400;
+                            display: block;
+                            padding-bottom: 4px;
+                        }
+                    }
+
+                    ul, li {
+                        list-style: none;
+                    }
+                }
+
+                &.block-dashboard-addresses,
+                &.block-dashboard-orders {
+                    .block-title {
+                        a.action {
+                            color: #005AE1;
+                            font-size: 12px;
+                            line-height: 1.24;
+
+                            &:after {
+                                font-family: 'goldilock-icon';
+                                content: "\e925";
+                                font-size: 9px;
+                                color: #005AE1;
+                                margin-left: 7px;
+                            }
+                        }
+                    }
+                }
+
+                &.block-dashboard-addresses {
+
+                    .block-content {
+                        &-title {
+                            font-size: 16px;
+                            line-height: 24px;
+                            width: 100%;
+                        }
+                    }
+
+                    .box-shipping-address {
+                        .box-title {
+                            color: #FFC100;
+                            margin-bottom: 3px;
+                        }
+                    }
+
+                    .box-billing-address {
+                        .box-title {
+                            color: #00A585;
+                            margin-bottom: 3px;
+                        }
+                    }
+                }
+
+                &.block-dashboard-orders {
+                    padding-bottom: 0;
+
+                    .block-title {
+                        margin-bottom: 3px;
+                    }
+                }
+
+                .box-actions {
+                    margin-top: 12px;
+                }
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .account.customer-account-index {
+        .column.main .block:not(.widget) {
+            .box {
+                margin-bottom: 0;
+            }
+
+            &.block-dashboard-addresses {
+                .block-content {
+                    &-title {
+                        color: #373737;
+                        margin-bottom: 12px;
+                        float: left;
+                    }
+                }
+
+                .box-actions {
+                    margin-top: 0;
+                }
+            }
+
+            &.block-dashboard-orders {
+                table {
+                    > tbody, > thead {
+                        > tr {
+                            > th, > td {
+                                &.id {
+                                    width: 18%;
+                                }
+
+                                &.date {
+                                    width: 15%;
+                                }
+
+                                &.shipping {
+                                    width: 30%;
+                                }
+
+                                &.status {
+                                    width: 17%;
+                                }
+
+                                &.actions {
+                                    width: 20%;
+                                }
+                            }
+                        }
+                    }
+
+                    > tbody {
+                        > tr > td {
+                            &.actions {
+                                text-align: right;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .account.customer-account-index {
+        .column.main {
+            .block:not(.widget) {
+                .block-title {
+                    .action.edit {
+                        text-transform: uppercase;
+                        font-weight: 600;
+
+                        &:after {
+                            content: "\e928";
+                            font-family: 'goldilock-icon';
+                            margin-left: 3px;
+                            font-weight: 400;
+                        }
+                    }
+                }
+
+                .box {
+                    margin-bottom: 10px;
+
+                    &.box-information {
+                        margin-bottom: 0;
+                    }
+
+                    &.box-shipping-address {
+                        border-bottom: 1px solid #E8E8E8;
+                        padding-bottom: 2px;
+                    }
+                }
+
+                &.block-dashboard-addresses {
+                    .view-all {
+                        span, &:after {
+                            display: none;
+                        }
+
+                        &:before {
+                            font-family: 'goldilock-icon';
+                            content: "\e91e";
+                            font-size: 11px;
+                            color: #292D32;
+                        }
+                    }
+
+                    .block-content {
+                        &-title {
+                            color: #7D7D7D;
+                            margin-bottom: 4px;
+                            display: block;
+                        }
+                    }
+                }
+
+                &.block-dashboard-orders {
+                    background: @primary__color;
+                    margin: 0 -9px 10px;
+
+                    .block-title strong {
+                        color: #fff;
+                        font-weight: 800;
+                    }
+                }
+            }
+        }
+    }
+}

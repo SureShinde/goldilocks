@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket_PrivateSale
+ * @copyright   Copyright (c) 2020 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ -->
+
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">prprivatesale_event_product_listing.prprivatesale_event_product_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>event_product</spinner>
+        <deps>
+            <dep>prprivatesale_event_product_listing.prprivatesale_event_product_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="prprivatesale_event_product_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">entity_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <dataProvider class="Plumrocket\PrivateSale\Ui\DataProvider\Event\Form\Products\DataProvider" name="prprivatesale_event_product_listing_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>entity_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="params" xsi:type="array">
+                        <item name="filters_modifier" xsi:type="array"/>
+                    </item>
+                    <item name="observers" xsi:type="array">
+                        <item name="filters" xsi:type="object">Magento\Catalog\Ui\Component\Listing\Filters</item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <statefull>
+                    <property name="applied" xsi:type="boolean">false</property>
+                </statefull>
+            </settings>
+        </filters>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="event_product" class="Magento\Catalog\Ui\Component\Listing\Columns">
+        <column name="entity_id" sortOrder="10" component="Plumrocket_PrivateSale/js/grid/columns/radio">
+            <settings>
+                <filter>textRange</filter>
+                <bodyTmpl>Plumrocket_PrivateSale/grid/cells/radioselect</bodyTmpl>
+                <headerTmpl>Plumrocket_PrivateSale/grid/columns/text</headerTmpl>
+                <label>ID</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="name" sortOrder="20">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Name</label>
+            </settings>
+        </column>
+        <column name="category_ids" sortOrder="30" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Plumrocket\PrivateSale\Model\Config\Source\Category"/>
+                <dataType>select</dataType>
+                <label translate="true">Category</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="sku" sortOrder="40">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">SKU</label>
+            </settings>
+        </column>
+        <column name="price" class="Magento\Catalog\Ui\Component\Listing\Columns\Price" sortOrder="50">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Price</label>
+            </settings>
+        </column>
+    </columns>
+</listing>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magenest\Pandago\Api\CallbackInterface" type="Magenest\Pandago\Model\Api\Callback" />
+    <!-- Logger -->
+    <virtualType name="Magenest\Pandago\Logger\Handler" type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+            <argument name="fileName" xsi:type="string">/var/log/pandago.log</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Magenest\Pandago\Logger\Logger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="name" xsi:type="string">Pandago Logger</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="system" xsi:type="object">Magenest\Pandago\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magenest\Pandago\Model\Api">
+        <arguments>
+            <argument name="logger" xsi:type="object">Magenest\Pandago\Logger\Logger</argument>
+        </arguments>
+    </type>
+    <type name="Magenest\Pandago\Model\Api\Callback">
+        <arguments>
+            <argument name="logger" xsi:type="object">Magenest\Pandago\Logger\Logger</argument>
+        </arguments>
+    </type>
+    <!-- End Logger -->
+</config>

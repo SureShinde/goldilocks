@@ -1,0 +1,68 @@
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="magenest_chatbot_message" resource="default" engine="innodb" comment="Magenest Message">
+        <column xsi:type="int" name="message_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Message ID"/>
+<!--        <column xsi:type="smallint" name="is_active" nullable="false" default="1" comment="Active"/>-->
+        <column xsi:type="text" name="name" nullable="false" comment="Name"/>
+        <column xsi:type="text" name="description" nullable="true" comment="Description"/>
+        <column xsi:type="int" name="sent_times" nullable="true" comment="Sent Times"/>
+        <column xsi:type="text" name="message_types" comment="Message Types"/>
+        <column xsi:type="text" name="typing" nullable="true" comment="Typing"/>
+        <column xsi:type="text" name="typing_time" nullable="true" comment="Typing Time"/>
+        <column xsi:type="varchar" name="code" nullable="true" length="100" comment="code of message"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="message_id"/>
+        </constraint>
+        <index referenceId="INDEX_MESSAGE_ID" indexType="btree">
+            <column name="message_id"/>
+        </index>
+        <index referenceId="MAGENEST_MESSAGE_NAME_DESCRIPTION" indexType="fulltext">
+            <column name="name"/>
+            <column name="description"/>
+        </index>
+    </table>
+
+    <table name="magenest_chatbot_button" resource="default" engine="innodb" comment="Magenest Button">
+        <column xsi:type="int" name="button_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Button ID"/>
+        <column xsi:type="text" name="code" nullable="false" comment="Code"/>
+        <column xsi:type="text" name="description" nullable="true" comment="Description"/>
+        <column xsi:type="smallint" name="button_type" padding="5" unsigned="true" nullable="false" identity="false"
+                default="1" comment="Button Type"/>
+        <column xsi:type="text" name="title" nullable="false" comment="Title"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="button_id"/>
+        </constraint>
+        <index referenceId="INDEX_BUTTON_ID" indexType="btree">
+            <column name="button_id"/>
+        </index>
+    </table>
+
+    <table name="magenest_chatbot_menu" resource="default" engine="innodb" comment="Magenest Menu">
+        <column xsi:type="int" name="menu_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Menu ID"/>
+        <column xsi:type="smallint" name="is_active" nullable="false" default="1" comment="Active"/>
+        <column xsi:type="text" name="name" nullable="false" comment="Name"/>
+        <column xsi:type="text" name="description" nullable="true" comment="Description"/>
+        <column xsi:type="int" name="message_id" padding="10" unsigned="true" nullable="false" comment="PK MESSAGE ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="menu_id"/>
+        </constraint>
+        <index referenceId="INDEX_MENU_ID" indexType="btree">
+            <column name="menu_id"/>
+        </index>
+        <index referenceId="MAGENEST_MENU_NAME" indexType="fulltext">
+            <column name="name"/>
+        </index>
+        <constraint xsi:type="foreign" referenceId="FL_ALLOWED_MESSAGE_ID" table="magenest_chatbot_menu"
+                    column="message_id" referenceTable="magenest_chatbot_message" referenceColumn="message_id"
+                    onDelete="CASCADE"/>
+    </table>
+    <table name="sales_order_grid" resource="sales" engine="innodb" comment="Sales Flat Order Grid">
+        <column xsi:type="int" name="ordered_bot" padding="10" default="0" identity="false"  nullable="true" comment="Ordered by chat bot"/>
+    </table>
+    <table name="quote" resource="checkout" comment="Sales Flat Quote">
+        <column xsi:type="text" name="stored_message" nullable="true" comment="stored data from user"/>
+    </table>
+</schema>

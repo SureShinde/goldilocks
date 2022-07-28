@@ -1,0 +1,26 @@
+From e4b23b99b4e75a4ebca97fa611fd5c97428783b7 Mon Sep 17 00:00:00 2001
+From: Nguyen Thi Hang <hangnt@magenest.com>
+Date: Mon, 4 Jul 2022 16:35:54 +0700
+Subject: [PATCH] GBI-019: SQL error on 2.4.4 prerelease when saving a product
+ with new source and stock
+
+---
+ .../Indexer/Stock/ReservationsIndexTable.php                    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/vendor/magento/module-inventory-indexer/Indexer/Stock/ReservationsIndexTable.php b/vendor/magento/module-inventory-indexer/Indexer/Stock/ReservationsIndexTable.php
+index e185628..013bac3 100755
+--- a/vendor/magento/module-inventory-indexer/Indexer/Stock/ReservationsIndexTable.php
++++ b/vendor/magento/module-inventory-indexer/Indexer/Stock/ReservationsIndexTable.php
+@@ -77,7 +77,7 @@ class ReservationsIndexTable
+      */
+     public function getTableName(int $stockId): string
+     {
+-        return 'reservations_temp_for_stock_' . $stockId;
++        return $this->resourceConnection->getTableName('reservations_temp_for_stock_' . $stockId);
+     }
+ 
+     /**
+-- 
+2.25.1
+

@@ -1,0 +1,21 @@
+{
+  "name": "magenest/module-abandoned-cart",
+  "description": "Abandoned Cart extension by Magenest",
+  "type": "magento2-module",
+  "version": "1.1.1",
+  "license": [
+    "proprietary",
+    "OSL-3.0"
+  ],
+  "require": {
+    "magenest/core": ">=1.2.1"
+  },
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Magenest\\AbandonedCart\\": ""
+    }
+  }
+}

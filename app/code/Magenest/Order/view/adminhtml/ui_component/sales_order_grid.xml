@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Add the column "my_column" (My Column) to the sales order grid. -->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <columns name="sales_order_columns">
+        <column name="source_field"
+                class="Magenest\Order\Ui\Component\Listing\Column\SourceField">
+            <settings>
+                <visible>false</visible>
+                <filter>false</filter>
+                <sortable>false</sortable>
+                <label translate="true">Source Fields</label>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+            </settings>
+        </column>
+    </columns>
+</listing>

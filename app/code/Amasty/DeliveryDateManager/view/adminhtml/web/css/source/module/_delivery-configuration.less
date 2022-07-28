@@ -1,0 +1,327 @@
+//
+//  Delivery Date Admin Delivery Configuration Styles
+//  ____________________________________________
+
+//
+//  Variables
+//  --------------------------------------------
+
+@amdelivery-background__main__color: #f7f7f7;
+@amdelivery-background__exceptions__color: #fffddd;
+@amdelivery-add-row-button__background-color: #343469;
+@amdelivery-action-button__copy__size: 12px;
+@amdelivery-action-button__copy__icon: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iMTMiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTkuMDI5IDkuNzd2LS42NDhoMS41M1YzLjcxM0g4LjIxNWEuMjE1LjIxNSAwIDAxLS4xNDctLjA1Ny4xOS4xOSAwIDAxLS4wNjEtLjEzOFYxLjMxNUg0LjE1OHYxLjQ1aC0uNjlWLjk5YS4zMDcuMzA3IDAgMDEuMS0uMjMuMzQ3LjM0NyAwIDAxLjI0NC0uMDk0aDQuNDU2YS4zNjUuMzY1IDAgMDEuMjQ1LjA5NmwyLjYzNyAyLjQ4NWMuMDY0LjA2LjEuMTQzLjEuMjI5djUuOTY5YS4zMDYuMzA2IDAgMDEtLjEwMS4yMjkuMzQ3LjM0NyAwIDAxLS4yNDQuMDk1SDkuMDI5eiIgZmlsbD0iIzVBNTU1MiIvPjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNLjc1IDEyLjAxVjMuNTU1YS4zMDcuMzA3IDAgMDEuMTAxLS4yMy4zNDguMzQ4IDAgMDEuMjQ0LS4wOTRoNC40NTZhLjM2My4zNjMgMCAwMS4yNjIuMTE0bDIuNjE5IDIuNDY3Yy4wNjQuMDYuMS4xNDMuMS4yMjl2NS45NjlhLjMwNy4zMDcgMCAwMS0uMS4yMjkuMzQ4LjM0OCAwIDAxLS4yNDUuMDk1SDEuMDk1YS4zNjQuMzY0IDAgMDEtLjI0NC0uMDk1LjMyMy4zMjMgMCAwMS0uMTAxLS4yM3ptNC41MzgtOC4xM0gxLjQ0djcuODA1aDYuNDAyVjYuMjc3SDUuNDk2YS4yMTUuMjE1IDAgMDEtLjE0Ny0uMDU3LjE5LjE5IDAgMDEtLjA2LS4xMzhWMy44Nzl6IiBmaWxsPSIjNUE1NTUyIi8+PC9zdmc+) no-repeat center;
+@amdelivery-action-button__copy__disabled__icon: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iMTMiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTkuMDI5IDkuNzd2LS42NDhoMS41M1YzLjcxM0g4LjIxNWEuMjE1LjIxNSAwIDAxLS4xNDctLjA1Ny4xOS4xOSAwIDAxLS4wNjEtLjEzOFYxLjMxNUg0LjE1OHYxLjQ1aC0uNjlWLjk5YS4zMDcuMzA3IDAgMDEuMS0uMjMuMzQ3LjM0NyAwIDAxLjI0NC0uMDk0aDQuNDU2YS4zNjUuMzY1IDAgMDEuMjQ1LjA5NmwyLjYzNyAyLjQ4NWMuMDY0LjA2LjEuMTQzLjEuMjI5djUuOTY5YS4zMDYuMzA2IDAgMDEtLjEwMS4yMjkuMzQ3LjM0NyAwIDAxLS4yNDQuMDk1SDkuMDI5eiIgZmlsbD0iI0NDQyIvPjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNLjc1IDEyLjAxVjMuNTU1YS4zMDcuMzA3IDAgMDEuMTAxLS4yMy4zNDguMzQ4IDAgMDEuMjQ0LS4wOTRoNC40NTZhLjM2My4zNjMgMCAwMS4yNjIuMTE0bDIuNjE5IDIuNDY3Yy4wNjQuMDYuMS4xNDMuMS4yMjl2NS45NjlhLjMwNy4zMDcgMCAwMS0uMS4yMjkuMzQ4LjM0OCAwIDAxLS4yNDUuMDk1SDEuMDk1YS4zNjQuMzY0IDAgMDEtLjI0NC0uMDk1LjMyMy4zMjMgMCAwMS0uMTAxLS4yM3ptNC41MzgtOC4xM0gxLjQ0djcuODA1aDYuNDAyVjYuMjc3SDUuNDk2YS4yMTUuMjE1IDAgMDEtLjE0Ny0uMDU3LjE5LjE5IDAgMDEtLjA2LS4xMzhWMy44Nzl6IiBmaWxsPSIjQ0NDIi8+PC9zdmc+) no-repeat center;
+
+//
+//  Common
+//  --------------------------------------------
+
+& when (@media-common = true) {
+    // Override magento collapsible fieldset styles
+    .amdelivery-admin-fieldset.fieldset-wrapper.admin__collapsible-block-wrapper {
+        margin-left: 0;
+    }
+
+    .amdelivery-admin-fieldset > .admin__fieldset-wrapper-content > .admin__fieldset {
+        > .admin__field {
+            margin-left: 0;
+        }
+
+        > .admin__field > .admin__field-control {
+            margin-left: 0;
+            width: 100%;
+        }
+    }
+    // (END) Override magento collapsible fieldset styles
+
+    // Override magento dynamic rows styles
+    .amdelivery-dynamic-links .admin__dynamic-rows {
+        &.admin__control-table > tbody > tr > td,
+        &.admin__control-table > tfoot > tr > td,
+        &.admin__control-table > tbody > tr > td:first-child {
+            padding: 0;
+            background: none;
+        }
+
+        &.admin__control-table td .action-delete {
+            padding: 7px;
+            background: @amdelivery-background__main__color;
+        }
+
+        > thead {
+            display: none;
+        }
+
+        &.admin__control-table > tbody > tr.data-row:not(:first-child) > td {
+            padding-top: 25px;
+        }
+
+        &.admin__control-table > tfoot > tr > td {
+            text-align: center;
+        }
+
+        &.admin__control-table > tfoot > tr > td > button {
+            & {
+                margin-top: 25px;
+                padding: 8px 20px;
+                border: none;
+                border-radius: 3px;
+                background: @amdelivery-add-row-button__background-color;
+                color: #fff;
+            }
+
+            &:hover {
+                background: lighten(@amdelivery-add-row-button__background-color, 15%);
+            }
+        }
+    }
+    // (END) Override magento dynamic rows styles
+
+    .amdelivery-grid-row {
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .amdelivery-grid-cell {
+        & {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        &.-big {
+            width: 100%;
+        }
+
+        > .amdelivery-title {
+            display: block;
+            padding: 10px;
+            width: 100%;
+            background: @amdelivery-background__main__color;
+            text-align: unset;
+            font-weight: 600;
+        }
+
+        > .amdelivery-content {
+            padding: 10px;
+            width: 100%;
+        }
+    }
+
+    .amdelivery-grid-cell.-big {
+        .amdelivery-title {
+            padding: 25px 15px;
+        }
+
+        .amdelivery-content {
+            padding: 0;
+            background: @amdelivery-background__main__color;
+        }
+
+        .amdelivery-wrapper {
+            padding: 15px;
+            width: 100%;
+            border-top: 1px solid #fff;
+        }
+    }
+
+    .amdelivery-cell-content {
+        &.-disabled {
+            opacity: .5;
+            pointer-events: none;
+        }
+
+        .amdelivery-select {
+            width: 100%;
+        }
+    }
+
+    .amdelivery-grid-cell.-big .amdelivery-cell-content {
+        & {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .amdelivery-description {
+            width: 100%;
+        }
+    }
+
+    .amdelivery-select-actions {
+        & {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .amdelivery-select {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        > .admin__field-error {
+            order: 1;
+            width: 100%;
+        }
+    }
+
+    .amdelivery-cell-actions {
+        & {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 5px;
+        }
+
+        .amdelivery-button {
+            & {
+                .lib-button-reset();
+                .lib-link();
+
+                padding: 5px 0;
+            }
+
+            &:not(:last-of-type) {
+                margin-right: 15px;
+            }
+
+            &:disabled {
+                color: #ccc;
+            }
+        }
+
+        .amdelivery-button.-edit {
+            margin-right: auto;
+            padding-right: 15px;
+        }
+
+        .amdelivery-button.-copy {
+            & {
+                display: inline-flex;
+                align-items: center;
+                color: #5a5552;
+            }
+
+            &:disabled {
+                color: #ccc;
+            }
+
+            &:before {
+                display: block;
+                margin-right: 7px;
+                width: @amdelivery-action-button__copy__size;
+                height: @amdelivery-action-button__copy__size;
+                background: @amdelivery-action-button__copy__icon;
+                content: '';
+            }
+
+            &:disabled:before {
+                background: @amdelivery-action-button__copy__icon;
+            }
+        }
+    }
+
+    .amdelivery-select-actions .amdelivery-cell-actions {
+        margin-top: 0;
+    }
+
+    .amdelivery-cell-description {
+        & {
+            display: flex;
+            margin-top: 10px;
+            font-size: 1.2rem;
+        }
+
+        .amdelivery-column {
+            flex: 1;
+        }
+
+        .amdelivery-item:not(:last-of-type) {
+            margin-bottom: 10px;
+        }
+
+        .amdelivery-column:not(:last-of-type) {
+            padding-right: 15px;
+        }
+
+        .amdelivery-value {
+            font-weight: 600;
+        }
+    }
+
+    .amdelivery-grid-cell.-big .amdelivery-cell-description {
+        margin-top: 0;
+    }
+
+    .amdelivery-intervals-table {
+        & {
+            width: 100%;
+            text-align: left;
+        }
+
+        tr > td,
+        tr > th {
+            & {
+                padding: 0 10px 5px 0;
+                background: none;
+            }
+
+            &:first-child {
+                padding-left: 0;
+            }
+        }
+    }
+
+    .amdelivery-dynamic-links.-exceptions .admin__dynamic-rows {
+        .amdelivery-grid-cell {
+            width: 100%;
+        }
+
+        &.admin__control-table td {
+            width: 100%;
+        }
+
+        &.admin__control-table td .action-delete,
+        .amdelivery-grid-cell > .amdelivery-title {
+            background: @amdelivery-background__exceptions__color;
+        }
+    }
+
+    .ui-datepicker.amdelivery-timepicker-nocurrent .ui-datepicker-buttonpane {
+        & {
+            text-align: center;
+        }
+
+        .ui-datepicker-current {
+            display: none;
+        }
+
+        .ui-datepicker-close {
+            float: none;
+        }
+    }
+
+    .ui-datepicker.amdelivery-datepicker-noyear .ui-datepicker-title {
+        .ui-datepicker-year {
+            display: none;
+        }
+
+        .ui-datepicker-month {
+            margin-right: 0;
+        }
+    }
+
+    // Time Intervals Modal
+    .amdelivery-intervals-dynamic {
+        & {
+            position: relative;
+        }
+
+        ._has-datepicker.admin__control-text {
+            width: 100%;
+        }
+
+        .admin__control-table-wrapper {
+            overflow: visible;
+        }
+    }
+}

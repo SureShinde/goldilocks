@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Magenest_WebApiLog::webapilog_head" title="Api Logging" module="Magenest_WebApiLog" sortOrder="100" parent="Magento_Backend::system" resource="Magenest_WebApiLog::webapilog_head"/>
+        <add id="Magenest_WebApiLog::logging" title="Logging" module="Magenest_WebApiLog" sortOrder="10" parent="Magenest_WebApiLog::webapilog_head" action="apilog/logging" resource="Magenest_WebApiLog::logging"/>
+        <add id="Magenest_WebApiLog::configuration" title="Configuration" module="Magenest_WebApiLog" sortOrder="40" parent="Magenest_WebApiLog::webapilog_head" action="adminhtml/system_config/edit/section/api_log" resource="Magenest_WebApiLog::configuration"/>
+    </menu>
+</config>

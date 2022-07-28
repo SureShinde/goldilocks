@@ -1,0 +1,35 @@
+<?php
+/**
+ * @var Amasty\DeliveryDateManager\Block\Adminhtml\Sales\Order\View\Deliverydate $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+<?php if ($block->isEnabledModule()): ?>
+    <section class="admin__page-section amasty-deliverydate">
+        <div class="admin__page-section-title">
+            <span class="title"><?= $escaper->escapeHtml(__('Delivery Information')) ?></span>
+            <?php if ($block->isEditable()): ?>
+                <div class="actions">
+                    <a href="<?= $escaper->escapeUrl($block->getEditUrl()) ?>">
+                        <?= $escaper->escapeHtml(__('Edit')) ?>
+                    </a>
+                </div>
+            <?php endif; ?>
+        </div>
+        <div class="admin__page-section-content">
+            <div class="admin__page-section-item" style="width: 49%;">
+                <?php $fields = $block->getDeliveryDateFields(); ?>
+                <?php if (!empty($fields)): ?>
+                    <table class="admin__table-secondary">
+                        <?php foreach ($fields as $field): ?>
+                            <tr>
+                                <td><?= $escaper->escapeHtml($field['label']) ?></td>
+                                <td style="text-align: right;"><?= $escaper->escapeHtml($field['value'], ['br']) ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </table>
+                <?php endif; ?>
+            </div>
+        </div>
+    </section>
+<?php endif; ?>

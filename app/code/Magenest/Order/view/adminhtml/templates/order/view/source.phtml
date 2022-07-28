@@ -1,0 +1,24 @@
+<?php
+/**
+ * @var $block Magento\Sales\Block\Adminhtml\Order\View\Tab\Info
+ */
+$order = $block->getOrder();
+/** @var \Magenest\SpecialCustomerProgram\ViewModel\Adminhtml\Order\View\SpecialCustomerProgram $viewModel */
+$viewModel = $block->getViewModel();
+$sourceData = json_decode($order->getData('source_field'), true);
+?>
+<?php if (!empty($sourceData)): ?>
+    <section id="session-additional-information" class="admin__page-section">
+        <div class="admin__page-section-title">
+            <span class="title"><?= __('Order Source Information') ?></span>
+        </div>
+        <div class="admin__page-section-item order-additional-information">
+            <?php foreach ($sourceData as $key => $value): ?>
+            <div class="admin__page-section-item-title">
+                <span class="title"><?= __($key) ?></span>
+            </div>
+            <div class="admin__page-section-item-content"><?= $value ?></div>
+            <?php endforeach; ?>
+        </div>
+    </section>
+<?php endif; ?>

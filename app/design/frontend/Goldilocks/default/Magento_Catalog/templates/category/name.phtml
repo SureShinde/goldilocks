@@ -1,0 +1,20 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php
+// phpcs:disable Magento2.Templates.ThisInTemplate.FoundThis
+
+/**
+ * Category view template
+ *
+ * @var $block \Magento\Catalog\Block\Category\View
+ */
+?>
+<?php if ($block->getCurrentCategory()->getName()) :?>
+    <span class="category-name">
+        <?= $block->getCurrentCategory()->getName() ?>
+    </span>
+<?php endif; ?>

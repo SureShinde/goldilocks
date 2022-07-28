@@ -1,0 +1,22 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<!--@subject {{trans "Newsletter unsubscription success"}} @-->
+<!--@vars {
+"template config_path=\"design\/email\/footer_template\"":"Email Footer Template",
+"template config_path=\"design\/email\/header_template\"":"Email Header Template"
+} @-->
+
+
+{{template config_path="design/email/header_template"}}
+<p class="header-bottom">{{trans "Newsletter Unsubscribe"}}</p>
+
+<p class="text">
+    <strong>{{trans "Dear"}}</strong>
+</p>
+<p class="text">{{trans "Do we still need to send an email? This should be just a pop-up confirmation on the website."}}</p>
+
+{{template config_path="design/email/footer_template"}}

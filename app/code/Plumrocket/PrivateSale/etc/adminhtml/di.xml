@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!--
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket Private Sales and Flash Sales v4.x.x
+ * @copyright   Copyright (c) 2020 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Catalog\Model\Category\Attribute\Source\Mode">
+        <plugin name="prprivatesale_homepage_mode" type="Plumrocket\PrivateSale\Plugin\Model\Category\Attribute\Source\Mode" />
+    </type>
+    <type name="Plumrocket\PrivateSale\Controller\Adminhtml\Event\Image\Upload">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Plumrocket\PrivateSale\Event\ImageUploader</argument>
+        </arguments>
+    </type>
+    <type name="Plumrocket\PrivateSale\Controller\Adminhtml\Splashpage\Image\Upload">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Plumrocket\PrivateSale\SplashPage\ImageUploader</argument>
+        </arguments>
+    </type>
+    <virtualType name="Plumrocket\PrivateSale\Ui\DataProvider\Event\Form\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="image" xsi:type="array">
+                    <item name="class" xsi:type="string">Plumrocket\PrivateSale\Ui\DataProvider\Event\Form\Modifier\Upload</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+                <item name="eav" xsi:type="array">
+                    <item name="class" xsi:type="string">Plumrocket\PrivateSale\Ui\DataProvider\Event\Form\Modifier\Eav</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
+                </item>
+                <item name="default" xsi:type="array">
+                    <item name="class" xsi:type="string">Plumrocket\PrivateSale\Ui\DataProvider\Event\Form\Modifier\DefaultData</item>
+                    <item name="sortOrder" xsi:type="number">40</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Plumrocket\PrivateSale\Ui\DataProvider\Event\Form\DataProvider">
+        <arguments>
+            <argument name="pool" xsi:type="object">Plumrocket\PrivateSale\Ui\DataProvider\Event\Form\Modifier\Pool</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Plumrocket\PrivateSale\Ui\DataProvider\SplashPage\Form\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="imageUploader" xsi:type="array">
+                    <item name="class" xsi:type="string">Plumrocket\PrivateSale\Ui\DataProvider\SplashPage\Form\Modifier\ImageUploader</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Plumrocket\PrivateSale\Ui\DataProvider\SplashPage\Form\DataProvider">
+        <arguments>
+            <argument name="pool" xsi:type="object">Plumrocket\PrivateSale\Ui\DataProvider\SplashPage\Form\Modifier\Pool</argument>
+        </arguments>
+    </type>
+    <type name="Magento\InventoryCatalogAdminUi\Ui\DataProvider\Product\Listing\Modifier\QuantityPerSource">
+        <plugin name="pr_private_inventory_modify_meta" type="Plumrocket\PrivateSale\Plugin\Ui\DataProvider\Product\Listing\Modifier\QuantityPerSource" sortOrder="1" disabled="false" />
+    </type>
+</config>

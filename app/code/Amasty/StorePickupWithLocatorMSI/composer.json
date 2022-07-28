@@ -1,0 +1,22 @@
+{
+    "name": "amasty/module-store-pickup-with-locator-msi",
+    "description": "Store Pickup with Locator MSI by Amasty",
+    "require": {
+        "php": ">=7.3",
+        "amasty/base": ">=1.13.3",
+        "amasty/module-store-pickup-with-locator": ">=2.5.0"
+    },
+    "type": "magento2-module",
+    "version": "1.0.5",
+    "license": [
+        "Commercial"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Amasty\\StorePickupWithLocatorMSI\\": ""
+        }
+    }
+}

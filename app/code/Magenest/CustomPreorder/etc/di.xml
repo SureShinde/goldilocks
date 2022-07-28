@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Amasty\DeliveryDateManager\Block\Component\CalendarComponent">
+        <plugin name="Magenest_CustomPreoder::load_config_calendar_component"
+                type="Magenest\CustomPreorder\Plugin\Block\Component\CalendarComponentPlugin"/>
+    </type>
+</config>

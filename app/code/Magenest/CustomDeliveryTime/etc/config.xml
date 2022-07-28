@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <magenest_bulk_order>
+            <general>
+                <bulk_order_limit_subtotal>5000</bulk_order_limit_subtotal>
+                <bulk_order_minimum_delivery_time>2</bulk_order_minimum_delivery_time>
+            </general>
+        </magenest_bulk_order>
+    </default>
+</config>

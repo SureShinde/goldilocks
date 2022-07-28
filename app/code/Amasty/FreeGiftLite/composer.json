@@ -1,0 +1,27 @@
+{
+    "name": "amasty\/module-free-gift-lite-package",
+    "description": "Free Gift Lite Package by Amasty",
+    "require": {
+        "php": ">=7.3",
+        "amasty\/base": ">=1.13.3",
+        "amasty\/promo": ">=2.5.4",
+        "amasty\/module-advanced-conditions": ">=1.5.6",
+        "amasty\/module-banners-lite": ">=1.0.21",
+        "amasty\/module-salesrulewizard": ">=1.0.4",
+        "amasty\/rgrid": ">=1.0.9"
+    },
+    "homepage": "https:\/\/amasty.com\/",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "Commercial"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Amasty\\FreeGiftLite\\": ""
+        }
+    }
+}

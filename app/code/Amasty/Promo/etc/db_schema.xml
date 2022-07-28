@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+/**
+* @author Amasty Team
+* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
+* @package Amasty_Promo
+*/
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+  <table name="amasty_ampromo_rule" resource="default" engine="innodb" comment="Amasty Autoadd Rules Table">
+    <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity ID"/>
+    <column xsi:type="int" name="salesrule_id" padding="10" unsigned="true" nullable="false" identity="false" comment="Salesrule Entity Id"/>
+    <column xsi:type="text" name="sku" nullable="false" comment="Promo Products SKUs"/>
+    <column xsi:type="smallint" name="type" padding="6" unsigned="false" nullable="false" identity="false" comment="Promo Rule Type"/>
+    <column xsi:type="boolean" name="top_banner_show_gift_images" nullable="false" comment="Show Gift Images"/>
+    <column xsi:type="boolean" name="after_product_banner_show_gift_images" nullable="false" comment="Show Gift Images"/>
+    <column xsi:type="varchar" name="items_discount" nullable="true" length="255" default="" comment="Promo Items Discount"/>
+    <column xsi:type="float" name="minimal_items_price" scale="0" precision="0" unsigned="false" nullable="true" comment="Minimal Price"/>
+    <column xsi:type="boolean" name="apply_tax" nullable="false" comment="Apply tax on original price of promo items added for free"/>
+    <column xsi:type="boolean" name="apply_shipping" nullable="false" comment="Apply shipping on promo items added for free"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="entity_id"/>
+    </constraint>
+    <index referenceId="AMASTY_AMPROMO_RULE_SALESRULE_ID" indexType="btree">
+      <column name="salesrule_id"/>
+    </index>
+  </table>
+</schema>

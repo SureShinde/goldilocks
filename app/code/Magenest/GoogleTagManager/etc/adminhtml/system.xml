@@ -1,0 +1,201 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="analytics" translate="label" sortOrder="410">
+            <label>Analytics</label>
+        </tab>
+        <section id="universalanalytics" translate="label" type="text" sortOrder="340" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Universal Analytics</label>
+            <tab>analytics</tab>
+            <resource>Magenest_GoogleTagManager::config_ua</resource>
+            <group id="gtm" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Google Tag Manager</label>
+                <comment><![CDATA[Universal Analytics (and classic Google Analytics) is to be integrated through Google Tag Manager.]]></comment>
+                <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <tooltip><![CDATA[Enable or disable the Universal Analytics integration with GTM]]></tooltip>
+                </field>
+                <field id="account" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Container ID</label>
+                    <tooltip><![CDATA[Enter your GTM container ID,<br />i.e: GTM-123ABC]]></tooltip>
+                    <comment><![CDATA[New to this? Click here to <a target="_blank" href="https://www.google.se/analytics/tag-manager/">Sign Up</a> or read more.]]></comment>
+                    <depends>
+                        <field id="*/*/active">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="product" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Product Settings</label>
+                <field id="impressions" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Product Impressions</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <tooltip><![CDATA[Enable or disable product impressions]]></tooltip>
+                </field>
+                <field id="product_attributes" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Product attributes</label>
+                    <frontend_model>Magenest\GoogleTagManager\Block\Adminhtml\Form\Field\Product\Attributes</frontend_model>
+                    <backend_model>Magenest\GoogleTagManager\Model\System\Config\Backend\Attributes</backend_model>
+                    <tooltip><![CDATA[Use 'Alias' only in case you want override attribute_code for GTM data. Otherwise leave 'Alias' empty.]]></tooltip>
+                    <comment><![CDATA[This option might be useful to fetch some product attributes. It is also possible to use same attribute with different aliases if it is needed.]]></comment>
+                    <depends>
+                        <field id="universalanalytics/gtm/active">1</field>
+                    </depends>
+                </field>
+                <field id="custom_attributes" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Custom attributes</label>
+                    <frontend_model>Magenest\GoogleTagManager\Block\Adminhtml\Form\Field\Product\AttributesCustom</frontend_model>
+                    <backend_model>Magenest\GoogleTagManager\Model\System\Config\Backend\Attributes</backend_model>
+                    <tooltip><![CDATA[Use 'Alias' only in case you want override custom attribute key for GTM data. Otherwise leave 'Alias' empty.]]></tooltip>
+                    <comment><![CDATA[This option might be useful to fetch some custom product data, raw attribute values or values from invisible (system) attributes (e.g., 'type_id', 'created_at').]]></comment>
+                    <depends>
+                        <field id="universalanalytics/gtm/active">1</field>
+                    </depends>
+                </field>
+                <field id="report_parent_categories" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Include parent category names</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[If enabled, parent category names will be included in the 'category' field for products, e.g. Apparel/Men/T-Shirts]]></comment>
+                    <depends>
+                        <field id="universalanalytics/gtm/active">1</field>
+                    </depends>
+                </field>
+                <field id="report_purchase_category" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Report category for cart items</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Report 'category' field for cart items based on the category they were purchased from]]></comment>
+                    <depends>
+                        <field id="universalanalytics/gtm/active">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="price_format" translate="label" type="text" sortOrder="17" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Price Formatting</label>
+                <field id="decimals_precision" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Decimals Precision</label>
+                    <comment><![CDATA[Recommended value: 4]]></comment>
+                    <depends>
+                        <field id="universalanalytics/gtm/active">1</field>
+                    </depends>
+                </field>
+                <field id="decimals_point" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Decimals Point</label>
+                    <comment><![CDATA[Recommended value: .]]></comment>
+                    <depends>
+                        <field id="universalanalytics/gtm/active">1</field>
+                    </depends>
+                </field>
+                <field id="thousands_separator" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Thousands Separator</label>
+                    <comment><![CDATA[Recommended value: Empty string]]></comment>
+                    <depends>
+                        <field id="universalanalytics/gtm/active">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="revenue" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Revenue Settings</label>
+                <field id="tax" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Include VAT in Grand Total</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <tooltip><![CDATA[Select whether to include VAT (tax) in the order Grand Total]]></tooltip>
+                    <comment><![CDATA[Recommended option: No]]></comment>
+                    <depends>
+                        <field id="universalanalytics/gtm/active">1</field>
+                    </depends>
+                </field>
+                <field id="shipping" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Include shipping in Grand Total</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <tooltip><![CDATA[Select whether to include shipping costs in the order Grand Total]]></tooltip>
+                    <comment><![CDATA[Recommended option: No]]></comment>
+                    <depends>
+                        <field id="universalanalytics/gtm/active">1</field>
+                    </depends>
+                </field>
+                <field id="discount" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Include discount in Grand Total</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <tooltip><![CDATA[Select whether to include discounts in the order Grand Total]]></tooltip>
+                    <comment><![CDATA[Recommended option: Yes]]></comment>
+                    <depends>
+                        <field id="universalanalytics/gtm/active">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="item" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Line Item Settings</label>
+                <field id="tax" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Include VAT in line item</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <tooltip><![CDATA[Select whether to include VAT (tax) on the product price, on the item level]]></tooltip>
+                    <comment><![CDATA[Recommended option: No]]></comment>
+                    <depends>
+                        <field id="universalanalytics/gtm/active">1</field>
+                    </depends>
+                </field>
+                <field id="discount" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Include discount in line item</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <tooltip><![CDATA[Select whether to include discounts (from Cart Price Rules) on the product price, on the item level]]></tooltip>
+                    <comment><![CDATA[Recommended option: Yes]]></comment>
+                    <depends>
+                        <field id="universalanalytics/gtm/active">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="shipping" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Shipping Settings</label>
+                <field id="tax" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Include VAT in shipping</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <tooltip><![CDATA[Select whether to include VAT (tax) on the shipping cost]]></tooltip>
+                    <comment><![CDATA[Recommended option, same as for: <strong>Include VAT in Grand Total</strong>]]></comment>
+                    <depends>
+                        <field id="universalanalytics/gtm/active">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="checkout" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Checkout Behaviour Analysis</label>
+                <field id="steps" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Checkout Steps</label>
+                    <frontend_model>Magenest\GoogleTagManager\Block\Adminhtml\Form\Field\Checkoutsteps</frontend_model>
+                    <backend_model>Magenest\GoogleTagManager\Model\System\Config\Backend\Checkoutsteps</backend_model>
+                    <tooltip><![CDATA[Only whole numbers greater than 0 are allowed, where each step is unique. If one step is to be excluded, don't add it.
+                    <br /><br />Example A:
+                    <br />
+                    Cart Page: 1<br />
+                    Shipping Step: 2<br />
+                    Payment Step: 3<br />
+                    Success Page: 4
+
+                    <br /><br />Example B:
+                    <br />
+                    Payment Step: 1<br />
+                    Shipping Step: 2<br />
+                    Success Page: 3<br />]]></tooltip>
+                    <comment><![CDATA[The order of the selected steps should match the steps in Google Analytics:<br />Conversions » E-commerce » Shopping Analysis » Checkout Behaviour Analysis]]></comment>
+                    <depends>
+                        <field id="universalanalytics/gtm/active">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="purchase" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Purchase Settings</label>
+                <field id="category" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Category Name to Product Detail</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Enable or disable the lowest Category name shows for every product details.]]></comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

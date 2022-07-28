@@ -1,0 +1,12 @@
+<!--@subject {{trans "New human support request on %fanpageName" fanpageName=$fanpageName}} @-->
+{{template config_path="design/email/header_template"}}
+<h3>{{trans 'New Request for Human Support'}}</h3>
+<ul style="list-style-type:none;">
+    <li>{{trans 'There is a new human support request from '}}<strong>{{trans '%userName' userName=$userName}}</strong></li>
+    <li><img src="{{trans '%avatar' avatar=$avatar}}" alt="avatar" width="100" height="100"></li>
+    <li><strong>{{trans 'ID: '}}</strong>{{trans '%userId' userId=$userId}}</li>
+    <li>{{trans 'Click'}} <a href="{{trans '%userMailboxLink' userMailboxLink=$userMailboxLink}}">here</a> {{trans ' to continue the conversation.'}}</li>
+    <li>{{trans 'Thank you.'}}</li>
+</ul>
+
+

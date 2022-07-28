@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add
+            id="Magenest_ServicesUi::consumer"
+            title="Consumer Queue"
+            module="Magenest_ServicesUi"
+            sortOrder="100"
+            parent="Magento_Backend::system_tools"
+            action="queue/consumer"
+            resource="Magenest_ServicesUi::consumer"
+        />
+        <add
+            id="Magenest_ServicesUi::cron"
+            title="Cron Schedule"
+            module="Magenest_ServicesUi"
+            sortOrder="101"
+            parent="Magento_Backend::system_tools"
+            action="queue/cron"
+            resource="Magenest_ServicesUi::cron"
+        />
+    </menu>
+</config>

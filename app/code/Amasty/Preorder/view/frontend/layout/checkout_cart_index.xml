@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Amasty_Preorder::css/ampreorder.css"/>
+    </head>
+    <body>
+        <referenceBlock name="additional.product.info">
+            <block class="Magento\Framework\View\Element\Template" name="checkout.cart.preorder" template="Amasty_Preorder::checkout/cart/preorder.phtml" ifconfig="ampreorder/functional/enabled">
+                <arguments>
+                    <argument name="preorder_information_view_model" xsi:type="object">Amasty\Preorder\ViewModel\Quote\Item\PreorderInformation</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

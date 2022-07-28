@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <acommerce_smsintegrarion>
+            <general>
+                <from>SmMarkets</from>
+            </general>
+            <credentials>
+                <username>supervalue</username>
+                <password backend_model="Magento\Config\Model\Config\Backend\Encrypted"/>
+                <host>https://8d1p1.api.infobip.com/sms/2/text/advanced</host>
+            </credentials>
+            <sms_messages>
+                <new_order><![CDATA[Hi {{var customer_name}}.
+Your SM Markets order ({{var order_id}}) has been received.
+Order Details:
+Total amount {{var order_total}}]]>
+                </new_order>
+                <ready_for_pickup>
+                    <![CDATA[Hi {{var customer_name}}
+Your SM Markets order ({{var order_id}}) is Ready for Pickup. Please prepare your ID and order number to show the staff in our SM Markets Online Booth or, if someone else is receiving your groceries for you, please provide a letter of authorization. Thanks for your order and we hope to serve you again soon!]]>
+                </ready_for_pickup>
+                <ready_for_delivery>
+                    <![CDATA[Hi {{var customer_name}}
+GRAB/AIRSPEED will deliver your order today. Order # {{var order_id}}. Please prepare your ID to show the rider upon delivery or, if someone else is receiving your groceries for you, please provide a letter of authorization. Thanks for your order and we hope to serve you again soon!]]>
+                </ready_for_delivery>
+                <payment_link>
+                    <![CDATA[Hi {{var customer_name}}
+Your order {{var order_id}} amounting to {{var order_total}} is ready for payment. You may click the link below to proceed with your online payment.
+{{var payment_link}}
+]]>
+                </payment_link>
+                <comment_order>
+                    <![CDATA[Hi {{var customer_name}}.
+Regarding your SM Markets order ({{var order_id}})
+[Order Comment]: {{var order_comment}}]]>
+                </comment_order>
+                <edit_order>
+                    <![CDATA[Hi {{var customer_name}}.
+[Order Comment]: {{var order_comment}}
+Your SM Markets order ({{var order_id}}).
+Order Details:
+Total amount {{var order_total}}]]>
+                </edit_order>
+                <complete_order>
+                    <![CDATA[Hi {{var customer_name}}.
+Your SM Markets order ({{var order_id}}) is complete]]>
+                </complete_order>
+            </sms_messages>
+            <otp_setting>
+                <otp_timeout>120</otp_timeout>
+                <otp_resend_timeout>60</otp_resend_timeout>
+                <otp_length>6</otp_length>
+                <otp_message><![CDATA[Your PIN: {{var otp}}]]></otp_message>
+            </otp_setting>
+        </acommerce_smsintegrarion>
+    </default>
+</config>

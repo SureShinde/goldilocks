@@ -1,0 +1,23 @@
+& when (@media-common = true) {
+    .catalogsearch-result-index {
+        .search-result-empty-content {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 16px;
+            line-height: 1.2;
+
+            img {
+                display: block;
+                margin: 0 auto 18px;
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .catalogsearch-result-index {
+        .search-result-empty-content {
+            margin-top: 60px;
+        }
+    }
+}

@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!--
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket_PrivateSale
+ * @copyright   Copyright (c) 2020 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Catalog\Block\Product\AbstractProduct">
+        <plugin name="pr_private_sale_product_list" type="Plumrocket\PrivateSale\Plugin\Block\Catalog\Product\AbstractProduct"  />
+    </type>
+    <type name="Magento\Framework\Pricing\Render">
+        <plugin name="pr_private_sale_replace_price" type="Plumrocket\PrivateSale\Plugin\Price\Render" sortOrder="1" disabled="false" />
+    </type>
+    <type name="Magento\Catalog\Model\Product">
+        <plugin name="pr_private_sale_product_hide_addToCart" type="Plumrocket\PrivateSale\Plugin\Product\HideAddToCart" sortOrder="1" disabled="false" />
+    </type>
+    <type name="Magento\Catalog\Api\Data\CategoryInterface">
+        <plugin name="pr_private_sale_preview_manage_category_is_active"
+                type="Plumrocket\PrivateSale\Plugin\Preview\ManageCategoryIsActive" sortOrder="10"/>
+    </type>
+    <type name="Magento\Catalog\Api\Data\ProductInterface">
+        <plugin name="pr_private_sale_preview_manage_products_attributes"
+                type="Plumrocket\PrivateSale\Plugin\Preview\ManageProductsAttributes" sortOrder="10"/>
+    </type>
+    <type name="Plumrocket\Popuplogin\Block\Popuplogin">
+        <plugin name="pr_private_sale_after_popup_login_config"
+                type="Plumrocket\PrivateSale\Plugin\Integration\Popuplogin" sortOrder="10"/>
+    </type>
+    <type name="Magento\Framework\View\Element\Context">
+        <plugin name="pr_private_sale_disable_block_cache"
+                type="Plumrocket\PrivateSale\Plugin\Preview\DisableBlockCache" sortOrder="10"/>
+    </type>
+</config>

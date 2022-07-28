@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_layout.xsd">
+    <referenceContainer name="product.info.details.after.wrapper.main">
+        <block class="Magento\Framework\View\Element\Template" name="product.description.wrapper" template="Magento_PageBuilder::catalog/product/view/section_wrapper.phtml" before="-">
+            <arguments>
+                <argument name="title" translate="true" xsi:type="string">Long Description</argument>
+                <argument name="section_id" xsi:type="string">description</argument>
+            </arguments>
+        </block>
+        <block class="Magento\Framework\View\Element\Template" name="product.reviews.wrapper" after="product.attributes.wrapper" template="Magento_PageBuilder::catalog/product/view/section_wrapper.phtml">
+            <arguments>
+                <argument name="title" translate="true" xsi:type="string">Review</argument>
+                <argument name="section_id" xsi:type="string">reviews</argument>
+            </arguments>
+            <block class="Magento\Review\Block\Product\View\ListView" name="product.info.product_additional_data.wrapper" template="Magento_Review::product/view/list.phtml" ifconfig="catalog/review/active">
+                <arguments>
+                    <argument name="hide_title" xsi:type="boolean">true</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Theme\Block\Html\Pager" name="product_review_list.toolbar" ifconfig="catalog/review/active">
+                <arguments>
+                    <argument name="show_per_page" xsi:type="boolean">false</argument>
+                    <argument name="show_amounts" xsi:type="boolean">false</argument>
+                </arguments>
+            </block>
+        </block>
+    </referenceContainer>
+    <referenceBlock name="product.attributes.wrapper">
+        <arguments>
+            <argument name="title" translate="true" xsi:type="string">Product Information</argument>
+        </arguments>
+    </referenceBlock>
+    <move element="product.info.description" destination="product.description.wrapper"/>
+    <move element="product.info.product_additional_data.wrapper" destination="reviews.tab"/>
+</layout>

@@ -1,0 +1,68 @@
+<?php /** @var \Magenest\AbandonedCart\Block\Adminhtml\Chart\GridCampaignReport $block */
+/** draw grid collection campaign for report */ ?>
+
+
+<!--session display campaign list-->
+<section class="admin__page-section campaign-statistics" id="campaign-list">
+    <div class="admin__page-section-title">
+                <span class="title">
+                    <?php /* @escapeNotVerified */
+                    echo __('A/B Test Campaign List') ?>
+                </span>
+    </div>
+    <?= $block->getGridHtml() ?>
+</section>
+
+<!--session display campaign statistics-->
+<section class="admin__page-section campaign-statistics" id="campaign-statistical">
+    <div class="admin__page-section-title">
+                <span class="title">
+                    <?php /* @escapeNotVerified */
+                    echo __('A/B Test Campaign Statistics') ?>
+                </span>
+    </div>
+    <table class="statistical">
+
+        <!--show Total campaigns'-->
+        <tr>
+            <th><?php /* @escapeNotVerified */
+                echo __('Total Campaigns') ?></th>
+            <td><?php /* @escapeNotVerified */
+                echo $block->getTotalABTestCampaign() ?></td>
+        </tr>
+
+
+        <!--show Total campaigns completed'-->
+        <tr>
+            <th><?php /* @escapeNotVerified */
+                echo __('Campaigns In Progress') ?></th>
+            <td><?php /* @escapeNotVerified */
+                echo $block->getTotalOnRun() ?></td>
+        </tr>
+    </table>
+</section>
+
+<div class="draw-chart-report" id="draw_chart_report" data-bind="scope:'draw_chart_report'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+
+
+<script>
+    // save data collection campaign in global variable
+    var campaign_grid = <?= $block->getDataCollection() ? $block->getDataCollection() : 0  ?>;
+</script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/x-magento-init">
+            {
+                "#draw_chart_report": {
+                    "Magento_Ui/js/core/app": {
+                        "components": {
+                            "draw_chart_report": {
+                                "component": "Magenest_AbandonedCart/js/report/chart_campaign",
+                                "dataDraw": <?= $block->getDataDrawChart()?>
+                            }
+                        }
+                    }
+                }
+            }
+</script>

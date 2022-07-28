@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="customer">
+            <group id="advancedlogin" translate="label" sortOrder="1000" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Advanced Login</label>
+                <field id="telephone_login_enable" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enable Telephone Login</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+<!--                <field id="email_suffix" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">-->
+<!--                    <label>Email Suffix</label>-->
+<!--                    <config_path>customer/advancedlogin/email_suffix</config_path>-->
+<!--                </field>-->
+            </group>
+        </section>
+    </system>
+</config>

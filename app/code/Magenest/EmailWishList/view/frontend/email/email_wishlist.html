@@ -1,0 +1,13 @@
+<!--@subject {{trans "Product wishlist is waitting"}} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<h3 class="email_title">{{trans "Product wishlist"}}</h3>
+<div class="email_content">
+    <strong>{{trans "Hi there,"}}</strong>
+    <p>{{trans "You have some products you forgot. It's waiting for checkout."}}</p>
+    <p>{{trans "The product's ID is %productId" productId=$productId }}</p>
+    <p>{{trans "Please check as soon as possible!"}}</p>
+</div>
+
+{{template config_path="design/email/footer_template"}}

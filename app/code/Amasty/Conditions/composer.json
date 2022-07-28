@@ -1,0 +1,21 @@
+{
+    "name": "amasty/module-advanced-conditions",
+    "description": "Advanced Conditions by Amasty",
+    "require": {
+        "php": ">=7.3",
+        "amasty/base": ">=1.13.4"
+    },
+    "type": "magento2-module",
+    "version": "1.5.6",
+    "license": [
+        "Commercial"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Amasty\\Conditions\\": ""
+        }
+    }
+}

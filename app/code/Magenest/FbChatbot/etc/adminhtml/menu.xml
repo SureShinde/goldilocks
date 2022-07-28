@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Magenest_FbChatbot::chatbot" title="Facebook Chatbot" module="Magenest_FbChatbot" sortOrder="51" resource="Magenest_FbChatbot::chatbot"/>
+        <add id="Magenest_FbChatbot::message" title="Automated messages from Bots" module="Magenest_FbChatbot" sortOrder="20" action="chatbot/message" parent="Magenest_FbChatbot::chatbot" resource="Magenest_FbChatbot::message"/>
+        <add id="Magenest_FbChatbot::menu" title="Persistent Menu" module="Magenest_FbChatbot" sortOrder="30" action="chatbot/menu" parent="Magenest_FbChatbot::chatbot" resource="Magenest_FbChatbot::menu"/>
+        <add id="Magenest_FbChatbot::configuration" title="Configuration" module="Magenest_FbChatbot" sortOrder="30" action="adminhtml/system_config/edit/section/fb_chatbot" parent="Magenest_FbChatbot::chatbot" resource="Magenest_FbChatbot::configuration"/>
+    </menu>
+</config>

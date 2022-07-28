@@ -1,0 +1,44 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php
+/**
+ * Product list toolbar
+ *
+ * @var $block \Magento\Catalog\Block\Product\ProductList\Toolbar
+ */
+$availableOrders = $block->getAvailableOrders();
+$options = [];
+foreach ($availableOrders as $code => $label) {
+    if ($code == 'name') {
+        $options['name_asc'] = __("Name from A to Z");
+        $options['name_desc'] = __("Name from Z to A");
+    } else {
+        if (!($code == 'position')) {
+            $options[$code . '_asc'] = __("%1 increase", $label);
+            $options[$code . '_desc'] = __("%1 decrease", $label);
+        }
+    }
+}
+?>
+<div class="toolbar-filters" data-bind="scope:'toolbarattributeFilters'" data-label="<?= __('Sort by') ?>">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "toolbarattributeFilters": {
+                        "component": "Magenest_Sidebar/js/view/toolbar-filters",
+                        "data": <?= json_encode(['options' => $options]) ?>
+                    }
+                }
+            }
+        }
+    }
+
+</script>

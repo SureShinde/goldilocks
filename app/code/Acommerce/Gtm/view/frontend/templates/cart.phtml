@@ -1,0 +1,34 @@
+<?php
+// @codingStandardsIgnoreFile
+?>
+<?php if($this->isEnabled()) : ?>
+    <?php $helper = $this->helper('Acommerce\Gtm\Helper\Data'); ?>
+        <?php
+        $crosselProductsCollection = $this->getCrosselProductCollection();
+        $productImpressions = [];
+
+        if (!empty($crosselProductsCollection)) :
+            $i = 1;
+            foreach($crosselProductsCollection as $_product) :
+                $crosselProduct = array();
+                $crosselProduct['name'] = html_entity_decode($_product->getName());
+                $crosselProduct['sku'] = $helper->getGtmProductId($_product);
+                $crosselProduct['id'] = $helper->getGtmProductId($_product);
+                $crosselProduct['price'] = $helper->numberFormat($_product->getFinalPrice(), 2);
+                if ($helper->isBrandEnabled()) :
+                    $crosselProduct['brand'] = $helper->getGtmBrand($_product);
+                endif;
+                $crosselProduct['category'] = $helper->getGtmCategoryByProduct($_product);
+                $crosselProduct['list'] = __('Crossel Products');
+                $crosselProduct['position'] = $i;
+                $productImpressions[] = $crosselProduct;
+                $i++ ;
+            endforeach;
+        endif;
+
+        if (count($productImpressions)) :
+            $this->setEcommerceData('currencyCode', $this->getCurrencyCode());
+            $this->setEcommerceData('impressions', $productImpressions);
+        endif;
+        ?>
+<?php endif; ?>

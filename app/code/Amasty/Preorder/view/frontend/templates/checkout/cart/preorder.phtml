@@ -1,0 +1,17 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+<?php
+/** @var \Amasty\Preorder\ViewModel\Quote\Item\PreorderInformation $preorderInformationViewModel */
+$preorderInformationViewModel = $block->getData('preorder_information_view_model');
+/** @var \Magento\Quote\Api\Data\CartItemInterface $quoteItem */
+$quoteItem = $block->getData('item');
+/** @var \Amasty\Preorder\Api\Data\CartItemInformationInterface $preorderInformation */
+$preorderInformation = $preorderInformationViewModel->getPreorderInformation($quoteItem);
+?>
+<?php if ($preorderInformation->isPreorder()): ?>
+    <div class="ampreorder-note"><?= /** @noEscape  */ $preorderInformation->getNote() ?></div>
+<?php endif; ?>

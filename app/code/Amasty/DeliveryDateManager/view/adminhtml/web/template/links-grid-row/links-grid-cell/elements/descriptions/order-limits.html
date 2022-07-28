@@ -1,0 +1,17 @@
+<div class="amdelivery-description amdelivery-cell-description">
+    <div class="amdelivery-column">
+        <if args="hasData(descriptionData())">
+            <div class="amdelivery-item">
+                <span class="amdelivery-label" data-bind="i18n: 'Limit per Day: '"></span>
+                <span class="amdelivery-value" data-bind="html: descriptionData().day_limit ? descriptionData().day_limit : '-'"></span>
+            </div>
+            <div class="amdelivery-item">
+                <span class="amdelivery-label" data-bind="i18n: 'Limit per Intervals: '"></span>
+                <span class="amdelivery-value" data-bind="html: descriptionData().interval_limit ? descriptionData().interval_limit : '-'"></span>
+            </div>
+        </if>
+        <ifnot args="hasData(descriptionData())">
+            <span translate="'No Order Limits Specified'"></span>
+        </ifnot>
+    </div>
+</div>

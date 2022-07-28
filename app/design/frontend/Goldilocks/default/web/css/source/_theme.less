@@ -1,0 +1,210 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Goldilocks theme overrides
+//  _____________________________________________
+
+//  Theme file should contain declarations (overrides) ONLY OF EXISTING variables
+//  Otherwise this theme won't be available for parent nesting
+//  All new variables should be placed in local theme lib or local theme files
+
+//
+//  Layout grid
+//  ---------------------------------------------
+
+@layout__max-width: 1270px;
+@layout-indent__width: 15px;
+@layout__width-xs-indent: 9px;
+@total-columns: 100;
+@layout-column__sidebar-width: 23;
+@checkout-wrapper__columns: 68;
+@checkout-sidebar__columns: 32;
+@layout-column-checkout__width-left: 32;
+@layout-column-main__sidebar-offset: 0;
+
+//
+//  Typography
+//  ---------------------------------------------
+@theme__color__primary: #FFC100;
+@theme__color__primary-alt: #F5AC1F;
+@theme__color__secondary: #F5AC1F;
+@primary__color: #FFC100;
+
+@font-size__base: 14px;
+@line-height__base: 1.5;
+@text__color:#000;
+@link__color: #005AE1;
+@link__visited__color: @link__color;
+@link__hover__color: @link__color;
+@link__active__color: @link__color;
+@color-white-smoke:#F2F2F2;
+@color-red10: #E74949;
+
+@h1__font-size: 24px;
+@heading__font-weight__base: @font-weight__extrabold;
+@heading__line-height__base: 1.2;
+@h4__font-weight: @font-weight__semibold;
+@h5__font-weight: @font-weight__semibold;
+
+@border-color__base: #E8E8E8;
+
+//
+//  Button
+//  ---------------------------------------------
+@button__color: @primary__color;
+@button__background: @color-white;
+@button__border: 2px solid @primary__color;
+@button__hover__color: @color-white;
+@button__hover__background: @primary__color;
+@button__hover__border: @button__border;
+@button__font-weight: @font-weight__semibold;
+@button__line-height: @font-size__base * 1.2;
+@button__padding: 10px 25px;
+@button__border-radius:100px;
+@button__disabled__opacity: .7;
+@button__shadow: none;
+@button__active__color: @button__color;
+@button__active__background: @button__background;
+@button__active__border: @button__border;
+
+@button-primary__color: @color-white;
+@button-primary__background: @theme__color__primary;
+@button-primary__border: 2px solid @theme__color__primary;
+@button-primary__hover__border: 2px solid @theme__color__primary-alt;
+@button-primary__font-weight: @font-weight__extrabold;
+@button-primary__line-height: @button__line-height;
+
+@button__padding__l: 12px 25px 10px;
+@button__font-size__s: @font-size__base;
+@button__line-height__s: @button__font-size__s * 1.2;
+@button__padding__s: 10px 15px;
+
+//
+//  Form
+//  ---------------------------------------------
+@focus__box-shadow: none;
+@form-field__vertical-indent__desktop: 16px;
+@form-field__vertical-indent: 16px;
+@form-field-type-label-inline__padding-top: 0;
+@form-field-type-label-inline__padding: @form-field-type-label-inline__padding-top 0 5px 0;
+@form-field-type-label-inline__width: false;
+@form-field-type-label-inline__align: false;
+@form-field-label__font-weight: @font-weight__semibold;
+@form-field-type-control-inline__width: 100%;
+@form-element-input-placeholder__color: #818181;
+@form-element-input__border-color: #E0E0E0;
+@form-element-input__border-radius: 6px;
+@form-element-input__height: 40px;
+@form-element-input__padding: 0 12px;
+@select__padding: @indent__xs 12px 4px;
+@textarea__padding: @indent__s 12px;
+@form-field-label-asterisk__margin: 0 0 0 4px;
+@form-field-label-asterisk__font-size: @form-element-input__font-size;
+@form-fieldset__margin: 0 0 16px;
+@form-fieldset-legend__font-size: 16px;
+@form-fieldset-legend__font-weight: @font-weight__semibold;
+@form-fieldset-legend__margin: 0 0 16px;
+@actions-toolbar-actions__position: center; // [left|right|center|justify]
+@actions-toolbar-actions-links-secondary__margin-top: 10px;
+
+//
+//  Breadcrumbs
+//  ---------------------------------------------
+@breadcrumbs__font-size: 12px;
+@breadcrumbs__container-margin: 0;
+@breadcrumbs__padding: 10px 0;
+@breadcrumbs-current__color: @color-black;
+@breadcrumbs-link__color: @color-black;
+@breadcrumbs-link__visited__color: @breadcrumbs-link__color;
+@breadcrumbs-link__hover__color: @breadcrumbs-link__color;
+@breadcrumbs-link__active__color: @breadcrumbs-link__color;
+@breadcrumbs-link__hover__text-decoration: none;
+
+//
+//  Pager
+//  ---------------------------------------------
+@pager__font-size: @font-size__base;
+@pager__font-weight: @font-weight__semibold;
+@pager__line-height: 24px;
+@pager-item__margin: 0 2px;
+@pager__color: #4F4F4F;
+@pager__hover__color: @pager__color;
+@pager__visited__color: @pager__color;
+@pager__active__color: @pager__color;
+@pager-action__color: #4F4F4F;
+@pager-action__border: none;
+@pager-icon__font-margin: 0;
+@pager-icon__font-size: 50px;
+
+//
+//  Sidebar
+//  ---------------------------------------------
+@sidebar__background-color: @color-white-smoke;
+
+//
+//  Navigation
+//  ---------------------------------------------
+@active-nav-indent: 35px;
+@navigation__background: @theme__color__secondary;
+@navigation-desktop__background: @theme__color__secondary;
+@navigation-desktop-level0-item__color: @color-white;
+@navigation-desktop-level0-item__hover__color: @color-white;
+@navigation-desktop__font-size: 15px;
+@navigation-desktop__font-weight: @font-weight__semibold;
+@navigation-desktop-level0-item__line-height: 38px;
+@navigation-desktop-level0-item__margin: 0 8px 0 0;
+@navigation-desktop-level0-item__padding: 0 0 0 12px;
+@submenu-desktop__font-size: 14px;
+@submenu-desktop__font-weight: @font-weight__regular;
+@submenu-desktop__border-color: #E0E0E0;
+@submenu-desktop__box-shadow: none;
+@submenu-desktop-item__padding: 14px 12px;
+@submenu-desktop-item__color: @text__color;
+@submenu-desktop-item__background: '';
+@submenu-desktop-item__hover__color: @submenu-desktop-item__color;
+@submenu-desktop-item__hover__background: @submenu-desktop-item__background;
+@navigation-desktop-level0-item__active__border-width: 0;
+@submenu-desktop-item__active__border-width: 0;
+@navigation-level0-item__font-size: 20px;
+@navigation-level0-item__color: @text__color;
+@navigation-level0-item__hover__color: '';
+@navigation-level0-item__text-transform: '';
+@navigation-level0-item__padding: 20px 35px 16px 20px;
+@navigation-level0-item__active__border-width: 0;
+@submenu-item__color: @text__color;
+@submenu-item__active__border: 0;
+@submenu__font-size: 16px;
+@submenu-item__line-height: 1.5;
+@submenu__padding-top: 8px;
+@submenu__padding-bottom: 8px;
+@submenu__padding-left: 20px;
+
+//
+//  Minicart
+//  ---------------------------------------------
+@minicart__padding-horizontal: 10px;
+
+//
+//  Rating
+//  ---------------------------------------------
+@rating-icon__content: '\e907';
+@rating-icon__font: 'goldilock-icon';
+@rating-icon__font-size: 14px;
+@rating-icon__letter-spacing: 2px;
+@rating-icon__color: #D9D9D9;
+@rating-icon__active__color: @theme__color__primary;
+
+//
+//  Checkout
+//  ---------------------------------------------
+@checkout-shipping-address__max-width: '';
+@checkout-shipping-address__margin-top: '';
+@checkout-tooltip-content__border-color: #E0E0E0;
+
+//
+// Modal
+//  ---------------------------------------------
+@modal-overlay__background-color: rgba(0, 0, 0, 0.35);

@@ -1,0 +1,44 @@
+<?php
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket Private Sales and Flash Sales v4.x.x
+ * @copyright   Copyright (c) 2020 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+?>
+
+<div class="admin__actions-switch" data-role="switcher">
+    <input class="admin__actions-switch-checkbox"
+        type="checkbox"
+        name="<?= $block->getInputName() ?>"
+        data-form-part="prprivatesale_event_form"
+        id="<?= $block->getInputId() ?>"
+        <% if (obj.<?= $block->getColumnName() ?> === 'on' || parseInt(obj.<?= $block->getColumnName() ?>) === 1) { %>
+            checked="checked"
+        <% } %>
+        >
+    <label class="admin__actions-switch-label" for="<?= $block->getInputId() ?>">
+        <span data-text-on="<?= __('Allow')?>" data-text-off="<?= __('Deny')?>"
+              class="admin__actions-switch-text"></span>
+    </label>
+</div>
+<script>
+    require([
+        'jquery',
+        'Plumrocket_PrivateSale/js/form/dependency',
+        'Plumrocket_PrivateSale/js/form/field/toggle'
+    ], function ($, dependency, toggle) {
+        toggle({
+            'dependency': dependency.getElementsDependedOn($('#<?= $block->getInputId() ?>').closest('tr'))
+        }, '#<?= $block->getInputId() ?>');
+    });
+</script>

@@ -1,0 +1,244 @@
+& when (@media-common = true) {
+    .account {
+        .sidebar-main {
+            background-color: #fff;
+            border-radius: 8px 8px 0 0;
+        }
+    }
+
+    .customer-sidebar {
+
+        .sidebar-info {
+            background: @primary__color;
+            overflow: hidden;
+            position: relative;
+            .lib-vendor-prefix-display(flex);
+            .lib-vendor-box-align(center);
+
+            strong {
+                text-align: center;
+                color: #FFFFFF;
+                font-weight: 600;
+            }
+
+            &:before {
+                content: '';
+                background: linear-gradient(180.1deg, rgba(255, 255, 255, 0.15) 0.09%, rgba(255, 255, 255, 0) 59.76%);
+                width: 491px;
+                height: 491px;
+                border-radius: 50%;
+                left: 50%;
+                right: 0;
+                display: block;
+                position: absolute;
+                transform: translateX(-50%);
+            }
+        }
+
+        .nav.items {
+            .nav.item {
+                margin: 0;
+                position: relative;
+
+                &.current {
+                    > strong {
+                        border: 0;
+                    }
+                }
+
+                strong {
+                    color: @primary__color;
+                }
+
+                a {
+                    color: #000000;
+
+                    &:hover {
+                        background-color: rgba(0, 0, 0, 0);
+                        color: @primary__color;
+                    }
+                }
+
+                a, strong {
+                    font-size: 16px;
+                    line-height: 24px;
+                    font-weight: 600;
+                    padding: 16px 20px 14px;
+                    margin: 0;
+                    border: 0;
+                }
+
+                &.logout {
+                    a {
+                        color: #E74949;
+                        .lib-vendor-prefix-display(flex);
+
+                        &:before {
+                            content: "\e911";
+                            font-family: 'goldilock-icon';
+                            font-size: 16px;
+                            padding-right: 13px;
+                            color: #E74949;
+                        }
+                    }
+                }
+            }
+        }
+
+        .block-collapsible-nav {
+            margin-bottom: 0;
+
+            .content {
+                background: #FFFFFF;
+                padding: 0;
+                display: block;
+                border: 0;
+            }
+
+            .delimiter {
+                margin: 0;
+                border-top: 1px solid #F4F4F4;
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .customer-sidebar {
+        display: none;
+
+        .sidebar-info {
+            min-height: 127px;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 8px;
+            justify-content: center;
+            -webkit-justify-content: center;
+
+            &:before {
+                top: 43px;
+            }
+
+            strong {
+                font-size: 26px;
+                line-height: 30px;
+                padding-top: 30px;
+            }
+        }
+
+        .nav.items {
+            .nav.item {
+                &.current {
+                    background: #FFFDD7;
+
+                    &:before {
+                        content: '';
+                        background-color: @primary__color;
+                        position: absolute;
+                        right: 0;
+                        height: auto;
+                        top: 0;
+                        bottom: 0;
+                        width: 8px;
+                        border-radius: 2px 0 0 2px;
+                    }
+                }
+            }
+        }
+    }
+
+    .account {
+        .columns {
+            .sidebar-main {
+                width: 32.3%;
+                flex-basis: unset;
+                padding-bottom: 100px;
+            }
+
+            .column.main {
+                width: calc(~'67.7% - 20px');
+                margin-left: 20px;
+            }
+        }
+
+        .customer-sidebar {
+            display: block;
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .account {
+
+    }
+
+    .customer-sidebar {
+        display: none;
+
+        .block-collapsible-nav {
+            position: static;
+            margin: -105px 9px 0;
+            width: auto;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        &.show {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #fff;
+            z-index: 999;
+            display: block;
+            overflow-y: auto;
+            padding-bottom: 100px;
+        }
+
+        .sidebar-info {
+            min-height: 289px;
+            border-radius: 0 0 8px 8px;
+            z-index: -1;
+            .lib-vendor-prefix-flex-direction(column);
+            justify-content: flex-start;
+            -webkit-justify-content: flex-start;
+            padding: 20px 20px 0;
+
+            &:before {
+                top: 70px;
+            }
+
+            strong {
+                font-size: 20px;
+                line-height: 24px;
+            }
+
+            .avatar {
+                width: 77px;
+                height: 77px;
+                object-fit: cover;
+                object-position: center;
+                border-radius: 50%;
+                border: 4px solid #FFFFFF;
+                margin-bottom: 15px;
+            }
+        }
+
+        .nav.items {
+            .nav.item:not(.logout) {
+                a {
+                    &:before {
+                        content: "\e91e";
+                        font-family: 'goldilock-icon';
+                        font-size: 14px;
+                        position: absolute;
+                        right: 20px;
+                        top: 50%;
+                        transform: translateY(-50%);
+                    }
+                }
+            }
+        }
+    }
+}

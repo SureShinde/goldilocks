@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="order_additional_info">
+            <block class="Magento\Sales\Block\Adminhtml\Order\View\Tab\Info"
+                   name="sales_order_view_custom"
+                   template="Magenest_SpecialCustomerProgram::order/view/special-customer-program.phtml">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">
+                        Magenest\SpecialCustomerProgram\ViewModel\Adminhtml\Order\View\SpecialCustomerProgram
+                    </argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

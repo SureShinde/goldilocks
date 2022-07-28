@@ -1,0 +1,13 @@
+<!--@subject {{trans "New Pending COD order waiting for approval"}} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<h3 class="email_title">{{trans "New Pending COD order waiting for approval"}}</h3>
+<div class="email_content">
+    <strong>{{trans "Hi there,"}}</strong>
+    <p>{{trans "There is a new COD order created by non-logged in customer. It's waiting for your approval right now."}}</p>
+    <p>{{trans "The order's ID is %orderId" orderId=$orderId }}</p>
+    <p>{{trans "Please check as soon as possible!"}}</p>
+</div>
+
+{{template config_path="design/email/footer_template"}}

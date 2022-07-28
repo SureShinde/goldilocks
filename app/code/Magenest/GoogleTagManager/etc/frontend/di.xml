@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Quote\Model\Quote\Config">
+        <plugin type="Magenest\GoogleTagManager\Plugin\Quote\ConfigPlugin"
+                name="Magenest_GoogleTagManager" />
+    </type>
+
+    <type name="Magento\Customer\CustomerData\SectionPoolInterface">
+        <arguments>
+            <argument name="sectionSourceMap" xsi:type="array">
+                <item name="google-tag-manager-product-info" xsi:type="string">Magenest\GoogleTagManager\CustomerData\ProductInfo</item>>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magenest\GoogleTagManager\Model\Generators\ProductObjectGenerator">
+        <arguments>
+            <argument name="collectors" xsi:type="array">
+                <item name="from_product" xsi:type="object">Magenest\GoogleTagManager\Model\DataCollectors\ProductObject\Product</item>
+                <item name="from_quote_item" xsi:type="object">Magenest\GoogleTagManager\Model\DataCollectors\ProductObject\QuoteItem</item>
+                <item name="from_order_item" xsi:type="object">Magenest\GoogleTagManager\Model\DataCollectors\ProductObject\OrderItem</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Catalog\Block\Product\AbstractProduct">
+        <plugin type="Magenest\GoogleTagManager\Plugin\Catalog\Block\Product\AbstractProduct\AddPurchaseCategoryToCartUrl"
+                name="vaimo_gtm_add_cart_url_purchase_category"
+                sortOrder="10"/>
+    </type>
+</config>

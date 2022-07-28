@@ -1,0 +1,46 @@
+<div id="nearest-store-modal-content" afterRender="showPopup()" style="display: none">
+    <div class="nearest-store-modal-inner-content">
+        <fieldset class="fieldset">
+            <div class="field address">
+                <label for="address" class="label"><span data-bind="i18n: 'Your address'"></span></label>
+                <div class="control">
+                    <input type="text" data-bind="value: address" name="address" alt="email" id="address"
+                           class="input-text" value=""
+                           aria-required="true">
+                </div>
+            </div>
+            <div class="primary">
+                <button type="submit" data-bind="click: searchAddress" class="action submit primary"><span
+                    data-bind="i18n: 'Search'"></span>
+                </button>
+            </div>
+            <div class="mgnlocator-store-list">
+                <div class="mgnlocator-wrapper" data-bind="foreach: storeList">
+                    <div class="mgnlocator-stores-wrapper" data-bind="click: function(){$parent.selectStore(id, name)}" >
+                        <div class="mgnlocator-store-desc">
+                            <div class="mgnlocator-block">
+                                <div class="mgnlocator-store-information">
+                                    <span data-bind="text: address"></span>
+                                    <div class="mgnlocator-title">
+                                        <strong><span data-bind="text: name"></span></strong>
+                                    </div>
+                                    <!-- ko if: working_time -->
+                                    <div class="mgnlocator-title">
+                                        <strong><span data-bind="text: working_time"></span></strong>
+                                    </div>
+                                    <!-- /ko -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br><br>
+                </div>
+                <!-- ko ifnot: storeList().length -->
+                <div class="mgnlocator-stores-wrapper-no-store">
+                    <span data-bind="i18n: 'No stores were found matching your address'"></span>
+                </div>
+                <!-- /ko -->
+            </div>
+        </fieldset>
+    </div>
+</div>

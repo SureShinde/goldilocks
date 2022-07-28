@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket Private Sales and Flash Sales
+ * @copyright   Copyright (c) 2020 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ -->
+
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="privatesales_active_events" class="Plumrocket\PrivateSale\Block\Event\Widget\Active">
+        <label>Flash Sales "Active" Events</label>
+        <description>Flash Sales "Active" Events</description>
+        <parameters>
+            <parameter name="block_title" xsi:type="text" visible="true">
+                <label>Title</label>
+            </parameter>
+            <parameter name="exclude_ending_soon" xsi:type="select" visible="true">
+                <label>Exclude Ending Soon Events</label>
+                <options>
+                    <option name="yes" value="1" selected="true">
+                        <label>Yes</label>
+                    </option>
+                    <option name="no" value="0">
+                        <label>No</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="template" xsi:type="select" visible="true">
+                <label>Template</label>
+                <options>
+                    <option name="default" value="Plumrocket_PrivateSale::homepage/event/default.phtml" selected="true">
+                        <label>Default Template</label>
+                    </option>
+                    <option name="grouped" value="Plumrocket_PrivateSale::homepage/event/group.phtml">
+                        <label>Grouped Events Template</label>
+                    </option>
+                </options>
+            </parameter>
+        </parameters>
+    </widget>
+
+    <widget id="privatesales_coming_soon" class="Plumrocket\PrivateSale\Block\Homepage\Comingsoon">
+        <label>Flash Sales "Coming Soon" Events</label>
+        <description>Flash Sales "Coming Soon" Events</description>
+        <parameters>
+            <parameter name="block_title" xsi:type="text" visible="true">
+                <label>Title</label>
+                <description>The default title is: "Coming Soon". Other examples of this title can be:
+                    "Upcoming Events", "Events Coming Soon", "Sales Coming Soon", "New Events Tomorrow", etc.</description>
+            </parameter>
+            <parameter name="template" xsi:type="select" visible="false">
+                <label>Template</label>
+                <options>
+                    <option name="default" value="Plumrocket_PrivateSale::homepage/event/default.phtml" selected="true">
+                        <label>Default Template</label>
+                    </option>
+                </options>
+            </parameter>
+        </parameters>
+    </widget>
+
+    <widget id="privatesales_ending_soon" class="Plumrocket\PrivateSale\Block\Homepage\Endingsoon">
+        <label>Flash Sales "Ending Soon" Events</label>
+        <description>Flash Sales "Ending Soon" Events</description>
+        <parameters>
+            <parameter name="block_title" xsi:type="text" visible="true">
+                <label>Title</label>
+                <description>The default title is: "Ending Soon". Other examples of this title can be:
+                    "Events Ending Soon", "Sales Ending Soon", "Ends Today", etc.</description>
+            </parameter>
+            <parameter name="template" xsi:type="select" visible="false">
+                <label>Template</label>
+                <options>
+                    <option name="default" value="Plumrocket_PrivateSale::homepage/event/default.phtml" selected="true">
+                        <label>Default Template</label>
+                    </option>
+                </options>
+            </parameter>
+        </parameters>
+    </widget>
+
+    <widget id="privatesales_active" class="Plumrocket\PrivateSale\Block\Homepage\Group">
+        <label>Flash Sales "Active" Events v4.0 (Deprecated)</label>
+        <description>Flash Sales "Active" Events v4.0 (Deprecated)</description>
+        <parameters>
+            <parameter name="block_title" xsi:type="text" visible="true">
+                <label>Title</label>
+            </parameter>
+            <parameter name="exclude_ending_soon" xsi:type="select" visible="true">
+                <label>Exclude Ending Soon Events</label>
+                <options>
+                    <option name="yes" value="1" selected="true">
+                        <label>Yes</label>
+                    </option>
+                    <option name="no" value="0">
+                        <label>No</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="template" xsi:type="select" visible="false">
+                <label>Template</label>
+                <options>
+                    <option name="default" value="Plumrocket_PrivateSale::homepage/event/group.phtml" selected="true">
+                        <label>Default Template</label>
+                    </option>
+                </options>
+            </parameter>
+        </parameters>
+    </widget>
+
+    <widget id="privatesales_products" class="Plumrocket\PrivateSale\Block\Homepage\ProductWidget">
+        <label translate="true">Flash Sales Products</label>
+        <description translate="true">Flash Sales Products</description>
+        <parameters>
+            <parameter name="block_title" xsi:type="text" visible="true">
+                <label translate="true">Title</label>
+            </parameter>
+            <parameter name="product_count_limit" xsi:type="text" required="true" visible="true">
+                <label translate="true">Number of Products to display</label>
+                <value>5</value>
+            </parameter>
+            <parameter name="exclude_ending_soon" xsi:type="select" visible="true">
+                <label translate="true">Exclude Ending Soon Events</label>
+                <options>
+                    <option name="yes" value="1">
+                        <label translate="true">Yes</label>
+                    </option>
+                    <option name="no" value="0">
+                        <label translate="true">No</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="template" xsi:type="select" visible="false">
+                <label translate="true">Template</label>
+                <options>
+                    <option name="default" value="Magento_Catalog::product/widget/new/content/new_grid.phtml" selected="true">
+                        <label translate="true">New Products Grid Template</label>
+                    </option>
+                    <option name="list" value="Magento_Catalog::product/widget/new/content/new_list.phtml">
+                        <label translate="true">New Products List Template</label>
+                    </option>
+                </options>
+            </parameter>
+
+        </parameters>
+        <containers>
+            <container name="content">
+                <template name="grid" value="default" />
+                <template name="list" value="list" />
+            </container>
+            <container name="content.bottom">
+                <template name="grid" value="default" />
+                <template name="list" value="list" />
+            </container>
+            <container name="content.top">
+                <template name="grid" value="default" />
+                <template name="list" value="list" />
+            </container>
+        </containers>
+    </widget>
+</widgets>

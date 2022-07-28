@@ -1,0 +1,16 @@
+type AmPreOrderInformation {
+    preorder_flag: Boolean @doc(description: "Is Preorder."),
+    note: String @doc(description: "Pre order note."),
+    cart_label: String @doc(description: "Cart Label.")
+}
+
+interface ProductInterface {
+  amPreOrderInformation: AmPreOrderInformation @resolver (class: "Amasty\\PreOrderGraphQl\\Model\\Resolver\\PreOrderInformation")
+}
+
+type StoreConfig {
+    ampreorder_functional_enabled: Boolean @doc(description: "Enable Pre Orders."),
+    ampreorder_general_show_preorder_note: Boolean @doc(description: "Show Pre-Order Note on Category Pages."),
+    ampreorder_general_cart_message: String @doc(description: "Pre-Order Warning in Shopping Cart."),
+    ampreorder_general_below_zero_message: String @doc(description: "Pre-Order Warning for Below Zero Qty.")
+}

@@ -1,0 +1,88 @@
+<?php /** @var $block \Amasty\DeliveryDateManager\Block\Deliverydate\Edit */ ?>
+<?php /** @var $escaper Magento\Framework\Escaper */ ?>
+<?php /** @var $viewModel \Amasty\DeliveryDateManager\ViewModel\Deliverydate\Edit */ ?>
+<?php $viewModel = $block->getViewModel() ?>
+<?php $order = $viewModel->getOrder($block->getOrderId()) ?>
+<?php $deliveryDate = $viewModel->getDeliveryDate($block->getOrderId()) ?>
+<?php $channelSetJson = $viewModel->getChannelSetJson($block->getOrderId()) ?>
+<?php $jsLayout = $block->getJsLayout() ?>
+<form class="form form-edit-account"
+      action="<?= $escaper->escapeUrl($block->getSaveUrl()) ?>"
+      data-mage-init='{"validation":{}}'
+      method="post"
+      id="form-validate"
+      enctype="multipart/form-data"
+      data-hasrequired="<?= $escaper->escapeHtmlAttr(__('* Required Fields')) ?>"
+      autocomplete="off">
+    <fieldset class="fieldset info">
+        <legend class="legend"><span><?= $escaper->escapeHtml(__('Order Information')) ?></span></legend><br>
+        <div class="field">
+            <label class="label"><span><?= $escaper->escapeHtml(__('Order #')) ?></span></label>
+            <div class="control">
+                <span><?= $escaper->escapeHtml($order->getRealOrderId()) ?></span>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label"><span><?= $escaper->escapeHtml(__('Email')) ?></span></label>
+            <div class="control">
+                <span><?= $escaper->escapeHtml($order->getCustomerEmail()) ?></span>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label"><span><?= $escaper->escapeHtml(__('Current Delivery Date')) ?></span></label>
+            <div class="control">
+                <span><?= $escaper->escapeHtml($viewModel->formatDate($deliveryDate)) ?></span>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label"><span><?= $escaper->escapeHtml(__('Current Delivery Time Interval')) ?></span></label>
+            <div class="control">
+                <span><?= $escaper->escapeHtml($viewModel->formatTimeInterval($deliveryDate)) ?></span>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label"><span><?= $escaper->escapeHtml(__('Current Delivery Comments')) ?></span></label>
+            <div class="control">
+                <span><?= $escaper->escapeHtml($viewModel->formatDeliveryComments($deliveryDate), ['br']) ?></span>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset class="fieldset deliverydate">
+        <?= $block->getBlockHtml('formkey')?>
+        <legend class="legend"><span><?= $escaper->escapeHtml(__('Delivery Date')) ?></span></legend><br>
+        <div data-bind="scope: 'amasty-delivery-date'">
+            <!-- ko template: getTemplate() --><!-- /ko -->
+        </div>
+    </fieldset>
+
+    <script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": <?= /* @noEscape */ $block->getJsLayout();?>
+        }
+    }
+    </script>
+
+    <div class="actions-toolbar">
+        <div class="primary">
+            <button type="submit" class="action save primary" title="<?= $escaper->escapeHtml(__('Save')) ?>">
+                <span><?= $escaper->escapeHtml(__('Save')) ?></span>
+            </button>
+        </div>
+        <?php if ($block->getBackUrl()): ?>
+        <div class="secondary">
+            <a class="action" href="<?= $escaper->escapeUrl($block->getBackUrl()) ?>">
+                <span><?= $escaper->escapeHtml(__('Back to Order # %1', $order->getRealOrderId())) ?></span>
+            </a>
+        </div>
+        <?php endif; ?>
+    </div>
+</form>
+
+<script>
+    window.amastyDeliveryDateEditConfig = <?= /* @noEscape */ $channelSetJson?>;
+    window.checkoutConfig = <?= /* @noEscape */ $viewModel->getConfigJson() ?>;
+</script>

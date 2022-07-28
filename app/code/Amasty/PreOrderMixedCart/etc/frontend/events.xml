@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="sales_quote_item_qty_set_after">
+        <observer name="amasty_preorder_quote_item_change" instance="Amasty\PreOrderMixedCart\Observer\Frontend\Quote\Item\CheckQuoteItemChange" />
+        <observer name="amasty_preorder_check_mixed_carts" instance="Amasty\PreOrderMixedCart\Observer\Frontend\Quote\Item\CheckMixedCarts" />
+    </event>
+</config>

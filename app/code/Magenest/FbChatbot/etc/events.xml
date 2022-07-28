@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="checkout_submit_all_after">
+        <observer name="track_ordered_by_chatbot" instance="Magenest\FbChatbot\Observer\Checkout\TrackOrder" />
+    </event>
+    <event name="sales_order_save_after">
+        <observer name="messenger_observer" instance="Magenest\FbChatbot\Observer\Order\UpdateStatus" />
+    </event>
+    <event name="catalog_product_get_final_price">
+        <observer name="catalogrule_bot_order" instance="Magenest\FbChatbot\Observer\ProcessQueueFinalPriceObserver" />
+    </event>
+</config>

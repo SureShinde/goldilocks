@@ -1,0 +1,208 @@
+<?php
+/**
+ * @var \Magenest\SocialLogin\Block\Widget\SocialLoginWidget $block
+ */
+$title = $block->getTitle();
+$displayType = $block->getDisplayType();
+$socialClassname = 'list-icon';
+if ($displayType == \Magenest\SocialLogin\Model\Config\Widget\DisplayType::SLIDER) {
+    $socialClassname = 'slider-icon';
+}
+$facebook = $block->getLayout()->createBlock(Magenest\SocialLogin\Block\SocialNetwork\Facebook::class);
+$google = $block->getLayout()->createBlock(Magenest\SocialLogin\Block\SocialNetwork\Google::class);
+$amazon = $block->getLayout()->createBlock(Magenest\SocialLogin\Block\SocialNetwork\Amazon::class);
+$twitter = $block->getLayout()->createBlock(Magenest\SocialLogin\Block\SocialNetwork\Twitter::class);
+$instagram = $block->getLayout()->createBlock(Magenest\SocialLogin\Block\SocialNetwork\Instagram::class);
+$linkedin = $block->getLayout()->createBlock(Magenest\SocialLogin\Block\SocialNetwork\Linkedin::class);
+$pinterest = $block->getLayout()->createBlock(Magenest\SocialLogin\Block\SocialNetwork\Pinterest::class);
+$reddit = $block->getLayout()->createBlock(Magenest\SocialLogin\Block\SocialNetwork\Reddit::class);
+$line = $block->getLayout()->createBlock(Magenest\SocialLogin\Block\SocialNetwork\Line::class);
+$zalo = $block->getLayout()->createBlock(Magenest\SocialLogin\Block\SocialNetwork\Zalo::class);
+$apple = $block->getLayout()->createBlock(Magenest\SocialLogin\Block\SocialNetwork\Apple::class);
+$scriptString = <<<script
+        require(['jquery','magenestSocialLogin'],
+            function($,sociallogin){
+                $(document).ready(function () {
+script;
+?>
+
+<?php if (!$block->isLoggedIn()) : ?>
+<div class="social-login-widget">
+    <div class="title">
+        <?= isset($escaper) ? $escaper->escapeHtml($title) : $block->escapeHtml($title)?>
+    </div>
+    <div class="social-login-icon <?= isset($escaper) ? $escaper->escapeHtmlAttr($socialClassname) : $block->escapeHtmlAttr($socialClassname) ?>">
+        <?php if ($facebook->isFacebookEnabled()) : ?>
+            <?php $scriptString .= <<<script
+                    $('.facebook_button_connect').bind('click',function(){
+                        var url = '{$facebook->getButtonUrl()}';
+                        if (url.length) {
+                            sociallogin.display(url, 'Facebook', 600, 600);
+                        }
+                    });
+                script;
+            ?>
+            <div class="modal-socialogin modal-facebook facebook_button_connect">
+            </div>
+        <?php endif; ?>
+        <?php if ($google->isGoogleEnabled()) : ?>
+            <?php $scriptString .= <<<script
+                    $('.google_button_connect').bind('click',function(){
+                        var url = '{$google->getButtonUrl()}';
+                        if (url.length) {
+                            sociallogin.display(url, 'Google', 600, 600);
+                        }
+                    });
+                script;
+            ?>
+            <div class=" modal-socialogin modal-google google_button_connect">
+            </div>
+        <?php endif; ?>
+        <?php if ($amazon->isAmazonEnabled()) : ?>
+            <?php $scriptString .= <<<script
+                     $('.amazon_button_connect').bind('click',function(){
+                        var url = '{$amazon->getButtonUrl()}';
+                        if (url.length) {
+                            sociallogin.display(url, 'Amazon', 600, 600);
+                        }
+                    });
+                script;
+            ?>
+            <div class=" modal-socialogin modal-amazon amazon_button_connect">
+            </div>
+        <?php endif; ?>
+        <?php if ($twitter->isTwitterEnabled()) : ?>
+            <?php $scriptString .= <<<script
+                    $('.twitter_button_connect').bind('click',function(){
+                        var url = '{$twitter->getButtonUrl()}';
+                        if (url.length) {
+                            sociallogin.display(url, 'Twitter', 600, 600);
+                        }
+                    });
+                script;
+            ?>
+            <div class=" modal-socialogin modal-twitter twitter_button_connect">
+            </div>
+        <?php endif; ?>
+        <?php if ($instagram->isInstagramEnabled()) : ?>
+            <?php $scriptString .= <<<script
+                    $('.instagram_button_connect').bind('click',function(){
+                        var url = '{$instagram->getButtonUrl()}';
+                        if (url.length) {
+                            sociallogin.display(url, 'Instagram', 600, 600);
+                        }
+                    });
+                script;
+            ?>
+            <div class=" modal-socialogin modal-instagram instagram_button_connect">
+            </div>
+        <?php endif; ?>
+        <?php if ($linkedin->isLinkedinEnabled()) : ?>
+            <?php $scriptString .= <<<script
+                    $('.linkedin_button_connect').bind('click',function(){
+                        var url = '{$linkedin->getButtonUrl()}';
+                        if (url.length) {
+                            sociallogin.display(url, 'Linkedin', 600, 600);
+                        }
+                    });
+                script;
+            ?>
+            <div class=" modal-socialogin modal-linkedin linkedin_button_connect">
+            </div>
+        <?php endif; ?>
+        <?php if ($pinterest->isPinterestEnabled()) : ?>
+            <?php $scriptString .= <<<script
+                     $('.pinterest_button_connect').bind('click', function () {
+                        var url = '{$pinterest->getButtonUrl()}';
+                        if (url.length) {
+                            sociallogin.display(url, 'Pinterest', 600, 600);
+                        }
+                    });
+                script;
+            ?>
+            <div class=" modal-socialogin modal-pinterest pinterest_button_connect">
+            </div>
+        <?php endif; ?>
+        <?php if ($reddit->isRedditEnabled()) : ?>
+            <?php $scriptString .= <<<script
+                   $('.reddit_button_connect').bind('click',function(){
+                        var url = '{$reddit->getButtonUrl()}';
+                        if (url.length) {
+                            sociallogin.display(url, 'Reddit', 600, 600);
+                        }
+                   });
+                script;
+            ?>
+            <div class=" modal-socialogin modal-reddit reddit_button_connect">
+            </div>
+        <?php endif; ?>
+        <?php if ($line->isLineEnabled()) : ?>
+            <?php $scriptString .= <<<script
+                    $('.line_button_connect').bind('click',function(){
+                        var url = '{$line->getButtonUrl()}';
+                        if (url.length) {
+                            sociallogin.display(url, 'Line', 600, 600);
+                        }
+                    });
+                script;
+            ?>
+            <div class=" modal-socialogin modal-line line_button_connect">
+            </div>
+        <?php endif; ?>
+        <?php if ($zalo->isZaloEnable()) : ?>
+            <?php $scriptString .= <<<script
+                    $(".zalo_button_connect").bind("click", function () {
+                        var btnUrl = '{$zalo->getButtonUrl()}';
+                        if (btnUrl.length) {
+                            sociallogin.display(btnUrl, "Zalo", 600, 600);
+                        }
+                    });
+                script;
+            ?>
+            <div class=" modal-socialogin modal-zalo zalo_button_connect">
+            </div>
+        <?php endif; ?>
+        <?php if ($apple->isAppleEnabled()) : ?>
+            <?php $scriptString .= <<<script
+                    $('.apple_button_connect').bind('click',function(){
+                        var url = '{$apple->getButtonUrl()}';
+                        if (url.length) {
+                            sociallogin.display(url, 'Apple', 600, 600);
+                        }
+                    });
+                script;
+            ?>
+            <div class=" modal-socialogin modal-apple apple_button_connect">
+            </div>
+        <?php endif; ?>
+    </div>
+</div>
+<?php $scriptString .= <<<script
+        })
+            })
+script; ?>
+
+<?= isset($secureRenderer) ? $secureRenderer->renderTag('script', [], $scriptString, false) : '<script>' . $scriptString . '</script>' ?>
+
+<?php endif; ?>
+
+
+<?php $scriptString = <<<script
+    require([
+        'jquery',
+        'slick'
+    ], function ($) {
+        $(document).ready(function () {
+            $(".slider-icon").not('.slick-initialized').slick({
+                arrows: true,
+                dots: false,
+                infinite: false,
+                slidesToShow: 4,
+                speed: 300,
+                slidesToScroll: 4,
+            });
+        });
+    });
+script;
+?>
+<?= isset($secureRenderer) ? $secureRenderer->renderTag('script', [], $scriptString, false) : '<script>' . $scriptString . '</script>' ?>

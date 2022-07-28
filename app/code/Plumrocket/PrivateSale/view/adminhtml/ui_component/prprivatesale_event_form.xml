@@ -1,0 +1,723 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket_PrivateSale
+ * @copyright   Copyright (c) 2020 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ -->
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">prprivatesale_event_form.privatesale_event_from_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Add New Event</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="back" class="Plumrocket\PrivateSale\Block\Adminhtml\Event\Edit\BackButton"/>
+            <button name="delete" class="Plumrocket\PrivateSale\Block\Adminhtml\Event\Edit\DeleteButton"/>
+            <button name="preview" class="Plumrocket\PrivateSale\Block\Adminhtml\Event\Edit\PreviewButton"/>
+            <button name="duplicate" class="Plumrocket\PrivateSale\Block\Adminhtml\Event\Edit\DuplicateButton"/>
+            <button name="save" class="Plumrocket\PrivateSale\Block\Adminhtml\Event\Edit\SaveButton"/>
+        </buttons>
+        <namespace>prprivatesale_event_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>prprivatesale_event_form.privatesale_event_from_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="privatesale_event_from_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="prprivatesale/event/save"/>
+        </settings>
+        <dataProvider class="Plumrocket\PrivateSale\Ui\DataProvider\Event\Form\DataProvider" name="privatesale_event_from_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>entity_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general">
+        <settings>
+            <label translate="true">Event</label>
+            <dataScope/>
+        </settings>
+        <field name="entity_id" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="is_event_private" formElement="checkbox" sortOrder="10">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Plumrocket_PrivateSale/js/form/field/checkbox</item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Is Event Private?</label>
+                <notice>Enable restricted, members-only access for the duration of the event.</notice>
+                <scopeLabel>[WEBSITE]</scopeLabel>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="event_type" formElement="select" sortOrder="30">
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <showFallbackReset>false</showFallbackReset>
+                <dataType>text</dataType>
+                <scopeLabel>[GLOBAL]</scopeLabel>
+                <label translate="true">Event Type</label>
+                <switcherConfig>
+                    <rules>
+                        <rule name="0">
+                            <value>1</value>
+                            <actions>
+                                <action name="0">
+                                    <target>prprivatesale_event_form.prprivatesale_event_form.general.category_container</target>
+                                    <callback>visible</callback>
+                                    <params>
+                                        <param name="0" xsi:type="boolean">true</param>
+                                    </params>
+                                </action>
+                                <action name="1">
+                                    <target>prprivatesale_event_form.prprivatesale_event_form.general.choose_product_container</target>
+                                    <callback>visible</callback>
+                                    <params>
+                                        <param name="0" xsi:type="boolean">false</param>
+                                    </params>
+                                </action>
+                                <action name="2">
+                                    <target>index=category_event</target>
+                                    <callback>visible</callback>
+                                    <params>
+                                        <param name="0" xsi:type="boolean">true</param>
+                                    </params>
+                                </action>
+                                <action name="3">
+                                    <target>index=product_event</target>
+                                    <callback>visible</callback>
+                                    <params>
+                                        <param name="0" xsi:type="boolean">false</param>
+                                    </params>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="1">
+                            <value>2</value>
+                            <actions>
+                                <action name="0">
+                                    <target>prprivatesale_event_form.prprivatesale_event_form.general.category_container</target>
+                                    <callback>visible</callback>
+                                    <params>
+                                        <param name="0" xsi:type="boolean">false</param>
+                                    </params>
+                                </action>
+                                <action name="1">
+                                    <target>prprivatesale_event_form.prprivatesale_event_form.general.choose_product_container</target>
+                                    <callback>visible</callback>
+                                    <params>
+                                        <param name="0" xsi:type="boolean">true</param>
+                                    </params>
+                                </action>
+                                <action name="2">
+                                    <target>index=category_event</target>
+                                    <callback>visible</callback>
+                                    <params>
+                                        <param name="0" xsi:type="boolean">false</param>
+                                    </params>
+                                </action>
+                                <action name="3">
+                                    <target>index=product_event</target>
+                                    <callback>visible</callback>
+                                    <params>
+                                        <param name="0" xsi:type="boolean">true</param>
+                                    </params>
+                                </action>
+                            </actions>
+                        </rule>
+                    </rules>
+                    <enabled>true</enabled>
+                </switcherConfig>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Plumrocket\PrivateSale\Model\Config\Source\EventType"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <container name="category_container" component="Magento_Ui/js/form/components/group" sortOrder="40">
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">container</item>
+                <item name="config" xsi:type="array">
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="additionalClasses" xsi:type="string">admin__control-grouped-date</item>
+                    <item name="label" xsi:type="string" translate="true">Event Category</item>
+                    <item name="scopeLabel" xsi:type="string">[WEBSITE]</item>
+                </item>
+            </argument>
+            <field name="category_event" component="Magento_Catalog/js/components/new-category" sortOrder="10" formElement="select">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="filterOptions" xsi:type="boolean">true</item>
+                        <item name="multiple" xsi:type="boolean">false</item>
+                        <item name="showCheckbox" xsi:type="boolean">true</item>
+                        <item name="disableLabel" xsi:type="boolean">true</item>
+                        <item name="levelsVisibility" xsi:type="number">1</item>
+                        <item name="optgroupTmpl" xsi:type="string">Plumrocket_PrivateSale/form/element/event-category-select</item>
+                    </item>
+                </argument>
+                <settings>
+                    <elementTmpl>ui/grid/filters/elements/ui-select</elementTmpl>
+                    <notice>Please assign the event to an existing category or create a new category.</notice>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <listens>
+                        <link name="index=create_category:responseData">setParsed</link>
+                        <link name="newOption">toggleOptionSelected</link>
+                    </listens>
+                </settings>
+                <formElements>
+                    <select>
+                        <settings>
+                            <options class="Plumrocket\PrivateSale\Model\Config\Source\CategoryTree"/>
+                        </settings>
+                    </select>
+                </formElements>
+            </field>
+            <container name="category_button" component="Magento_Ui/js/form/components/button" template="ui/form/components/button/container" sortOrder="20">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="formElement" xsi:type="string">container</item>
+                        <item name="actions" xsi:type="array">
+                            <item name="0" xsi:type="array">
+                                <item name="targetName" xsi:type="string">prprivatesale_event_form.prprivatesale_event_form.general.create_category_modal</item>
+                                <item name="actionName" xsi:type="string">toggleModal</item>
+                            </item>
+                        </item>
+                        <item name="displayArea" xsi:type="string">insideGroup</item>
+                        <item name="title" xsi:type="string" translate="true">New Category</item>
+                        <item name="additionalForGroup" xsi:type="boolean">true</item>
+                        <item name="additionalClasses" xsi:type="string">admin__field-small</item>
+                    </item>
+                </argument>
+            </container>
+        </container>
+        <modal name="create_category_modal">
+            <settings>
+                <options>
+                    <option name="title" xsi:type="string" translate="true">New Category</option>
+                </options>
+                <imports>
+                    <link name="state">!index=create_category:responseStatus</link>
+                </imports>
+            </settings>
+            <insertForm name="create_category">
+                <settings>
+                    <formSubmitType>ajax</formSubmitType>
+                    <renderUrl path="mui/index/render_handle">
+                        <param name="handle">catalog_category_create</param>
+                        <param name="buttons">1</param>
+                    </renderUrl>
+                    <loading>false</loading>
+                    <realTimeLink>true</realTimeLink>
+                    <autoRender>true</autoRender>
+                    <toolbarContainer>${ $.parentName }</toolbarContainer>
+                    <externalProvider>new_category_form.new_category_form_data_source</externalProvider>
+                    <ns>new_category_form</ns>
+                </settings>
+            </insertForm>
+        </modal>
+        <container name="choose_product_container" component="Magento_Ui/js/form/components/group" sortOrder="60">
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">container</item>
+                <item name="config" xsi:type="array">
+                    <item name="formElement" xsi:type="string">container</item>
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="label" xsi:type="string">Event Product</item>
+                    <item name="dataScope" xsi:type="string"/>
+                    <item name="additionalClasses" xsi:type="string">admin__control-grouped-date pr-prs-wrap</item>
+                    <item name="breakLine" xsi:type="boolean">true</item>
+                    <item name="scopeLabel" xsi:type="string">[WEBSITE]</item>
+                </item>
+            </argument>
+            <container name="choose_product_button" component="Magento_Ui/js/form/components/button" sortOrder="10">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="formElement" xsi:type="string">container</item>
+                        <item name="actions" xsi:type="array">
+                            <item name="0" xsi:type="array">
+                                <item name="targetName" xsi:type="string">prprivatesale_event_form.prprivatesale_event_form.general.choose_product</item>
+                                <item name="actionName" xsi:type="string">toggleModal</item>
+                            </item>
+                        </item>
+                        <item name="imports" xsi:type="array">
+                            <item name="title" xsi:type="string">${ $.provider }:data.product_button_label</item>
+                        </item>
+                        <item name="additionalForGroup" xsi:type="boolean">true</item>
+                        <item name="displayArea" xsi:type="string">insideGroup</item>
+                        <item name="additionalClasses" xsi:type="string">admin__field-small</item>
+                    </item>
+                </argument>
+            </container>
+            <field name="product_event" sortOrder="30" formElement="input" component="Plumrocket_PrivateSale/js/form/field/choose-product">
+                <settings>
+                    <imports>
+                        <link name="userChanges">${ $.provider }:${ $.dataProvider }</link>
+                        <link name="productLabel">${ $.provider }:data.product_label</link>
+                        <link name="productLink">${ $.provider }:data.product_link</link>
+                        <link name="productEditUrl">${ $.provider }:data.product_edit_url</link>
+                    </imports>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <elementTmpl>Plumrocket_PrivateSale/form/element/link</elementTmpl>
+                    <notice>Please assign the event to an existing product.</notice>
+                </settings>
+            </field>
+        </container>
+        <modal name="choose_product">
+            <settings>
+                <options>
+                    <option name="title" xsi:type="string" translate="true">Assign Product</option>
+                    <option name="buttons" xsi:type="array">
+                        <item name="0" xsi:type="array">
+                            <item name="text" xsi:type="string">Cancel</item>
+                            <item name="class" xsi:type="string">action-secondary</item>
+                            <item name="actions" xsi:type="array">
+                                <item name="0" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">${ $.name }</item>
+                                    <item name="actionName" xsi:type="string">actionCancel</item>
+                                </item>
+                            </item>
+                        </item>
+                        <item name="1" xsi:type="array">
+                            <item name="text" xsi:type="string" translate="true">Add</item>
+                            <item name="class" xsi:type="string">action-primary</item>
+                            <item name="actions" xsi:type="array">
+                                <item name="0" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">index = product_event</item>
+                                    <item name="actionName" xsi:type="string">changeValue</item>
+                                </item>
+                                <item name="1" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">${ $.name }</item>
+                                    <item name="actionName" xsi:type="string">actionDone</item>
+                                </item>
+                            </item>
+                        </item>
+                    </option>
+                </options>
+            </settings>
+            <insertListing name="product_listing">
+                <settings>
+                    <externalProvider>prprivatesale_event_product_listing.prprivatesale_event_product_listing_data_source</externalProvider>
+                    <loading>false</loading>
+                    <autoRender>true</autoRender>
+                    <ns>prprivatesale_event_product_listing</ns>
+                    <exports>
+                        <link name="uuid">${ $.externalProvider }:params.product_id</link>
+                    </exports>
+                    <imports>
+                        <link name="uuid">${ $.provider }:data.uuid</link>
+                    </imports>
+                </settings>
+            </insertListing>
+        </modal>
+        <container name="date_container" component="Magento_Ui/js/form/components/group" sortOrder="70">
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">container</item>
+                <item name="config" xsi:type="array">
+                    <item name="additionalClasses" xsi:type="string">admin__control-grouped-date</item>
+                    <item name="breakLine" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+            <field name="event_from" formElement="date" sortOrder="10">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Schedule Event From</item>
+                        <item name="additionalClasses" xsi:type="string">admin__field-date</item>
+                    </item>
+                </argument>
+                <settings>
+                    <validation>
+                        <rule name="validate-datetime" xsi:type="boolean">true</rule>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <dataType>text</dataType>
+                </settings>
+                <formElements>
+                    <date>
+                        <settings>
+                            <options>
+                                <option name="showsTime" xsi:type="boolean">true</option>
+                                <option name="dateFormat" xsi:type="string">MMM d, YYYY</option>
+                                <option name="timeFormat" xsi:type="string">HH:mm:ss</option>
+                            </options>
+                        </settings>
+                    </date>
+                </formElements>
+            </field>
+            <field name="event_to" formElement="date" sortOrder="20">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">To</item>
+                        <item name="additionalClasses" xsi:type="string">admin__field-date</item>
+                    </item>
+                </argument>
+                <settings>
+                    <validation>
+                        <rule name="validate-datetime" xsi:type="boolean">true</rule>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <dataType>text</dataType>
+                </settings>
+                <formElements>
+                    <date>
+                        <settings>
+                            <options>
+                                <option name="showsTime" xsi:type="boolean">true</option>
+                                <option name="dateFormat" xsi:type="string">MMM d, YYYY</option>
+                                <option name="timeFormat" xsi:type="string">HH:mm:ss</option>
+                            </options>
+                        </settings>
+                    </date>
+                </formElements>
+            </field>
+        </container>
+        <field name="priority" formElement="input" sortOrder="100">
+            <settings>
+                <scopeLabel>[WEBSITE]</scopeLabel>
+                <validation>
+                    <rule name="validate-number" xsi:type="boolean">true</rule>
+                </validation>
+                <label translate="true">Priority</label>
+                <notice>When events share the same product, and their dates are overlapping, the event with higher priority will be selected.</notice>
+            </settings>
+        </field>
+    </fieldset>
+    <fieldset name="content">
+        <settings>
+            <level>1</level>
+            <collapsible>true</collapsible>
+            <label translate="true">Content</label>
+        </settings>
+        <container name="event_video" sortOrder="20" component="Magento_Ui/js/form/components/group" template="Plumrocket_PrivateSale/form/components/field">
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">container</item>
+                <item name="config" xsi:type="array">
+                    <item name="additionalClasses" xsi:type="string">admin__control-grouped-date</item>
+                    <item name="label" xsi:type="string" translate="true">Event Video</item>
+                    <item name="showLabel" xsi:type="boolean">true</item>
+                    <item name="scopeLabel" xsi:type="string">[STORE VIEW]</item>
+                </item>
+            </argument>
+            <htmlContent name="event_video">
+                <block name="event_video" class="Plumrocket\PrivateSale\Block\Adminhtml\Event\Helper\Form\Gallery">
+                    <block class="Plumrocket\PrivateSale\Block\Adminhtml\Event\Helper\Form\Gallery\Content" as="content">
+                        <arguments>
+                            <argument name="config" xsi:type="array">
+                                <item name="parentComponent" xsi:type="string">prprivatesale_event_form.prprivatesale_event_form.event_video.block_event_video.block_event_video</item>
+                            </argument>
+                        </arguments>
+                        <block class="Plumrocket\PrivateSale\Block\Adminhtml\Event\Edit\NewVideo" name="new-video" template="Magento_ProductVideo::product/edit/slideout/form.phtml"/>
+                    </block>
+                </block>
+            </htmlContent>
+        </container>
+    </fieldset>
+    <fieldset name="permissions">
+        <settings>
+            <level>1</level>
+            <collapsible>true</collapsible>
+            <label translate="true">General Permissions</label>
+        </settings>
+        <field name="event_permissions" formElement="select" sortOrder="10">
+            <settings>
+                <label translate="true">Use Default Config Settings</label>
+                <scopeLabel>[WEBSITE]</scopeLabel>
+                <switcherConfig>
+                    <rules>
+                        <rule name="0">
+                            <value>0</value>
+                            <actions>
+                                <action name="0">
+                                    <target>prprivatesale_event_form.prprivatesale_event_form.permissions.before_event_starts</target>
+                                    <callback>visible</callback>
+                                    <params>
+                                        <param name="0" xsi:type="boolean">true</param>
+                                    </params>
+                                </action>
+                                <action name="1">
+                                    <target>prprivatesale_event_form.prprivatesale_event_form.permissions.after_event_ends</target>
+                                    <callback>visible</callback>
+                                    <params>
+                                        <param name="0" xsi:type="boolean">true</param>
+                                    </params>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="1">
+                            <value>1</value>
+                            <actions>
+                                <action name="0">
+                                    <target>prprivatesale_event_form.prprivatesale_event_form.permissions.before_event_starts</target>
+                                    <callback>visible</callback>
+                                    <params>
+                                        <param name="0" xsi:type="boolean">false</param>
+                                    </params>
+                                </action>
+                                <action name="1">
+                                    <target>prprivatesale_event_form.prprivatesale_event_form.permissions.after_event_ends</target>
+                                    <callback>visible</callback>
+                                    <params>
+                                        <param name="0" xsi:type="boolean">false</param>
+                                    </params>
+                                </action>
+                            </actions>
+                        </rule>
+                    </rules>
+                    <enabled>true</enabled>
+                </switcherConfig>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Magento\Config\Model\Config\Source\Yesno"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <container name="before_event_starts" sortOrder="20" component="Magento_Ui/js/form/components/group" template="Plumrocket_PrivateSale/form/components/field">
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">container</item>
+                <item name="config" xsi:type="array">
+                    <item name="additionalClasses" xsi:type="string">admin__control-grouped-date</item>
+                    <item name="label" xsi:type="string" translate="true">Before Event Starts</item>
+                    <item name="notice" xsi:type="string">The same permissions will apply to all customer groups. Changing "Browsing Event" permissions will enable/disable category or product status.</item>
+                    <item name="showLabel" xsi:type="boolean">true</item>
+                    <item name="scopeLabel" xsi:type="string">[WEBSITE]</item>
+                </item>
+            </argument>
+            <htmlContent name="before_event_starts">
+                <block class="Plumrocket\PrivateSale\Block\Adminhtml\Form\Field\GeneralPermissions" name="before-event-starts">
+                    <arguments>
+                        <argument name="element" xsi:type="string">Plumrocket\PrivateSale\ViewModel\Adminhtml\Form\Element</argument>
+                    </arguments>
+                    <action method="setElementData">
+                        <argument name="name" xsi:type="string">name</argument>
+                        <argument name="value" xsi:type="string">before_event_starts</argument>
+                    </action>
+                    <action method="setElementData">
+                        <argument name="name" xsi:type="string">default_value</argument>
+                        <argument name="value" xsi:type="helper" helper="Plumrocket\PrivateSale\Helper\Config::getGeneralPermissionBeforeEventStarts">after_event_ends</argument>
+                    </action>
+                </block>
+            </htmlContent>
+        </container>
+        <container name="after_event_ends" sortOrder="30" component="Magento_Ui/js/form/components/group" template="Plumrocket_PrivateSale/form/components/field">
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">container</item>
+                <item name="config" xsi:type="array">
+                    <item name="additionalClasses" xsi:type="string">admin__control-grouped-date</item>
+                    <item name="label" xsi:type="string" translate="true">After Event Ends</item>
+                    <item name="notice" xsi:type="string">The same permissions will apply to all customer groups. Changing "Browsing Event" permissions will enable/disable category or product status.</item>
+                    <item name="showLabel" xsi:type="boolean">true</item>
+                    <item name="scopeLabel" xsi:type="string">[WEBSITE]</item>
+                </item>
+            </argument>
+            <htmlContent name="after_event_ends">
+                <block class="Plumrocket\PrivateSale\Block\Adminhtml\Form\Field\GeneralPermissions" name="after-event-ends">
+                    <arguments>
+                        <argument name="element" xsi:type="string">Plumrocket\PrivateSale\ViewModel\Adminhtml\Form\Element</argument>
+                    </arguments>
+                    <action method="setElementData">
+                        <argument name="name" xsi:type="string">name</argument>
+                        <argument name="value" xsi:type="string">after_event_ends</argument>
+                    </action>
+                    <action method="setElementData">
+                        <argument name="name" xsi:type="string">default_value</argument>
+                        <argument name="value" xsi:type="helper" helper="Plumrocket\PrivateSale\Helper\Config::getGeneralPermissionAfterEventEnds">after_event_ends</argument>
+                    </action>
+                </block>
+            </htmlContent>
+        </container>
+    </fieldset>
+    <fieldset name="private_sale">
+        <settings>
+            <level>1</level>
+            <collapsible>true</collapsible>
+            <label translate="true">Private Sale Permissions</label>
+        </settings>
+        <field name="private_event_permissions" formElement="select" sortOrder="20">
+            <settings>
+                <label translate="true">Use Default Config Settings</label>
+                <scopeLabel>[WEBSITE]</scopeLabel>
+                <switcherConfig>
+                    <rules>
+                        <rule name="0">
+                            <value>0</value>
+                            <actions>
+                                <action name="0">
+                                    <target>prprivatesale_event_form.prprivatesale_event_form.private_sale.custom_permissions</target>
+                                    <callback>visible</callback>
+                                    <params>
+                                        <param name="0" xsi:type="boolean">true</param>
+                                    </params>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="1">
+                            <value>1</value>
+                            <actions>
+                                <action name="0">
+                                    <target>prprivatesale_event_form.prprivatesale_event_form.private_sale.custom_permissions</target>
+                                    <callback>visible</callback>
+                                    <params>
+                                        <param name="0" xsi:type="boolean">false</param>
+                                    </params>
+                                </action>
+                            </actions>
+                        </rule>
+                    </rules>
+                    <enabled>true</enabled>
+                </switcherConfig>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Magento\Config\Model\Config\Source\Yesno"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <container name="custom_permissions" sortOrder="30" component="Magento_Ui/js/form/components/group" template="Plumrocket_PrivateSale/form/components/field">
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">container</item>
+                <item name="config" xsi:type="array">
+                    <item name="additionalClasses" xsi:type="string">admin__control-grouped-date</item>
+                    <item name="label" xsi:type="string" translate="true">Custom Permissions</item>
+                    <item name="notice" xsi:type="string" translate="true">Configure access for selected customer groups to a private event. Custom permissions will override global permissions set in the extension configuration.</item>
+                    <item name="scopeLabel" xsi:type="string">[WEBSITE]</item>
+                </item>
+            </argument>
+            <htmlContent name="custom_permissions">
+                <block class="Plumrocket\PrivateSale\Block\Adminhtml\Form\Field\PrivateSalePermissions" name="custom-permission">
+                    <arguments>
+                        <argument name="element" xsi:type="string">Plumrocket\PrivateSale\ViewModel\Adminhtml\Form\Element</argument>
+                    </arguments>
+                    <action method="setElementData">
+                        <argument name="name" xsi:type="string">name</argument>
+                        <argument name="value" xsi:type="string">custom_permissions</argument>
+                    </action>
+                    <action method="setElementData">
+                        <argument name="name" xsi:type="string">default_value</argument>
+                        <argument name="value" xsi:type="helper" helper="Plumrocket\PrivateSale\Helper\Config::getPrivateSalePermission">after_event_ends</argument>
+                    </action>
+                </block>
+            </htmlContent>
+        </container>
+    </fieldset>
+    <fieldset name="discounts">
+        <settings>
+            <collapsible>true</collapsible>
+            <label translate="true">Products and Discounts</label>
+        </settings>
+        <insertListing name="flash_sale_discounts">
+            <settings>
+                <externalProvider>prprivatesale_discount_listing.prprivatesale_discount_listing_data_source</externalProvider>
+                <loading>false</loading>
+                <autoRender>true</autoRender>
+                <ns>prprivatesale_discount_listing</ns>
+                <exports>
+                    <link name="internalProviderName">${ $.externalProvider }:internalProviderName</link>
+                    <link name="productId">${ $.externalProvider }:params.product_id</link>
+                    <link name="categoryId">${ $.externalProvider }:params.category_id</link>
+                    <link name="eventType">${ $.externalProvider }:params.event_type</link>
+                    <link name="event_id">${ $.externalProvider }:params.event_id</link>
+                    <link name="eventIdCopy">prprivatesale_discount_listing.prprivatesale_discount_listing.listing_top.export_button:additionalParams.event_id</link>
+                    <link name="productIdCopy">prprivatesale_discount_listing.prprivatesale_discount_listing.listing_top.export_button:additionalParams.product_id</link>
+                    <link name="categoryIdCopy">prprivatesale_discount_listing.prprivatesale_discount_listing.listing_top.export_button:additionalParams.category_id</link>
+                    <link name="eventTypeCopy">prprivatesale_discount_listing.prprivatesale_discount_listing.listing_top.export_button:additionalParams.event_type</link>
+                </exports>
+                <imports>
+                    <link name="internalProviderName">${ $.provider }:name</link>
+                    <link name="event_id">${ $.provider }:data.entity_id</link>
+                    <link name="categoryId">${ $.provider }:data.category_event</link>
+                    <link name="productId">${ $.provider }:data.product_event</link>
+                    <link name="eventType">${ $.provider }:data.event_type</link>
+                    <link name="categoryIdCopy">${ $.provider }:data.category_event</link>
+                    <link name="productIdCopy">${ $.provider }:data.product_event</link>
+                    <link name="eventTypeCopy">${ $.provider }:data.event_type</link>
+                    <link name="eventIdCopy">${ $.provider }:data.entity_id</link>
+                </imports>
+            </settings>
+        </insertListing>
+        <htmlContent name="discounts_notice_content">
+            <block name="discounts_notice_block" class="Plumrocket\PrivateSale\Block\Adminhtml\Event\Edit\Discounts\Notice">
+                <arguments>
+                    <argument name="template" xsi:type="string">Plumrocket_PrivateSale::form/event/discounts/notice.phtml</argument>
+                </arguments>
+            </block>
+        </htmlContent>
+    </fieldset>
+    <fieldset name="banner">
+        <settings>
+            <collapsible>true</collapsible>
+            <label translate="true">Promo Banner</label>
+        </settings>
+    </fieldset>
+    <fieldset name="developer">
+        <settings>
+            <collapsible>true</collapsible>
+            <label translate="true">Developer</label>
+        </settings>
+        <field name="widget_code" formElement="textarea" sortOrder="10">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="cols" xsi:type="number">15</item>
+                    <item name="rows" xsi:type="number">5</item>
+                    <item name="readonly" xsi:type="boolean">true</item>
+                    <item name="default" xsi:type="string">{{widget type="Plumrocket\PrivateSale\Block\Homepage\ProductWidget" flashsale_id="1" show_pager="1" products_count="50" products_per_page="4" exclude_ending_soon="1" template="Magento_Catalog::product/widget/new/content/new_grid.phtml"}}</item>
+                </item>
+            </argument>
+            <settings>
+                <elementTmpl>Plumrocket_PrivateSale/form/element/textarea</elementTmpl>
+                <label translate="true">Widget Code</label>
+                <notice>To display this event at any custom location of your Magento store, just copy and paste the widget code. Learn more about event widgets and their attributes at our online documentation.</notice>
+                <scopeLabel>[GLOBAL]</scopeLabel>
+            </settings>
+        </field>
+    </fieldset>
+</form>

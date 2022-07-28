@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Amasty\Preorder\Model\Product\RetrieveNote\FormatPreorderNote">
+        <arguments>
+            <argument name="customResolverPool" xsi:type="array">
+                <item name="release_date" xsi:type="object">Amasty\PreOrderRelease\Model\Product\RetrieveNote\FormatNote\ReleaseDateResolver</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Quote\Model\Quote\Config">
+        <plugin name="Amasty_PreOrderRelease::AddReleaseDateAttribute" type="Amasty\PreOrderRelease\Plugin\Quote\Model\Quote\Config\AddReleaseDateAttribute" />
+    </type>
+</config>

@@ -1,0 +1,29 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<if args="visible()">
+    <!-- ko if: address().firstname -->
+    <text args="address().prefix"></text> <text args="address().firstname"></text> <text args="address().middlename"></text>
+    <text args="address().lastname"></text> <text args="address().suffix"></text><br/>
+    <!-- /ko -->
+    <!-- ko if: address().street -->
+    <text args="_.values(address().street).join(', ')"></text><br/>
+    <!-- /ko -->
+    <!-- ko if: address().city || address().region || address().postcode -->
+    <text args="address().city "></text>, <span text="address().region"></span> <text args="address().postcode"></text><br/>
+    <!-- /ko -->
+    <!-- ko if: getCountryName(address().countryId) -->
+    <text args="getCountryName(address().countryId)"></text><br/>
+    <!-- /ko -->
+    <!-- ko if: address().telephone -->
+    <a if="address().telephone" attr="'href': 'tel:' + address().telephone" text="address().telephone"></a><br/>
+    <!-- /ko -->
+
+    <each args="data: address().customAttributes, as: 'element'">
+        <text args="$parent.getCustomAttributeLabel(element)"></text>
+        <br/>
+    </each>
+</if>

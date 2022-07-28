@@ -1,0 +1,175 @@
+{
+    "plumrocket_privatesale_event_eav_attribute": {
+        "column": {
+            "attribute_id": true,
+            "is_global": true
+        },
+        "index": {
+            "PLUMROCKET_PRIVATESALE_EVENT_EAV_ATTRIBUTE_ATTRIBUTE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "PLUMROCKET_PRIVATESALE_EVENT_EAV_ATTR_ATTR_ID_EAV_ATTR_ATTR_ID": true
+        }
+    },
+    "plumrocket_privatesale_product_event_indexer": {
+        "column": {
+            "product_id": true,
+            "website_id": true,
+            "event_id": true,
+            "is_private": true,
+            "start_date": true,
+            "end_date": true
+        },
+        "index": {
+            "PLUMROCKET_PRIVATESALE_PRODUCT_EVENT_INDEXER_EVENT_ID": true,
+            "PLUMROCKET_PRIVATESALE_PRODUCT_EVENT_INDEXER_WEBSITE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_EED167DA3EA854C028394BDB3FFF8188": true,
+            "PLUMROCKET_PRIVATESALE_PRD_EVENT_IDXER_WS_ID_STORE_WS_WS_ID": true,
+            "FK_0FD7016EA664E98D58B48F5DE106D7B5": true
+        }
+    },
+    "plumrocket_privatesale_product_upcoming_event_indexer": {
+        "column": {
+            "product_id": true,
+            "website_id": true,
+            "event_id": true,
+            "is_private": true,
+            "start_date": true,
+            "end_date": true
+        },
+        "index": {
+            "PLUMROCKET_PRIVATESALE_PRODUCT_UPCOMING_EVENT_INDEXER_EVENT_ID": true,
+            "PLUMROCKET_PRIVATESALE_PRODUCT_UPCOMING_EVENT_INDEXER_WEBSITE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_2BC5DC96088894A485786F3555BF1056": true,
+            "FK_77474B2FBE5DE6B8B3BE42CBD8895209": true,
+            "FK_41E33F9C4E8EA0ED5A61DE07FDD58BFD": true
+        }
+    },
+    "plumrocket_privatesale_product_ended_event_indexer": {
+        "column": {
+            "product_id": true,
+            "website_id": true,
+            "event_id": true,
+            "is_private": true,
+            "start_date": true,
+            "end_date": true
+        },
+        "index": {
+            "PLUMROCKET_PRIVATESALE_PRODUCT_ENDED_EVENT_INDEXER_EVENT_ID": true,
+            "PLUMROCKET_PRIVATESALE_PRODUCT_ENDED_EVENT_INDEXER_WEBSITE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_EE91EBDFD3EF2CE8C19021120F6E332C": true,
+            "FK_9B53A274AA75F2A03679E8875CE6346D": true,
+            "FK_DCD2A88DA9988211FCCC1788FDB0CD62": true
+        }
+    },
+    "plumrocket_privatesale_special_price_storage": {
+        "column": {
+            "price_id": true,
+            "sku": true,
+            "special_price_value": true,
+            "website_id": true,
+            "date_from": true,
+            "date_to": true
+        },
+        "index": {
+            "PLUMROCKET_PRIVATESALE_SPECIAL_PRICE_STORAGE_SKU": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_7C6F58AFC59C6A4D7B98CE941EB03335": true
+        }
+    },
+    "plumrocket_privatesale_event_statistics": {
+        "column": {
+            "entity_id": true,
+            "event_id": true,
+            "customer_id": true,
+            "order_id": true,
+            "item_id": true,
+            "created_date": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "plumrocket_privatesale_flash_sale": {
+        "column": {
+            "sale_id": true,
+            "product_id": true,
+            "event_id": true,
+            "discount_amount_percent": true,
+            "sale_price": true,
+            "flash_sale_qty_limit": true
+        },
+        "index": {
+            "PLUMROCKET_PRIVATESALE_FLASH_SALE_PRODUCT_ID": true,
+            "PLUMROCKET_PRIVATESALE_FLASH_SALE_EVENT_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "PLUMROCKET_PRIVATESALE_FLASH_SALE_PRD_ID_CAT_PRD_ENTT_ENTT_ID": true,
+            "FK_0F9193D95E9434546A3275698CF3C38C": true
+        }
+    },
+    "plumrocket_privatesale_event_entity": {
+        "column": {
+            "entity_id": true,
+            "event_type": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "plumrocket_privatesale_emailtemplates": {
+        "column": {
+            "id": true,
+            "name": true,
+            "store_id": true,
+            "date": true,
+            "events_ids": true,
+            "title": true,
+            "period_text": true,
+            "template": true,
+            "template_date_format": true,
+            "list_layout": true,
+            "list_template": true,
+            "list_template_date_format": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "plumrocket_privatesale_image": {
+        "column": {
+            "image_id": true,
+            "name": true,
+            "active_from": true,
+            "active_to": true,
+            "sort_order": true,
+            "exclude": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "plumrocket_privatesale_preview_access": {
+        "column": {
+            "code": true,
+            "active_to": true
+        }
+    }
+}

@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Catalog Lists -->
+    <type name="Magento\Catalog\Block\Product\ListProduct">
+        <plugin name="Amasty_Preorder::addPreorderLabelToCatalogList" type="Amasty\Preorder\Plugin\Catalog\Block\Product\ListProduct\AddPreorderHtml" />
+    </type>
+    <type name="Magento\CatalogWidget\Block\Product\ProductsList">
+        <plugin name="Amasty_Preorder::addPreorderLabelToWidgetList" type="Amasty\Preorder\Plugin\CatalogWidget\Block\Product\ProductsList\AddPreorderHtml" />
+    </type>
+    <type name="Magento\Catalog\Block\Product\ProductList\Related">
+        <plugin name="Amasty_Preorder::addToRelated" type="Amasty\Preorder\Plugin\ProductList\ListByGetItemsPlugin" />
+    </type>
+    <type name="Magento\Catalog\Block\Product\ProductList\Upsell">
+        <plugin name="Amasty_Preorder::addToUpsell" type="Amasty\Preorder\Plugin\ProductList\ListByItemCollectionPlugin" />
+    </type>
+    <type name="Magento\TargetRule\Block\Catalog\Product\ProductList\Related">
+        <plugin name="Amasty_Preorder::addToRelatedEE" type="Amasty\Preorder\Plugin\ProductList\ListByItemCollectionPlugin" />
+    </type>
+    <type name="Magento\TargetRule\Block\Catalog\Product\ProductList\Upsell">
+        <plugin name="Amasty_Preorder::addToUpsellEE" type="Amasty\Preorder\Plugin\ProductList\ListByItemCollectionPlugin" />
+    </type>
+    <type name="Amasty\Mostviewed\Block\Widget\Related">
+        <plugin name="Amasty_Preorder::addToMostviewedRelated"
+                type="Amasty\Preorder\Plugin\Mostviewed\Block\Widget\Related\AddPreorderHtml" />
+    </type>
+    <!-- Catalog Lists End -->
+
+    <type name="Magento\Catalog\Block\Product\View">
+        <plugin name="Amasty_Preorder::change-add-to-cart" type="Amasty\Preorder\Plugin\Catalog\Block\Product\View\ChangeCartButton" />
+    </type>
+    <type name="Magento\Catalog\Block\Product\AbstractProduct">
+        <plugin name="Amasty_Preorder::AddPreorderNote" type="Amasty\Preorder\Plugin\Catalog\Block\Product\AbstractProduct\ChangeStockInfo" sortOrder="100" />
+    </type>
+
+    <type name="Amasty\SeoRichData\Block\Product">
+        <plugin name="Amasty_Preorder::availability-condition"
+                type="Amasty\Preorder\Plugin\SeoRichData\Block\Product\ChangeAvailabilityCondition" />
+    </type>
+
+    <type name="Amasty\Conf\Helper\Data">
+        <plugin name="Amasty_Preorder::preorder-simple-in-matrix" type="Amasty\Preorder\Plugin\Conf\Helper\Data\CheckIsProductPreorder" />
+    </type>
+
+    <type name="Magento\Catalog\Model\Product\Type\AbstractType">
+        <plugin name="Amasty_Preorder::CheckIsSalable" type="Amasty\Preorder\Plugin\Catalog\Model\Product\Type\AbstractType\CheckIsSalable" />
+    </type>
+
+    <type name="Magento\Catalog\Helper\Product\View">
+        <plugin name="Amasty_Preorder::AddHandle" type="Amasty\Preorder\Plugin\Catalog\Helper\Product\View\AddHandle" />
+    </type>
+</config>

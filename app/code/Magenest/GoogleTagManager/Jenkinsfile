@@ -1,0 +1,242 @@
+#!groovy
+// Copyright © Vaimo Group. All rights reserved.
+// See LICENSE_VAIMO.txt for license details.
+
+// This pipeline is meant to be used together with vaimo/composer-changelogs (>=0.10.0) and is build on an
+// assumption that the CI job name matches with package name (required for package generation).
+
+@Library('platform-jenkins-pipeline') _
+
+pipeline {
+    agent { label 'magento2' }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '5'))
+        disableConcurrentBuilds()
+        timeout(time: 20, unit: 'MINUTES')
+        timestamps()
+    }
+    stages {
+        stage('Collect Info') {
+            steps {
+                script {
+                    env.CHANGELOG_URL = ''
+                    env.SHOULD_RELEASE = '0'
+                    env.SHOULD_ANALYSE = '0'
+                    env.SHOULD_TEST = '0'
+                    env.BRANCH_NAME = ''
+                    
+                    def branchName = sh(returnStdout: true, script: "hg branch").trim()
+                    def releaseAuthor = sh(returnStdout: true, script: "hg log -b ${branchName} -r . --template='{author}'").trim().toLowerCase()
+
+                    env.PACKAGE_NAME = sh(returnStdout: true, script: "cat composer.json|python -c 'import json,sys;o=json.load(sys.stdin);print o[\"name\"]'").trim()
+                    env.BRANCH_NAME = env.JOB_BASE_NAME == 'default' ? '' : branchName
+
+                    env.IS_RELEASE_BRANCH = env.JOB_BASE_NAME == 'default' || env.BRANCH_NAME.startsWith('release/')
+                    env.PIPELINE_NAME = sh(returnStdout: true, script: "echo ${env.JOB_NAME}|cut -d'/' -f1").trim()
+                    env.REPOSITORY_URL = "${env.MERCURIAL_REPOSITORY_URL}"
+                  
+                    env.DOCS_FOLDER = 'docs'
+                    env.HAS_DOCS = sh(returnStatus: true, script: "test -d ${env.DOCS_FOLDER}") == 0
+  
+                    env.SHOULD_BUILD = sh(returnStdout: true, script: "hg log -b ${branchName} -r . --template '{latesttagdistance}'").trim() != '1' || releaseAuthor != 'jenkins'
+                    
+                    env.REPOSITORY_HTTP = sh(returnStdout: true, script: "echo ${env.MERCURIAL_REPOSITORY_URL}|cut -d'@' -f2").trim()
+                    env.REPOSITORY_HTTP = "https://${env.REPOSITORY_HTTP}/src/${env.JOB_BASE_NAME}"           
+                }
+            }
+        }
+        stage('Validate') {
+            when {
+                expression { env.SHOULD_BUILD.toBoolean() == true }
+            }
+            steps {
+                ansiColor('xterm') {
+                    script {
+                        def validationResult = sh(returnStatus: true, script: "composer validate")
+                                        
+                        if (validationResult != 0) {
+                            sh('composer update --lock --ansi')
+                            sh("composer validate --ansi")
+                                                                    
+                            sh('hg commit -m "composer.lock updated due to changes done to package configuration"')
+                        } 
+                    }
+                }
+            }
+        }
+        stage('Build Module') {
+            when {
+                expression { env.SHOULD_BUILD.toBoolean() == true }
+            }
+            steps {
+                ansiColor('xterm') {
+                    sh("composer install --ansi")
+                    sh("composer validate --ansi")
+                    sh("composer changelog:validate --ansi")
+                }
+                script {
+                    env.RELEASE_VERSION = sh(returnStdout: true, script: "composer changelog:version --branch ${env.JOB_BASE_NAME}").trim()
+                    env.CHANGELOG_MAJOR_VERSION = sh(returnStdout: true, script: "composer changelog:version --branch ${env.JOB_BASE_NAME} --segments 1").trim()
+                                        
+                    env.SHOULD_RELEASE = env.SHOULD_BUILD.toBoolean() == true && env.CHANGELOG_MAJOR_VERSION != '' && env.IS_RELEASE_BRANCH.toBoolean() == true && sh(returnStdout: true, script: "hg tags|cut -d' ' -f1|grep '^${env.RELEASE_VERSION}\$' || true").trim() == ''
+                    env.SHOULD_ANALYSE = env.SHOULD_BUILD.toBoolean() == true && sh(returnStatus: true, script: "composer list --raw|grep -qw '^code:analyse '") == 0
+                    env.SHOULD_TEST = env.SHOULD_BUILD.toBoolean() == true && sh(returnStatus: true, script: "composer list --raw|grep -qw '^test '") == 0
+                }
+            }
+        }
+        stage('Analyse Code') {
+            parallel {
+                stage('Assess Code Quality') {
+                    when {
+                        expression { env.SHOULD_ANALYSE.toBoolean() == true }
+                    }
+                    steps {
+                        bitbucketStatus (key: 'analyse_code', name: 'Code Analysis') {
+                            ansiColor('xterm') {
+                                sh("composer code:analyse --ansi")
+                            }
+                        }
+                    }
+                }
+                stage('Run Tests') {
+                    when {
+                        expression { env.SHOULD_TEST.toBoolean() == true }
+                    }
+                    steps {
+                       bitbucketStatus (key: 'analyse_code', name: 'Code Analysis') {
+                            ansiColor('xterm') {
+                                sh("composer test --ansi")
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        stage('Lock Release') {
+            when {
+                expression { env.SHOULD_RELEASE.toBoolean() == true }
+            }
+            steps {
+                sh("hg tag ${env.RELEASE_VERSION}")
+                
+                script {
+                    env.RELEASE_LOCK_HASH = sh(returnStdout: true, script: "hg tip --template='{node}'").trim()
+                }
+            }
+        }
+        stage('Make Docs') {
+            when {
+                expression { env.SHOULD_BUILD.toBoolean() == true }
+            }
+            steps {                
+                script {
+                    env.DOCS_VERSION_SUFFIX = env.CHANGELOG_MAJOR_VERSION != '' ? "--v${env.CHANGELOG_MAJOR_VERSION}" : ''
+                    env.DOCS_SUFFIX = env.JOB_BASE_NAME == 'default' ? '' : "${env.DOCS_VERSION_SUFFIX}"
+                    env.DOCS_NAME = "${env.PIPELINE_NAME}${env.DOCS_SUFFIX}"
+                    env.DOCS_VERSIONED_NAME = "${env.PIPELINE_NAME}${env.DOCS_VERSION_SUFFIX}"
+
+                    if (sh(returnStatus: true, script: "test -f CHANGELOG.md") == 0) {
+                        sh("rm CHANGELOG.md")
+                    } 
+                
+                    sh("composer changelog:generate --url=${env.REPOSITORY_URL}")                
+                    
+                    env.CHANGELOG_URL = "https://docs.vaimo.com/${env.DOCS_NAME}/changelog.html"
+                                    
+                    env.HAS_CHANGELOG_MD = sh(returnStatus: true, script: "test -f CHANGELOG.md") == 0
+                        
+                    if (!env.HAS_DOCS.toBoolean() && env.HAS_CHANGELOG_MD.toBoolean() && env.SHOULD_RELEASE.toBoolean()) {
+                        env.CHANGELOG_URL = "${env.REPOSITORY_HTTP}/CHANGELOG.md"
+                        
+                        sh('hg add CHANGELOG.md')
+                        sh('hg commit -m "update CHANGELOG.md output"')
+                        
+                        env.RELEASE_LOCK_HASH = sh(returnStdout: true, script: "hg tip --template='{node}'").trim()
+                    }
+                    
+                    if (env.HAS_DOCS.toBoolean()) {
+                        sh("cd docs && make clean && make html")
+                    }
+                }
+            }
+        }
+        stage('Publish') {
+            parallel {
+                stage('Publish Docs: Development') {
+                    when {
+                        allOf {
+                            expression { env.HAS_DOCS.toBoolean() == true }
+                            expression { env.SHOULD_BUILD.toBoolean() == true }
+                            expression { env.IS_RELEASE_BRANCH.toBoolean() == true }
+                        }
+                    }
+                    steps {
+                        bitbucketStatus (key: 'publish_docs', name: 'Publish Development Docs') {
+                            sh("mc mirror --overwrite --remove --quiet docs/_build/html minio/docs.vaimo.com/${env.DOCS_NAME}--dev")
+                            sh("mc mirror --overwrite --remove --quiet docs/_build/html minio/docs.vaimo.com/${env.DOCS_VERSIONED_NAME}--dev")
+                        }
+                    }
+                }
+                
+                stage('Publish Docs: Production') {
+                    when {
+                        allOf {
+                            expression { env.HAS_DOCS.toBoolean() == true }
+                            expression { env.SHOULD_RELEASE.toBoolean() == true }
+                        }
+                    }
+                    steps {
+                        bitbucketStatus (key: 'publish_docs', name: 'Publish Production Docs') {
+                            sh("mc mirror --overwrite --remove --quiet docs/_build/html minio/docs.vaimo.com/${env.DOCS_NAME}")
+                            sh("mc mirror --overwrite --remove --quiet docs/_build/html minio/docs.vaimo.com/${env.DOCS_VERSIONED_NAME}")
+                        }
+                    }
+                }
+                
+                stage('Publish Release') {
+                    when {
+                        expression { env.SHOULD_RELEASE.toBoolean() == true }
+                    }
+                    steps {
+                        bitbucketStatus (key: 'publish_package', name: 'Publishing Package') {
+                            sh("hg push --rev ${env.RELEASE_LOCK_HASH} ${env.REPOSITORY_URL}")                                
+                        }
+                    }
+                }
+            }
+        }
+        stage('Publish Package') {
+            when {
+                expression { env.SHOULD_BUILD.toBoolean() == true }
+            }
+            steps {
+                bitbucketStatus (key: 'publish_package', name: 'Publishing Package') {
+                    generateComposerPackage(moduleName:"${env.REPOSITORY_URL}")
+                }
+            }
+        }
+        stage('Announce Release') {
+            when {
+                expression { env.SHOULD_RELEASE.toBoolean() == true }
+            }
+            steps {
+                script {
+                    env.RELEASE_NOTES = sh(returnStdout: true, script: "composer changelog:info --branch ${env.JOB_BASE_NAME} --format slack --brief").trim()
+                    env.NOTIFICATION = "*${env.PACKAGE_NAME}*: Release version ${env.RELEASE_VERSION} (<${env.REPOSITORY_HTTP}|src>) (<${env.CHANGELOG_URL}|log>)\n${env.RELEASE_NOTES}"
+                }
+            }
+            post {
+                success {
+                    slackSend(color: "good", channel: "#product-department", message: "${env.NOTIFICATION}")
+                    slackSend(color: "good", channel: "#module-releases", message: "${env.NOTIFICATION}")
+                }
+            }
+        }
+    }
+    post {
+        always {
+            deleteDir()
+            sendNotifications(channel: '#product-team', branch: "${env.BRANCH_NAME}")
+        }
+    }
+}

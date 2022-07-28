@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <title>Login</title>
+    </head>
+    <body>
+        <referenceBlock name="breadcrumbs">
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string">Home</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="title" xsi:type="string" translate="true">Home</item>
+                    <item name="label" xsi:type="string" translate="true">Home</item>
+                    <item name="link" xsi:type="string">/</item>
+                </argument>
+            </action>
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string">Login</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="title" xsi:type="string" translate="true">Login</item>
+                    <item name="label" xsi:type="string" translate="true">Login</item>
+                </argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <!-- customer.form.login.extra -->
+            <container htmlClass="column-wrapper" name="customer.column.wrapper" htmlTag="div">
+                <block class="Magento\Cms\Block\Block" name="customer.account.logo" before="-">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">customer.account.logo</argument>
+                    </arguments>
+                </block>
+                <container name="customer.form.container" label="Customer Login Container" htmlTag="div" htmlClass="form-container">
+                    <block class="Magento\Customer\Block\Form\Login" name="customer_form_login" template="Magento_Customer::form/login.phtml">
+                        <container name="form.additional.info" as="form_additional_info"/>
+                    </block>
+                    <block class="Magento\Customer\Block\Form\Login\Info" name="customer.new" template="Magento_Customer::newcustomer.phtml"/>
+                    <block class="Magenest\AdvancedLogin\Block\Form\Login" name="customer_form_login" template="Magenest_AdvancedLogin::customer/form/login.phtml">
+                        <container name="form.additional.info">
+                            <block class="Magento\Captcha\Block\Captcha" name="captcha" after="-" cacheable="false">
+                                <action method="setFormId">
+                                    <argument name="formId" xsi:type="string">user_login</argument>
+                                </action>
+                                <action method="setImgWidth">
+                                    <argument name="width" xsi:type="string">230</argument>
+                                </action>
+                                <action method="setImgHeight">
+                                    <argument name="width" xsi:type="string">50</argument>
+                                </action>
+                            </block>
+                        </container>
+                    </block>
+                </container>
+            </container>
+        </referenceContainer>
+        <referenceContainer name="header.container">
+            <block class="Magento\Theme\Block\Html\Title" name="page.main.title.mobile" template="Magento_Theme::html/title-mobile.phtml" before="-" />
+        </referenceContainer>
+        <move element="page.main.title" destination="customer.form.container" before="-" />
+    </body>
+</page>

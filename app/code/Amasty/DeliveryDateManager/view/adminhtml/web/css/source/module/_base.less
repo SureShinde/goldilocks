@@ -1,0 +1,42 @@
+//
+//  Delivery Date Admin Base Styles
+//  ____________________________________________
+
+//
+//  Common
+//  --------------------------------------------
+
+& when (@media-common = true) {
+    .amasty-deliverydate h4 {
+        display: none;
+    }
+
+    .amasty-deliverydate-fieldset {
+        & {
+            margin: 0;
+            padding: 0;
+            min-width: 0;
+            border: 0;
+        }
+
+        legend {
+            margin-bottom: 3rem;
+            font-weight: 600;
+            font-size: 1.8rem;
+        }
+    }
+
+    //Tooltip styles
+    .amdelivery-tooltip-list {
+        & {
+            margin-left: 25px;
+        }
+    }
+
+    //Schedule modal
+    .amdelivery-datepicker-input {
+        .admin__field-error {
+            width: 15rem;
+        }
+    }
+}

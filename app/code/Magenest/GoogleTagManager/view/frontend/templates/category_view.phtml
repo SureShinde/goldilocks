@@ -1,0 +1,23 @@
+<?php
+
+
+/** @var \Magenest\GoogleTagManager\Block\CategoryGtm $block */
+$products = $block->getProducts();
+
+if (!empty($products)) : ?>
+    <?php // phpcs:ignore MEQP2.Templates.RawJavaScript.FoundRawJS ?>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        var vaimoGtmImpressions = <?= /* @noEscape */ $block->jsonEncode($products) ?>;
+    </script>
+    <?php
+endif;
+?>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "google-tag-manager/category": {}
+        }
+    }
+</script>

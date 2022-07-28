@@ -1,0 +1,12 @@
+{
+    "magenest_pending_cod_order": {
+        "column": {
+            "pending_cod_order_id": true,
+            "email_sent": true,
+            "send_email": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

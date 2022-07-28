@@ -1,0 +1,9 @@
+<?php
+/** @var \Magento\Backend\Block\Template $block */
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+
+<?= $escaper->escapeHtml(__(
+    'Some products do not meet the notification criteria.<br/>The notification has been sent for the following products:'
+), ['br']) ?>
+<?= $escaper->escapeHtml('<br/>' . implode(',<br/>', $block->getData('product_skus')), ['br']) ?>

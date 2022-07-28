@@ -1,0 +1,284 @@
+& when (@media-common = true) {
+    .amlocator-index-index {
+        .amlocator-map-container {
+            .tick {
+                position: relative;
+                padding-left: 20px;
+                margin-bottom: 8px;
+                font-size: 12px;
+
+                &:before {
+                    position: absolute;
+                    left: 0;
+                    top: 1px;
+                    content: url("data:image/svg+xml,%3Csvg width='14' height='15' viewBox='0 0 14 15' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 14.5C10.8661 14.5 14 11.3661 14 7.5C14 3.6339 10.8661 0.5 7 0.5C3.1339 0.5 0 3.6339 0 7.5C0 11.3661 3.1339 14.5 7 14.5ZM9.9449 6.2449L6.7949 9.3949C6.66363 9.52613 6.48561 9.59985 6.3 9.59985C6.11439 9.59985 5.93637 9.52613 5.8051 9.3949L4.4051 7.9949C4.33824 7.93033 4.28492 7.85309 4.24823 7.76768C4.21154 7.68228 4.19223 7.59043 4.19142 7.49748C4.19062 7.40453 4.20833 7.31236 4.24352 7.22633C4.27872 7.1403 4.3307 7.06215 4.39642 6.99642C4.46215 6.9307 4.5403 6.87872 4.62633 6.84352C4.71236 6.80833 4.80454 6.79062 4.89748 6.79142C4.99043 6.79223 5.08228 6.81154 5.16768 6.84823C5.25309 6.88491 5.33033 6.93824 5.3949 7.0051L6.3 7.9102L8.9551 5.2551C9.01967 5.18824 9.09691 5.13492 9.18232 5.09823C9.26772 5.06154 9.35957 5.04223 9.45252 5.04142C9.54546 5.04062 9.63764 5.05833 9.72367 5.09352C9.8097 5.12872 9.88785 5.1807 9.95358 5.24642C10.0193 5.31215 10.0713 5.3903 10.1065 5.47633C10.1417 5.56236 10.1594 5.65454 10.1586 5.74748C10.1578 5.84043 10.1385 5.93228 10.1018 6.01768C10.0651 6.10309 10.0118 6.18033 9.9449 6.2449Z' fill='%2300A585'/%3E%3C/svg%3E%0A");
+                }
+            }
+
+            .list-info {
+                list-style: none;
+
+                li {
+                    .lib-vendor-prefix-display(flex);
+                    font-size: 12px;
+
+                    strong {
+                        min-width: 85px;
+                    }
+
+                }
+            }
+        }
+
+        .amlocator-search-container {
+            background: #F1F1F1;
+            border-radius: 8px;
+            padding: 13px 11px;
+
+            .amlocator-block.-separator {
+                display: none !important;
+            }
+        }
+
+        .amlocator-current-location {
+            .amlocator-text {
+                color: #000000;
+                border: 1px solid #E0E0E0;
+                border-radius: 6px;
+
+                &:focus + .amlocator-search {
+                    background: unset;
+                }
+
+                &::placeholder {
+                    color: #000000;
+                }
+            }
+
+            .amlocator-search {
+                background: unset;
+                top: 10px;
+
+                &:before {
+                    content: url("data:image/svg+xml,%3Csvg width='17' height='17' viewBox='0 0 17 17' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M11.9525 11.1789L16.2117 15.4381C16.3614 15.5879 16.4455 15.7911 16.4454 16.0028C16.4453 16.2146 16.3611 16.4177 16.2113 16.5674C16.0615 16.7171 15.8584 16.8012 15.6466 16.8011C15.4348 16.801 15.2317 16.7168 15.082 16.567L10.8228 12.3079C9.54961 13.294 7.94851 13.7581 6.34527 13.6057C4.74202 13.4533 3.25706 12.6958 2.19247 11.4874C1.12787 10.279 0.563618 8.71038 0.614492 7.10071C0.665365 5.49104 1.32755 3.96121 2.46632 2.82243C3.6051 1.68365 5.13493 1.02148 6.7446 0.970602C8.35427 0.919728 9.92286 1.48398 11.1313 2.54858C12.3397 3.61317 13.0972 5.09813 13.2496 6.70138C13.402 8.30462 12.9379 9.90572 11.9517 11.1789H11.9525ZM6.94525 12.0506C8.20503 12.0506 9.41321 11.5501 10.304 10.6593C11.1948 9.76853 11.6953 8.56035 11.6953 7.30057C11.6953 6.04079 11.1948 4.83261 10.304 3.94181C9.41321 3.05101 8.20503 2.55057 6.94525 2.55057C5.68547 2.55057 4.47729 3.05101 3.58649 3.94181C2.6957 4.83261 2.19525 6.04079 2.19525 7.30057C2.19525 8.56035 2.6957 9.76853 3.58649 10.6593C4.47729 11.5501 5.68547 12.0506 6.94525 12.0506Z' fill='black'/%3E%3C/svg%3E%0A");
+                }
+            }
+        }
+
+        .amlocator-search-radius {
+            .amlocator-title {
+                margin-bottom: 10px;
+                margin-top: 5px;
+            }
+
+            .amlocator-select {
+                background-color: unset;
+                padding-left: 5px;
+                background-position: center right 13px;
+                background-size: 9px;
+                font-weight: 600;
+            }
+
+            .amlocator-wrapper {
+                .amlocator-select {
+                    background-size: 12px;
+                    background-color: #fff;
+                    padding: 0 12px;
+                }
+            }
+        }
+
+        .amlocator-main-container .amlocator-search-container {
+            button.amlocator-button {
+                border-radius: 68px;
+                background-color: @theme__color__primary;
+                border: none;
+                color: #fff;
+                font-size: 18px;
+                font-weight: 800;
+                height: 44px;
+                text-transform: uppercase;
+                .lib-css(transition, all 0.3s ease-in-out);
+
+                &:hover, &:focus {
+                    background-color: @theme__color__primary-alt;
+                }
+            }
+        }
+
+        .amlocator-store-list {
+            .amlocator-store-desc {
+                margin-bottom: 0;
+                margin-top: 0;
+                border-bottom: 1px solid #E0E0E0;
+
+                .amlocator-store-information {
+                    .amlocator-title {
+                        margin-bottom: 8px;
+                    }
+
+                }
+
+                &:last-child {
+                    border-bottom: 0;
+                }
+
+                &.-active {
+                    background: @theme__color__primary;
+                }
+
+                .amlocator-schedule-container {
+                    display: none;
+                }
+            }
+        }
+
+        .amlocator-block.-map {
+            div[role="dialog"] {
+                .amlocator-info-popup {
+                    width: 100%;
+                    .lib-vendor-prefix-display(flex);
+
+                    .amlocator-image {
+                        margin-right: 10px;
+
+                        img {
+                            max-width: 100%;
+                            max-height: 100%;
+                            width: 100%;
+                            height: 100%;
+                            display: block;
+                        }
+                    }
+
+                    .popup-info {
+                        .amlocator-name {
+                            font-weight: 600;
+                            margin-top: 0;
+
+                            .amlocator-link {
+                                color: #000;
+                                .lib-css(transition, all 0.3s ease-in-out);
+
+                                &:visited {
+                                    color: #000;
+                                }
+
+                                &:hover {
+                                    text-decoration: none;
+                                    color: @theme__color__primary;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .amlocator-filters-container {
+            border-radius: 8px;
+            overflow: hidden;
+
+            .amlocator-attribute-filter {
+                background: #F1F1F1;
+                height: 47.72px;
+            }
+
+            .amlocator-button {
+                background-color: @theme__color__primary;
+                border-radius: 15px;
+            }
+        }
+
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l){
+    .amlocator-index-index {
+        .page-main {
+            .amlocator-main-container {
+                .amlocator-map-container {
+                    .amlocator-block.-map {
+                        height: 100%;
+                        max-height: 825px;
+                    }
+                }
+
+                .amlocator-store-list {
+                    .amlocator-wrapper {
+                        max-height: 550px;
+                    }
+
+                    .amlocator-store-desc {
+                        .amlocator-image {
+                            width: 124px;
+                            height: 124px;
+                            min-width: 124px;
+                        }
+                    }
+                }
+            }
+
+            .amlocator-block.-map {
+                div[role="dialog"] {
+                    max-width: 412px !important;
+                    width: 100%;
+                    .amlocator-image {
+                        width: 124px;
+                        height: 124px;
+
+                    }
+                }
+            }
+
+            .amlocator-search-container, .amlocator-block.-filter, .amlocator-store-list {
+                max-width: 400px;
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__l){
+    .amlocator-index-index {
+        .page-main {
+            padding-top: 20px;
+        }
+
+        .amlocator-search-container {
+            button.amlocator-button {
+                margin-top: 14px;
+                margin-bottom: 5px;
+            }
+        }
+        .amlocator-store-list {
+            .amlocator-store-desc {
+                .amlocator-image {
+                    width: 100px;
+                    height: 100px;
+                    min-width: 100px;
+                }
+                .amlocator-title{
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__l){
+    .amlocator-index-index {
+        .amlocator-block.-map {
+            div[role="dialog"] {
+                .amlocator-info-popup{
+                    .amlocator-image{
+                        width: 70px;
+                        height: 70px;
+                    }
+                    .amlocator-name{
+                        font-size: 13px;
+                    }
+                }
+            }
+        }
+    }
+}

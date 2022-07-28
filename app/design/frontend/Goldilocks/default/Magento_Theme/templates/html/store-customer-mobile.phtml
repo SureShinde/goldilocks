@@ -1,0 +1,62 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * @var \Magento\Theme\Block\Html\Header $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+$welcomeMessage = $block->getWelcome();
+?>
+<?php if ($block->getShowPart() == 'welcome') : ?>
+    <li class="greet welcome" data-bind="scope: 'customer'">
+        <!-- ko if: customer().fullname  -->
+        <button class="logged-in logged-in-button"
+           data-bind="text: new String('<?= $escaper->escapeHtml(__('%1', '%1')) ?>').replace('%1', customer().fullname)">
+        </button>
+        <br>
+        <a href="<?= $block->getUrl('customer/account/edit') ?>" class="account-link"
+           data-bind="i18n: 'Edit Account'"></a>
+        </a>
+        <!-- /ko -->
+        <!-- ko ifnot: customer().fullname  -->
+        <a href="<?= $block->getUrl('customer/account/login') ?>" class="not-logged-in"
+           data-bind="i18n: 'Sign in'"></a>
+        <?= $block->getBlockHtml('header.additional') ?>
+        <!-- /ko -->
+    </li>
+    <li class="logout" data-bind="scope: 'customer'">
+        <!-- ko if: customer().fullname  -->
+        <a href="<?= $block->getUrl('customer/account/logout') ?>"
+           data-bind="i18n: 'Log Out'">
+        </a>
+        <!-- /ko -->
+    </li>
+    <script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "customer": {
+                        "component": "Magento_Customer/js/view/customer"
+                    }
+                }
+            }
+        }
+    }
+    </script>
+<?php elseif ($block->getShowPart() == 'other') :?>
+    <?= $block->getChildHtml() ?>
+<?php endif ?>
+<script>
+    require([
+        'jquery'
+    ], function ($) {
+        $(document).on('click', '.logged-in-button', function () {
+            console.log(1)
+            $('.customer-sidebar').addClass('show');
+        });
+    });
+</script>

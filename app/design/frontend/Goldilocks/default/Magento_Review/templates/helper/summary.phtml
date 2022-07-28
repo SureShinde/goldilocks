@@ -1,0 +1,84 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * @var \Magento\Review\Block\Product\ReviewRenderer $block
+ * @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+ */
+
+$url = $block->getReviewsUrl() . '#reviews';
+$urlForm = $block->getReviewsUrl() . '#review-form';
+?>
+<?php if ($block->isReviewEnabled() && $block->getReviewsCount()): ?>
+    <?php $rating = $block->getRatingSummary(); ?>
+    <div class="product-reviews-summary<?= !$rating ? ' no-rating' : '' ?>" itemprop="aggregateRating" itemscope
+         itemtype="http://schema.org/AggregateRating">
+        <?php if ($rating):?>
+        <div class="rating-summary-point">
+            <?= round($rating * 5 / 100,1) ?>
+        </div>
+        <?php endif;?>
+        <div class="rating-summary-content">
+            <?php if ($rating):?>
+                <div class="rating-summary">
+                     <span class="label"><span><?= $block->escapeHtml(__('Rating')) ?>:</span></span>
+                     <div class="rating-result"
+                          id="rating-result_<?= $block->escapeHtmlAttr($block->getProduct()->getId()) ?>"
+                          title="<?= $block->escapeHtmlAttr($rating) ?>%"
+                     >
+                         <span>
+                             <span>
+                                 <span itemprop="ratingValue"><?= $block->escapeHtml($rating); ?>
+                                 </span>% of <span itemprop="bestRating">100</span>
+                             </span>
+                         </span>
+                     </div>
+                    <span class="review-count">
+                        <span itemprop="reviewCount"><?= $block->escapeHtml($block->getReviewsCount()) ?></span>
+                        <span><?= ($block->getReviewsCount() == 1) ? $block->escapeHtml(__('review')) : $block->escapeHtml(__('reviews')) ?></span>
+                    </span>
+                </div>
+                <?= /* @noEscape */
+                $secureRenderer->renderStyleAsTag(
+                    'width:' . $block->escapeHtmlAttr($rating) . '%',
+                    '#rating-result_' . $block->getProduct()->getId() . ' span'
+                ) ?>
+            <?php endif;?>
+            <div class="reviews-actions">
+                <a class="action add" href="<?= $block->escapeUrl($urlForm) ?>">
+                    <?= $block->escapeHtml(__('Write a review')) ?>
+                </a>
+            </div>
+        </div>
+    </div>
+<?php elseif ($block->isReviewEnabled() && $block->getDisplayIfEmpty()): ?>
+    <div class="product-reviews-summary empty">
+        <div class="rating-summary-point">0</div>
+        <div class="rating-summary-content">
+            <div class="rating-summary">
+                <span class="label"><span><?= $block->escapeHtml(__('Rating')) ?>:</span></span>
+                <div class="rating-result"
+                     id="rating-result_<?= $block->escapeHtmlAttr($block->getProduct()->getId()) ?>"
+                     title="<?= __('No reviews yet') ?>">
+                     <span style="width: 0;">
+                         <span>
+                             <span><?= __('No reviews yet') ?></span>
+                         </span>
+                     </span>
+                </div>
+                <span class="review-count">
+                    <span itemprop="reviewCount">0</span>
+                    <span><?= __('review') ?></span>
+                </span>
+            </div>
+            <div class="reviews-actions">
+                <a class="action add" href="<?= $block->escapeUrl($urlForm) ?>">
+                    <?= $block->escapeHtml(__('Write a review')) ?>
+                </a>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>

@@ -1,0 +1,44 @@
+<?php
+/**
+ * @var $block Magento\Sales\Block\Adminhtml\Order\View\Tab\Info
+ */
+$order = $block->getOrder();
+/** @var \Magenest\SpecialCustomerProgram\ViewModel\Adminhtml\Order\View\SpecialCustomerProgram $viewModel */
+$viewModel = $block->getViewModel();
+$ciImage = $order->getData('ci_image');
+?>
+<?php if ($order->getData('special_customer_program')): ?>
+<section id="session-additional-information" class="admin__page-section">
+    <div class="admin__page-section-title">
+        <span class="title"><?= __('Special Customer Program Information') ?></span>
+    </div>
+    <div class="admin__page-section-item order-additional-information">
+        <div class="admin__page-section-item-title">
+            <span class="title"><?= __("Citizen Identification Number") ?></span>
+        </div>
+        <div class="admin__page-section-item-content"><?= $order->getData('ci_number') ?></div>
+        <div class="admin__page-section-item-title">
+            <span class="title"><?= __("Citizen Identification Name") ?></span>
+        </div>
+        <div class="admin__page-section-item-content"><?= $order->getData('ci_full_name') ?></div>
+        <div class="admin__page-section-item-title">
+            <span class="title"><?= __("Citizen Identification Image") ?></span>
+        </div>
+        <div class="file-uploader-summary">
+            <div class="file-uploader-preview image-uploader-preview">
+                <a class="image-uploader-preview-link" target="_blank"
+                   href="<?= $viewModel->getSrcImage($ciImage) ?>">
+                    <div class="file-uploader-spinner image-uploader-spinner"></div>
+                    <img class="preview-image" tabindex="0"
+                         src="<?= $viewModel->getSrcImage($ciImage) ?>"
+                         alt="<?= $ciImage ?>"
+                         title="<?= $ciImage ?>">
+                </a>
+            </div>
+            <div class="file-uploader-filename"><?= $ciImage ?></div>
+            <div class="file-uploader-meta">
+            </div>
+        </div>
+    </div>
+</section>
+<?php endif; ?>

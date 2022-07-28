@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Add DD Fields to Order Grid -->
+    <type name="Magento\Sales\Model\ResourceModel\Order\Grid\Collection">
+        <plugin name="Amasty_DeliveryDateManager::GridSearchResult" type="Amasty\DeliveryDateManager\Plugin\Sales\Model\ResourceModel\Order\Grid\Collection\ManageGridFields" />
+    </type>
+    <!-- Add DD Fields to Shipment Grid -->
+    <type name="Magento\Sales\Model\ResourceModel\Order\Shipment\Grid\Collection">
+        <plugin name="Amasty_DeliveryDateManager::GridSearchResult" type="Amasty\DeliveryDateManager\Plugin\Sales\Model\ResourceModel\Order\Grid\Collection\ManageGridFields" />
+    </type>
+
+    <type name="Magento\Sales\Block\Adminhtml\Order\View\Info">
+        <plugin name="Amasty_DeliveryDateManager::OrderViewInfo" type="Amasty\DeliveryDateManager\Plugin\Sales\Block\Adminhtml\Order\View\Info\AddDeliveryInfoBlock"/>
+    </type>
+    <type name="Magento\Sales\Block\Adminhtml\Order\Create\Shipping\Method\Form">
+        <plugin name="Amasty_DeliveryDateManager::OrderCreateDD" type="Amasty\DeliveryDateManager\Plugin\Sales\Block\Adminhtml\Order\Create\Shipping\Method\Form\AddDeliveryFieldsBlock"/>
+    </type>
+
+    <type name="Amasty\DeliveryDateManager\Ui\Component\Grid\Channel\DataProvider">
+        <arguments>
+            <argument name="modifiersPool" xsi:type="object">Amasty\DeliveryDateManager\Ui\Component\Grid\Channel\Modifier\Pool</argument>
+        </arguments>
+    </type>
+    <virtualType name="Amasty\DeliveryDateManager\Ui\Component\Grid\Channel\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool" />
+
+    <virtualType name="Amasty\DeliveryDateManager\Model\ResourceModel\DeliveryChannel\Grid\Collection\Processor" type="Amasty\DeliveryDateManager\Model\ResourceModel\Collection\Processor">
+        <arguments>
+            <argument name="dataFillers" xsi:type="array">
+                <item name="channel_config" xsi:type="object">Amasty\DeliveryDateManager\Model\ResourceModel\DeliveryChannel\Grid\Collection\DataFiller\ChannelConfig</item>
+                <item name="store" xsi:type="object">Amasty\DeliveryDateManager\Model\ResourceModel\DeliveryChannel\Grid\Collection\DataFiller\Store</item>
+                <item name="customer_group" xsi:type="object">Amasty\DeliveryDateManager\Model\ResourceModel\DeliveryChannel\Grid\Collection\DataFiller\CustomerGroup</item>
+                <item name="shipping_method" xsi:type="object">Amasty\DeliveryDateManager\Model\ResourceModel\DeliveryChannel\Grid\Collection\DataFiller\ShippingMethod</item>
+                <item name="schedule_row" xsi:type="object">Amasty\DeliveryDateManager\Model\ResourceModel\DeliveryChannel\Grid\Collection\DataFiller\ScheduleRow</item>
+            </argument>
+            <argument name="filterAndSortingAppliers" xsi:type="array">
+                <item name="channel_config" xsi:type="object">Amasty\DeliveryDateManager\Model\ResourceModel\DeliveryChannel\Grid\Collection\FilterAndSortingApplier\ChannelConfig</item>
+                <item name="store" xsi:type="object">Amasty\DeliveryDateManager\Model\ResourceModel\DeliveryChannel\Grid\Collection\FilterAndSortingApplier\Store</item>
+                <item name="customer_group" xsi:type="object">Amasty\DeliveryDateManager\Model\ResourceModel\DeliveryChannel\Grid\Collection\FilterAndSortingApplier\CustomerGroup</item>
+                <item name="shipping_method" xsi:type="object">Amasty\DeliveryDateManager\Model\ResourceModel\DeliveryChannel\Grid\Collection\FilterAndSortingApplier\ShippingMethod</item>
+                <item name="schedule" xsi:type="object">Amasty\DeliveryDateManager\Model\ResourceModel\DeliveryChannel\Grid\Collection\FilterAndSortingApplier\Schedule</item>
+                <item name="time_set" xsi:type="object">Amasty\DeliveryDateManager\Model\ResourceModel\DeliveryChannel\Grid\Collection\FilterAndSortingApplier\TimeSet</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Duplicate resolvers facade START -->
+    <type name="Amasty\DeliveryDateManager\Controller\Adminhtml\Channel\ModalDuplicate">
+        <arguments>
+            <argument name="duplicateResolver" xsi:type="object">Amasty\DeliveryDateManager\Model\DuplicateModal\Resolver\DuplicateResolver</argument>
+        </arguments>
+    </type>
+    <virtualType name="Amasty\DeliveryDateManager\Model\DuplicateModal\Resolver\DuplicateResolver"
+                 type="Amasty\DeliveryDateManager\Model\ModalDuplicateResolver\CompositeResolver">
+        <arguments>
+            <argument name="resolvers" xsi:type="array">
+                <item name="configuration" xsi:type="object">Amasty\DeliveryDateManager\Model\ChannelConfig\Duplicate</item>
+                <item name="schedule" xsi:type="object">Amasty\DeliveryDateManager\Model\DateSchedule\Duplicate</item>
+                <item name="order_limit" xsi:type="object">Amasty\DeliveryDateManager\Model\OrderLimit\Duplicate</item>
+                <item name="time_interval" xsi:type="object">Amasty\DeliveryDateManager\Model\TimeInterval\Set\Duplicate</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <!-- Duplicate resolvers facade END -->
+
+    <type name="Amasty\DeliveryDateManager\Ui\Component\Form\Channel\DataProvider">
+        <arguments>
+            <argument name="pool" xsi:type="object">Amasty\DeliveryDateManager\Ui\Component\Form\Channel\Modifier\Pool</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Amasty\DeliveryDateManager\Ui\Component\Form\Channel\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="general" xsi:type="array">
+                    <item name="class" xsi:type="string">Amasty\DeliveryDateManager\Ui\Component\Form\Channel\Modifiers\General</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+                <item name="schedule" xsi:type="array">
+                    <item name="class" xsi:type="string">Amasty\DeliveryDateManager\Ui\Component\Form\Channel\Modifiers\DataSchedule</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Time set collection to fetch them with time intervals data -->
+    <type name="Amasty\DeliveryDateManager\Ui\Component\Form\Channel\AdditionalDataProviders\TimeIntervalSet\DataProvider">
+        <arguments>
+            <argument name="collectionFactory" xsi:type="object">Amasty\DeliveryDateManager\Model\ResourceModel\TimeInterval\Set\Form\CollectionFactory</argument>
+        </arguments>
+    </type>
+    <virtualType name="Amasty\DeliveryDateManager\Model\ResourceModel\TimeInterval\Set\Form\CollectionFactory" type="Amasty\DeliveryDateManager\Model\ResourceModel\TimeInterval\Set\CollectionFactory">
+        <arguments>
+            <argument name="instanceName" xsi:type="string">Amasty\DeliveryDateManager\Model\ResourceModel\TimeInterval\Set\Form\Collection</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Amasty\DeliveryDateManager\Model\ResourceModel\TimeInterval\Set\Form\Collection" type="Amasty\DeliveryDateManager\Model\ResourceModel\TimeInterval\Set\Collection">
+        <arguments>
+            <argument name="fetchStrategy" xsi:type="object">Amasty\DeliveryDateManager\Model\ResourceModel\TimeInterval\Set\Collection\FetchStrategy\FormData</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Amasty\DeliveryDateManager\Ui\Component\Form\Channel\AdditionalDataProviders\Exception\DataProvider" type="Amasty\DeliveryDateManager\Ui\Component\Form\Channel\AdditionalDataProviders\DateSchedule\DataProvider">
+        <arguments>
+            <argument name="behaviorType" xsi:type="const">Amasty\DeliveryDateManager\Ui\Component\Form\Channel\AdditionalDataProviders\DateSchedule\DataProvider::BEHAVIOR_DISALLOW</argument>
+        </arguments>
+    </virtualType>
+</config>
+

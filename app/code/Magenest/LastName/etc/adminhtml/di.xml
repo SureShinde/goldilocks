@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!--Plugin-->
+    <type name="Magento\Sales\Block\Adminhtml\Order\Create\Form\Address">
+        <plugin name="magenest_lastname" type="Magenest\LastName\Plugin\Order\Create\Form\Address" />
+    </type>
+    <type name="Magento\Sales\Model\ResourceModel\Order\Customer\Collection">
+        <plugin name="magenest_check_not_empty_lastname" type="Magenest\LastName\Plugin\Model\CheckEmptyLastName" />
+    </type>
+</config>

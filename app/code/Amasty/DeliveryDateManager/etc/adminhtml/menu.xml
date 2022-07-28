@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Amasty_DeliveryDateManager::deliverydate_channel_grid" title="Delivery Configurations Grid" sortOrder="30" module="Amasty_DeliveryDateManager" parent="Magento_Sales::sales_operation" action="amasty_deliverydate/channel/" resource="Amasty_DeliveryDateManager::deliverydate_channel_grid"/>
+    </menu>
+</config>

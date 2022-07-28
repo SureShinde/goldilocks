@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © eComBricks. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\InventoryApi\Api\StockRepositoryInterface">
+        <plugin name="add_notice_for_unassigned_sales_channels" disabled="true"/>
+        <plugin name="4b762738f9cb0fa1fbddeb1826edf421" type="Ecombricks\StoreInventory\Plugin\Api\InventoryApi\StockRepositoryInterface" sortOrder="100"/>
+    </type>
+    <type name="Magento\InventorySalesAdminUi\Model\WebsiteNameResolver">
+        <plugin name="2b1a88847c5a54371963bcafcc4465bc" type="Ecombricks\StoreInventory\Plugin\Model\InventorySalesAdminUi\WebsiteNameResolver" sortOrder="100"/>
+    </type>
+    <type name="Magento\InventoryShippingAdminUi\Block\Adminhtml\Order\View\ShipButton">
+        <plugin name="2f4134c8c147e65fa629888358dd1930" type="Ecombricks\StoreInventory\Plugin\Block\InventoryShippingAdminUi\Adminhtml\Order\View\ShipButton" sortOrder="100"/>
+    </type>
+    <type name="Magento\InventoryShippingAdminUi\Ui\DataProvider\SourceSelectionDataProvider">
+        <plugin name="4ac7e981f9ddd5dec6b05683ca02f3eb" type="Ecombricks\StoreInventory\Plugin\Ui\InventoryShippingAdminUi\DataProvider\SourceSelectionDataProvider" sortOrder="100"/>
+    </type>
+    <type name="Magento\Sales\Block\Adminhtml\Order\Invoice\Create\Form">
+        <plugin name="disallow_create_shipment_in_multi_source_mode" disabled="true"/>
+        <plugin name="e1cfddc66cda9a6ccaf345c769b5a2b2" type="Ecombricks\StoreInventory\Plugin\Block\Sales\Adminhtml\Order\Invoice\Create\Form" sortOrder="100"/>
+    </type>
+    <type name="Magento\Shipping\Block\Adminhtml\Create">
+        <plugin name="back_button_url" disabled="true"/>
+        <plugin name="7ff5c6fdbae463bbb609bef93abeae43" type="Ecombricks\StoreInventory\Plugin\Block\Shipping\Adminhtml\Create" sortOrder="100"/>
+    </type>
+    <type name="Magento\InventorySalesApi\Api\GetStockBySalesChannelInterface">
+        <plugin name="adapt_stock_resolver_to_admin_website" disabled="true"/>
+        <plugin name="get_stock_by_sales_channel_adminhtml" type="Ecombricks\StoreInventory\Plugin\Api\InventorySalesApi\Adminhtml\GetStockBySalesChannelInterface" sortOrder="100"/>
+    </type>
+    <type name="Magento\InventoryBundleProduct\Plugin\CatalogInventory\Helper\Stock\AdaptAssignStatusToProductPlugin">
+        <arguments>
+            <argument name="stockResolver" xsi:type="object">Ecombricks\StoreInventory\Model\StockResolver</argument>
+        </arguments>
+    </type>
+</config>

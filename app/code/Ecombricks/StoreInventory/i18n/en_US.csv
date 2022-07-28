@@ -1,0 +1,15 @@
+"""model"" value should be specified","""model"" value should be specified"
+"$storeId is required","$storeId is required"
+"$storeId parameter is required","$storeId parameter is required"
+"All unassigned sales channels will be assigned to the Default Stock","All unassigned sales channels will be assigned to the Default Stock"
+"Invalid filter type: %1","Invalid filter type: %1"
+"Some of the products are out of stock.","Some of the products are out of stock."
+"Something went wrong. Export couldn't be executed, See log files for error details","Something went wrong. Export couldn't be executed, See log files for error details"
+Stock,Stock
+Store,Store
+"The Product stock item is invalid. Verify the stock item and try again.","The Product stock item is invalid. Verify the stock item and try again."
+"The store with code ""%code"" does not exist.","The store with code ""%code"" does not exist."
+"This product is disabled.","This product is disabled."
+"This product is out of stock.","This product is out of stock."
+"Website code is empty","Website code is empty"
+"Wrong condition.","Wrong condition."

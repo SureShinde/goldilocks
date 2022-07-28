@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="product.info.bundle.options.radio">
+            <arguments>
+                <argument name="view_model" xsi:type="object">Magenest\Bundle\ViewModel\BundleViewModel</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="product.price.render.bundle.customization" remove="true"/>
+        <referenceBlock name="product.info.addtocart.bundle">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Magento_Bundle::catalog/product/view/addtocart.phtml</argument>
+            </action>
+            <block class="Magento\Catalog\Pricing\Render"
+                   name="product.price.render.bundle.customization.addToCart">
+                <arguments>
+                    <argument name="price_render" xsi:type="string">product.price.render.default</argument>
+                    <argument name="price_type_code" xsi:type="string">configured_price</argument>
+                    <argument name="zone" xsi:type="string">item_view</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

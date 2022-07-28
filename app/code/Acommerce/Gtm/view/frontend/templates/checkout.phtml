@@ -1,0 +1,23 @@
+<?php
+// @codingStandardsIgnoreFile
+?>
+<?php if ($this->isEnabled()) : ?>
+    <?php $helper = $this->helper('Acommerce\Gtm\Helper\Data'); ?>
+    <?php $quote = $this->getQuote(); ?>
+    <?php $products = $this->getProducts(); ?>
+
+    <?php
+    $checkoutData = [];
+    $checkoutData['actionField'] = [
+        'step' => '0',
+        'option' => '' // @TODO Some value can be added
+    ];
+    $checkoutData['basketID'] = $quote->getId();
+    $checkoutData['basketTotal'] = $helper->numberFormat($quote->getGrandTotal(), 2);
+    $checkoutData['basketProducts'] = $products;
+
+
+    $this->setDataLayerOption('event', 'checkout');
+    $this->setEcommerceData('checkout', $checkoutData);
+    ?>
+<?php endif; ?>

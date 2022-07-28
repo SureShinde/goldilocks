@@ -1,0 +1,26 @@
+//
+//  Inputs Component
+//  ______________________________________________
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    .ampreorderan-input {
+        & {
+            flex-basis: 100%;
+            padding: @ampreorderan__indent / 2 @ampreorderan__indent;
+            height: 34px;
+            border: 1px solid #adadad;
+            border-radius: 1px;
+            background: #fff;
+            font-weight: 400;
+            font-size: 14px;
+        }
+
+        &:focus {
+            border-color: @ampreorderan-color__hover;
+        }
+    }
+}

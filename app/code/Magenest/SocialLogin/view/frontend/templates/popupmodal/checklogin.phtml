@@ -1,0 +1,13 @@
+<?php $scriptString = <<<script
+    require([
+        'jquery'
+    ], function ($) {
+
+        $(document).ready(function () {
+            window.close();
+            window.opener.location.reload();
+        })
+    })
+script;
+?>
+<?= isset($secureRenderer) ? $secureRenderer->renderTag('script', [], $scriptString, false) : '<script>' . $scriptString . '</script>' ?>

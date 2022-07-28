@@ -1,0 +1,13 @@
+<?php
+
+?>
+<?php /** @var \Magenest\GoogleTagManager\Block\Enterprise\GtmProxy $block */ ?>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    dataLayer.push({
+        'ecommerce': {
+            impressions: <?php echo $block->getContextInfoJson() ?>
+        }
+    });
+</script>
+<?php echo $block->getChildHtml(); ?>

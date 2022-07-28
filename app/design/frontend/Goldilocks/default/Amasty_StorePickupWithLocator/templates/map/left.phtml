@@ -1,0 +1,34 @@
+<?php
+/**
+ * @var \Amasty\StorePickupWithLocator\Block\Location $block
+ * @var \Amasty\Storelocator\Model\Location $location
+ */
+$locations = $block->getLocationCollection();
+?>
+<div class="amlocator-wrapper">
+    <div class="amlocator-stores-wrapper">
+        <?php foreach ($locations as $location): ?>
+            <div class="amlocator-store-desc" name="leftLocation"
+                 data-mapid="<?= $block->escapeHtml($block->getMapId()); ?>"
+                 data-amid="<?= (int)$location['id']; ?>">
+                <div class="amlocator-block">
+                    <div class="amlocator-store-information">
+                        <?= /* @noEscape */
+                        $location->getStoreListHtml() ?>
+                        <?php if (!$block->getDisablePickupButton()): ?>
+                            <button class="amlocator-button -pickup"
+                                    data-ampickup-location="<?= (int)$location->getId() ?>"
+                                    data-ampickup-js="choose-store">
+                            </button>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+
+    <?php if ($block->isExistBlockPager() && $pager = $block->getPagerHtml()): ?>
+        <div class="amlocator-pager-container"><?= /** @escapeNotVerified */
+            $pager; ?></div>
+    <?php endif; ?>
+</div>

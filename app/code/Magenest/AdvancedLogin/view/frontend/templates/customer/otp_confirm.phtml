@@ -1,0 +1,44 @@
+<form class="form otp confirm"
+      action="<?= $block->escapeUrl($block->getUrl('*/*/confirm')) ?>"
+      method="post"
+      id="form-validate"
+      data-mage-init='{"validation":{}}'>
+    <fieldset class="fieldset" data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>">
+        <div class="field email required">
+            <label for="otp_code" class="label"><span><?= $block->escapeHtml(__('Otp')) ?></span></label>
+            <div class="control">
+                <input type="text" name="otp_code" alt="otp code" id="otp_code"
+                       data-validate="{required: true}" class="input-text" aria-required="true">
+                <p class="otp-message"></p>
+                <button id="resendOtp" class="resend-otp"><span><?= $block->escapeHtml(__('Send Again')) ?></span></button>
+            </div>
+        </div>
+        <?= $block->getChildHtml('form_additional_info') ?>
+    </fieldset>
+    <?php echo $block->getBlockHtml('formkey') ?>
+    <div class="actions-toolbar">
+        <div class="primary">
+            <button type="submit" class="action submit primary"><span><?= $block->escapeHtml(__('Confirm')) ?></span>
+            </button>
+        </div>
+        <div class="secondary mobile-hide">
+            <a class="action back" href="<?= $block->escapeUrl($block->getLoginUrl()) ?>"><span><?= $block->escapeHtml(__('Cancel')) ?></span></a>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    require(['jquery', 'Magento_Ui/js/modal/alert'], function ($, alert) {
+        $("#resendOtp").click(function (e){
+            e.preventDefault();
+            $.ajax({
+                showLoader: true,
+                url: "<?= $block->getUrl('*/*/resendOtp') ?>",
+                data: {},
+                type: "POST",
+                success: function (response) {
+                    $('.otp-message').html(response.message);
+                }
+            })
+        })
+    })
+</script>

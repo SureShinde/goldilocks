@@ -1,0 +1,21 @@
+<div class="ampreorderan-date-picker"
+     data-bind="afterRender: function (node) {
+                    initDatePicker(node);
+                }">
+    <label class="ampreorderan-label">
+        <span class="ampreorderan-text" data-bind="i18n: 'From'"></span>
+        <input class="ampreorderan-input -from"
+               id="from"
+               name="from"
+               data-bind="value: $data.value.from" />
+        <!-- ko template: $data.templates.icons.calendar --><!-- /ko -->
+    </label>
+    <label class="ampreorderan-label">
+        <span class="ampreorderan-text" data-bind="i18n: 'To'"></span>
+        <input class="ampreorderan-input -to"
+               id="to"
+               name="to"
+               data-bind="value: $data.value.to" />
+        <!-- ko template: $data.templates.icons.calendar --><!-- /ko -->
+    </label>
+</div>

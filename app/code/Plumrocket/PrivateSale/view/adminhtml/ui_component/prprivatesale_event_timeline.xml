@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket_PrivateSale
+ * @copyright   Copyright (c) 2020 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ -->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">prprivatesale_event_timeline.prprivatesale_event_timeline_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>update_columns</spinner>
+        <deps>
+            <dep>prprivatesale_event_timeline.prprivatesale_event_timeline_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="prprivatesale_event_timeline_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">entity_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <dataProvider class="Plumrocket\PrivateSale\Ui\DataProvider\Event\Listing\DataProvider" name="prprivatesale_event_timeline_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top" template="Plumrocket_PrivateSale/timeline/toolbar-dashboard">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="updateTypes" xsi:type="string">ns = ${ $.ns }, index = status</item>
+            </item>
+        </argument>
+        <filters name="listing_filters">
+            <settings>
+                <links>
+                    <link name="filters">prprivatesale_event_listing.prprivatesale_event_listing.listing_top.listing_filters:filters</link>
+                </links>
+                <imports>
+                    <link name="apply">prprivatesale_event_listing.prprivatesale_event_listing.listing_top.listing_filters:applied</link>
+                </imports>
+            </settings>
+        </filters>
+        <paging name="listing_paging">
+            <settings>
+                <totalTmpl>ui/grid/paging/paging-detailed-total</totalTmpl>
+            </settings>
+        </paging>
+    </listingToolbar>
+    <columns name="update_columns" component="Plumrocket_PrivateSale/js/timeline/timeline">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="recordTmpl" xsi:type="string">Plumrocket_PrivateSale/timeline/record</item>
+                <item name="detailsTmpl" xsi:type="string">Plumrocket_PrivateSale/timeline/details</item>
+                <item name="detailsFormat" xsi:type="string">MMM D, YYYY h:mm A</item>
+            </item>
+        </argument>
+        <column name="status" component="Plumrocket_PrivateSale/js/grid/columns/status">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="updateTypesMap" xsi:type="array">
+                        <item name="0" xsi:type="array">
+                            <item name="className" xsi:type="string">status_active</item>
+                            <item name="value" xsi:type="string">1</item>
+                        </item>
+                        <item name="1" xsi:type="array">
+                            <item name="className" xsi:type="string">status_ending-soon</item>
+                            <item name="value" xsi:type="string">2</item>
+                        </item>
+                        <item name="2" xsi:type="array">
+                            <item name="className" xsi:type="string">status_coming-soon</item>
+                            <item name="value" xsi:type="string">5</item>
+                        </item>
+                        <item name="3" xsi:type="array">
+                            <item name="className" xsi:type="string">status_upcoming</item>
+                            <item name="value" xsi:type="string">3</item>
+                        </item>
+                        <item name="4" xsi:type="array">
+                            <item name="className" xsi:type="string">status_ended</item>
+                            <item name="value" xsi:type="string">4</item>
+                        </item>
+                        <item name="5" xsi:type="array">
+                            <item name="className" xsi:type="string">status_disabled</item>
+                            <item name="value" xsi:type="string">0</item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <options class="Plumrocket\PrivateSale\Model\Config\Source\EventStatus"/>
+                <dataType>select</dataType>
+                <label translate="true">Status</label>
+            </settings>
+        </column>
+        <column name="event_name">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Name</label>
+            </settings>
+        </column>
+        <column name="event_from" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <filter>dateRange</filter>
+                <dateFormat>MM/dd/y</dateFormat>
+                <label translate="true">Start Time</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        <column name="event_to" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <filter>dateRange</filter>
+                <dateFormat>MM/dd/y</dateFormat>
+                <label translate="true">End Time</label>
+            </settings>
+        </column>
+        <column name="priority" sortOrder="130">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Priority</label>
+            </settings>
+        </column>
+        <column name="enable" sortOrder="140" component="Plumrocket_PrivateSale/js/grid/columns/status">
+            <settings>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <bodyTmpl>Plumrocket_PrivateSale/grid/cells/status</bodyTmpl>
+                <options class="Magento\Config\Model\Config\Source\Yesno"/>
+                <label translate="true">Enabled</label>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="Plumrocket\PrivateSale\Ui\Component\Listing\Columns\TimelineActions">
+            <settings>
+                <label>Action</label>
+                <indexField>id</indexField>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

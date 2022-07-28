@@ -1,0 +1,35 @@
+//
+//  Style groups for 'mobile' devices
+//  ---------------------------------------------
+& when (@media-target = 'mobile'), (@media-target = 'all') {
+    @media only screen and (max-width: (@screen__xxl - 1)) {
+        .media-width('max', @screen__xxl);
+    }
+
+    @media only screen and (max-width: (@screen__xl - 1)) {
+        .media-width('max', @screen__xl);
+    }
+
+    @media only screen and (max-width: (@screen__l - 1)) {
+        .media-width('max', @screen__l);
+    }
+
+    @media all and (min-width: @screen__xs) {
+        .media-width('min', @screen__xs);
+    }
+
+    @media all and (min-width: @screen__xxs) {
+        .media-width('min', @screen__xxs);
+    }
+}
+
+//
+//  Style groups for 'desktop' devices
+//  ---------------------------------------------
+
+& when (@media-target = 'desktop'), (@media-target = 'all') {
+    @media all and (min-width: @screen__xxl),
+    print {
+        .media-width('min', @screen__xxl);
+    }
+}

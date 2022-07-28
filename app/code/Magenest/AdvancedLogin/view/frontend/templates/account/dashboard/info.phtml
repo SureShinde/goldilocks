@@ -1,0 +1,69 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Customer\Block\Account\Dashboard\Info $block */
+?>
+<div class="block block-dashboard-info">
+    <div class="block-title">
+        <strong><?= $block->escapeHtml(__('Personal Information')) ?></strong>
+        <a class="action edit desktop-hide" href="<?= $block->escapeUrl($block->getUrl('customer/account/edit')) ?>">
+            <span><?= $block->escapeHtml(__('Edit')) ?></span>
+        </a>
+    </div>
+    <div class="block-content">
+        <div class="box box-information">
+            <strong class="box-title mobile-hide">
+                <span><?= $block->escapeHtml(__('Contact Information')) ?></span>
+            </strong>
+            <div class="box-content">
+                <p>
+                    <span class="label"><?= __('Name') ?></span>
+                    <span class="value"><?= $block->escapeHtml($block->getName()) ?></span>
+                </p>
+                <p>
+                    <span class="label"><?= __('Email') ?></span>
+                    <span class="value"><?= $block->escapeHtml($block->getCustomer()->getEmail()) ?></span>
+                </p>
+                <?php if ($telephoneAttribute = $block->getCustomer()->getCustomAttribute('telephone')): ?>
+                <p>
+                    <span class="label"><?= __('Phone') ?></span>
+                    <span class="value">
+                            <?= $block->escapeHtml($block->getCustomer()->getCustomAttribute('telephone')->getValue()) ?>
+                    </span>
+                </p>
+                <?php endif ?>
+                <?= $block->getChildHtml('customer.account.dashboard.info.extra'); ?>
+            </div>
+            <div class="box-actions mobile-hide">
+                <a class="action edit" href="<?= $block->escapeUrl($block->getUrl('customer/account/edit')) ?>">
+                    <span><?= $block->escapeHtml(__('Edit')) ?></span>
+                </a>
+                <a href="<?= $block->escapeUrl($block->getChangePasswordUrl()) ?>" class="action change-password">
+                    <?= $block->escapeHtml(__('Change Password')) ?>
+                </a>
+            </div>
+        </div>
+        <?php if ($block->isNewsletterEnabled()) : ?>
+            <div class="box box-newsletter mobile-hide">
+                <strong class="box-title">
+                    <span><?= $block->escapeHtml(__('Newsletter Subscription')) ?></span>
+                </strong>
+                <div class="box-content">
+                    <p class="value">
+                        <?php if ($block->getIsSubscribed()) : ?>
+                            <?= $block->escapeHtml(__('You are subscribed to "General Subscription".')) ?>
+                        <?php else : ?>
+                            <?= $block->escapeHtml(__('You have subscribed to the newsletter')) ?>
+                        <?php endif; ?>
+                    </p>
+                </div>
+                <div class="box-actions">
+                    <a class="action edit" href="<?= $block->escapeUrl($block->getUrl('newsletter/manage')) ?>"><span><?= $block->escapeHtml(__('Edit')) ?></span></a>
+                </div>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>

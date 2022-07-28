@@ -1,0 +1,14 @@
+<ul class="ampreorderan-info-list" data-bind="foreach: elems">
+    <li data-bind="
+            attr: {
+                class: 'ampreorderan-item' + ' -' + $data.type
+            }">
+        <p class="ampreorderan-title-block">
+            <span class="ampreorderan-title" data-bind="i18n: $data.title"></span>
+            <span class="ampreorderan-icon-block">
+                <!-- ko template: { name: $data.icon } --><!-- /ko-->
+            </span>
+        </p>
+        <b class="ampreorderan-value" data-bind="text: $data.value"></b>
+    </li>
+</ul>

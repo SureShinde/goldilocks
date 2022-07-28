@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">
+                magenest_abandonedcart_abtestcampaigns_form.magenest_abandonedcart_abtestcampaigns_form_data_source
+            </item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Campaign Information</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="reverseMetadataMerge" xsi:type="boolean">true</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="back">
+                <url path="*/*/"/>
+                <class>back</class>
+                <label translate="true">Back</label>
+            </button>
+            <button name="reset">
+                <class>reset</class>
+                <label translate="true">Reset</label>
+            </button>
+            <button name="delete" class="Magenest\AbandonedCart\Block\Adminhtml\ABTestCampaigns\Edit\Button\Delete"/>
+            <button name="save_and_continue"
+                    class="Magenest\AbandonedCart\Block\Adminhtml\ABTestCampaigns\Edit\Button\SaveAndContinue"/>
+            <button name="save" class="Magenest\AbandonedCart\Block\Adminhtml\ABTestCampaigns\Edit\Button\Save"/>
+        </buttons>
+        <namespace>magenest_abandonedcart_abtestcampaigns_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>magenest_abandonedcart_abtestcampaigns_form.magenest_abandonedcart_abtestcampaigns_form_data_source
+            </dep>
+        </deps>
+    </settings>
+    <dataSource name="magenest_abandonedcart_abtestcampaigns_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="abandonedcart/abtestcampaigns/save"/>
+        </settings>
+        <dataProvider class="Magenest\AbandonedCart\Model\ABTestCampaign\DataProvider"
+                      name="magenest_abandonedcart_abtestcampaigns_form_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="magenest_abandonedcart_abtestcampaigns_details">
+        <settings>
+            <collapsible>false</collapsible>
+            <label translate="true">Campaign Details</label>
+        </settings>
+        <field name="id" formElement="hidden">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">magenest_abandonedcart_abtestcampaigns</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>string</dataType>
+            </settings>
+        </field>
+        <field name="status" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Status</label>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Magenest\AbandonedCart\Model\Config\Source\ActiveInactive"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="name" sortOrder="20" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">magenest_abandonedcart_abtestcampaigns</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>string</dataType>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <label translate="true">Campaign Name</label>
+            </settings>
+        </field>
+        <field name="description" sortOrder="30" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">magenest_abandonedcart_abtestcampaigns</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Description</label>
+            </settings>
+        </field>
+        <field name="from_date" sortOrder="40" formElement="date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">magenest_abandonedcart_abtestcampaigns</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>string</dataType>
+                <additionalClasses>
+                    <class name="admin__field-date">true</class>
+                </additionalClasses>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="validate-date" xsi:type="boolean">true</rule>
+                </validation>
+                <label translate="true">From</label>
+                <imports>
+                    <link name="visible">${ $.parentName}.type:value</link>
+                </imports>
+            </settings>
+            <formElements>
+                <date>
+                    <settings>
+                        <inputDateFormat>MM/dd/y</inputDateFormat>
+                        <outputDateFormat>MM/dd/y</outputDateFormat>
+                    </settings>
+                </date>
+            </formElements>
+        </field>
+        <field name="to_date" sortOrder="50" formElement="date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">magenest_abandonedcart_abtestcampaigns</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>string</dataType>
+                <additionalClasses>
+                    <class name="admin__field-date">true</class>
+                </additionalClasses>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="validate-date" xsi:type="boolean">true</rule>
+                </validation>
+                <label translate="true">To</label>
+                <imports>
+                    <link name="visible">${ $.parentName}.type:value</link>
+                </imports>
+            </settings>
+            <formElements>
+                <date>
+                    <settings>
+                        <inputDateFormat>MM/dd/y</inputDateFormat>
+                        <outputDateFormat>MM/dd/y</outputDateFormat>
+                    </settings>
+                </date>
+            </formElements>
+        </field>
+    </fieldset>
+</form>

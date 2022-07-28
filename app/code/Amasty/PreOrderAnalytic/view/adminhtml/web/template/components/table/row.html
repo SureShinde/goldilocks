@@ -1,0 +1,11 @@
+<tr class="ampreorderan-table-row" data-bind="foreach: { data: Object.keys(elems), as: 'key' }">
+    <!-- ko scope: 'index = amasty_preorder_table' -->
+        <!-- ko if: key === 'status' -->
+            <!-- ko template: { name: templates.column_status, data: { item: $parents[1].elems, key: key } } --><!-- /ko-->
+        <!-- /ko -->
+
+        <!-- ko if: key !== 'status' && key !== 'status_title' -->
+            <!-- ko template: { name: templates.column, data: { item: $parents[1].elems, key: key } } --><!-- /ko-->
+        <!-- /ko -->
+    <!-- /ko -->
+</tr>

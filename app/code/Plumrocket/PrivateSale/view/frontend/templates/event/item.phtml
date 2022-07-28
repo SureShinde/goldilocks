@@ -1,0 +1,47 @@
+<?php
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket Private Sales and Flash Sales v4.x.x
+ * @copyright   Copyright (c) 2020 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+
+/** @var \Plumrocket\PrivateSale\Block\Event\Category|\Plumrocket\PrivateSale\Block\Event\Product $block */
+?>
+
+<?php if ($block->displayCountdown()): ?>
+
+    <div class="privatesale-event-container">
+        <div data-item="<?= $block->escapeHtmlAttr($block->getEventId()) ?>" class="privatesale-countdown-timer" style="display: none;">
+            <?php if ($block->isStaticDate()): ?>
+                <span class="static-date">
+                    <span><?= __('Until') ?></span>
+                    <?= ' ' . $block->getStaticDate() ?>
+                </span>
+            <?php else: ?>
+                <span class="timer"></span>
+            <?php endif; ?>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        require(['jquery', 'privatesaleEvent'], function ($) {
+            $.plumrocket.privatesaleEvent.prototype.addItem(
+                <?= $block->escapeJs($block->getEventId()) ?>,
+                <?= (int) $block->getEventEnd() ?>,
+                '<?= $block->escapeJs($block->getTimerLayout()) ?>',
+                'catalog'
+            );
+        });
+    </script>
+
+<?php endif; ?>

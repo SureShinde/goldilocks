@@ -1,0 +1,18 @@
+@chatbot-icons-admin__font-name-path: 'Magenest_FbChatbot::fonts/icomoon';
+@chatbot-icons-admin__font-name : 'FbChatbot';
+
+.lib-font-face(
+    @family-name: @chatbot-icons-admin__font-name,
+    @font-path: @chatbot-icons-admin__font-name-path,
+    @font-weight: normal,
+    @font-style: normal
+);
+
+.admin__menu .item-chatbot.parent.level-0 > a:before,
+.admin__menu .item-chatbot.level-0 > a:before {
+    font-family: @chatbot-icons-admin__font-name;
+    font-size: 3.2rem;
+    line-height: 2px;
+    content: "\e900";
+    padding-top: 5px;
+}

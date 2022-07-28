@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <magenest>
+
+            <general>
+                <enabled_social_enabled_modal>1</enabled_social_enabled_modal>
+                <display_on>1,2,3</display_on>
+                <enabled_share>1</enabled_share>
+                <select_social_share>facebook</select_social_share>
+            </general>
+
+            <credentials>
+                <google>
+                    <enabled>0</enabled>
+                </google>
+                <facebook>
+                    <enabled>0</enabled>
+                </facebook>
+                <twitter>
+                    <enabled>0</enabled>
+                </twitter>
+                <instagram>
+                    <enabled>0</enabled>
+                </instagram>
+                <linkedin>
+                    <enabled>0</enabled>
+                </linkedin>
+                <pinterest>
+                    <enabled>0</enabled>
+                </pinterest>
+                <line>
+                    <enabled>0</enabled>
+                </line>
+                <reddit>
+                    <enabled>0</enabled>
+                </reddit>
+                <amazon>
+                    <enabled>0</enabled>
+                </amazon>
+                <zalo>
+                    <enabled>0</enabled>
+                </zalo>
+                <apple>
+                    <enabled>0</enabled>
+                </apple>
+            </credentials>
+
+        </magenest>
+    </default>
+</config>

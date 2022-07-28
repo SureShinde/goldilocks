@@ -1,0 +1,31 @@
+{
+    "amasty_ampromo_rule": {
+        "column": {
+            "entity_id": true,
+            "salesrule_id": true,
+            "sku": true,
+            "type": true,
+            "top_banner_show_gift_images": true,
+            "after_product_banner_show_gift_images": true,
+            "items_discount": true,
+            "minimal_items_price": true,
+            "apply_tax": true,
+            "apply_shipping": true,
+            "top_banner_image": true,
+            "top_banner_alt": true,
+            "top_banner_on_hover_text": true,
+            "top_banner_link": true,
+            "top_banner_description": true,
+            "after_product_banner_image": true,
+            "after_product_banner_alt": true,
+            "after_product_banner_on_hover_text": true,
+            "after_product_banner_link": true,
+            "after_product_banner_description": true,
+            "label_image": true,
+            "label_image_alt": true
+        },
+        "index": {
+            "AMASTY_AMPROMO_RULE_SALESRULE_ID": true
+        }
+    }
+}

@@ -1,0 +1,27 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<!--@subject {{trans "Newsletter subscription success"}} @-->
+<!--@vars {
+"template config_path=\"design\/email\/footer_template\"":"Email Footer Template",
+"template config_path=\"design\/email\/header_template\"":"Email Header Template"
+} @-->
+
+
+{{template config_path="design/email/header_template"}}
+<p class="header-bottom">
+    <span>{{trans "Newsletter"}}</span>
+    <span>{{trans "Subscription Success"}}</span>
+</p>
+
+<p class="text">
+    <strong>{{trans "Dear"}}</strong>
+</p>
+<p class="text">{{trans "You’re all set! Thank you for subscribing to our newsletter. Exciting deals from Goldilocks await you!"}}</p>
+<p class="text">{{trans "Thank you,"}}</p>
+<p class="text">{{trans "Goldilocks Delivery"}}</p>
+
+{{template config_path="design/email/footer_template"}}

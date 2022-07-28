@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="logo">
+            <arguments>
+                <argument name="logo_width" xsi:type="number">246</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceContainer name="page.top">
+            <container name="page.top.wrapper" htmlTag="div" htmlClass="page-top-wrapper" label="Page Top Wrapper" before="-">
+                <container name="page.top.inner" htmlTag="div" htmlClass="page-top-inner" label="Page Top Inner"/>
+            </container>
+        </referenceContainer>
+        <referenceBlock name="store.menu">
+            <block class="Magento\Theme\Block\Html\Header" name="store.customer.mobile" template="Magento_Theme::html/store-customer-mobile.phtml">
+                <arguments>
+                    <argument name="show_part" xsi:type="string">welcome</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+        <move element="top.links" destination="header-wrapper" before="minicart"/>
+        <move element="navigation.sections" destination="page.top.inner"/>
+        <move element="nearest-store-top-link" destination="page.top.inner"/>
+        <move element="copyright" destination="footer-container" after="-"/>
+        <referenceBlock name="store.links" remove="true"/>
+        <referenceBlock name="footer_links" remove="true"/>
+        <referenceBlock name="form.subscribe" remove="true"/>
+        <referenceBlock name="report.bugs" remove="true"/>
+        <referenceBlock name="wishlist_sidebar" remove="true"/>
+        <referenceBlock name="catalog.compare.sidebar" remove="true"/>
+        <referenceBlock name="sale.reorder.sidebar" remove="true"/>
+    </body>
+</page>

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="amasty_deliverydate_dateschedule_delete_after">
+        <observer name="amasty_deliverydate" instance="Amasty\DeliveryDateManager\Observer\DateSchedule\DeleteTimeSetRelations" />
+    </event>
+</config>

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="customer_register_success">
+        <observer name="Magenest_AdvancedLogin::setFlagRegisterSuccess" instance="Magenest\AdvancedLogin\Observer\CreatePost" />
+    </event>
+    <event name="controller_action_predispatch_advancedlogin_otp_forgotpasswordpost">
+        <observer name="captcha_phone" instance="\Magenest\AdvancedLogin\Observer\CheckForgotpasswordObserver" />
+    </event>
+</config>

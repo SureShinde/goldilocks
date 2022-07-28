@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <fb_chatbot>
+            <connect>
+                <enable>0</enable>
+                <access_token></access_token>
+                <verification_token>123</verification_token>
+            </connect>
+            <human_support>
+                <enable>0</enable>
+                <email>example@gmail.com</email>
+            </human_support>
+            <message>
+                <greeting>Hi {{user_first_name}}! Welcome to our page. Click "Get Started" to shop with us.</greeting>
+            </message>
+        </fb_chatbot>
+    </default>
+</config>

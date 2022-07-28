@@ -1,0 +1,103 @@
+<?php
+/**
+ * @var \Magenest\Sidebar\Block\LayeredNavigation\RangeFilter $block
+ * @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+ * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+<div id="slider-box">
+    <div id="price-range" class="slider"></div>
+    <div class="priceValueText">
+        <span id="minPriceValue">
+            <?=  $escaper->escapeHtml($block->getFormatedPrice($block->getMinPriceOfCurrentCategory())); ?>
+        </span>
+        <span id="minCurrentPrice"></span>
+        <span id="maxCurrentPrice"></span>
+        <span id="maxPriceValue">
+            <?= $escaper->escapeHtml($block->getFormatedPrice($block->getMaxPriceOfCurrentCategory()));?>
+        </span>
+    </div>
+</div>
+<?php $scriptString = <<<script
+    require([
+        'jquery',
+        'jquery/ui',
+        'jquery-ui-modules/slider',
+        'jquery/ui-modules/widgets/slider'
+    ], function ($, ui) {
+        const preparePriceUrl = (priceFrom,priceTo) => {
+            let price = priceFrom + "-" + priceTo
+            let urlSearch = new URL(window.location.href);
+            urlSearch.searchParams.set("price", price);
+            return urlSearch.toString();
+        }
+
+        let data = {$block->getJsonConfig()};
+        $("#price-range").slider({
+            step: Number(data.step),
+            range: true,
+            min: Math.floor(data.price_from),
+            max: Math.ceil(data.price_to),
+            slide: function (event, ui) {
+                $("#priceSearchBtn").attr('href',preparePriceUrl(ui.values[0],ui.values[1]));
+                $('#minPriceValue').html('{$block->escapeJs($block->getCurrentCurrencySymbol())}' + Math.floor(data.price_from));
+                $('#maxPriceValue').html('{$block->escapeJs($block->getCurrentCurrencySymbol())}' + Math.ceil(data.price_to));
+                if (ui.values[0] == Math.floor(data.price_from)) {
+                    $('#minCurrentPrice').html('');
+                    $(this).children('.ui-slider-handle').first().attr('data-value','');
+                } else {
+                    $('#minCurrentPrice').html('{$block->escapeJs($block->getCurrentCurrencySymbol())}' + ui.values[0]);
+                    $(this).children('.ui-slider-handle').first().attr('data-value','{$block->escapeJs($block->getCurrentCurrencySymbol())}' + ui.values[0]);
+                }
+                if (ui.values[1] == Math.ceil(data.price_to)) {
+                    $('#maxCurrentPrice').html('');
+                    $(this).children('.ui-slider-handle').last().attr('data-value','');
+                } else {
+                    $('#maxCurrentPrice').html('{$block->escapeJs($block->getCurrentCurrencySymbol())}' + ui.values[1]);
+                    $(this).children('.ui-slider-handle').last().attr('data-value','{$block->escapeJs($block->getCurrentCurrencySymbol())}' + ui.values[1]);
+                }
+            },
+            create: function(event, ui){
+                $(this).slider('values',data.current_values);
+                $("#priceSearchBtn").attr('href',preparePriceUrl(data.current_values[0],data.current_values[1]));
+                $('#minPriceValue').html('{$block->escapeJs($block->getCurrentCurrencySymbol())}' + Math.floor(data.price_from));
+                $('#maxPriceValue').html('{$block->escapeJs($block->getCurrentCurrencySymbol())}' + Math.ceil(data.price_to));
+                if (data.current_values[0] == Math.floor(data.price_from)) {
+                    $('#minCurrentPrice').html('');
+                    $(this).children('.ui-slider-handle').first().attr('data-value','');
+                } else {
+                    $('#minCurrentPrice').html('{$block->escapeJs($block->getCurrentCurrencySymbol())}' + data.current_values[0]);
+                    $(this).children('.ui-slider-handle').first().attr('data-value','{$block->escapeJs($block->getCurrentCurrencySymbol())}' + data.current_values[0]);
+                }
+                if (data.current_values[1] == Math.ceil(data.price_to)) {
+                    $('#maxCurrentPrice').html('');
+                    $(this).children('.ui-slider-handle').last().attr('data-value','');
+                } else {
+                    $('#maxCurrentPrice').html('{$block->escapeJs($block->getCurrentCurrencySymbol())}' + data.current_values[1]);
+                    $(this).children('.ui-slider-handle').last().attr('data-value','{$block->escapeJs($block->getCurrentCurrencySymbol())}' + data.current_values[1]);
+                }
+            },
+            stop: function( event, ui ) {
+                let currentValue = ui.value;
+                if (ui.values[0] == Math.floor(data.price_from)) {
+                    $('#minCurrentPrice').html('');
+                    $(this).children('.ui-slider-handle').first().attr('data-value','');
+                } else {
+                    $('#minCurrentPrice').html('{$block->escapeJs($block->getCurrentCurrencySymbol())}' + ui.values[0]);
+                    $(this).children('.ui-slider-handle').first().attr('data-value','{$block->escapeJs($block->getCurrentCurrencySymbol())}' + ui.values[0]);
+                }
+                if (ui.values[1] == Math.ceil(data.price_to)) {
+                    $('#maxCurrentPrice').html('');
+                    $(this).children('.ui-slider-handle').last().attr('data-value','');
+                } else {
+                    $('#maxCurrentPrice').html('{$block->escapeJs($block->getCurrentCurrencySymbol())}' + ui.values[1]);
+                    $(this).children('.ui-slider-handle').last().attr('data-value','{$block->escapeJs($block->getCurrentCurrencySymbol())}' + ui.values[1]);
+                }
+                var href = preparePriceUrl(ui.values[0], ui.values[1]);
+                window.location.replace(href);
+            }
+        });
+    })
+script;
+?>
+<?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false) ?>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">amdelivery_sales_order_edit.amdelivery_sales_order_edit_data_source</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="save" class="Amasty\DeliveryDateManager\Block\Adminhtml\GeneralButtons\SaveButton"/>
+            <button name="reset" class="Amasty\DeliveryDateManager\Block\Adminhtml\GeneralButtons\ResetButton"/>
+            <button name="back" class="Amasty\DeliveryDateManager\Block\Adminhtml\Sales\Order\Edit\BackButton"/>
+        </buttons>
+        <namespace>amdelivery_sales_order_edit</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>amdelivery_sales_order_edit.amdelivery_sales_order_edit_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="amdelivery_sales_order_edit_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="amasty_deliverydate/sales_order/save"/>
+        </settings>
+        <dataProvider class="Amasty\DeliveryDateManager\Ui\Component\Form\Sales\Order\Edit\DataProvider"
+                      name="amdelivery_sales_order_edit_data_source">
+            <settings>
+                <requestFieldName>order_id</requestFieldName>
+                <primaryFieldName>deliverydate_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general" sortOrder="10">
+        <settings>
+            <collapsible>false</collapsible>
+            <opened>true</opened>
+            <label translate="true">Delivery Information</label>
+        </settings>
+        <field name="deliverydate_id" formElement="hidden">
+            <settings>
+                <dataType>text</dataType>
+            </settings>
+        </field>
+        <field name="order_id" formElement="hidden">
+            <settings>
+                <dataType>text</dataType>
+            </settings>
+        </field>
+        <field name="date" formElement="date" component="Amasty_DeliveryDateManager/js/view/modal/form/element/date">
+            <settings>
+                <validation>
+                    <rule name="validate-date" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Delivery Date</label>
+            </settings>
+            <formElements>
+                <date>
+                    <settings>
+                        <options>
+                            <option name="minDate" xsi:type="string">new Date()</option>
+                        </options>
+                    </settings>
+                </date>
+            </formElements>
+        </field>
+        <field name="time_from" formElement="date"
+               component="Amasty_DeliveryDateManager/js/view/form/element/time-picker"
+               class="Amasty\DeliveryDateManager\Ui\Component\Form\Element\DataType\TimePicker"
+               template="ui/form/field">
+            <settings>
+                <dataScope>time_from</dataScope>
+                <dataType>text</dataType>
+                <label translate="true">Delivery Time From</label>
+            </settings>
+            <formElements>
+                <date>
+                    <settings>
+                        <options>
+                            <option name="showsDate" xsi:type="boolean">false</option>
+                            <option name="showsTime" xsi:type="boolean">true</option>
+                            <option name="timeOnly" xsi:type="boolean">true</option>
+                            <option name="timeFormat" xsi:type="string">HH:mm</option>
+                            <option name="closeText" xsi:type="string" translate="true">OK</option>
+                        </options>
+                    </settings>
+                </date>
+            </formElements>
+        </field>
+        <field name="time_to" formElement="date"
+               component="Amasty_DeliveryDateManager/js/view/form/element/time-picker"
+               class="Amasty\DeliveryDateManager\Ui\Component\Form\Element\DataType\TimePicker"
+               template="ui/form/field">
+            <settings>
+                <dataScope>time_to</dataScope>
+                <dataType>text</dataType>
+                <label translate="true">Delivery Time To</label>
+            </settings>
+            <formElements>
+                <date>
+                    <settings>
+                        <options>
+                            <option name="showsDate" xsi:type="boolean">false</option>
+                            <option name="showsTime" xsi:type="boolean">true</option>
+                            <option name="timeOnly" xsi:type="boolean">true</option>
+                            <option name="timeFormat" xsi:type="string">HH:mm</option>
+                            <option name="closeText" xsi:type="string" translate="true">OK</option>
+                        </options>
+                    </settings>
+                </date>
+            </formElements>
+        </field>
+        <field name="comment" formElement="textarea">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Delivery Comments</label>
+                <visible>true</visible>
+                <dataScope>comment</dataScope>
+            </settings>
+        </field>
+        <field name="notify" formElement="checkbox">
+            <settings>
+                <label translate="true">Notify Customer by Email</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="string">0</map>
+                            <map name="true" xsi:type="string">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+    </fieldset>
+</form>

@@ -1,0 +1,83 @@
+<?php
+/**
+ * @var \Magento\Backend\Block\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+<div class="fieldset-wrapper form-inline advanced-inventory-edit">
+    <fieldset class="fieldset" id="amasty_preorder_fieldset" style="display: block;">
+        <legend class="admin__legend legend">
+            <span>Pre-Order</span>
+        </legend>
+        <br>
+        <div class="field">
+            <label class="label" for="amasty_preorder_note">
+                <span><?= $escaper->escapeHtml(__('Pre-Order Note')) ?></span>
+            </label>
+
+            <div class="control">
+                <div class="fields-group-1">
+                    <div class="field">
+                        <input type="text" class="input-text" id="amasty_preorder_note"
+                               name="attributes[amasty_preorder_note]"
+                               value=""
+                               disabled="disabled" />
+                    </div>
+                    <div class="field choice">
+                        <input type="checkbox"
+                               id="amasty_preorder_note_checkbox"
+                               data-role="toggle-editability-all"/>
+                        <label for="amasty_preorder_note_checkbox"
+                               class="label"><span><?= $escaper->escapeHtml(__('Change')) ?></span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label" for="amasty_preorder_cart_label">
+                <span><?= $escaper->escapeHtml(__('Pre-Order Cart Button')) ?></span>
+            </label>
+
+            <div class="control">
+                <div class="fields-group-1">
+                    <div class="field">
+                        <input type="text" class="input-text" id="amasty_preorder_cart_label"
+                               name="attributes[amasty_preorder_cart_label]"
+                               value=""
+                               disabled="disabled" />
+                    </div>
+                    <div class="field choice">
+                        <input type="checkbox"
+                               id="amasty_preorder_note_checkbox"
+                               data-role="toggle-editability-all"/>
+                        <label for="amasty_preorder_note_checkbox"
+                               class="label"><span><?= $escaper->escapeHtml(__('Change')) ?></span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</div>
+
+<script type="text/javascript">
+    require([
+            'jquery'
+        ],
+        function($) {
+            var preOrderId = <?= (int) \Amasty\Preorder\Model\Product\Constants::BACKORDERS_PREORDER_OPTION ?>,
+                $preorderTab = $("#amasty_preorder_fieldset"),
+                inventoryElement = $("#inventory_backorders");
+            if (inventoryElement.val() != preOrderId){
+                $preorderTab.hide();
+            }
+
+            inventoryElement.change(function () {
+                if (this.value == preOrderId) {
+                    $preorderTab.show();
+                } else {
+                    $preorderTab.hide();
+                }
+            });
+        }
+    );
+</script>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <type name="Magento\StoreGraphQl\Model\Resolver\Store\StoreConfigDataProvider">
+        <arguments>
+            <argument name="extendedConfigData" xsi:type="array">
+                <item name="ampreorder_functional_enabled" xsi:type="string">ampreorder/functional/enabled</item>
+
+                <item name="ampreorder_general_show_preorder_note" xsi:type="string">ampreorder/general/show_preorder_note</item>
+                <item name="ampreorder_general_cart_message" xsi:type="string">ampreorder/general/cart_message</item>
+                <item name="ampreorder_general_below_zero_message" xsi:type="string">ampreorder/general/below_zero_message</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

@@ -1,0 +1,28 @@
+<section class="admin__page-section" id="campaign-comparison">
+    <div class="admin__page-section-title">
+                <span class="title" data-bind="i18n:'Compare Number Of Sent Mails'">
+                </span>
+    </div>
+    <div class="notice-collection-rule" data-bind="style:{ display: show_notice}">
+        <p class="messages-message-error" data-bind="html: notice_collection"></p>
+    </div>
+    <table class="statistical">
+        <tr>
+            <th data-bind="i18n:'Rule 1'"></th>
+            <td data-bind="html: title_campaign_first"></td>
+            <td data-bind="html: total_send_first"></td>
+        </tr>
+        <tr>
+            <th data-bind="i18n:'Rule 2'"></th>
+            <td data-bind="html: title_campaign_second"></td>
+            <td data-bind="html: total_send_second"></td>
+        </tr>
+    </table>
+
+    <table class="columns bar-char-compare">
+        <tr>
+            <td><div id="columnchart_percent_material_compare"></div></td>
+            <td><div id="columnchart_number_material_compare"></div></td>
+        </tr>
+    </table>
+</section>

@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <container name="gtm.before.body.end" as="gtm_before_body_end" label="Gtm Before Body End" after="before.body.end">
+            <block ifconfig="Acommerce_Gtm/general/enable" class="Acommerce\Gtm\Block\Adminhtml\Refund" name="weltpixel_gtm_footer_refund" after="-" template="Acommerce_Gtm::gtm_footer_refund.phtml" ttl="0" />
+        </container>
+    </body>
+</page>

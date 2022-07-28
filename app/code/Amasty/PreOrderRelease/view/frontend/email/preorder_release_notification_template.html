@@ -1,0 +1,17 @@
+<!--@subject {{trans "%product_name have arrived!" product_name=$product_name}} @-->
+<!--@vars
+{
+"var product_name":"{Product Name}",
+"var store.frontend_name":"Store Name",
+"var orders_url":"Url to Orders Tab"
+}
+@-->
+{{template config_path="design/email/header_template"}}
+
+{{trans "Hey there!"}}
+<br/>
+{{trans "You've preordered %name at %store_name. The product is out." name=$product_name store_name=$store.frontend_name}}
+<br />
+{{trans "You can check your order in <a href="%orders_url">My Orders</a> tab in your account on our site." orders_url=$orders_url |raw}}
+
+{{template config_path="design/email/footer_template"}}

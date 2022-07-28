@@ -1,0 +1,37 @@
+<?php
+/** @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer */
+?>
+
+<strong class="filter-toggle-sticky"><?= __('Filter') ?></strong>
+<div class="filter-overlay"></div>
+<div class="filter-toggle">
+    <strong><?= __('Filter By') ?></strong>
+</div>
+<?php $scriptString = <<<script
+    require(['jquery'], function ($) {
+        $('.filter-toggle, .filter-overlay').click(function () {
+            var filterPostion = $(this).offset().top - $('.page-products .columns').offset().top;
+            $('body').toggleClass('filter-opened');
+            $('.block.filter').css('top', filterPostion);
+        })
+        $('.filter-toggle-sticky').click(function () {
+            var filterTogglePostion = $('.filter-toggle').offset().top - 10;
+            window.scrollTo({top: filterTogglePostion, behavior: 'smooth'});
+            $('.filter-toggle').click();
+        })
+        $(window).scroll(function() {
+            startingPosition = $('.filter-toggle').offset().top + $('.filter-toggle').outerHeight();
+            if ($(window).scrollTop() > startingPosition) {
+                $('.page-header').height($('.page-header').outerHeight());
+                $('.toolbar-filters').height($('.toolbar-filters').outerHeight());
+                $('body').addClass('filter-sticky');
+            } else {
+                $('body').removeClass('filter-sticky');
+                $('.page-header').height('');
+                $('.toolbar-filters').height('');
+            }
+        });
+    })
+script;
+?>
+<?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false) ?>

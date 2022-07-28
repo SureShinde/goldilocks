@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="magenest" sortOrder="100">
+            <label>Magenest</label>
+        </tab>
+        <section id="api_log" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Api Logging</label>
+            <resource>Magenest_WebApiLog::configuration</resource>
+            <tab>magenest</tab>
+            <group id="general_settings" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Settings</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="log_trace" translate="label" type="select" canRestore="1" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Log the exception trace</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="hold_log" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Keep back log X days nearest</label>
+                    <validate>validate-greater-than-zero required-entry</validate>
+                    <comment>Clear all logs after this days</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

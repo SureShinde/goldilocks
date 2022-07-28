@@ -1,0 +1,23 @@
+{
+    "name": "amasty/module-pre-order-analytic",
+    "description": "Pre Order Analytics by Amasty",
+    "require": {
+        "php": ">=7.3.0",
+        "amasty/base": ">=1.13.4",
+        "amasty/preorder": ">=2.0.0"
+    },
+    "homepage": "https://amasty.com/",
+    "type": "magento2-module",
+    "version": "1.0.1",
+    "license": [
+        "Commercial"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Amasty\\PreOrderAnalytic\\": ""
+        }
+    }
+}

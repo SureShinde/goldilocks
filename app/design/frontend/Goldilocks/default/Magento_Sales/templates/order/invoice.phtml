@@ -1,0 +1,30 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+
+/* @var $block \Magento\Sales\Block\Order\Invoice
+ * @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+ */
+$order = $block->getOrder();
+?>
+
+<div class="desktop-hide order-id-title">
+    <strong><?= __("Order #%1", $order->getIncrementId()) ?></strong>
+</div>
+<div class="order-details-items invoice">
+    <?= $block->getChildHtml('invoice_items') ?>
+</div>
+
+<?php $scriptString = <<<script
+    require(['jquery'], function($){
+        $('.order-id-title').on('click', function () {
+            $(this).next('.order-details-items').slideToggle(300);
+            $(this).toggleClass('order-hide');
+        })
+    });
+script;
+?>
+<?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false); ?>

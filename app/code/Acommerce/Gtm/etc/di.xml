@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Checkout\Model\ShippingInformationManagement">
+        <plugin name="weltpixel-googletagmanager-checkout-shippinginformation"
+                type="Acommerce\Gtm\Plugin\ShippingInformation" sortOrder="10"/>
+    </type>
+    <type name="Magento\Checkout\Model\PaymentInformationManagement">
+        <plugin name="weltpixel-googletagmanager-checkout-paymentinformation"
+                type="Acommerce\Gtm\Plugin\PaymentInformation" sortOrder="10"/>
+    </type>
+    <type name="Magento\Checkout\Model\GuestPaymentInformationManagement">
+        <plugin name="weltpixel-googletagmanager-checkout-guestpaymentinformation"
+                type="Acommerce\Gtm\Plugin\GuestPaymentInformation" sortOrder="10"/>
+    </type>
+
+    <type name="Magento\Catalog\Block\Product\ListProduct">
+        <plugin name="weltpixel-googletagmanager-catalog-block-product-listproduct"
+                type="Acommerce\Gtm\Plugin\Catalog\Block\Product\ListProductPlugin" sortOrder="10"/>
+    </type>
+
+    <type name="Magento\CatalogSearch\Block\SearchResult\ListProduct">
+        <plugin name="weltpixel-googletagmanager-catalog-block-product-listproduct"
+                type="Acommerce\Gtm\Plugin\CatalogSearch\Block\SearchResult\ListProductPlugin" sortOrder="10"/>
+    </type>
+</config>

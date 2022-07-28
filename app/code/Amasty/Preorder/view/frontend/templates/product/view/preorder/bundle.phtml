@@ -1,0 +1,32 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+<?php
+/** @var \Amasty\Preorder\ViewModel\Product\View\Preorder $preorderViewModel */
+$preorderViewModel = $block->getData('preorder_view_model');
+/** @var \Amasty\Preorder\ViewModel\Product\View\PreorderBundle $preorderBundleViewModel */
+$preorderBundleViewModel = $block->getData('preorder_bundle_view_model');
+$bundleProduct = $preorderViewModel->getCurrentProduct();
+/** @var \Amasty\Preorder\Api\Data\ProductInformationInterface $preorderInformation */
+$preorderInformation = $preorderViewModel->getPreorderInformation($bundleProduct);
+?>
+<?php
+if (!$bundleProduct->isSalable()) {
+    return;
+}
+?>
+<script type="text/javascript">
+    require(['jquery', 'Amasty_Preorder/js/product/preorder_bundle'], function($) {
+        $widget = $.mage.amastyPreorderBundle({
+            isAllProductsPreorder: <?= (int) $preorderBundleViewModel->isAllProductsPreorder($bundleProduct) ?>,
+            preOrderNote: '<?= /** @noEscape */ $preorderViewModel->escapeQuote($preorderInformation->getNote()) ?>',
+            addToCartLabel: '<?= /** @noEscape */ $preorderViewModel->escapeQuote($preorderInformation->getCartLabel()) ?>',
+            map: <?= /** @noEscape */ $preorderBundleViewModel->getMap($bundleProduct) ?>,
+            optionsData: <?= /** @noEscape */ $preorderBundleViewModel->getBundleOptionsData($bundleProduct) ?>,
+            originalNote: '<?= $escaper->escapeHtml($preorderViewModel->getOriginalNote($bundleProduct)) ?>'
+        });
+    });
+</script>

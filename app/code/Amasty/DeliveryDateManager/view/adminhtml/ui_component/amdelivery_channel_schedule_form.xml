@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd"
+      component="Amasty_DeliveryDateManager/js/view/modal/abstract-modal-form">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider"
+                  xsi:type="string">amdelivery_channel_schedule_form.amdelivery_channel_schedule_form_data_source
+            </item>
+        </item>
+        <item name="config" xsi:type="array">
+            <item name="deleteConfirmationMessage" translate="true" xsi:type="string">Are you sure you want to delete this date schedule?</item>
+            <item name="notSelectedEntityMessage" translate="true" xsi:type="string">Please, select date schedule to delete.</item>
+            <item name="idField" xsi:type="string">schedule_id</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="cancel" class="Amasty\DeliveryDateManager\Block\Adminhtml\Channel\Modal\CancelButton"/>
+            <button name="delete" class="Amasty\DeliveryDateManager\Block\Adminhtml\Channel\Modal\DeleteButton"/>
+            <button name="save_and_continue" class="Amasty\DeliveryDateManager\Block\Adminhtml\GeneralButtons\SaveAndContinueButton"/>
+            <button name="save" class="Amasty\DeliveryDateManager\Block\Adminhtml\GeneralButtons\SaveButton"/>
+        </buttons>
+        <namespace>amdelivery_channel_schedule_form</namespace>
+        <ajaxSave>true</ajaxSave>
+        <ajaxSaveType>simple</ajaxSaveType>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>amdelivery_channel_schedule_form.amdelivery_channel_schedule_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="amdelivery_channel_schedule_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="amasty_deliverydate/channel_schedule/save"/>
+        </settings>
+        <dataProvider class="Amasty\DeliveryDateManager\Ui\Component\Form\Channel\Modal\DateScheduleDataProvider"
+                      name="amdelivery_channel_schedule_form_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>schedule_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general" sortOrder="10">
+        <settings>
+            <label/>
+        </settings>
+        <field name="schedule_id" formElement="hidden">
+            <settings>
+                <dataType>text</dataType>
+            </settings>
+        </field>
+        <field name="is_available" formElement="hidden">
+            <settings>
+                <dataType>text</dataType>
+            </settings>
+        </field>
+        <field name="name" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="tracks" xsi:type="array">
+                        <item name="label" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Title</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="max_text_length" xsi:type="number">50</rule>
+                </validation>
+            </settings>
+        </field>
+        <radioset name="type">
+            <settings>
+                <switcherConfig>
+                    <enabled>true</enabled>
+                    <rules>
+                        <rule name="0">
+                            <value></value>
+                            <actions>
+                                <action name="0">
+                                    <target>${$.parentName}.strict</target>
+                                    <callback>visible</callback>
+                                    <params>
+                                        <param name="0" xsi:type="boolean">false</param>
+                                    </params>
+                                </action>
+                                <action name="1">
+                                    <target>${$.parentName}.day_of_year</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="2">
+                                    <target>${$.parentName}.day_of_month</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="3">
+                                    <target>${$.parentName}.day_of_week</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="1">
+                            <value>0</value>
+                            <actions>
+                                <action name="0">
+                                    <target>${$.parentName}.strict</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="1">
+                                    <target>${$.parentName}.day_of_year</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="2">
+                                    <target>${$.parentName}.day_of_month</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="3">
+                                    <target>${$.parentName}.day_of_week</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="2">
+                            <value>1</value>
+                            <actions>
+                                <action name="0">
+                                    <target>${$.parentName}.strict</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="1">
+                                    <target>${$.parentName}.day_of_year</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="2">
+                                    <target>${$.parentName}.day_of_month</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="3">
+                                    <target>${$.parentName}.day_of_week</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="3">
+                            <value>2</value>
+                            <actions>
+                                <action name="0">
+                                    <target>${$.parentName}.strict</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="1">
+                                    <target>${$.parentName}.day_of_year</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="2">
+                                    <target>${$.parentName}.day_of_month</target>
+                                    <callback>show</callback>
+                                </action>
+                                <action name="3">
+                                    <target>${$.parentName}.day_of_week</target>
+                                    <callback>hide</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                        <rule name="4">
+                            <value>3</value>
+                            <actions>
+                                <action name="0">
+                                    <target>${$.parentName}.strict</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="1">
+                                    <target>${$.parentName}.day_of_year</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="2">
+                                    <target>${$.parentName}.day_of_month</target>
+                                    <callback>hide</callback>
+                                </action>
+                                <action name="3">
+                                    <target>${$.parentName}.day_of_week</target>
+                                    <callback>show</callback>
+                                </action>
+                            </actions>
+                        </rule>
+                    </rules>
+                </switcherConfig>
+                <label translate="true">Type</label>
+                <dataScope>type</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <options>
+                    <option name="0" xsi:type="array">
+                        <item name="value" xsi:type="number">0</item>
+                        <item name="label" xsi:type="string" translate="true">Specific Date Range</item>
+                    </option>
+                    <option name="1" xsi:type="array">
+                        <item name="value" xsi:type="number">1</item>
+                        <item name="label" xsi:type="string" translate="true">Days of Year</item>
+                    </option>
+                    <option name="2" xsi:type="array">
+                        <item name="value" xsi:type="number">2</item>
+                        <item name="label" xsi:type="string" translate="true">Days of Month</item>
+                    </option>
+                    <option name="3" xsi:type="array">
+                        <item name="value" xsi:type="number">3</item>
+                        <item name="label" xsi:type="string" translate="true">Days of Week</item>
+                    </option>
+                </options>
+            </settings>
+        </radioset>
+        <fieldset name="strict" component="Amasty_DeliveryDateManager/js/view/visibilityFieldset">
+            <settings>
+                <label/>
+                <collapsible>false</collapsible>
+            </settings>
+            <field name="from_0" formElement="date" component="Amasty_DeliveryDateManager/js/view/modal/form/element/from-datepicker">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="toDatepickerName" xsi:type="string">${$.parentName}.to_0</item>
+                    </item>
+                </argument>
+                <settings>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                        <rule name="validate-date" xsi:type="boolean">true</rule>
+                        <rule name="date-same-or-after-current" xsi:type="boolean">true</rule>
+                    </validation>
+                    <dataType>text</dataType>
+                    <label translate="true">From</label>
+                    <notice translate="true">Set the range start date, e.g.: 12/25/2021</notice>
+                    <listens>
+                        <link name="${$.parentName}.to_0:shiftedValue">setFromEqualTo</link>
+                    </listens>
+                    <additionalClasses>
+                        <class name="amdelivery-datepicker-input">true</class>
+                    </additionalClasses>
+                </settings>
+                <formElements>
+                    <date>
+                        <settings>
+                            <options>
+                                <option name="minDate" xsi:type="string">new Date()</option>
+                            </options>
+                        </settings>
+                    </date>
+                </formElements>
+            </field>
+            <field name="to_0" formElement="date" component="Amasty_DeliveryDateManager/js/view/modal/form/element/to-datepicker">
+                <settings>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                        <rule name="validate-date" xsi:type="boolean">true</rule>
+                        <rule name="date-same-or-after-current" xsi:type="boolean">true</rule>
+                    </validation>
+                    <dataType>text</dataType>
+                    <label translate="true">To</label>
+                    <listens>
+                        <link name="${$.parentName}.from_0:shiftedValue">setToMinDateEqualFromDate</link>
+                    </listens>
+                    <notice translate="true"><![CDATA[Set the range end date, e.g.: 12/27/2021.
+                        The 'Specific Date Range' option means that the specified period won't be repeated after the end date is reached]]></notice>
+                    <additionalClasses>
+                        <class name="amdelivery-datepicker-input">true</class>
+                    </additionalClasses>
+                </settings>
+                <formElements>
+                    <date>
+                        <settings>
+                            <options>
+                                <option name="minDate" xsi:type="string">new Date()</option>
+                            </options>
+                        </settings>
+                    </date>
+                </formElements>
+            </field>
+        </fieldset>
+
+        <fieldset name="day_of_year" component="Amasty_DeliveryDateManager/js/view/visibilityFieldset">
+            <settings>
+                <label/>
+                <collapsible>false</collapsible>
+            </settings>
+            <field name="from_1" formElement="date"
+                   class="Amasty\DeliveryDateManager\Ui\Component\Form\Element\DataType\DayMonth"
+                   component="Amasty_DeliveryDateManager/js/view/modal/form/element/date-no-year" template="ui/form/field">
+                <settings>
+                    <dataType>text</dataType>
+                    <dataScope>from_1</dataScope>
+                    <label translate="true">From</label>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <notice translate="true">Set the range start date, e.g.: 04/10</notice>
+                    <additionalClasses>
+                        <class name="amdelivery-datepicker-input">true</class>
+                    </additionalClasses>
+                </settings>
+                <formElements>
+                    <date>
+                        <settings>
+                            <options>
+                                <option name="changeYear" xsi:type="boolean">false</option>
+                                <option name="drawYear" xsi:type="number">1970</option>
+                            </options>
+                            <outputDateFormat>MM-dd</outputDateFormat>
+                        </settings>
+                    </date>
+                </formElements>
+            </field>
+            <field name="to_1" formElement="date"
+                   class="Amasty\DeliveryDateManager\Ui\Component\Form\Element\DataType\DayMonth"
+                   component="Amasty_DeliveryDateManager/js/view/modal/form/element/date-no-year" template="ui/form/field">
+                <settings>
+                    <dataType>text</dataType>
+                    <dataScope>to_1</dataScope>
+                    <label translate="true">To</label>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <notice translate="true"><![CDATA[Set the range end date, e.g.: 04/24.
+                        The 'Days of Year' option means that the specified period is repeated annually]]></notice>
+                    <additionalClasses>
+                        <class name="amdelivery-datepicker-input">true</class>
+                    </additionalClasses>
+                </settings>
+                <formElements>
+                    <date>
+                        <settings>
+                            <options>
+                                <option name="changeYear" xsi:type="boolean">false</option>
+                                <option name="drawYear" xsi:type="number">1970</option>
+                            </options>
+                            <outputDateFormat>MM-dd</outputDateFormat>
+                        </settings>
+                    </date>
+                </formElements>
+            </field>
+        </fieldset>
+
+        <fieldset name="day_of_month" component="Amasty_DeliveryDateManager/js/view/visibilityFieldset">
+            <settings>
+                <label/>
+                <collapsible>false</collapsible>
+            </settings>
+            <field name="from_2" formElement="input">
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">From</label>
+                    <notice translate="true">Enter a number of a calendar day (from 1 to 31), e.g: 17</notice>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                        <rule name="validate-number" xsi:type="boolean">true</rule>
+                        <rule name="validate-number-range" xsi:type="string">1-31</rule>
+                    </validation>
+                </settings>
+            </field>
+            <field name="to_2" formElement="input">
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">To</label>
+                    <notice translate="true"><![CDATA[Enter a number of a calendar day (from 1 to 31), e.g: 31.
+                        The 'Days of Month' option means that the specified period is repeated monthly.
+                        Please note that if you set from 1 to 31 days and there are fewer than 31 days in a month, this value will be automatically changed to the maximum available days number in this month, i.e. February to 28]]></notice>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                        <rule name="validate-number" xsi:type="boolean">true</rule>
+                        <rule name="validate-number-range" xsi:type="string">1-31</rule>
+                    </validation>
+                </settings>
+            </field>
+        </fieldset>
+
+        <fieldset name="day_of_week" component="Amasty_DeliveryDateManager/js/view/visibilityFieldset">
+            <settings>
+                <label/>
+                <collapsible>false</collapsible>
+            </settings>
+            <field name="from_3" formElement="select" component="Amasty_DeliveryDateManager/js/view/modal/form/element/select">
+                <settings>
+                    <label translate="true">From</label>
+                    <visible>true</visible>
+                    <dataType>select</dataType>
+                    <notice translate="true">Set the range start day, e.g.: Monday</notice>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                </settings>
+                <formElements>
+                    <select>
+                        <settings>
+                            <options class="Amasty\DeliveryDateManager\Ui\Component\Form\Channel\Modal\Source\ScheduleSourceProvider"/>
+                        </settings>
+                    </select>
+                </formElements>
+            </field>
+            <field name="to_3" formElement="select" component="Amasty_DeliveryDateManager/js/view/modal/form/element/select">
+                <settings>
+                    <label translate="true">To</label>
+                    <visible>true</visible>
+                    <dataType>select</dataType>
+                    <notice translate="true"><![CDATA[Set the range end day, e.g.: Friday.
+                        To choose only one day of week, the 'From' and 'To' values should be the same.
+                        The 'Days of Week' option means that the specified period is repeated weekly.]]></notice>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                </settings>
+                <formElements>
+                    <select>
+                        <settings>
+                            <options class="Amasty\DeliveryDateManager\Ui\Component\Form\Channel\Modal\Source\ScheduleSourceProvider"/>
+                        </settings>
+                    </select>
+                </formElements>
+            </field>
+        </fieldset>
+    </fieldset>
+</form>

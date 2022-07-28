@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="carriers" translate="label" type="text" sortOrder="320" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="pandago" translate="label" type="text" sortOrder="900" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Pandago Integration</label>
+                <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="client_id" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Client Id</label>
+                </field>
+                <field id="key_id" translate="label" type='obscure' sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Key Id</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+                <field id="scope" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Scope</label>
+                </field>
+                <field id="callback_uri" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Callback Uri</label>
+                    <frontend_model>Magenest\Pandago\Model\Config\Source\OauthCallback</frontend_model>
+                </field>
+                <field id="sandbox_mode" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Sandbox Mode</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="sandbox_file_pem" translate="label" type="Magento\Config\Block\System\Config\Form\Field\File" sortOrder="61" showInDefault="1" showInWebsite="0" >
+                    <label>Upload Sandbox Secret key</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\File</backend_model>
+                    <upload_dir config="system">pandago</upload_dir>
+                    <depends>
+                        <field id="sandbox_mode">1</field>
+                    </depends>
+                </field>
+                <field id="production_file_pem" translate="label" type="Magento\Config\Block\System\Config\Form\Field\File" sortOrder="61" showInDefault="1" showInWebsite="0" >
+                    <label>Upload Production Secret key</label>
+                    <depends>
+                        <field id="sandbox_mode">0</field>
+                    </depends>
+                </field>
+                <field id="check_api" translate="button_label" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <button_label>Get Token</button_label>
+                    <frontend_model>Magenest\Pandago\Block\Adminhtml\System\Config\GetToken</frontend_model>
+                </field>
+                <field id="title" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Title</label>
+                </field>
+                <field id="name" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Method Name</label>
+                </field>
+                <field id="description" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Description</label>
+                    <validate>required-entry</validate>
+                </field>
+                <field id="shipping_cost" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1" >
+                    <label>Shipping Cost</label>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                </field>
+                <field id="sallowspecific" translate="label" type="select" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Ship to Applicable Countries</label>
+                    <frontend_class>shipping-applicable-country</frontend_class>
+                    <source_model>Magento\Shipping\Model\Config\Source\Allspecificcountries</source_model>
+                </field>
+                <field id="specificcountry" translate="label" type="multiselect" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Ship to Specific Countries</label>
+                    <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+                <field id="showmethod" translate="label" type="select" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Method if Not Applicable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <frontend_class>shipping-skip-hide</frontend_class>
+                </field>
+                <field id="sort_order" translate="label" type="text" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Sort Order</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

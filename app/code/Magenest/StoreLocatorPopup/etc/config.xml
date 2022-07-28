@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <amlocator>
+            <general>
+                <distance_limit>6</distance_limit>
+            </general>
+        </amlocator>
+        <storepickup_locator>
+            <general>
+                <enabled_restrict>1</enabled_restrict>
+                <payment_method_restrict>cashondelivery</payment_method_restrict>
+            </general>
+        </storepickup_locator>
+    </default>
+</config>

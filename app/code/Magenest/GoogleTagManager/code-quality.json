@@ -1,0 +1,12 @@
+{
+    "preset": "vcq1",
+    "reference": {
+        "from": "09f5c1e694b8",
+        "excludes": {
+            "code normalization": "ef430663f572"
+        }
+    },
+    "excludes": {
+        "avoiding this due to there being soft comparisons in the code that are expected to remain such": "SlevomatCodingStandard.ControlStructures.DisallowEqualOperators.DisallowedEqualOperator"
+    }
+}

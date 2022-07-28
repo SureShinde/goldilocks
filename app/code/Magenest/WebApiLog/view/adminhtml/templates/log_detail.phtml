@@ -1,0 +1,49 @@
+<?php /** @var $block  \Magenest\WebApiLog\Block\Adminhtml\ApiLogListing */ ?>
+<?php
+$apiLog = $block->getLog();
+?>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+    <tr>
+        <td>
+            <table border="0" width="100%" cellspacing="1" cellpadding="1">
+                <tr style="height: 35px;text-indent: 10px;">
+                    <td width="10%" style="font-size: 16px;font-weight: 600;">Type</td>
+                    <td width="1%" style="font-size: 16px;font-weight: 600;">:</td>
+                    <td>
+                        <?php
+                        if($apiLog->getType() == 1)
+                            echo "Request";
+                        else
+                            echo "Response";
+                        ?>
+                    </td>
+                </tr>
+                <tr style="height: 35px;text-indent: 10px;">
+                    <td width="10%" style="font-size: 16px;font-weight: 600;">Time</td>
+                    <td width="1%" style="font-size: 16px;font-weight: 600;">:</td>
+                    <td><?= $apiLog->getTime() ?></td>
+                </tr>
+                <tr style="height: 35px;text-indent: 10px;">
+                    <td width="10%" style="font-size: 16px;font-weight: 600;">Content</td>
+                    <td width="1%" style="font-size: 16px;font-weight: 600;">:</td>
+                    <td style="text-indent: 0px;padding-left: 10px;padding-top: 15px">
+                        <div id="api_content"><?= $apiLog->getContent()?></div>
+                        <pre id="api_content_pretty"></pre>
+                    </td>
+                </tr>
+                <tr style="height: 35px;text-indent: 10px;">
+                    <td width="10%" style="font-size: 16px;font-weight: 600;">Exception</td>
+                    <td width="1%" style="font-size: 16px;font-weight: 600;">:</td>
+                    <td style="text-indent: 0px;padding-left: 10px; padding-top: 15px;">
+                        <div id="api_exception"><?= $apiLog->getException()?></div>
+                        <pre id="api_exception_pretty"></pre>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td style="height:  35px;"></td>
+    </tr>
+
+</table>

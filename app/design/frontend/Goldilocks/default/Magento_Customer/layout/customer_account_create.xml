@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <title>Register</title>
+    </head>
+    <body>
+        <referenceBlock name="breadcrumbs">
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string">Home</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="title" xsi:type="string" translate="true">Home</item>
+                    <item name="label" xsi:type="string" translate="true">Home</item>
+                    <item name="link" xsi:type="string">/</item>
+                </argument>
+            </action>
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string">Login</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="title" xsi:type="string" translate="true">Login</item>
+                    <item name="label" xsi:type="string" translate="true">Login</item>
+                    <item name="link" xsi:type="string">/customer/account/login/</item>
+                </argument>
+            </action>
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string">Register</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="title" xsi:type="string" translate="true">Register</item>
+                    <item name="label" xsi:type="string" translate="true">Register</item>
+                </argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <container htmlClass="column-wrapper" name="customer.column.wrapper" htmlTag="div">
+                <block class="Magento\Cms\Block\Block" name="customer.account.logo" before="-">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">customer.account.logo</argument>
+                    </arguments>
+                </block>
+                <container name="customer.form.container" htmlTag="div" htmlClass="form-container">
+                    <block class="Magento\Theme\Block\Html\Title" name="page.main.title.mobile" template="Magento_Theme::html/title-mobile.phtml" before="-" />
+                    <block class="Magento\Customer\Block\Form\Register" name="customer_form_register">
+                        <arguments>
+                            <argument name="attribute_data" xsi:type="object">Magento\Customer\Block\DataProviders\AddressAttributeData</argument>
+                            <argument name="region_provider" xsi:type="object">Magento\Customer\ViewModel\Address\RegionProvider</argument>
+                        </arguments>
+                        <container name="form.additional.info" as="form_additional_info"/>
+                        <container name="customer.form.register.fields.before" as="form_fields_before" label="Form Fields Before" htmlTag="div" htmlClass="customer-form-before"/>
+                        <action method="setTemplate">
+                            <argument name="template" xsi:type="string">Magenest_AdvancedLogin::customer/form/register.phtml</argument>
+                        </action>
+                        <block class="Magenest\AdvancedLogin\Block\Form\CustomAttribute\Attributes" template="Magenest_AdvancedLogin::customer/form/userattributes.phtml" name="customer_form_custom_attributes"/>
+                    </block>
+                    <block class="Magento\Cookie\Block\RequireCookie" name="require-cookie" template="Magento_Cookie::require_cookie.phtml">
+                        <arguments>
+                            <argument name="triggers" xsi:type="array">
+                                <item name="registerSubmitButton" xsi:type="string">.action.submit</item>
+                            </argument>
+                        </arguments>
+                    </block>
+                </container>
+            </container>
+        </referenceContainer>
+        <move element="page.main.title" destination="customer.form.container" before="-" />
+    </body>
+</page>

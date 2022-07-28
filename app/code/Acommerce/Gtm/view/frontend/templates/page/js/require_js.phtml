@@ -1,0 +1,18 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php
+$_helper = $this->helper('Acommerce\Gtm\Helper\Data');
+?>
+<?php if ($_helper->isEnabled()) : ?>
+    <?php echo $_helper->getGtmCodeSnippet(); ?>
+<?php endif; ?>
+
+<script>
+    var require = {
+        "baseUrl": "<?php /* @escapeNotVerified */ echo $block->getViewFileUrl('/') ?>"
+    };
+</script>

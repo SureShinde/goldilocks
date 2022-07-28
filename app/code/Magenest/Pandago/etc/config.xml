@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <carriers>
+            <pandago>
+                <active>0</active>
+                <title>Pandago</title>
+                <name>Pandago Delivery</name>
+                <shipping_cost>10</shipping_cost>
+                <sallowspecific>0</sallowspecific>
+                <sandbox_mode>1</sandbox_mode>
+                <enable_logging>1</enable_logging>
+                <sort_order>15</sort_order>
+                <sandbox_host>https://sts-st.deliveryhero.io</sandbox_host>
+                <sandbox_host_order>https://pandago-api-sandbox.deliveryhero.io/sg/api/v1/orders</sandbox_host_order>
+                <production_host_order>https://pandago-api-sandbox.deliveryhero.io/sg/api/v1/orders</production_host_order>
+                <production_host_base>https://pandago-api-sandbox.deliveryhero.io/</production_host_base>
+                <sandbox_host_base>https://pandago-api-sandbox.deliveryhero.io/</sandbox_host_base>
+                <aud>https://sts.deliveryhero.io</aud>
+                <description>Pandago description</description>
+                <production_host>https://sts.deliveryhero.io</production_host>
+                <max_package_weight>50</max_package_weight>
+                <model>Magenest\Pandago\Model\Carrier\Pandago</model>
+            </pandago>
+        </carriers>
+    </default>
+</config>

@@ -1,0 +1,11 @@
+type Query {
+    generateSocialCustomerToken (
+        identifier: String! @doc(description: "Query by identifier."),
+        type: String! @doc(description: "Query by type.")
+    ) : GenerateSocialCustomerToken @resolver( class: "Magenest\\SocialLogin\\Model\\Resolver\\GenerateSocialCustomerToken") @doc(description: "Query by Query Customer Info By Identifier.")
+}
+
+type GenerateSocialCustomerToken {
+    token: String @doc(description: "The customer token")
+    expired_after_hours: String @doc(description: "The customer token will be expired in x hours. If x is zero, mean never expired")
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Backend::system">
+                    <resource id="Magento_Backend::tools">
+                        <resource id="Magenest_ServicesUi::queue" title="Show Queue" sortOrder="60">
+                            <resource id="Magenest_ServicesUi::consumer" title="Consumer Queue"/>
+                            <resource id="Magenest_ServicesUi::cron" title="Cron Schedule"/>
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

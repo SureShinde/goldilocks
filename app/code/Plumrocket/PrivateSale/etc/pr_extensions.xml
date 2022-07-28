@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket Private Sales and Flash Sales v4.x.x
+ * @copyright   Copyright (c) 2021 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+-->
+<extensions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="urn:magento:module:Plumrocket_Base:etc/pr_extensions.xsd">
+    <extension name="PrivateSale"
+               title="Private Sales &amp; Flash Sales"
+               config_section="prprivatesale"
+               is_enabled_path="prprivatesale/general/enabled"
+               wiki="https://plumrocket.com/docs/magento-private-sales-flash-sales/v5"
+    >
+        <customer key="96261d5be535678d2e8e109821ffbcdd56f1e46752"/>
+    </extension>
+</extensions>

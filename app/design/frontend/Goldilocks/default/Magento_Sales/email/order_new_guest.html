@@ -1,0 +1,60 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<!--@subject {{trans "Your %store_name order confirmation" store_name=$store.frontend_name}} @-->
+<!--@vars {
+"var formattedBillingAddress|raw":"Billing Address",
+"var order_data.email_customer_note|escape|nl2br":"Email Order Note",
+"var order_data.customer_name":"Guest Customer Name",
+"var created_at_formatted":"Order Created At (datetime)",
+"var order.increment_id":"Order Id",
+"layout handle=\"sales_email_order_items\" order=$order":"Order Items Grid",
+"var payment_html|raw":"Payment Details",
+"var formattedShippingAddress|raw":"Shipping Address",
+"var order.shipping_description":"Shipping Description",
+"var shipping_msg":"Shipping message",
+"var store.frontend_name":"Store Frontend Name",
+"var store_phone":"Store Phone",
+"var store_email":"Store Email",
+"var store_hours":"Store Hours",
+"var order_data.is_not_virtual":"Order Type",
+"var order_id": "Order DB Id",
+"var order":"Order"
+} @-->
+{{template config_path="design/email/header_template"}}
+<p class="header-bottom">
+    <span>{{trans 'Order #%increment_id' increment_id=$order.increment_id |raw}}</span>
+    <span>{{trans "is Confirmed"}}</span>
+</p>
+
+<table>
+    <tr class="email-intro">
+        <td>
+            <p class="name-text">
+                <strong>{{trans "Dear"}} {{trans "%customer_name," customer_name=$order_data.customer_name}}</strong>
+            </p>
+            <p class="text">
+                {{trans "We have received your order! Thank you for ordering at Goldilocks Delivery!"}}
+            </p>
+            <p class="text">
+                {{trans "Here are your order details:"}}<br>
+                <a href="">{{trans '#%increment_id' increment_id=$order.increment_id |raw}}</a>
+            </p>
+            <p class="text">
+                {{trans 'For your other concerns, contact us at '}} {{depend store_phone}} {{trans 'or call us at <a class="phone" href="tel:%store_phone">%store_phone</a>' store_phone=$store_phone |raw}}{{/depend}}.
+                {{trans 'You can also email us at <a class="email" href="mailto:%store_email">%store_email</a>' store_email=$store_email |raw'}}
+            </p>
+            <p class="text">
+                {{trans 'Thank you,'}}
+            </p>
+            <p class="text">
+                {{trans 'Goldilocks Delivery'}}
+            </p>
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

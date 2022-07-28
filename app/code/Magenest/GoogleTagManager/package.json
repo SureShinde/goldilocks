@@ -1,0 +1,6 @@
+{
+    "private": true,
+    "dependencies": {
+        "@composer-asset/vaimo--code-quality-linters-frontend": "file:./vendor/foxy/composer-asset/vaimo/code-quality-linters-frontend"
+    }
+}

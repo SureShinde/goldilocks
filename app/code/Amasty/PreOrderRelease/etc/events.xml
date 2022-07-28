@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="amasty_preorder_note_value_loaded">
+        <observer name="amasty_preorder_note_release_date" instance="Amasty\PreOrderRelease\Observer\Note\ModifyWithReleaseDate" />
+    </event>
+</config>

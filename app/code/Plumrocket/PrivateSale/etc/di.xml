@@ -1,0 +1,175 @@
+<?xml version="1.0"?>
+<!--
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket_PrivateSale
+ * @copyright   Copyright (c) 2020 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Plumrocket\PrivateSale\Api\EventRepositoryInterface" type="Plumrocket\PrivateSale\Model\EventRepository" />
+    <preference for="Plumrocket\PrivateSale\Api\Data\EventSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="Plumrocket\PrivateSale\Api\Data\EventInterface" type="Plumrocket\PrivateSale\Model\Event" />
+    <preference for="Plumrocket\PrivateSale\Api\FlashSaleRepositoryInterface" type="Plumrocket\PrivateSale\Model\FlashSaleRepository" />
+    <preference for="Plumrocket\PrivateSale\Api\Data\FlashSaleInterface" type="Plumrocket\PrivateSale\Model\FlashSale" />
+    <preference for="Plumrocket\PrivateSale\Api\GetEventIdByCategoryIdInterface" type="Plumrocket\PrivateSale\Model\Event\Category\GetEventId" />
+    <preference for="Plumrocket\PrivateSale\Api\GetEventIdByProductIdInterface" type="Plumrocket\PrivateSale\Model\Event\GetEventIdByProductId" />
+    <preference for="Plumrocket\PrivateSale\Api\PrivateSaleServiceInterface" type="Plumrocket\PrivateSale\Model\Event\PrivateSaleService" />
+    <preference for="Plumrocket\PrivateSale\Api\EventStatisticsRepositoryInterface" type="Plumrocket\PrivateSale\Model\EventStatisticsRepository" />
+    <preference for="Plumrocket\PrivateSale\Api\Data\EventStatisticsInterface" type="Plumrocket\PrivateSale\Model\EventStatistics" />
+    <virtualType name="Plumrocket\PrivateSale\FileHandler" type="Magento\Framework\Filesystem\Driver\File"/>
+
+    <virtualType name="Plumrocket\PrivateSale\Model\Api\SearchCriteria\CollectionProcessor\EventFilterProcessor" type="Magento\Eav\Model\Api\SearchCriteria\CollectionProcessor\FilterProcessor">
+        <arguments>
+            <argument name="customFilters" xsi:type="array">
+                <item name="active" xsi:type="object">Plumrocket\PrivateSale\Model\Api\SearchCriteria\CollectionProcessor\FilterProcessor\ActiveEventsFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Plumrocket\PrivateSale\Model\Api\SearchCriteria\EventCollectionProcessor" type="Magento\Eav\Model\Api\SearchCriteria\CollectionProcessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="filters" xsi:type="object">Plumrocket\PrivateSale\Model\Api\SearchCriteria\CollectionProcessor\EventFilterProcessor</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Plumrocket\PrivateSale\Model\EventRepository">
+        <arguments>
+            <argument name="collectionProcessor" xsi:type="object">Plumrocket\PrivateSale\Model\Api\SearchCriteria\EventCollectionProcessor</argument>
+        </arguments>
+    </type>
+
+    <type name="Plumrocket\PrivateSale\Observer\Event\Adminhtml\EventObserver">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Plumrocket\PrivateSale\ImageUpload</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Plumrocket\PrivateSale\Event\ImageUploader" type="Magento\Catalog\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="const">Plumrocket\PrivateSale\Model\Event::IMAGE_TMP_DIR</argument>
+            <argument name="basePath" xsi:type="const">Plumrocket\PrivateSale\Model\Event::IMAGE_DIR</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+            <argument name="allowedMimeTypes" xsi:type="array">
+                <item name="jpg" xsi:type="string">image/jpg</item>
+                <item name="jpeg" xsi:type="string">image/jpeg</item>
+                <item name="gif" xsi:type="string">image/gif</item>
+                <item name="png" xsi:type="string">image/png</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Plumrocket\PrivateSale\SplashPage\ImageUploader" type="Plumrocket\PrivateSale\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="const">Plumrocket\PrivateSale\Model\Splashpage::IMAGE_TMP_DIR</argument>
+            <argument name="basePath" xsi:type="const">Plumrocket\PrivateSale\Model\Splashpage::IMAGE_DIR</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+            <argument name="allowedMimeTypes" xsi:type="array">
+                <item name="jpg" xsi:type="string">image/jpg</item>
+                <item name="jpeg" xsi:type="string">image/jpeg</item>
+                <item name="gif" xsi:type="string">image/gif</item>
+                <item name="png" xsi:type="string">image/png</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="prevents_entity_listing_data_source" xsi:type="string">
+                    Plumrocket\PrivateSale\Model\ResourceModel\Event\Grid\Collection
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Plumrocket\PrivateSale\Model\SplashPageImage">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Plumrocket\PrivateSale\SplashPage\ImageUploader</argument>
+        </arguments>
+    </type>
+    <type name="Plumrocket\PrivateSale\Model\ResourceModel\Event\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">plumrocket_privatesale_event_entity</argument>
+            <argument name="resourceModel" xsi:type="string">Plumrocket\PrivateSale\Model\ResourceModel\Event</argument>
+            <argument name="identifierName" xsi:type="string">entity_id</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Plumrocket\PrivateSale\Api\Data\EventInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">plumrocket_privatesale_event_entity</item>
+                    <item name="eavEntityType" xsi:type="const">Plumrocket\PrivateSale\Model\Event::ENTITY</item>
+                    <item name="identifierField" xsi:type="string">entity_id</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Plumrocket\PrivateSale\Model\Attribute\Backend\Image">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Plumrocket\PrivateSale\Event\ImageUploader</argument>
+        </arguments>
+    </type>
+    <type name="Plumrocket\PrivateSale\Helper\Data">
+        <arguments>
+            <argument name="fileHandler" xsi:type="object">Plumrocket\PrivateSale\FileHandler</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Catalog\Model\Layer\Search\CollectionFilter">
+        <plugin name="pr_private_sale_private_event" type="Plumrocket\PrivateSale\Plugin\Catalog\Layer\Search\CollectionFilter" sortOrder="10" />
+    </type>
+    <type name="Plumrocket\PrivateSale\Plugin\Catalog\Layer\Search\CollectionFilter">
+        <arguments>
+            <argument name="customerSession" xsi:type="object">Magento\Customer\Model\Session</argument>
+        </arguments>
+    </type>
+
+    <type name="Plumrocket\PrivateSale\Model\Indexer\TableNameResolver">
+        <arguments>
+            <argument name="indexTableMapping" xsi:type="array">
+                <item name="plumrocket_privatesale_product_event" xsi:type="string">plumrocket_privatesale_product_event_indexer</item>
+                <item name="plumrocket_privatesale_product_upcoming_event" xsi:type="string">plumrocket_privatesale_product_upcoming_event_indexer</item>
+                <item name="plumrocket_privatesale_product_ended_event" xsi:type="string">plumrocket_privatesale_product_ended_event_indexer</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Catalog\Model\Indexer\Product\Full">
+        <arguments>
+            <argument name="indexerList" xsi:type="array">
+                <item name="pr_private_sale_product_event" xsi:type="const">Plumrocket\PrivateSale\Model\Indexer\Product::INDEXER_ID</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Catalog\Model\Product">
+        <plugin name="pr_private_sale_product_event_reindex" type="Plumrocket\PrivateSale\Plugin\Product\ReindexProductEventAfterReindex" sortOrder="1" disabled="false" />
+    </type>
+    <virtualType name="Plumrocket\PrivateSale\DirectSpecialPriceStorage" type="Magento\Catalog\Model\Product\Price\SpecialPriceStorage">
+        <arguments>
+            <argument name="specialPriceResource" xsi:type="object">Magento\Catalog\Model\ResourceModel\Product\Price\SpecialPrice</argument>
+        </arguments>
+    </virtualType>
+    <type name="Plumrocket\PrivateSale\Model\PriceCalculation">
+        <arguments>
+            <argument name="specialPriceStorage" xsi:type="object">Plumrocket\PrivateSale\DirectSpecialPriceStorage</argument>
+        </arguments>
+    </type>
+</config>

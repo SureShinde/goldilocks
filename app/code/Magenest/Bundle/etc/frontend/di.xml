@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Bundle\Pricing\Render\FinalPriceBox">
+        <plugin name="remove_final_price" type="Magenest\Bundle\Plugin\Pricing\Render\FinalPriceBox" sortOrder="0"/>
+    </type>
+</config>

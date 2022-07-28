@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Customer\Controller\Account\Login">
+        <plugin name="set_referer_to_session" type="Magenest\AdvancedLogin\Plugin\Customer\Controller\Account\Login" sortOrder="1" />
+    </type>
+    <type name="Magento\Customer\Controller\Account\CreatePost">
+        <plugin name="set_email_customer" type="Magenest\AdvancedLogin\Plugin\Customer\Controller\Account\CreatePost" sortOrder="1" />
+    </type>
+    <type name="Magento\Customer\Controller\Account\EditPost">
+        <plugin name="addEmailIfNotExist" type="Magenest\AdvancedLogin\Plugin\Customer\Controller\Account\EditPost" sortOrder="1" />
+    </type>
+    <type name="Magento\Customer\Model\Session">
+        <plugin name="set_email_customer_to_customer_session" type="Magenest\AdvancedLogin\Plugin\Customer\Model\Session" sortOrder="1" />
+    </type>
+    <type name="Magento\Customer\Controller\Account\LoginPost">
+        <plugin name="Magenest_AdvancedLogin::redirectToOptConfirm" type="Magenest\AdvancedLogin\Plugin\Customer\Controller\Account\LoginPost" sortOrder="1" />
+    </type>
+    <type name="Magento\Customer\Controller\Ajax\Login">
+        <plugin name="Magenest_AdvancedLogin::Ajax_login_redirectToOptConfirm" type="Magenest\AdvancedLogin\Plugin\Customer\Controller\Ajax\Login" sortOrder="1" />
+    </type>
+    <type name="Magenest\SocialLogin\Controller\CheckLogin\Index">
+        <plugin name="Magenest_AdvancedLogin::SocialLogin_redirectToOptConfirm" type="Magenest\AdvancedLogin\Plugin\Customer\Controller\CheckLogin\Index" sortOrder="1" />
+    </type>
+    <type name="Magento\LoginAsCustomer\Model\AuthenticateCustomerBySecret">
+        <plugin name="Magenest_AdvancedLogin::LoginAsCustomerAdmin" type="Magenest\AdvancedLogin\Plugin\Model\AuthenticateCustomerBySecret" sortOrder="1" />
+    </type>
+</config>

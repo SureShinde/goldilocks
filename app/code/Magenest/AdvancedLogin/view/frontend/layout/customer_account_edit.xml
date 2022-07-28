@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_form_template_handle"/>
+    <body>
+        <referenceBlock name="customer_edit">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Magenest_AdvancedLogin::customer/form/edit.phtml</argument>
+            </action>
+            <block class="Magenest\AdvancedLogin\Block\Form\CustomAttribute\Attributes" template="Magenest_AdvancedLogin::customer/form/userattributes.phtml" name="customer_form_custom_attributes"/>
+        </referenceBlock>
+        <referenceBlock name="form.additional.info" remove="true"/>
+    </body>
+</page>

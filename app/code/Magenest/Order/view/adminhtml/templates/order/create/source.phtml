@@ -1,0 +1,28 @@
+<?php
+/* @var \Magenest\Order\Block\Adminhtml\Order\Create\Source $block */
+$source = $block->getSourceField();
+?>
+<?php if (!empty($source)): ?>
+<section id="order-form_account" class="admin__page-section order-account-information">
+    <div class="admin__page-section-title head-account">
+        <span class="title"><?= __("Order Source Information") ?></span>
+        <div class="actions"></div>
+    </div>
+    <div id="customer_account_fields" class="admin__page-section-content">
+        <fieldset class="fieldset admin__fieldset " id="main">
+            <?php foreach ($source as $key => $field): ?>
+                <div class="admin__field field field-firstname  required _required" data-ui-id="billing-address-fieldset-element-form-field-firstname">
+                    <label class="label admin__field-label" for="order-source_<?= $key ?>" data-ui-id="billing-address-fieldset-element-text-order-shipping-address-firstname-label">
+                        <span><?= __($field) ?></span></label>
+                    <div class="admin__field-control control">
+                        <input id="order-source_<?= $key ?>"
+                               name="order[source][<?= $key?>]"
+                               data-ui-id="billing-address-fieldset-element-text-order-shipping-address-firstname"
+                               class="required-entry input-text admin__control-text required-entry _required" type="text"  aria-required="true">
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </fieldset>
+    </div>
+</section>
+<?php endif; ?>

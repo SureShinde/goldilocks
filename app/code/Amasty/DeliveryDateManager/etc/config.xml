@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <amdeliverydate>
+            <general>
+                <enabled>1</enabled>
+                <comment></comment>
+                <comment_style>as_is</comment_style>
+            </general>
+            <date_field>
+                <required>0</required>
+                <only_workdays>0</only_workdays>
+                <enabled_default>0</enabled_default>
+                <date_placeholder_text>Click to show available choices</date_placeholder_text>
+                <include>order_print,order_email,invoice_email,shipment_email,invoice_pdf,shipment_pdf</include>
+                <show>order_view,order_create,invoice_view,shipment_view,order_info</show>
+                <note></note>
+                <is_editable>0</is_editable>
+                <rule_activation>both</rule_activation>
+                <order_status></order_status>
+                <period>3</period>
+                <admin_email></admin_email>
+                <identity>general</identity>
+                <email_template>amdeliverydate_date_field_email_template</email_template>
+            </date_field>
+            <time_field>
+                <enabled_time>1</enabled_time>
+                <required>0</required>
+                <enabled_default>0</enabled_default>
+                <time_placeholder_text>Click to show available choices</time_placeholder_text>
+                <include>order_print,order_email,invoice_email,shipment_email,invoice_pdf,shipment_pdf</include>
+                <show>order_view,order_create,invoice_view,shipment_view,order_info</show>
+                <note></note>
+            </time_field>
+            <comment_field>
+                <enabled_comment>1</enabled_comment>
+                <required>0</required>
+                <maxlength>0</maxlength>
+                <include>order_print,order_email,invoice_email,shipment_email,invoice_pdf,shipment_pdf</include>
+                <show>order_view,order_create,invoice_view,shipment_view,order_info</show>
+                <note></note>
+            </comment_field>
+            <reminder>
+                <enabled_reminder>0</enabled_reminder>
+                <recipient_email></recipient_email>
+                <reminder_sender>general</reminder_sender>
+                <email_template>amdeliverydate_reminder_email_template</email_template>
+                <time_before></time_before>
+            </reminder>
+        </amdeliverydate>
+    </default>
+</config>

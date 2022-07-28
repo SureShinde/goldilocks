@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="page.main.title">
+            <action method="setPageTitle">
+                <argument translate="true" name="title" xsi:type="string">Your Tray</argument>
+            </action>
+        </referenceBlock>
+        <referenceBlock name="breadcrumbs">
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string">Home</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="title" xsi:type="string">Homepage</item>
+                    <item name="label" xsi:type="string">Homepage</item>
+                    <item name="link" xsi:type="string">{{baseUrl}}</item>
+                </argument>
+            </action>
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string">Your Tray</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="title" xsi:type="string">Your Tray</item>
+                    <item name="label" xsi:type="string">Your Tray</item>
+                </argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="checkout.cart.totals.container" htmlTag="div" htmlClass="cart-totals-wrapper"/>
+        <referenceBlock name="checkout.cart.summary.title">
+            <arguments>
+                <argument translate="true" name="text" xsi:type="string">Order sumary</argument>
+            </arguments>
+        </referenceBlock>
+        <move element="checkout.cart.summary.title" destination="checkout.cart.totals.container" before="-" />
+        <move element="checkout.cart.methods.bottom" destination="checkout.cart.totals.container" />
+    </body>
+</page>

@@ -1,0 +1,250 @@
+<?xml version="1.0"?>
+<!--
+
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket Private Sales and Flash Sales v4.x.x
+ * @copyright   Copyright (c) 2020 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+
+ -->
+
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">prprivatesale_eventhomepages.prprivatesale_eventhomepages_data_source</item>
+            <item name="deps" xsi:type="string">prprivatesale_eventhomepages.prprivatesale_eventhomepages_data_source</item>
+        </item>
+        <item name="spinner" xsi:type="string">prprivatesale_eventhomepages_columns</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="add" class="Plumrocket\PrivateSale\Block\Adminhtml\Event\Homepage\Grid\AddButton"/>
+        </buttons>
+    </settings>
+    <dataSource name="prprivatesale_eventhomepages_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Plumrocket\PrivateSale\Ui\DataProvider\Event\Homepage\DataProvider</argument>
+            <argument name="name" xsi:type="string">prprivatesale_eventhomepages_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">entity_id</argument>
+            <argument name="requestFieldName" xsi:type="string">entity_id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="ajax_url" xsi:type="url" path="prprivatesale/eventhomepages/save"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="params" xsi:type="array">
+                        <item name="filters_modifier" xsi:type="array"/>
+                    </item>
+                    <item name="observers" xsi:type="array">
+                        <item name="filters" xsi:type="object">Magento\Catalog\Ui\Component\Listing\Filters</item>
+                    </item>
+                </item>
+            </argument>
+        </filters>
+        <columnsControls name="columns_controls"/>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="prprivatesale_eventhomepages_columns">
+        <actionsColumn name="category_action" class="Plumrocket\PrivateSale\Block\Adminhtml\Event\Homepage\Columns\CategoryAction">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">entity_id</item>
+                    <item name="viewUrlPath" xsi:type="string">catalog/category/edit</item>
+                    <item name="urlEntityParamName" xsi:type="string">id</item>
+                    <item name="label" xsi:type="string" translate="true">Category ID</item>
+                </item>
+            </argument>
+        </actionsColumn>
+        <column name="name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="sorting" xsi:type="string">asc</item>
+                    <item name="label" xsi:type="string" translate="true">Category Name</item>
+                </item>
+            </argument>
+        </column>
+        <actionsColumn name="active_events_action" class="Plumrocket\PrivateSale\Block\Adminhtml\Event\Homepage\Columns\ActiveEventsAction" component="Plumrocket_PrivateSale/js/grid/columns/link">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">entity_id</item>
+                    <item name="label" xsi:type="string" translate="true">Active Events</item>
+                    <item name="bodyTmpl" xsi:type="string">Plumrocket_PrivateSale/grid/cells/link</item>
+                </item>
+            </argument>
+        </actionsColumn>
+        <actionsColumn name="upcoming_events" class="Plumrocket\PrivateSale\Block\Adminhtml\Event\Homepage\Columns\UpcomingEventsAction" component="Plumrocket_PrivateSale/js/grid/columns/link">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Upcoming Events</item>
+                    <item name="bodyTmpl" xsi:type="string">Plumrocket_PrivateSale/grid/cells/link</item>
+                </item>
+            </argument>
+        </actionsColumn>
+        <actionsColumn name="ended_events" class="Plumrocket\PrivateSale\Block\Adminhtml\Event\Homepage\Columns\EndedEventsAction" component="Plumrocket_PrivateSale/js/grid/columns/link">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Ended Events</item>
+                    <item name="bodyTmpl" xsi:type="string">Plumrocket_PrivateSale/grid/cells/link</item>
+                </item>
+            </argument>
+        </actionsColumn>
+          <column name="order_count">
+              <argument name="data" xsi:type="array">
+                  <item name="config" xsi:type="array">
+                      <item name="label" xsi:type="string" translate="true">Order Count</item>
+                      <item name="sortable" xsi:type="boolean">false</item>
+                  </item>
+              </argument>
+          </column>
+          <column name="total_revenue">
+              <argument name="data" xsi:type="array">
+                  <item name="config" xsi:type="array">
+                      <item name="label" xsi:type="string" translate="true">Total Revenue</item>
+                      <item name="sortable" xsi:type="boolean">false</item>
+                  </item>
+              </argument>
+          </column>
+          <column name="new_users">
+              <argument name="data" xsi:type="array">
+                  <item name="config" xsi:type="array">
+                      <item name="label" xsi:type="string" translate="true">New Users</item>
+                      <item name="sortable" xsi:type="boolean">false</item>
+                  </item>
+              </argument>
+          </column>
+          <actionsColumn name="actions" class="Magento\Sales\Ui\Component\Listing\Column\ViewAction">
+              <argument name="data" xsi:type="array">
+                  <item name="config" xsi:type="array">
+                      <item name="indexField" xsi:type="string">entity_id</item>
+                      <item name="viewUrlPath" xsi:type="string">catalog/category/edit</item>
+                      <item name="urlEntityParamName" xsi:type="string">id</item>
+                  </item>
+              </argument>
+          </actionsColumn>
+    </columns>
+    <modal name="create_new_event_homepage" component="Plumrocket_PrivateSale/js/modal/modal-homepage">
+        <settings>
+            <options>
+                <option name="buttons" xsi:type="array">
+                    <item name="0" xsi:type="array">
+                        <item name="text" xsi:type="string">Save</item>
+                        <item name="class" xsi:type="string">action-primary</item>
+                        <item name="actions" xsi:type="array">
+                            <item name="0" xsi:type="array">
+                                <item name="targetName" xsi:type="string">prprivatesale_eventhomepages.prprivatesale_eventhomepages.create_new_event_homepage</item>
+                                <item name="actionName" xsi:type="string">setHomepageToCategory</item>
+                            </item>
+                        </item>
+                    </item>
+                </option>
+                <option name="title" xsi:type="string">Create new Event Homepage</option>
+            </options>
+        </settings>
+        <fieldset name="general">
+            <settings>
+                <label/>
+            </settings>
+            <container name="category_container" component="Magento_Ui/js/form/components/group" sortOrder="40">
+                <argument name="data" xsi:type="array">
+                    <item name="type" xsi:type="string">container</item>
+                    <item name="config" xsi:type="array">
+                        <item name="additionalClasses" xsi:type="string">admin__control-grouped-date</item>
+                        <item name="label" xsi:type="string" translate="true">Event Homepage Category</item>
+                    </item>
+                </argument>
+                <field name="category_event" component="Magento_Catalog/js/components/new-category" sortOrder="10" formElement="select">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="filterOptions" xsi:type="boolean">true</item>
+                            <item name="multiple" xsi:type="boolean">false</item>
+                            <item name="showCheckbox" xsi:type="boolean">true</item>
+                            <item name="disableLabel" xsi:type="boolean">true</item>
+                            <item name="levelsVisibility" xsi:type="number">1</item>
+                            <item name="optgroupTmpl" xsi:type="string">Plumrocket_PrivateSale/form/element/event-category-select</item>
+                        </item>
+                    </argument>
+                    <settings>
+                        <elementTmpl>ui/grid/filters/elements/ui-select</elementTmpl>
+                        <notice>Please choose an existing parent category or create a new category for the event homepage.
+                            Selected parent category (event homepage) will display all child categories - events.</notice>
+                        <listens>
+                            <link name="index=create_category:responseData">setParsed</link>
+                            <link name="newOption">toggleOptionSelected</link>
+                        </listens>
+                    </settings>
+                    <formElements>
+                        <select>
+                            <settings>
+                                <options class="Plumrocket\PrivateSale\Model\Config\Source\CategoryTree"/>
+                            </settings>
+                        </select>
+                    </formElements>
+                </field>
+                <container name="category_button" component="Magento_Ui/js/form/components/button" template="ui/form/components/button/container" sortOrder="20">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="formElement" xsi:type="string">container</item>
+                            <item name="actions" xsi:type="array">
+                                <item name="0" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">prprivatesale_eventhomepages.prprivatesale_eventhomepages.create_new_event_homepage.general.create_category_modal</item>
+                                    <item name="actionName" xsi:type="string">toggleModal</item>
+                                </item>
+                            </item>
+                            <item name="displayArea" xsi:type="string">insideGroup</item>
+                            <item name="title" xsi:type="string" translate="true">New Category</item>
+                            <item name="additionalForGroup" xsi:type="boolean">true</item>
+                            <item name="additionalClasses" xsi:type="string">admin__field-small</item>
+                        </item>
+                    </argument>
+                </container>
+            </container>
+            <modal name="create_category_modal">
+                <settings>
+                    <options>
+                        <option name="title" xsi:type="string" translate="true">New Category</option>
+                    </options>
+                    <imports>
+                        <link name="state">!index=create_category:responseStatus</link>
+                    </imports>
+                </settings>
+                <insertForm name="create_category">
+                    <settings>
+                        <formSubmitType>ajax</formSubmitType>
+                        <renderUrl path="mui/index/render_handle">
+                            <param name="handle">catalog_category_create</param>
+                            <param name="buttons">1</param>
+                        </renderUrl>
+                        <loading>false</loading>
+                        <realTimeLink>true</realTimeLink>
+                        <autoRender>true</autoRender>
+                        <toolbarContainer>${ $.parentName }</toolbarContainer>
+                        <externalProvider>new_category_form.new_category_form_data_source</externalProvider>
+                        <ns>new_category_form</ns>
+                    </settings>
+                </insertForm>
+            </modal>
+        </fieldset>
+    </modal>
+</listing>

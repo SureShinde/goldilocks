@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magenest_FbChatbot::chatbot" title="Facebook Chatbot" translate="title">
+                    <resource id="Magenest_FbChatbot::manage" title="Manage" translate="title">
+                        <resource id="Magenest_FbChatbot::message" title="Message" translate="title"/>
+                        <resource id="Magenest_FbChatbot::menu" title="Menu" translate="title"/>
+                        <resource id="Magenest_FbChatbot::configuration" title="Configuration" translate="title"/>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

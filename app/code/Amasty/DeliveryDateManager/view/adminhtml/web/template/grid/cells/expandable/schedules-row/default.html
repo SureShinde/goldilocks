@@ -1,0 +1,7 @@
+<div data-bind="foreach: { data: $col.detailedDataMap[$data.detailedMapIndex], as: 'mapItem' }"
+     class="amdelivery-content amdelivery-column detailed-info">
+    <div class="amdelivery-item info-item">
+        <span class="amdelivery-label info-item-label" if="mapItem.label" text="mapItem.label"></span>:
+        <span class="amdelivery-value info-item-value" text="$col.getInfoValue(detailed[mapItem.index], mapItem)"></span>
+    </div>
+</div>

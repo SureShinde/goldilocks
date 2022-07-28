@@ -1,0 +1,41 @@
+<?php
+/** @var \Magenest\AbandonedCart\Block\Adminhtml\Rule\Edit\Tab\TestCampaign $block */
+$emailblock = $block->getData('testCampaignClass');
+echo $emailblock->getChildHtml('magenest_rule_testcampaign_grid');
+?>
+<script type="text/javascript">
+    require([
+        "jquery",
+        "Magento_Ui/js/modal/confirm"
+    ], function ($, confirmation) {
+        sendMail = function (url,hasEmail) {
+            var content= $.mage.__('Do you want to continue sending the email?');
+            if(!hasEmail){
+                content = $.mage.__('Please setup email for test in configuration!');
+            }
+            confirmation({
+                content: content,
+                actions: {
+                    confirm: function () {
+                        if(hasEmail) {
+                            window.location.href = url;
+                        }
+                    }
+                },
+                buttons: [{
+                    text: $.mage.__('Cancel'),
+                    class: 'action-secondary action-dismiss',
+                    click: function (event) {
+                        this.closeModal(event);
+                    }
+                }, {
+                    text: $.mage.__('Yes'),
+                    class: 'action-primary action-accept',
+                    click: function (event) {
+                        this.closeModal(event, true);
+                    }
+                }]
+            });
+        }
+    });
+</script>

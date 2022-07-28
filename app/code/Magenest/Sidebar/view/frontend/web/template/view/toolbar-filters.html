@@ -1,0 +1,13 @@
+<div class="toolbar-filter-attributes">
+    <!-- ko foreach: {data: data.options, as: 'option'} -->
+    <div class="filter-option">
+        <a class="filter-option-link" data-bind="attr: {
+            class: $parent.isActive($data.attribute_code) ? 'filter-option-link active' : 'filter-option-link',
+            href: $parent.buildHref($data.attribute_code),
+            title: $data.label
+        }">
+            <button data-bind="text: option.label"></button>
+        </a>
+    </div>
+    <!-- /ko -->
+</div>

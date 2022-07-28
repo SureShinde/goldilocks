@@ -1,0 +1,32 @@
+<div class="amdelivery-cell-detailed data-grid-cell-expanded-content">
+    <!-- ko foreach: { data: detailed.time_set, as: 'detailed' } -->
+        <div class="amdelivery-column detailed-info">
+            <table class="amdelivery-intervals-table">
+                <thead>
+                    <tr>
+                        <th class="amdelivery-label" data-bind="i18n: 'From:'"></th>
+                        <th class="amdelivery-label" data-bind="i18n: 'To:'"></th>
+                        <th class="amdelivery-label" data-bind="i18n: 'Limits:'"></th>
+                        <th class="amdelivery-label" data-bind="i18n: 'Label:'"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ifnot="$col.hasData(detailed.time_intervals)">
+                        <td class="amdelivery-value">-</td>
+                        <td class="amdelivery-value">-</td>
+                        <td class="amdelivery-value">-</td>
+                        <td class="amdelivery-value">-</td>
+                    </tr>
+                <!-- ko foreach: { data: detailed.time_intervals, as: 'timeInterval' } -->
+                    <tr>
+                        <td class="amdelivery-value -no-wrap" data-bind="text: timeInterval.from"></td>
+                        <td class="amdelivery-value -no-wrap" data-bind="text: timeInterval.to"></td>
+                        <td class="amdelivery-value" data-bind="text: timeInterval.interval_limit ? timeInterval.interval_limit : '-'"></td>
+                        <td class="amdelivery-value" data-bind="text: timeInterval.label ? timeInterval.label : '-'"></td>
+                    </tr>
+                <!-- /ko -->
+                </tbody>
+            </table>
+        </div>
+    <!-- /ko -->
+</div>

@@ -1,0 +1,7 @@
+<script type="text/javascript">
+    require(['jquery', 'Magento_Customer/js/customer-data'], function($, customerData){
+        return function () {
+            customerData.invalidate(["messages"]);
+        }
+    });
+</script>

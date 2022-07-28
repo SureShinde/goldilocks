@@ -1,0 +1,87 @@
+<?php
+// @codingStandardsIgnoreFile
+?>
+<?php if ($this->isEnabled()) : ?>
+
+    <?php $helper = $this->helper('Acommerce\Gtm\Helper\Data'); ?>
+
+    <?php $product = $this->getCurrentProduct(); ?>
+    <?php if (isset($product)) : ?>
+        <?php $productDetails = array(); ?>
+
+        <?php
+        $productDetail = array();
+        $productDetail['name'] = html_entity_decode($product->getName());
+        $productDetail['sku'] = $helper->getGtmProductId($product);
+        $productDetail['id'] = $helper->getGtmProductId($product);
+        $productDetail['price'] = $helper->numberFormat($product->getFinalPrice(), 2);
+
+        if ($helper->isBrandEnabled()) :
+            $productDetail['brand'] = $helper->getGtmBrand($product);
+        endif;
+
+        $productDetail['category'] = $helper->getGtmCategoryByProduct($product);
+        $productDetails['products'][] = $productDetail;
+        ?>
+
+        <?php $this->setEcommerceData('detail', $productDetails); ?>
+
+        <?php
+        $relatedProductsCollection = $this->getRelatedProductCollection();
+        $upsellProductsCollection = $this->getUpsellProductCollection();
+
+        $productImpressions = [];
+
+        if (count($relatedProductsCollection)) :
+            $i = 1;
+            foreach ($relatedProductsCollection->getItems() as $_product) :
+                $relatedProduct = array();
+                $relatedProduct['name'] = html_entity_decode($_product->getName());
+                $relatedProduct['sku'] = html_entity_decode($_product->getSku());
+                $relatedProduct['id'] = $helper->getGtmProductId($_product);
+                $relatedProduct['price'] = $helper->numberFormat($_product->getFinalPrice(), 2);
+                if ($helper->isBrandEnabled()) :
+                    $relatedProduct['brand'] = $helper->getGtmBrand($_product);
+                endif;
+                $relatedProduct['category'] = $helper->getGtmCategoryByProduct($_product);
+                $relatedProduct['list'] = __('Related Products From') . ' ' . $product->getData('name');
+                $relatedProduct['position'] = $i;
+                $productImpressions[] = $relatedProduct;
+                $i++;
+            endforeach;
+        endif;
+
+
+        if (count($upsellProductsCollection)) :
+            $i = 1;
+            foreach ($upsellProductsCollection as $_product) :
+                $upsellProduct = array();
+                $upsellProduct['name'] = html_entity_decode($_product->getName());
+                $upsellProduct['sku'] = $helper->getGtmProductId($_product);
+                $upsellProduct['id'] = $helper->getGtmProductId($_product);
+                $upsellProduct['price'] = $helper->numberFormat($_product->getFinalPrice(), 2);
+                if ($helper->isBrandEnabled()) :
+                    $upsellProduct['brand'] = $helper->getGtmBrand($_product);
+                endif;
+                $upsellProduct['category'] = $helper->getGtmCategoryByProduct($_product);
+                $upsellProduct['list'] = __('Upsell Products From') . ' ' . $product->getData('name');
+                $upsellProduct['position'] = $i;
+                $productImpressions[] = $upsellProduct;
+                $i++;
+            endforeach;
+        endif;
+
+        if (count($productImpressions)) :
+            $this->setEcommerceData('currencyCode', $this->getCurrencyCode());
+            $this->setEcommerceData('impressions', $productImpressions);
+        endif;
+
+        if ($helper->isCustomDimensionStockStatusEnabled()) :
+            $productStockStatus = ($product->isAvailable()) ? 'In stock' : 'Out of stock';
+            $this->setDataLayerOption('ProductStockStatus', $productStockStatus);
+        endif;
+        ?>
+
+    <?php endif; ?>
+
+<?php endif; ?>

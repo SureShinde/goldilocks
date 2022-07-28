@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="order_info">
+            <block class="Amasty\DeliveryDateManager\Block\Adminhtml\Sales\Order\View\Deliverydate" name="amasty_delivery_date">
+                <arguments>
+                    <argument name="sales_area" xsi:type="const">Amasty\DeliveryDateManager\Model\Config\Source\Show::INVOICE_VIEW</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

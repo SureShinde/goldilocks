@@ -1,0 +1,33 @@
+<!--
+/**
+* Plumrocket Inc.
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the End-user License Agreement
+* that is available through the world-wide-web at this URL:
+* http://wiki.plumrocket.net/wiki/EULA
+* If you are unable to obtain it through the world-wide-web, please
+* send an email to support@plumrocket.com so we can send you a copy immediately.
+*
+* @package     Plumrocket Private Sales and Flash Sales
+* @copyright   Copyright (c) 2020 Plumrocket Inc. (http://www.plumrocket.com)
+* @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+*/
+-->
+
+<div class="admin__action-dropdown-wrap admin__data-grid-action-import" collapsible>
+    <button class="admin__action-dropdown" type="button" toggleCollapsible>
+        <span class="admin__action-dropdown-text" translate="'Import'">
+    </button>
+    <div class="admin__action-dropdown-menu admin__data-grid-action-import-menu prr-import-dropdown">
+        <div class="admin__field admin__field-option" outereach="options">
+            <label class="admin__field-label" text="label" attr="for: ko.uid">
+            <!-- ko template: $parent.getTemplateByType($data.type) --><!-- /ko -->
+        </div>
+        <div class="admin__action-dropdown-footer-main-actions">
+            <button class="action-tertiary" type="button" translate="'Cancel'" closeCollapsible>
+            <button class="action-secondary" type="button" translate="'Import'" click="applyOption">
+        </div>
+    </div>
+</div>

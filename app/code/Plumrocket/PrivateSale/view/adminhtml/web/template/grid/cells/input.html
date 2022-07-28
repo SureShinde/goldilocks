@@ -1,0 +1,32 @@
+<!--
+/**
+* Plumrocket Inc.
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the End-user License Agreement
+* that is available through the world-wide-web at this URL:
+* http://wiki.plumrocket.net/wiki/EULA
+* If you are unable to obtain it through the world-wide-web, please
+* send an email to support@plumrocket.com so we can send you a copy immediately.
+*
+* @package     Plumrocket Private Sales and Flash Sales
+* @copyright   Copyright (c) 2020 Plumrocket Inc. (http://www.plumrocket.com)
+* @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+*/
+-->
+
+<span if="$col.beforeSymbol" data-bind="text: $col.beforeSymbol"></span>
+<input class="data-grid-cell-content pr-cell-content"
+       data-bind="
+       attr: {
+           'data-index': index + '_' + $row().entity_id,
+           name: index
+       },
+       event: {
+           input: function (uiClass, event) {$col.updateRow(uiClass, event, $row());}
+       },
+       value: $col.getLabel($row()),
+       css: $col.highlight && $row().additionalClass"
+>
+<span if="$col.afterSymbol" data-bind="text: $col.afterSymbol"></span>

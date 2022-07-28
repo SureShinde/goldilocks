@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="sales_quote_remove_item">
+        <observer instance="Magenest\GoogleTagManager\Observer\RemoveQuoteItemObserver"
+                  name="Magenest_GoogleTagManager" />
+    </event>
+
+    <event name="layout_load_before">
+        <observer instance="Magenest\GoogleTagManager\Observer\LayoutLoadBeforeObserver"
+                  name="Magenest_GoogleTagManager" />
+    </event>
+
+    <event name="checkout_cart_product_add_after">
+        <observer instance="Magenest\GoogleTagManager\Observer\RegisterProductAddedToCart"
+                  name="Magenest_GoogleTagManager_register_product_added"/>
+    </event>
+
+    <event name="gtm_populate_product_object_from_product">
+        <observer instance="Magenest\GoogleTagManager\Observer\ProductObject\AddProductCategoryParentNames"
+                  name="Magenest_GoogleTagManager_set_product_category_path" />
+    </event>
+
+    <event name="gtm_populate_product_object_from_quote_item">
+        <observer instance="Magenest\GoogleTagManager\Observer\ProductObject\SetQuoteItemPurchasedCategory"
+                  name="Magenest_GoogleTagManager_set_quote_item_category" />
+    </event>
+
+    <event name="gtm_populate_product_object_from_order_item">
+        <observer instance="Magenest\GoogleTagManager\Observer\ProductObject\SetOrderItemPurchasedCategory"
+                  name="Magenest_GoogleTagManager_set_order_item_category" />
+    </event>
+
+    <event name="checkout_cart_update_items_after">
+        <observer instance="Magenest\GoogleTagManager\Observer\RegisterUpdateItemQty"
+                  name="Magenest_GoogleTagManager"/>
+    </event>
+</config>

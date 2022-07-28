@@ -1,0 +1,118 @@
+& when (@media-common = true) {
+    .checkout-onepage-success {
+        .page-title-wrapper {
+            text-align: center;
+
+            .page-title {
+                margin-bottom: 0;
+            }
+
+            .action.print {
+                display: none;
+            }
+        }
+
+        .checkout-success {
+            text-align: center;
+
+            .order-number {
+                color: @link__color;
+            }
+
+            > .title {
+                margin-top: 5px;
+                margin-bottom: 10px;
+            }
+        }
+
+        .checkout-success-hotline,
+        .checkout-success-mail {
+            margin-top: 12px;
+            margin-bottom: 5px;
+
+            a {
+                color: inherit;
+                font-weight: @font-weight__semibold;
+            }
+        }
+
+        .checkout-success-mail {
+            a {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .checkout-onepage-success {
+        .page-title-wrapper {
+            margin-top: 92px;
+            margin-bottom: 10px;
+
+            .page-title {
+                font-size: 46.3636px;
+            }
+        }
+
+        .checkout-success {
+            > .title {
+                font-size: 16px;
+            }
+
+            .actions-toolbar {
+                margin-top: 20px;
+
+                .action.primary {
+                    min-width: 246px;
+                    margin: 0;
+                    padding: 13px 15px 11px;
+                    font-size: 16px;
+                }
+            }
+        }
+
+        .checkout-success-hotline,
+        .checkout-success-mail {
+            a {
+                font-size: 20px;
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .checkout-onepage-success {
+        .page-title-wrapper {
+            margin-top: 50px;
+            margin-bottom: 6px;
+
+            .page-title {
+                font-size: 32px;
+            }
+        }
+
+        .checkout-success {
+            font-size: 12px;
+
+            > .title {
+                font-size: 14px;
+            }
+
+            .actions-toolbar {
+                margin-top: 20px;
+
+                .action.primary {
+                    font-size: 16px;
+                }
+            }
+        }
+
+        .checkout-success-hotline,
+        .checkout-success-mail {
+            a {
+                font-size: 16px;
+            }
+        }
+    }
+}

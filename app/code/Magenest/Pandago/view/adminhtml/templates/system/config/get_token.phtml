@@ -1,0 +1,45 @@
+<?php
+/**
+ * @var $block \Magenest\Pandago\Block\Adminhtml\System\Config\GetToken
+ * @var $escaper \Magento\Framework\Escaper
+ */
+?>
+<div class="actions button-container">
+    <button class="button action-configure"
+            type="button"
+            data-role="<?= /* @escapeNotVerified */ $block->getHtmlId() ?>"
+            id="<?= /* @escapeNotVerified */ $block->getHtmlId() ?>">
+        <span><?= /* @escapeNotVerified */ $escaper->escapeHtml($block->getButtonLabel()) ?></span>
+    </button>
+</div>
+<script>
+    require([
+        'jquery',
+        'Magento_Ui/js/modal/alert'
+    ], function ($, modalAlert) {
+        'use strict';
+        var buttonDataRole = $('#<?= /* @escapeNotVerified */ $block->getHtmlId() ?>');
+        buttonDataRole.click(function () {
+            $.ajax({
+                type: "GET",
+                url: '<?= /* @noEscape */ $block->getUrl('pandago/authentication/getAccessToken'); ?>',
+                data: [],
+                showLoader: true,
+                success: function (response) {
+                    if(response.success === false) {
+                        modalAlert({
+                            content: response.message,
+                            title: '<?= /* @escapeNotVerified */ $escaper->escapeHtml($block->getButtonLabel()) ?>'
+                        });
+                    } else {
+                        modalAlert({
+                            content: response.message,
+                            title: '<?= /* @escapeNotVerified */ $escaper->escapeHtml($block->getButtonLabel()) ?>'
+                        });
+                    }
+                }
+            });
+
+        });
+    });
+</script>

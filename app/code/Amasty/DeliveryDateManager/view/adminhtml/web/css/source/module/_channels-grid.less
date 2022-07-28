@@ -1,0 +1,180 @@
+//
+//  Delivery Date Admin Channel Grid Styles
+//  ____________________________________________
+
+//
+//  Common
+//  --------------------------------------------
+
+& when (@media-common = true) {
+    .data-grid td.amdelivery-grid-column { // override magento selectors
+        vertical-align: top;
+        font-size: 1.4rem;
+    }
+
+    .amdelivery-expandable-cell {
+        .amdelivery-content.-short {
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .amdelivery-content.-detailed {
+            & {
+                display: none;
+            }
+
+            &.-expanded {
+                display: block;
+            }
+        }
+
+        .amdelivery-column {
+            padding-bottom: 20px;
+        }
+    }
+
+    .amdelivery-row-label.-expandable {
+        & {
+            position: relative;
+            cursor: pointer;
+        }
+
+        &:before {
+            position: absolute;
+            top: 50%;
+            border-width: 5px 4px 0;
+            border-style: solid;
+            border-color: #000 transparent transparent;
+            content: '';
+            transform: translate(0, -50%);
+        }
+
+        &.-expanded:before {
+            transform: translate(0, -50%) rotate(180deg);
+        }
+
+        .cell-content {
+            margin-left: 20px;
+        }
+    }
+
+    .amdelivery-cell-detailed {
+        & {
+            margin-top: 10px;
+            font-size: 1.2rem;
+        }
+
+        .amdelivery-item:not(:last-of-type) {
+            margin-bottom: 10px;
+        }
+
+        .amdelivery-label {
+            color: #5a5552;
+        }
+
+        .amdelivery-value {
+            font-weight: 600;
+        }
+    }
+
+    .amdelivery-intervals-table {
+        & {
+            margin-top: 5px;
+            width: auto;
+            text-align: left;
+        }
+
+        tr > td,
+        tr > th {
+            padding: 0 10px 5px 0;
+            background: none;
+        }
+
+        tr,
+        td,
+        th {
+            border: none !important; // override native grid column styles
+        }
+
+        th.amdelivery-label {
+            font-weight: 400;
+        }
+
+        .amdelivery-value.-no-wrap {
+            white-space: nowrap;
+        }
+    }
+
+    .amdelivery-schedule-cell .amdelivery-table,
+    .data-grid tr:not(.data-grid-editable-row):last-child .amdelivery-schedule-cell .amdelivery-table { // override magento grid styles
+        & {
+            width: 100%;
+        }
+
+        th,
+        td {
+            border: none;
+            vertical-align: top;
+        }
+
+        > thead > tr > th,
+        > tbody > tr > td {
+            & {
+                padding: 5px 10px;
+                border-right-style: none;
+                border-left-style: none;
+            }
+
+            &:first-child {
+                padding-left: 0;
+            }
+        }
+
+        > thead > tr > th {
+            padding-bottom: 15px;
+            border-bottom: 1px solid @data-grid-td__border-color;
+            background: none;
+            color: inherit;
+            font-size: 1.4rem;
+        }
+
+        > thead > tr > th:last-child,
+        > tbody > tr > td:last-child {
+            padding-right: 0;
+        }
+
+        > tbody > tr:last-child > td {
+            border-bottom: none;
+        }
+
+        .amdelivery-item {
+            margin-bottom: 5px;
+        }
+
+        .amdelivery-value {
+            word-wrap: break-word;
+            word-break: break-word;
+        }
+
+        .amdelivery-value.-schedule {
+            width: 27%;
+        }
+
+        .amdelivery-value.-limit {
+            width: 27%;
+        }
+
+        .amdelivery-value.-time-set {
+            width: 66%;
+        }
+    }
+
+    .amdelivery-schedule-cell .amdelivery-intervals-table {
+        & {
+            width: 100%;
+        }
+        tr > td {
+            padding: 0 5px 5px 0;
+        }
+    }
+}

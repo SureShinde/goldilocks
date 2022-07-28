@@ -1,0 +1,54 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+
+<!-- ko if: (isVisible()) -->
+<li class="ship-via">
+    <div class="step-title">
+        <span data-bind="i18n: 'Pickup or delivery?'"></span>
+        <button class="action action-edit hide" data-bind="click: backToShippingMethod">
+            <span data-bind="i18n: 'edit'"></span>
+        </button>
+    </div>
+    <div class="shipping-information-content">
+        <span class="value" data-bind="text: getShippingMethodTitle()"></span>
+    </div>
+</li>
+<li class="delivery-schedule">
+    <div class="step-title">
+    <!-- ko if: (isPickUpStore()) -->
+        <span data-bind="i18n: 'Pick-up Schedule'"></span>
+    <!--/ko-->
+    <!-- ko ifnot: (isPickUpStore()) -->
+        <span data-bind="i18n: 'Delivery Schedule'"></span>
+    <!--/ko-->
+    </div>
+    <div class="shipping-information-content">
+        <span data-bind="i18n: 'Date'"></span>
+        <span data-bind="text: getDateDelivery()"></span>
+        <span data-bind="i18n: 'Time'"></span>
+        <span data-bind="text: getTimeDelivery()"></span>
+    </div>
+</li>
+<li class="ship-to">
+    <div class="step-title">
+        <!-- ko if: (isPickUpStore()) -->
+        <span data-bind="i18n: 'Pickup Location'"></span>
+        <!--/ko-->
+        <!-- ko ifnot: (isPickUpStore()) -->
+        <span data-bind="i18n: 'Delivery Address'"></span>
+        <!--/ko-->
+        <button class="action action-edit hide" data-bind="click: back">
+            <span data-bind="i18n: 'edit'"></span>
+        </button>
+    </div>
+    <div class="shipping-information-content">
+        <!-- ko foreach: getRegion('ship-to') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+    </div>
+</li>
+<!--/ko-->

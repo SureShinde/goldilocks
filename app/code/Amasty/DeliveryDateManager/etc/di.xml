@@ -1,0 +1,438 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Amasty\DeliveryDateManager\Api\Data\ChannelConfigDataInterface"
+                type="Amasty\DeliveryDateManager\Model\ChannelConfig\ConfigData"/>
+    <preference for="Amasty\DeliveryDateManager\Api\Data\DateScheduleInterface"
+                type="Amasty\DeliveryDateManager\Model\DateSchedule\DateScheduleData"/>
+    <preference for="Amasty\DeliveryDateManager\Api\Data\DeliveryChannelInterface"
+                type="Amasty\DeliveryDateManager\Model\DeliveryChannel\DeliveryChannelData"/>
+    <preference for="Amasty\DeliveryDateManager\Api\Data\DateScheduleChannelRelationInterface"
+                type="Amasty\DeliveryDateManager\Model\Relations\DateScheduleChannelRelation\DateScheduleChannelRelationData"/>
+    <preference for="Amasty\DeliveryDateManager\Api\Data\DateScheduleChannelRelationSearchResultsInterface"
+                type="Amasty\DeliveryDateManager\Model\Relations\DateScheduleChannelRelation\SearchResults"/>
+    <preference for="Amasty\DeliveryDateManager\Api\Data\DateScheduleSearchResultsInterface"
+                type="Amasty\DeliveryDateManager\Model\DateSchedule\SearchResults"/>
+    <preference for="Amasty\DeliveryDateManager\Api\Data\DeliveryChannelSearchResultsInterface"
+                type="Amasty\DeliveryDateManager\Model\DeliveryChannel\DeliveryChannelSearchResults"/>
+    <preference for="Amasty\DeliveryDateManager\Api\Data\DeliveryDateOrderInterface"
+                type="Amasty\DeliveryDateManager\Model\DeliveryOrder\DeliveryOrderData"/>
+    <preference for="Amasty\DeliveryDateManager\Api\Data\DeliveryDateOrderSearchResultInterface"
+                type="Amasty\DeliveryDateManager\Model\DeliveryOrder\SearchResults"/>
+    <preference for="Amasty\DeliveryDateManager\Api\Data\DeliveryDateQuoteInterface"
+                type="Amasty\DeliveryDateManager\Model\DeliveryQuote\DeliveryDateQuoteData"/>
+    <preference for="Amasty\DeliveryDateManager\Api\Data\OrderLimitInterface"
+                type="Amasty\DeliveryDateManager\Model\OrderLimit\LimitDataModel"/>
+    <preference for="Amasty\DeliveryDateManager\Api\Data\OrderLimitSearchResultInterface"
+                type="Amasty\DeliveryDateManager\Model\OrderLimit\SearchResults"/>
+    <preference for="Amasty\DeliveryDateManager\Api\Data\TimeIntervalChannelRelationInterface"
+                type="Amasty\DeliveryDateManager\Model\Relations\TimeIntervalChannelRelation\TimeIntervalChannelData"/>
+    <preference for="Amasty\DeliveryDateManager\Api\Data\TimeIntervalChannelRelationSearchResultsInterface"
+                type="Amasty\DeliveryDateManager\Model\Relations\TimeIntervalChannelRelation\SearchResults"/>
+    <preference for="Amasty\DeliveryDateManager\Api\Data\TimeIntervalDateScheduleRelationInterface"
+                type="Amasty\DeliveryDateManager\Model\Relations\TimeIntervalDateScheduleRelation\TimeIntervalDateScheduleData"/>
+    <preference for="Amasty\DeliveryDateManager\Api\Data\TimeIntervalDateScheduleRelationSearchResultsInterface"
+                type="Amasty\DeliveryDateManager\Model\Relations\TimeIntervalDateScheduleRelation\SearchResults"/>
+    <preference for="Amasty\DeliveryDateManager\Api\Data\TimeIntervalInterface"
+                type="Amasty\DeliveryDateManager\Model\TimeInterval\TimeIntervalDataModel"/>
+    <preference for="Amasty\DeliveryDateManager\Api\Data\TimeIntervalSearchResultsInterface"
+                type="Amasty\DeliveryDateManager\Model\TimeInterval\SearchResults"/>
+    <preference for="Amasty\DeliveryDateManager\Api\Data\RestrictedDateInterface"
+                type="Amasty\DeliveryDateManager\Model\OrderLimit\Restricted\RestrictedDate"/>
+    <preference for="Amasty\DeliveryDateManager\Api\Data\RestrictedTimeIntervalInterface"
+                type="Amasty\DeliveryDateManager\Model\OrderLimit\Restricted\RestrictedTimeInterval"/>
+    <preference for="Amasty\DeliveryDateManager\Api\DeliveryQuoteServiceInterface"
+                type="Amasty\DeliveryDateManager\Model\DeliveryQuote\Manager"/>
+    <preference for="Amasty\DeliveryDateManager\Api\DeliveryGuestQuoteServiceInterface"
+                type="Amasty\DeliveryDateManager\Model\DeliveryQuote\Guest"/>
+    <preference for="Amasty\DeliveryDateManager\Model\Validator\IsBackOrderInterface"
+                type="Amasty\DeliveryDateManager\Model\DeliveryQuote\IsBackOrderQuoteValidator"/>
+
+    <type name="Magento\Sales\Model\Order\Email\Sender\OrderSender">
+        <plugin name="Amasty_DeliveryDateManager::load_extension_attriburtes_before_send"
+                type="Amasty\DeliveryDateManager\Plugin\Sales\Model\Order\Email\Sender\OrderSender\LoadExtensionAttributes"/>
+    </type>
+
+    <virtualType name="Amasty\DeliveryDateManager\SearchCriteria\CollectionProcessor\DeliveryChannelJoinProcessor"
+                 type="Amasty\DeliveryDateManager\Model\DeliveryChannel\JoinProcessor">
+        <arguments>
+            <argument name="customJoins" xsi:type="array">
+                <item name="scope_store.store_id"
+                      xsi:type="object">Amasty\DeliveryDateManager\Model\ResourceModel\DeliveryChannel\JoinProcessor\ScopeStore
+                </item>
+                <item name="scope_shpm.shipping_method"
+                      xsi:type="object">Amasty\DeliveryDateManager\Model\ResourceModel\DeliveryChannel\JoinProcessor\ScopeShippingMethod
+                </item>
+                <item name="scope_group.group_id"
+                      xsi:type="object">Amasty\DeliveryDateManager\Model\ResourceModel\DeliveryChannel\JoinProcessor\ScopeCustomerGroup
+                </item>
+            </argument>
+            <argument name="fieldMapping" xsi:type="array">
+                <item name="store_id" xsi:type="string">scope_store.store_id</item>
+                <item name="shipping_method" xsi:type="string">scope_shpm.shipping_method</item>
+                <item name="group_id" xsi:type="string">scope_group.group_id</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Amasty\DeliveryDateManager\SearchCriteria\CollectionProcessor\DeliveryChannelSortingProcessor"
+                 type="Magento\Framework\Api\SearchCriteria\CollectionProcessor\SortingProcessor">
+        <arguments>
+            <argument name="fieldMapping" xsi:type="array">
+                <item name="store_id" xsi:type="string">scope_store.store_id</item>
+                <item name="shipping_method" xsi:type="string">scope_shpm.shipping_method</item>
+                <item name="group_id" xsi:type="string">scope_group.group_id</item>
+            </argument>
+            <argument name="defaultOrders" xsi:type="array">
+                <item name="priority" xsi:type="const">\Magento\Framework\Data\Collection::SORT_ORDER_ASC</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Amasty\DeliveryDateManager\SearchCriteria\CollectionProcessor\DeliveryChannelFilterProcessor"
+                 type="Magento\Framework\Api\SearchCriteria\CollectionProcessor\FilterProcessor">
+        <arguments>
+            <argument name="fieldMapping" xsi:type="array">
+                <item name="store_id" xsi:type="string">scope_store.store_id</item>
+                <item name="shipping_method" xsi:type="string">scope_shpm.shipping_method</item>
+                <item name="group_id" xsi:type="string">scope_group.group_id</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Amasty\DeliveryDateManager\SearchCriteria\CollectionProcessor\DeliveryChannelCollectionProcessor"
+                 type="Magento\Framework\Api\SearchCriteria\CollectionProcessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="joins" xsi:type="object"
+                      shared="false">Amasty\DeliveryDateManager\SearchCriteria\CollectionProcessor\DeliveryChannelJoinProcessor
+                </item>
+                <item name="filters"
+                      xsi:type="object">Amasty\DeliveryDateManager\SearchCriteria\CollectionProcessor\DeliveryChannelFilterProcessor
+                </item>
+                <item name="sorting"
+                      xsi:type="object">Amasty\DeliveryDateManager\SearchCriteria\CollectionProcessor\DeliveryChannelSortingProcessor
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Amasty\DeliveryDateManager\Model\DeliveryChannel\Command\GetList">
+        <arguments>
+            <argument name="collectionProcessor"
+                      xsi:type="object">Amasty\DeliveryDateManager\SearchCriteria\CollectionProcessor\DeliveryChannelCollectionProcessor
+            </argument>
+        </arguments>
+    </type>
+    <type name="Amasty\DeliveryDateManager\Model\DeliveryChannel\GetChannelByCurrentScopes">
+        <arguments>
+            <argument name="scopeProcessors" xsi:type="array">
+                <item name="general"
+                      xsi:type="object">Amasty\DeliveryDateManager\Model\DeliveryChannelScope\GeneralProcessor
+                </item>
+                <item name="store"
+                      xsi:type="object">Amasty\DeliveryDateManager\Model\DeliveryChannelScope\StoreScopeProcessor
+                </item>
+                <item name="shipping_method"
+                      xsi:type="object">Amasty\DeliveryDateManager\Model\DeliveryChannelScope\ShippingMethodProcessor
+                </item>
+                <item name="customer_group"
+                      xsi:type="object">Amasty\DeliveryDateManager\Model\DeliveryChannelScope\CustomerGroupProcessor
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="\Amasty\DeliveryDateManager\Model\DeliveryChannelScope\ScopeRegistry">
+        <arguments>
+            <argument name="scopeValueProviders" xsi:type="array">
+                <item name="store"
+                      xsi:type="object">Amasty\DeliveryDateManager\Model\DeliveryChannelScope\StoreViewValueProvider
+                </item>
+                <item name="shipping_method"
+                      xsi:type="object">Amasty\DeliveryDateManager\Model\DeliveryChannelScope\ShippingMethodValueProvider
+                </item>
+                <item name="customer_group"
+                      xsi:type="object">Amasty\DeliveryDateManager\Model\DeliveryChannelScope\CustomerGroupValueProvider
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Amasty\DeliveryDateManager\SearchCriteria\CollectionProcessor\TimeIntervalJoinProcessor"
+                 type="Magento\Framework\Api\SearchCriteria\CollectionProcessor\JoinProcessor">
+        <arguments>
+            <argument name="customJoins" xsi:type="array">
+                <item name="channel.delivery_channel_id"
+                      xsi:type="object">Amasty\DeliveryDateManager\Model\ResourceModel\TimeInterval\JoinProcessor\ChannelProcessor
+                </item>
+                <item name="schedule.date_schedule_id"
+                      xsi:type="object">Amasty\DeliveryDateManager\Model\ResourceModel\TimeInterval\JoinProcessor\DateScheduleProcessor
+                </item>
+                <item name="set_rel.set_id"
+                      xsi:type="object">Amasty\DeliveryDateManager\Model\ResourceModel\TimeInterval\JoinProcessor\TimeSetRelationProcessor
+                </item>
+            </argument>
+            <argument name="fieldMapping" xsi:type="array">
+                <item name="delivery_channel_id" xsi:type="string">channel.delivery_channel_id</item>
+                <item name="date_schedule_id" xsi:type="string">schedule.date_schedule_id</item>
+                <item name="time_set_id" xsi:type="string">set_rel.set_id</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Amasty\DeliveryDateManager\SearchCriteria\CollectionProcessor\TimeIntervalSortingProcessor"
+                 type="Magento\Framework\Api\SearchCriteria\CollectionProcessor\SortingProcessor">
+        <arguments>
+            <argument name="fieldMapping" xsi:type="array">
+                <item name="delivery_channel_id" xsi:type="string">channel.delivery_channel_id</item>
+                <item name="date_schedule_id" xsi:type="string">schedule.date_schedule_id</item>
+                <item name="time_set_id" xsi:type="string">set_rel.set_id</item>
+                <item name="from" xsi:type="string">main_table.from</item>
+            </argument>
+            <argument name="defaultOrders" xsi:type="array">
+                <item name="position" xsi:type="const">Magento\Framework\Data\Collection::SORT_ORDER_ASC</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Amasty\DeliveryDateManager\SearchCriteria\CollectionProcessor\TimeIntervalFilterProcessor"
+                 type="Magento\Framework\Api\SearchCriteria\CollectionProcessor\FilterProcessor">
+        <arguments>
+            <argument name="customFilters" xsi:type="array">
+                <item name="interval_limit" xsi:type="object">Amasty\DeliveryDateManager\Model\ResourceModel\TimeInterval\FilterProcessor\OrderLimitProcessor</item>
+            </argument>
+            <argument name="fieldMapping" xsi:type="array">
+                <item name="delivery_channel_id" xsi:type="string">channel.delivery_channel_id</item>
+                <item name="date_schedule_id" xsi:type="string">schedule.date_schedule_id</item>
+                <item name="time_set_id" xsi:type="string">set_rel.set_id</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Amasty\DeliveryDateManager\SearchCriteria\CollectionProcessor\TimeIntervalCollectionProcessor"
+                 type="Magento\Framework\Api\SearchCriteria\CollectionProcessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="joins"
+                      xsi:type="object">Amasty\DeliveryDateManager\SearchCriteria\CollectionProcessor\TimeIntervalJoinProcessor
+                </item>
+                <item name="filters"
+                      xsi:type="object">Amasty\DeliveryDateManager\SearchCriteria\CollectionProcessor\TimeIntervalFilterProcessor
+                </item>
+                <item name="sorting"
+                      xsi:type="object">Amasty\DeliveryDateManager\SearchCriteria\CollectionProcessor\TimeIntervalSortingProcessor
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Amasty\DeliveryDateManager\Model\TimeInterval\GetList">
+        <arguments>
+            <argument name="collectionProcessor"
+                      xsi:type="object">Amasty\DeliveryDateManager\SearchCriteria\CollectionProcessor\TimeIntervalCollectionProcessor
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="amdelivery_channel_listing_data_source" xsi:type="string">Amasty\DeliveryDateManager\Model\ResourceModel\DeliveryChannel\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Amasty\DeliveryDateManager\Model\ResourceModel\DeliveryChannel\Grid\Collection">
+        <arguments>
+            <argument name="resourceModel" xsi:type="string">Amasty\DeliveryDateManager\Model\ResourceModel\DeliveryChannel</argument>
+            <argument name="collectionProcessor" xsi:type="object">Amasty\DeliveryDateManager\Model\ResourceModel\DeliveryChannel\Grid\Collection\Processor</argument>
+        </arguments>
+    </type>
+
+    <!-- Scope and relation handlers facade START -->
+    <type name="Amasty\DeliveryDateManager\Model\ResourceModel\DeliveryChannel">
+        <arguments>
+            <argument name="dataHandler" xsi:type="object">Amasty\DeliveryDateManager\Model\ResourceModel\DeliveryChannel\CompositeHandler</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Amasty\DeliveryDateManager\Model\ResourceModel\DeliveryChannel\CompositeHandler"
+                 type="Amasty\DeliveryDateManager\Model\ResourceModel\AbstractDb\CompositeHandler">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="stores" xsi:type="object">Amasty\DeliveryDateManager\Model\ResourceModel\DeliveryChannel\DataHandler\Stores</item>
+                <item name="shipping_methods" xsi:type="object">Amasty\DeliveryDateManager\Model\ResourceModel\DeliveryChannel\DataHandler\ShippingMethod</item>
+                <item name="customer_groups" xsi:type="object">Amasty\DeliveryDateManager\Model\ResourceModel\DeliveryChannel\DataHandler\CustomerGroup</item>
+                <item name="date_schedule" xsi:type="object">Amasty\DeliveryDateManager\Model\ResourceModel\DeliveryChannel\DataHandler\DateSchedule</item>
+                <item name="date_schedule_channel_relation" xsi:type="object">Amasty\DeliveryDateManager\Model\ResourceModel\DeliveryChannel\DataHandler\DateScheduleChannelRelation</item>
+                <item name="time_interval_date_schedule_relation" xsi:type="object">Amasty\DeliveryDateManager\Model\ResourceModel\DeliveryChannel\DataHandler\TimeIntervalDateScheduleRelation</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Amasty\DeliveryDateManager\Model\ResourceModel\DeliveryChannel\DataHandler\Stores"
+                 type="Amasty\DeliveryDateManager\Model\ResourceModel\DeliveryChannel\DataHandler\AbstractScopeHandler">
+        <arguments>
+            <argument name="tableName" xsi:type="const">Amasty\DeliveryDateManager\Model\ResourceModel\DeliveryChannel::SCOPE_STORE_TABLE</argument>
+            <argument name="scopeValueColumn" xsi:type="const">Amasty\DeliveryDateManager\Model\DeliveryChannelScope\StoreViewScopeData::STORE_ID</argument>
+            <argument name="scopeValuesDataKey" xsi:type="string">storeview_ids</argument>
+            <argument name="allScopesValue" xsi:type="null"/>
+        </arguments>
+    </virtualType>
+    <virtualType name="Amasty\DeliveryDateManager\Model\ResourceModel\DeliveryChannel\DataHandler\ShippingMethod"
+                 type="Amasty\DeliveryDateManager\Model\ResourceModel\DeliveryChannel\DataHandler\AbstractScopeHandler">
+        <arguments>
+            <argument name="tableName" xsi:type="const">Amasty\DeliveryDateManager\Model\ResourceModel\DeliveryChannel::SCOPE_SHIPPING_METHOD_TABLE</argument>
+            <argument name="scopeValueColumn" xsi:type="const">Amasty\DeliveryDateManager\Model\DeliveryChannelScope\ShippingMethodScopeData::SHIPPING_METHOD</argument>
+            <argument name="scopeValuesDataKey" xsi:type="string">shipping_methods</argument>
+            <argument name="allScopesValue" xsi:type="null"/>
+        </arguments>
+    </virtualType>
+    <virtualType name="Amasty\DeliveryDateManager\Model\ResourceModel\DeliveryChannel\DataHandler\CustomerGroup"
+                 type="Amasty\DeliveryDateManager\Model\ResourceModel\DeliveryChannel\DataHandler\AbstractScopeHandler">
+        <arguments>
+            <argument name="tableName" xsi:type="const">Amasty\DeliveryDateManager\Model\ResourceModel\DeliveryChannel::SCOPE_CUSTOMER_GROUP_TABLE</argument>
+            <argument name="scopeValueColumn" xsi:type="const">Amasty\DeliveryDateManager\Model\DeliveryChannelScope\CustomerGroupScopeData::GROUP_ID</argument>
+            <argument name="scopeValuesDataKey" xsi:type="string">customer_groups</argument>
+            <argument name="allScopesValue" xsi:type="null"/>
+        </arguments>
+    </virtualType>
+    <!-- Scope and relation handlers facade END -->
+
+    <!-- Data preprocessors facade START -->
+    <type name="Amasty\DeliveryDateManager\Controller\Adminhtml\Channel\Save">
+        <arguments>
+            <argument name="dataPreprocessor" xsi:type="object">Amasty\DeliveryDateManager\Model\DeliveryChannel\Preprocessor\DataPreprocessor</argument>
+        </arguments>
+    </type>
+    <virtualType name="Amasty\DeliveryDateManager\Model\DeliveryChannel\Preprocessor\DataPreprocessor"
+                 type="Amasty\DeliveryDateManager\Model\Preprocessor\CompositePreprocessor">
+    <arguments>
+        <argument name="processors" xsi:type="array">
+            <item name="date_schedule" xsi:type="object">Amasty\DeliveryDateManager\Controller\Adminhtml\Channel\DataPreprocessor\DateSchedule</item>
+            <item name="date_schedule_channel_relation" xsi:type="object">Amasty\DeliveryDateManager\Controller\Adminhtml\Channel\DataPreprocessor\DateScheduleChannelRelation</item>
+            <item name="time_interval_date_schedule_relation" xsi:type="object">Amasty\DeliveryDateManager\Controller\Adminhtml\Channel\DataPreprocessor\TimeIntervalDateScheduleRelation</item>
+        </argument>
+    </arguments>
+    </virtualType>
+
+    <type name="Amasty\DeliveryDateManager\Observer\Admin\Order\Save">
+        <arguments>
+            <argument name="dataPreprocessor" xsi:type="object">Amasty\DeliveryDateManager\Model\DeliveryOrder\Preprocessor\DataPreprocessor</argument>
+        </arguments>
+    </type>
+    <type name="Amasty\DeliveryDateManager\Controller\Adminhtml\Sales\Order\Save">
+        <arguments>
+            <argument name="dataPreprocessor" xsi:type="object">Amasty\DeliveryDateManager\Model\DeliveryOrder\Preprocessor\DataPreprocessor</argument>
+        </arguments>
+    </type>
+    <virtualType name="Amasty\DeliveryDateManager\Model\DeliveryOrder\Preprocessor\DataPreprocessor"
+                 type="Amasty\DeliveryDateManager\Model\Preprocessor\CompositePreprocessor">
+    <arguments>
+        <argument name="processors" xsi:type="array">
+            <item name="delivery_order_data" xsi:type="object">Amasty\DeliveryDateManager\Controller\Adminhtml\Sales\Order\DataPreprocessor\DeliveryData</item>
+        </argument>
+    </arguments>
+    </virtualType>
+
+    <type name="Amasty\DeliveryDateManager\Controller\Deliverydate\Save">
+        <arguments>
+            <argument name="dataPreprocessor" xsi:type="object">Amasty\DeliveryDateManager\Model\DeliveryDate\CustomerAccount\Preprocessor\DataPreprocessor</argument>
+        </arguments>
+    </type>
+    <virtualType name="Amasty\DeliveryDateManager\Model\DeliveryDate\CustomerAccount\Preprocessor\DataPreprocessor"
+                 type="Amasty\DeliveryDateManager\Model\Preprocessor\CompositePreprocessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="delivery_date_data" xsi:type="object">Amasty\DeliveryDateManager\Controller\Deliverydate\DataPreprocessor\DeliveryData</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Amasty\DeliveryDateManager\Controller\Adminhtml\Channel\Schedule\Save">
+        <arguments>
+            <argument name="dataPreprocessor" xsi:type="object">Amasty\DeliveryDateManager\Model\DateSchedule\Preprocessor\DataPreprocessor</argument>
+        </arguments>
+    </type>
+    <virtualType name="Amasty\DeliveryDateManager\Model\DateSchedule\Preprocessor\DataPreprocessor"
+                 type="Amasty\DeliveryDateManager\Model\Preprocessor\CompositePreprocessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="general" xsi:type="object">Amasty\DeliveryDateManager\Controller\Adminhtml\Channel\Schedule\DataPreprocessor\General</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Amasty\DeliveryDateManager\Controller\Adminhtml\Channel\Configuration\Save">
+        <arguments>
+            <argument name="dataPreprocessor" xsi:type="object">Amasty\DeliveryDateManager\Model\ChannelConfig\Preprocessor\DataPreprocessor</argument>
+        </arguments>
+    </type>
+    <virtualType name="Amasty\DeliveryDateManager\Model\ChannelConfig\Preprocessor\DataPreprocessor"
+                 type="Amasty\DeliveryDateManager\Model\Preprocessor\CompositePreprocessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="general" xsi:type="object">Amasty\DeliveryDateManager\Controller\Adminhtml\Channel\Configuration\DataPreprocessor\General</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <!-- Data preprocessors facade END -->
+
+    <type name="Amasty\DeliveryDateManager\ViewModel\DeliveryDate\Edit">
+        <arguments>
+            <argument name="checkoutConfigProvider" xsi:type="object">Amasty\DeliveryDateManager\Model\EditConfigProvider</argument>
+        </arguments>
+    </type>
+    <virtualType name="Amasty\DeliveryDateManager\Model\EditConfigProvider"
+                 type="Amasty\DeliveryDateManager\Model\CheckoutConfigProvider">
+        <arguments>
+            <argument name="isBackOrder" xsi:type="object">Amasty\DeliveryDateManager\Model\DeliveryOrder\Edit\Validator\IsBackOrderValidator</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Amasty\DeliveryDateManager\Model\ChannelSetRepository">
+        <arguments>
+            <argument name="channelSetCollector" xsi:type="object">Amasty\DeliveryDateManager\Model\ChannelSetCollector\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Amasty\DeliveryDateManager\Model\Cache\ObjectCache">
+        <arguments>
+            <argument name="cache" xsi:type="object">Magento\Framework\App\Cache\Type\Collection</argument>
+            <argument name="cacheIdPrefix" xsi:type="string">amasty_deliveryDate</argument>
+        </arguments>
+    </type>
+
+     <virtualType name="Amasty\DeliveryDateManager\Model\DeliveryChannel\ValidatorComposite"
+                 type="Amasty\DeliveryDateManager\Model\Validator\ValidatorComposite">
+        <arguments>
+            <argument name="validators" xsi:type="array">
+                <item name="schedules" xsi:type="object">Amasty\DeliveryDateManager\Model\DeliveryChannel\Validator\Schedules</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Amasty\DeliveryDateManager\Model\DeliveryChannel\DeliveryChannelData">
+        <arguments>
+            <argument name="validatorComposite" xsi:type="object">Amasty\DeliveryDateManager\Model\DeliveryChannel\ValidatorComposite</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Checkout\Model\ShippingInformationManagement">
+        <plugin name="Amasty_DeliveryDateManager::save-extension-attributes"
+                type="Amasty\DeliveryDateManager\Plugin\Checkout\Model\ShippingInformationManagementPlugin"/>
+    </type>
+    <type name="Magento\Sales\Block\Items\AbstractItems">
+        <plugin name="Amasty_DeliveryDateManager::OrderEmail" type="Amasty\DeliveryDateManager\Plugin\Sales\Block\Items\AbstractItems\AddBlockToEmail"/>
+    </type>
+    <type name="Magento\Sales\Api\OrderRepositoryInterface">
+        <plugin name="Amasty_DeliveryDateManager::save-extension-attributes"
+                type="Amasty\DeliveryDateManager\Plugin\Sales\Api\OrderRepositoryInterfacePlugin"/>
+    </type>
+    <type name="Magento\Sales\Model\Order\Pdf\Invoice">
+        <plugin name="Amasty_DeliveryDateManager::PrintInvoice" type="Amasty\DeliveryDateManager\Plugin\Sales\Model\Order\Pdf\Invoice\InsertDeliveryInfo"/>
+    </type>
+    <type name="Magento\Sales\Model\Order\Pdf\Shipment">
+        <plugin name="Amasty_DeliveryDateManager::PrintShipment" type="Amasty\DeliveryDateManager\Plugin\Sales\Model\Order\Pdf\Shipment\InsertDeliveryInfo"/>
+    </type>
+    <type name="Magento\Quote\Model\Cart\ShippingMethodConverter">
+        <plugin name="Amasty_DeliveryDateManager::addChannelSet"
+                type="Amasty\DeliveryDateManager\Plugin\Quote\Model\Cart\ShippingMethodConverterPlugin"/>
+    </type>
+    <type name="Magento\Quote\Model\Quote\Address\ToOrder">
+        <plugin name="Amasty_DeliveryDateManager::convert_quote_to_order"
+                type="Amasty\DeliveryDateManager\Plugin\Quote\Model\Quote\AddressToOrderPlugin"/>
+    </type>
+    <type name="Magento\Setup\Model\DeclarationInstaller">
+        <plugin name="Amasty_DeliveryDateManager::checkIfInstalledOldModule"
+                type="Amasty\DeliveryDateManager\Plugin\Setup\Model\DeclarationInstaller\CheckIfInstalledOldDD"/>
+    </type>
+</config>

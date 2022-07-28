@@ -1,0 +1,135 @@
+<script>
+    require(['jquery'],function($){
+
+        function handleSidebar(){
+            //Scroll to element
+            $(document).on('click', '.cms-page-tab .tabs-navigation .tab-header .tab-title', function(e) {
+                // target element id
+                var id = $(this).attr('href');
+
+                // target element
+                var $id = $(id);
+                if ($id.length === 0) {
+                    return;
+                }
+
+                // prevent standard hash navigation (avoid blinking in IE)
+                e.preventDefault();
+
+                // top position relative to the document
+                var pos = $id.offset().top;
+
+                // animated top scrolling
+                $('body, html').animate({scrollTop: pos});
+
+            });
+
+            //Wrap tabs navigation to make sticky
+            setTimeout(function(){
+                $('.cms-page-tab .tabs-navigation').wrapInner('<div class="tabs-navigation-inner"></div>')
+            },700)
+
+            if($(window).width() < 1023){
+                //Sticky sidebar on mobile
+                var stickyToggle = function(sticky, stickyWrapper, scrollElement) {
+                    var stickyHeight = sticky.outerHeight();
+                    var stickyTop = stickyWrapper.offset().top;
+                    if (scrollElement.scrollTop() >= stickyTop ){
+                        stickyWrapper.height(stickyHeight);
+                        sticky.addClass("is-sticky");
+                    }
+                    else{
+                        sticky.removeClass("is-sticky");
+                        stickyWrapper.height('auto');
+                    }
+                };
+                $('.cms-page-tab .tabs-navigation').each(function() {
+                    var sticky = $(this);
+                    var stickyWrapper = $('<div>').addClass('sticky-wrapper');
+                    // insert hidden element to maintain actual top offset on page
+                    sticky.before(stickyWrapper);
+                    sticky.addClass('sticky');
+                    // Scroll & resize events
+                    $(window).on('scroll.sticky-onscroll resize.sticky-onscroll', function() {
+                        stickyToggle(sticky, stickyWrapper, $(this));
+                    });
+                    // On page load
+                    stickyToggle(sticky, stickyWrapper, $(window));
+                });
+
+            }
+
+            //Scroll to center onclick mobile
+            $(".cms-page-tab .tabs-navigation .tab-header").on("click", function() {
+                $(".cms-page-tab .tabs-navigation .tab-header").removeClass("center");
+                $(this).addClass("center");
+                $(".cms-page-tab .tabs-navigation-inner").scrollCenter(".center", 300);
+            });
+
+            jQuery.fn.scrollCenter = function(elem, speed) {
+                var active = jQuery(this).find(elem); // find the active element
+                //var activeWidth = active.width(); // get active width
+                var activeWidth = active.width() / 2; // get active width center
+
+                //var pos = jQuery('#timepicker .active').position().left; //get left position of active li
+                // var pos = jQuery(elem).position().left; //get left position of active li
+                //var pos = jQuery(this).find(elem).position().left; //get left position of active li
+                var pos = active.position().left + activeWidth; //get left position of active li + center position
+                var elpos = jQuery(this).scrollLeft(); // get current scroll position
+                var elW = jQuery(this).width(); //get div width
+                //var divwidth = jQuery(elem).width(); //get div width
+                pos = pos + elpos - elW / 2; // for center position if you want adjust then change this
+
+                jQuery(this).animate({
+                    scrollLeft: pos
+                }, speed == undefined ? 1000 : speed);
+                return this;
+            };
+
+            jQuery.fn.scrollCenterORI = function(elem, speed) {
+                jQuery(this).animate({
+                    scrollLeft: jQuery(this).scrollLeft() - jQuery(this).offset().left + jQuery(elem).offset().left
+                }, speed == undefined ? 1000 : speed);
+                return this;
+            };
+
+        }
+
+        //Scroll to center onclick mobile
+        function sidebarScrollCenterMobile(){
+            $(".cms-page-tab .tabs-navigation .tab-header").on("click", function() {
+                $(".cms-page-tab .tabs-navigation .tab-header").removeClass("center");
+                $(this).addClass("center");
+                $(".cms-page-tab .tabs-navigation-inner").scrollCenter(".center", 300);
+            });
+
+            jQuery.fn.scrollCenter = function(elem, speed) {
+                var active = jQuery(this).find(elem); // find the active element
+                //var activeWidth = active.width(); // get active width
+                var activeWidth = active.width() / 2; // get active width center
+
+                var pos = active.position().left + activeWidth; //get left position of active li + center position
+                var elpos = jQuery(this).scrollLeft(); // get current scroll position
+                var elW = jQuery(this).width(); //get div width
+                //var divwidth = jQuery(elem).width(); //get div width
+                pos = pos + elpos - elW / 2; // for center position if you want adjust then change this
+
+                jQuery(this).animate({
+                    scrollLeft: pos
+                }, speed == undefined ? 1000 : speed);
+                return this;
+            };
+
+            jQuery.fn.scrollCenterORI = function(elem, speed) {
+                jQuery(this).animate({
+                    scrollLeft: jQuery(this).scrollLeft() - jQuery(this).offset().left + jQuery(elem).offset().left
+                }, speed == undefined ? 1000 : speed);
+                return this;
+            };
+        }
+
+        // sidebarScrollCenterMobile()
+        handleSidebar()
+    });
+
+</script>

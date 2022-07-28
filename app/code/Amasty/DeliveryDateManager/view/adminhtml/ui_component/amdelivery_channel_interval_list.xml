@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">amdelivery_channel_interval_list.amdelivery_time_set_data_source</item>
+        </item>
+        <item name="template" xsi:type="string">templates/provider</item>
+        <item name="save_parameters_in_session" xsi:type="string">0</item>
+    </argument>
+    <settings>
+        <deps>
+            <dep>amdelivery_channel_interval_list.amdelivery_time_set_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="amdelivery_time_set_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">schedule_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>Amasty_DeliveryDateManager::channel_intervals</aclResource>
+        <dataProvider class="Amasty\DeliveryDateManager\Ui\Component\Form\Channel\AdditionalDataProviders\TimeIntervalSet\DataProvider"
+                      name="amdelivery_time_set_data_source">
+            <settings>
+                <requestFieldName>schedule_id</requestFieldName>
+                <primaryFieldName>schedule_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+</listing>

@@ -1,0 +1,10 @@
+<!-- ko if: items().length -->
+<section class="ampreorderan-bestsellers-container">
+    <div class="ampreorderan-title-block">
+        <h3 class="ampreorderan-title" data-bind="i18n: 'Pre-order Bestsellers'"></h3>
+    </div>
+    <!-- ko scope: 'index = amasty_preorder_table' -->
+        <!-- ko template: { name: getTemplate(), data: { header: $parent.titles, elems: $parent.items } } --><!-- /ko-->
+    <!-- /ko -->
+</section>
+<!-- /ko-->

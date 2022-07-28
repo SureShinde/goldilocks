@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Indexer/etc/indexer.xsd">
+    <indexer id="amasty_preorder_product_preorder" view_id="amasty_preorder_product_preorder" class="Amasty\Preorder\Model\Indexer\Product\PreorderIndexer" shared_index="amasty_preorder_product_preorder">
+        <title translate="true">Amasty Preorder Products</title>
+        <description translate="true">Indexed preorder products</description>
+        <dependencies>
+            <indexer id="cataloginventory_stock" />
+        </dependencies>
+    </indexer>
+
+    <indexer id="amasty_preorder_product_preorder_msi" view_id="amasty_preorder_product_preorder_msi" class="Amasty\Preorder\Model\Indexer\Product\PreorderIndexer" shared_index="amasty_preorder_product_preorder">
+        <title translate="true">Amasty Preorder Products (MSI)</title>
+        <description translate="true">Indexed preorder products</description>
+    </indexer>
+
+    <indexer id="catalogsearch_fulltext">
+        <dependencies>
+            <indexer id="amasty_preorder_product_preorder" />
+        </dependencies>
+    </indexer>
+
+    <indexer id="catalogrule_product">
+        <dependencies>
+            <indexer id="amasty_preorder_product_preorder" />
+        </dependencies>
+    </indexer>
+</config>

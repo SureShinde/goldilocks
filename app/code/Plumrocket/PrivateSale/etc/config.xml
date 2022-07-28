@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<!--
+
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket Private Sales and Flash Sales v4.x.x
+ * @copyright   Copyright (c) 2020 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <prprivatesale>
+            <general>
+                <serial></serial>
+            </general>
+            <main>
+                <event_statistic>1</event_statistic>
+                <cookie_lifetime>10</cookie_lifetime>
+                <coming_soon_days>3</coming_soon_days>
+                <ending_soon_days>3</ending_soon_days>
+            </main>
+            <design>
+                <timer>
+                    <homepage_timer>days_hours</homepage_timer>
+                    <event_category_timer>days_hours</event_category_timer>
+                    <product_timer>days_hours_minutes_seconds</product_timer>
+                </timer>
+                <category_event_header>
+                    <style>template_4</style>
+                </category_event_header>
+                <product_event_header>
+                    <style>template_3</style>
+                </product_event_header>
+            </design>
+            <permission>
+                <general>
+                    <before_starts>
+                        <row1>
+                            <label>Browsing Event</label>
+                            <status>off</status>
+                        </row1>
+                        <row2>
+                            <label>Show Product Prices</label>
+                            <status>off</status>
+                        </row2>
+                        <row3>
+                            <label>Show Add to Cart Button</label>
+                            <status>off</status>
+                        </row3>
+                    </before_starts>
+                    <after_ends>
+                        <row4>
+                            <label>Browsing Event</label>
+                            <status>off</status>
+                        </row4>
+                        <row5>
+                            <label>Show Product Prices</label>
+                            <status>off</status>
+                        </row5>
+                        <row6>
+                            <label>Show Add to Cart Button</label>
+                            <status>off</status>
+                        </row6>
+                    </after_ends>
+                </general>
+                <private_sale>
+                    <customer_group>
+                        <row7>
+                            <group>select_all</group>
+                            <label>Browsing Event</label>
+                            <status>on</status>
+                            <action/>
+                        </row7>
+                        <row8>
+                            <group/>
+                            <label>Show Product Prices</label>
+                            <status>on</status>
+                            <action/>
+                        </row8>
+                        <row9>
+                            <group/>
+                            <label>Show Add to Cart Button</label>
+                            <status>on</status>
+                            <action/>
+                        </row9>
+                    </customer_group>
+                    <landing_page>1</landing_page>
+                </private_sale>
+            </permission>
+            <splashpage>
+                <data><![CDATA[{
+                    "enabled_page":"0",
+                    "form_text": "<h2>FIND YOUR FAVORITE BRANDS EVERY DAY</h2>Best prices on your favorite brands: these deals will make you happy!",
+                    "enabled_registration":"1",
+                    "enabled_launching_soon":"0",
+                    "confirmation_text":"<h2>Thank you so much for becoming a member of our store!</h2> <p>We're thrilled to have you onboard and can't wait to show you our members-only deals!</p>",
+                    "meta_title":"",
+                    "meta_keywords":"",
+                    "meta_description":""
+                }]]></data>
+            </splashpage>
+            <settings>
+                <before_start_label>2</before_start_label>
+                <end_label>2</end_label>
+            </settings>
+        </prprivatesale>
+    </default>
+</config>

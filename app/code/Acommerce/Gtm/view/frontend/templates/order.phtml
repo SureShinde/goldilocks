@@ -1,0 +1,39 @@
+<?php
+// @codingStandardsIgnoreFile
+?>
+<?php if($this->isEnabled()) : ?>
+    <?php $helper = $this->helper('Acommerce\Gtm\Helper\Data'); ?>
+    <?php $order = $this->getOrder(); ?>
+    <?php $products = $this->getProducts(); ?>
+
+    <?php
+        $purchaseData = [];
+        $purchaseData['actionField'] = [
+            'transactionId' => $order->getIncrementId(),
+            'store' => $helper->getAffiliationName(),
+            'transactionTotal' => $helper->numberFormat($order->getBaseGrandTotal(), 2),
+            'coupon' => (string)$order->getCouponCode(),
+            'shippingMethod' => explode("_",$order->getShippingMethod())[0],
+            'paymentMethod' => $order->getPayment()->getMethodInstance()->getCode()
+        ];
+
+        if (!$this->excludeTaxFromTransaction()) :
+        $purchaseData['actionField']['tax'] = $helper->numberFormat($order->getBaseTaxAmount(), 0);
+        endif;
+
+        if (!$this->excludeShippingFromTransaction()) :
+            $purchaseData['actionField']['shipping'] = $helper->numberFormat($order->getBaseShippingInclTax(), 0);
+        endif;
+
+
+        $purchaseData['products'] = $products;
+
+        $this->setEcommerceData('purchase', $purchaseData);
+
+        if ($helper->isAdWordConversionTrackingEnabled()) :
+            $this->setDataLayerOption(\Acommerce\Gtm\Model\Api\ConversionTracking::FIELD_CONVERSION_TRACKING_CONVERSION_VALUE, $order->getBaseGrandTotal());
+            $this->setDataLayerOption(\Acommerce\Gtm\Model\Api\ConversionTracking::FIELD_CONVERSION_TRACKING_ORDER_ID, $order->getIncrementId());
+        endif;
+
+    ?>
+<?php endif; ?>

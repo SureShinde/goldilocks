@@ -1,0 +1,69 @@
+<!-- ko if: (isVisible()) -->
+<form method="post" id="form-special-customer-program">
+        <legend class="legend">
+            <span data-bind="i18n: 'Senior Citizen ID or PWD ID'"></span>
+            <!-- ko if: (isApplied()) -->
+            <a class="action delete" data-bind="click: remove">
+                <span data-bind="i18n: 'Remove'"></span>
+            </a>
+            <!--/ko-->
+        </legend>
+        <div class="field field-name-firstname required">
+            <div class="control">
+                <input data-bind="value: ci_number, attr:{disabled:isApplied() , placeholder: $t('Citizen Identification Number')}"
+                    type="text" id="ci_number" name="ci_number" class="input-text required-entry"
+                       data-validate="{required:true, 'validate-number':true}" aria-required="true">
+            </div>
+        </div>
+        <div class="field field-name-firstname required">
+            <div class="control">
+                <input data-bind="value: ci_full_name, attr:{disabled:isApplied() , placeholder: $t('Citizen Identification Full Name')} "
+                    type="text" id="ci_full_name" name="ci_full_name" class="input-text required-entry"
+                       data-validate="{required:true}" aria-required="true">
+            </div>
+        </div>
+        <div class="file-uploader-summary">
+            <div class="file-uploader-preview" data-bind="click: selectImage">
+                <img
+                    id="previewImage"
+                    tabindex="0"
+                    data-bind="attr:{src: ci_image_src}"
+                    src="">
+                <span class="file-uploader-placeholder" data-bind="i18n: '+ Upload image of SC or PWD ID'"></span>
+                <!-- ko ifnot: (isApplied()) -->
+                <div class="actions">
+                    <button type="button" class="action-remove"
+                            data-bind="click: deleteImage, attr:{disabled:isApplied() , title: $t('Delete image')}"
+                            data-role="delete-button">
+                        <span data-bind="i18n: 'Delete image'"><span data-bind="i18n: 'Delete image'"></span>
+                    </button>
+                </div>
+                <!--/ko-->
+            </div>
+        </div>
+
+        <!-- ko if: (validateImage()) -->
+        <div id="ci_number-error" style="color: #e02b27;font-size: 1.2rem;"><span data-bind="i18n: 'This is a required field.'"></span></div>
+        <!--/ko-->
+        <div class="file-upload">
+            <input type="file"
+                   data-bind="event: { change: changeImage }, value: ci_image"
+                   style="display: none" name="ci_image" id="ci_image" data-validate="{required:true}"
+                   oninput="previewImage.src=window.URL.createObjectURL(this.files[0])">
+        </div>
+
+    <!-- ko if: (isApplied()) -->
+    <p class="note" data-bind="i18n: '*Please present your ID upon delivery or pickup.'"></p>
+    <!--/ko-->
+    <!-- ko ifnot: (isApplied()) -->
+    <div class="actions-toolbar">
+        <div class="primary">
+            <button type="submit" data-bind="click: submit"
+                    class="action tocart primary">
+                <span><span data-bind="i18n: 'Submit'"></span></span>
+            </button>
+        </div>
+    </div>
+    <!--/ko-->
+</form>
+<!--/ko-->

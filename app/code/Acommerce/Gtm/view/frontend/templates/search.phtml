@@ -1,0 +1,27 @@
+<?php
+// @codingStandardsIgnoreFile
+?>
+<?php if($this->isEnabled()) : ?>
+    <?php $productCollection = $this->getProductCollection(); ?>
+    <?php $helper = $this->helper('Acommerce\Gtm\Helper\Data'); ?>
+    <?php if (count($productCollection)) : ?>
+        <?php $categoryProducts = array(); ?>
+        <?php $i = 1; ?>
+        <?php foreach($productCollection as $product) : ?>
+            <?php $categoryProduct = array(); ?>
+            <?php $categoryProduct['name'] = html_entity_decode($product->getName()); ?>
+            <?php $categoryProduct['sku'] = $helper->getGtmProductId($product); ?>
+            <?php $categoryProduct['price'] = $helper->numberFormat($product->getFinalPrice(), 2); ?>
+            <?php if ($helper->isBrandEnabled()) : ?>
+                <?php $categoryProduct['brand'] = $helper->getGtmBrand($product); ?>
+            <?php endif;?>
+            <?php $categoryProduct['category'] = $helper->getGtmCategoryByProduct($product); ?>
+            <?php $categoryProduct['list'] = $block->getListPrefix() . ' ' . __('Search Result'); ?>
+            <?php $categoryProduct['position'] = $i; ?>
+            <?php $categoryProducts[] = $categoryProduct; ?>
+            <?php $i++ ; ?>
+        <?php endforeach; ?>
+        <?php $this->setEcommerceData('currencyCode', $this->getCurrencyCode()); ?>
+        <?php $this->setEcommerceData('impressions', $categoryProducts); ?>
+    <?php endif; ?>
+<?php endif; ?>

@@ -1,0 +1,35 @@
+.draw-chart-campaign{
+    position: relative;
+    margin: 1% 0 0 0;
+}
+#draw_pie_chart{
+    position: absolute;
+    right: 0;
+}
+.statistical th {
+    text-align: left;
+}
+
+.statistical th, td {
+    padding: 15px;
+    text-align: left;
+}
+
+.campaign-statistics{
+    margin: 0 0 0 0 !important;
+}
+
+.bar-char-compare{
+    margin: 5em 0 0 0;
+}
+
+.notice-collection-rule{
+    background: #fffbbb;
+    border: none;
+    border-radius: 0;
+    color: #333333;
+    font-size: 1.4rem;
+    padding: 1.8rem 4rem 1.8rem 1.5rem;
+    position: relative;
+    text-shadow: none;
+}

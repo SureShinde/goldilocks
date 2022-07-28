@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="amastyPreorder" xsi:type="array">
+                    <item name="class" xsi:type="string">Amasty\Preorder\Ui\DataProvider\Product\Form\Modifier\Preorder</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\InventoryIndexer\Indexer\SourceItem\Strategy\Sync">
+        <plugin name="Amasty_Preorder::preorder-reindex-msi" type="Amasty\Preorder\Plugin\InventoryIndexer\Indexer\SourceItem\Strategy\Sync\ReindexPreorder" />
+    </type>
+
+    <type name="Magento\Sales\Model\ResourceModel\Order\Grid\Collection">
+        <plugin name="Amasty_Preorder::join-preorder-data" type="Amasty\Preorder\Plugin\Sales\Model\ResourceModel\Order\Grid\Collection\JoinPreorderData" />
+        <plugin name="Amasty_Preorder::apply-preorder-filter" type="Amasty\Preorder\Plugin\Sales\Model\ResourceModel\Order\Grid\Collection\ApplyPreorderFilter" />
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter">
+        <plugin name="Amasty_Preorder::join-preorder-table" type="Amasty\Preorder\Plugin\Sales\Model\ResourceModel\Order\Grid\Collection\JoinPreorderTableToExport"/>
+    </type>
+
+    <type name="Magento\Catalog\Block\Adminhtml\Product\Edit\Action\Attribute\Tab\Inventory">
+        <plugin name="Amasty_Preorder::addPreOrderFields" type="Amasty\Preorder\Plugin\Catalog\Block\Adminhtml\Product\Edit\Action\Attribute\Tab\Inventory\AddPreorderTab" />
+    </type>
+
+    <type name="Magento\SalesRule\Model\Rule\Condition\Product\Combine">
+        <plugin name="Amasty_Preorder::addPreorderCondition" type="Amasty\Preorder\Plugin\SalesRule\Model\Rule\Condition\Product\Combine\AddPreorderCondition" />
+    </type>
+    <type name="Magento\CatalogRule\Model\Rule\Condition\Combine">
+        <plugin name="Amasty_Preorder::addPreorderCondition" type="Amasty\Preorder\Plugin\CatalogRule\Model\Rule\Condition\Combine\AddPreorderCondition" />
+    </type>
+    <type name="Amasty\Stockstatus\Model\Rule\Condition\Combine">
+        <plugin name="Amasty_Preorder::addPreorderCondition" type="Amasty\Preorder\Plugin\Stockstatus\Model\Rule\Condition\Combine\AddPreorderCondition" />
+    </type>
+</config>

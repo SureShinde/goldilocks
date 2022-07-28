@@ -1,0 +1,93 @@
+<?php
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket Private Sales and Flash Sales v4.x.x
+ * @copyright   Copyright (c) 2020 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+
+/** @var \Plumrocket\PrivateSale\Block\Event\Category $block */
+?>
+
+<?php if ($block->canShowHeader('template_1')): ?>
+    <div class="prprivatesale-category-header header-one">
+        <div class="prprivatesale-header-bg" style="background-image: url('<?= $block->getEventImage() ?>')"></div>
+        <div class="prprivatesale-header-content">
+            <h1 class="prprivatesale-header-event-name">
+                <?= $block->getEventName() ?>
+            </h1>
+            <div class="prprivatesale-event-timer">
+                <?= $block->getChildHtml('privatesale.category.event.timer') ?>
+            </div>
+        </div>
+    </div>
+<?php elseif ($block->canShowHeader('template_2')): ?>
+    <div class="prprivatesale-category-header header-two">
+        <div class="prprivatesale-header-bg"
+             style="background-image:
+                                    linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                                    url('<?= $block->getEventImage() ?>')"
+        >
+        </div>
+        <div class="prprivatesale-header-content">
+            <h1 class="prprivatesale-header-event-name">
+                <?= $block->getEventName() ?>
+            </h1>
+            <?php if ($description = $block->getEventDescription()): ?>
+                <div class="prprivatesale-header-desc">
+                    <?= $description ?>
+                </div>
+            <?php endif; ?>
+            <div class="prprivatesale-event-timer">
+                <?= $block->getChildHtml('privatesale.category.event.timer') ?>
+            </div>
+        </div>
+    </div>
+<?php elseif ($block->canShowHeader('template_3')): ?>
+    <div class="prprivatesale-category-header header-three">
+        <div class="prprivatesale-header-bg" style="background-image: url('<?= $block->getEventImage() ?>')"></div>
+        <div class="prprivatesale-header-content">
+            <h1 class="prprivatesale-header-event-name">
+                <?= $block->getEventName() ?>
+            </h1>
+            <?php if ($description = $block->getEventDescription()): ?>
+                <div class="prprivatesale-header-desc">
+                    <div><?= $description ?></div>
+                    <button type="button"><?= $block->escapeHtml(__('show more')) ?></button>
+                </div>
+            <?php endif; ?>
+            <div class="prprivatesale-event-timer">
+                <?= $block->getChildHtml('privatesale.category.event.timer') ?>
+            </div>
+        </div>
+    </div>
+<?php elseif ($block->canShowHeader('template_4')): ?>
+    <div class="prprivatesale-category-header header-four">
+        <h1 class="prprivatesale-header-event-name">
+            <?= $block->getEventName() ?>
+        </h1>
+        <div class="prprivatesale-event-timer">
+            <?= $block->getChildHtml('privatesale.category.event.timer') ?>
+        </div>
+    </div>
+<?php elseif ($block->canShowHeader('template_5')): ?>
+    <div class="prprivatesale-category-header header-five">
+        <h1 class="prprivatesale-header-event-name">
+            <?= $block->getEventName() ?>
+        </h1>
+        <div class="prprivatesale-header-content">
+            <div class="prprivatesale-event-timer">
+                <?= $block->getChildHtml('privatesale.category.event.timer') ?>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>

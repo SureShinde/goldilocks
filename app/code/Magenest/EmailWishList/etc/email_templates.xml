@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="magenest_email_wishlist_setting_email_wishlist"
+              label="Email Wishlist"
+              file="email_wishlist.html"
+              type="html" module="Magenest_EmailWishList"
+              area="frontend"/>
+</config>

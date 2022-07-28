@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket_PrivateSale
+ * @copyright   Copyright (c) 2020 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Mview/etc/mview.xsd">
+    <view id="plumrocket_privatesale_product_event" class="Plumrocket\PrivateSale\Model\Indexer\Product" group="indexer">
+        <subscriptions>
+            <table name="catalog_product_website" entity_column="product_id" />
+        </subscriptions>
+    </view>
+    <view id="plumrocket_private_sale_entity_to_event_index" class="Plumrocket\PrivateSale\Model\Indexer\EntityToEvent\Indexer" group="indexer">
+        <subscriptions>
+            <table name="plumrocket_privatesale_event_entity" entity_column="entity_id" />
+        </subscriptions>
+    </view>
+</config>
+

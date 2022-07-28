@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <ampreorder>
+            <release_date>
+                <enabled>0</enabled>
+                <attribute>amasty_preorder_release_date</attribute>
+                <format>default</format>
+                <change_backorders>102</change_backorders>
+                <fix_for_scope>1</fix_for_scope>
+            </release_date>
+            <release_notification>
+                <email_template>amasty_preorder_release_notification_template</email_template>
+                <email_sender>general</email_sender>
+            </release_notification>
+        </ampreorder>
+    </default>
+</config>

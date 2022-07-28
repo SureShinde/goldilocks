@@ -1,0 +1,38 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Review\Block\Product\Review $block */
+/** @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer */
+?>
+<div class="review-list-container">
+    <div class="review-list-title">
+        <strong class="title"><?= __('Review') ?></strong>
+        <?= $block->getChildHtml('product.info.review') ?>
+    </div>
+    <?= $block->getChildHtml('product.info.product_additional_data.wrapper') ?>
+    <div id="product-review-container" data-role="product-review"></div>
+</div>
+<?= $block->getChildHtml('review_form') ?>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Review/js/process-reviews": {
+                "productReviewUrl": "<?= $block->escapeJs($block->getProductReviewUrl()) ?>",
+                "reviewsTabSelector": "#reviews"
+            }
+        }
+    }
+</script>
+<?php $scriptString = <<<script
+    require(['jquery'], function($){
+        $('.review-list-title > .title').click(function () {
+            $(this).parents('.review-list-container').toggleClass('collapsed');
+        })
+    });
+script;
+?>
+<?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false); ?>

@@ -1,0 +1,30 @@
+<form class="form otp confirm"
+      action="<?= $block->escapeUrl($block->getUrl('*/*/phonePost')) ?>"
+      method="post"
+      id="form-validate"
+      data-mage-init='{"validation": {}}'>
+    <fieldset class="fieldset" data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>">
+        <div class="field note"><?= $block->escapeHtml(__('Please enter the telephone to complete the registration')) ?></div>
+        <div class="field email required">
+            <label for="telephone" class="label"><span><?= $block->escapeHtml(__('Telephone')) ?></span></label>
+            <div class="control">
+                <input type="text" name="telephone"  data-validate="{required: true, 'phone-validate': true}"
+                       alt="telephone" id="telephone" class="input-text" aria-required="true">
+            </div>
+        </div>
+        <?= $block->getChildHtml('form_additional_info') ?>
+    </fieldset>
+    <?php echo $block->getBlockHtml('formkey')?>
+    <div class="actions-toolbar">
+        <div class="primary">
+            <button type="submit" class="action submit primary"><span><?= $block->escapeHtml(__('Submit')) ?></span></button>
+        </div>
+    </div>
+</form>
+<script type="text/x-magento-init">
+    {
+        "*": {
+           "validateMethod": {}
+       }
+    }
+</script>

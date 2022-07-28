@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Magenest\StoreLocatorPopup\Block\NearestStorePopup" name="store.locator.popup"
+                   template="Magenest_StoreLocatorPopup::popup/nearest_store.phtml"/>
+        </referenceContainer>
+        <referenceBlock name="header.links">
+            <block class="Magenest\StoreLocatorPopup\Block\NearestStoreLink" name="nearest-store-header-link"/>
+        </referenceBlock>
+        <referenceBlock name="top.links">
+            <block class="Magenest\StoreLocatorPopup\Block\NearestStoreLink" name="nearest-store-top-link"/>
+        </referenceBlock>
+    </body>
+</page>

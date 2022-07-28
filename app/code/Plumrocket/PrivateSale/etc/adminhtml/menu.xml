@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!--
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket Private Sales and Flash Sales
+ * @copyright   Copyright (c) 2020 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Plumrocket_PrivateSale::privatesale" title="Private Sales &amp; Flash Sales" translate="title" module="Plumrocket_PrivateSale" parent="Plumrocket_Base::elements" sortOrder="9599884" resource="Plumrocket_PrivateSale::privatesale"/>
+        <add id="Plumrocket_PrivateSale::manage_events" title="Manage Events" translate="title" module="Plumrocket_PrivateSale" parent="Plumrocket_PrivateSale::privatesale" sortOrder="0" action="prprivatesale/event/index" resource="Plumrocket_PrivateSale::manage_events"/>
+        <add id="Plumrocket_PrivateSale::event_homepages" title="Manage Event Homepages" translate="title" module="Plumrocket_PrivateSale" parent="Plumrocket_PrivateSale::privatesale" sortOrder="5" action="prprivatesale/eventhomepages/" resource="Plumrocket_PrivateSale::event_homepages"/>
+        <add id="Plumrocket_PrivateSale::splashpage" title="Website Splash Page" translate="title" module="Plumrocket_PrivateSale" parent="Plumrocket_PrivateSale::privatesale" sortOrder="10" action="prprivatesale/splashpage/" resource="Plumrocket_PrivateSale::splashpage"/>
+        <add id="Plumrocket_PrivateSale::emailtemplate" title="Newsletter Templates" translate="title" module="Plumrocket_PrivateSale" parent="Plumrocket_PrivateSale::privatesale" sortOrder="15" action="prprivatesale/emailtemplate/" resource="Plumrocket_PrivateSale::emailtemplate"/>
+        <add id="Plumrocket_PrivateSale::privatesale_configuration" title="Configuration" translate="title" module="Plumrocket_PrivateSale" parent="Plumrocket_PrivateSale::privatesale" sortOrder="20" action="adminhtml/system_config/edit/section/prprivatesale" resource="Plumrocket_PrivateSale::config_privatesale"/>
+
+        <add id="Plumrocket_PrivateSale::privatesale_marketing" title="Private Sales &amp; Flash Sales" translate="title" module="Plumrocket_PrivateSale" parent="Magento_Backend::marketing" sortOrder="999" resource="Plumrocket_PrivateSale::privatesale"/>
+        <add id="Plumrocket_PrivateSale::manage_events_marketing" title="Manage Events" translate="title" module="Plumrocket_PrivateSale" parent="Plumrocket_PrivateSale::privatesale_marketing" sortOrder="0" action="prprivatesale/event/index" resource="Plumrocket_PrivateSale::manage_events"/>
+        <add id="Plumrocket_PrivateSale::event_homepages_marketing" title="Manage Event Homepages" translate="title" module="Plumrocket_PrivateSale" parent="Plumrocket_PrivateSale::privatesale_marketing" sortOrder="5" action="prprivatesale/eventhomepages/" resource="Plumrocket_PrivateSale::event_homepages"/>
+        <add id="Plumrocket_PrivateSale::splashpage_marketing" title="Website Splash Page" translate="title" module="Plumrocket_PrivateSale" parent="Plumrocket_PrivateSale::privatesale_marketing" sortOrder="10" action="prprivatesale/splashpage/" resource="Plumrocket_PrivateSale::splashpage"/>
+        <add id="Plumrocket_PrivateSale::emailtemplate_marketing" title="Newsletter Templates" translate="title" module="Plumrocket_PrivateSale" parent="Plumrocket_PrivateSale::privatesale_marketing" sortOrder="15" action="prprivatesale/emailtemplate/" resource="Plumrocket_PrivateSale::emailtemplate"/>
+    </menu>
+</config>

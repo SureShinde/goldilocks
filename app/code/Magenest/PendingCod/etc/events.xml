@@ -1,0 +1,5 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="checkout_submit_all_after">
+        <observer name="magenest_checkout_submit_all_after_observer" instance="Magenest\PendingCod\Observer\PendingCod"/>
+    </event>
+</config>

@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <type name="Magenest\FbChatbot\Controller\Adminhtml\Upload\Image">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Magenest\Chatbot\ImageUploader</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Magenest\Chatbot\ImageUploader" type="Magento\Catalog\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">bot/media</argument>
+            <argument name="basePath" xsi:type="string">bot/media</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+            <argument name="allowedMimeTypes" xsi:type="array">
+                <item name="jpg" xsi:type="string">image/jpg</item>
+                <item name="jpeg" xsi:type="string">image/jpeg</item>
+                <item name="gif" xsi:type="string">image/gif</item>
+                <item name="png" xsi:type="string">image/png</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <preference for="Magenest\FbChatbot\Api\ButtonRepositoryInterface" type="Magenest\FbChatbot\Model\ButtonRepository"/>
+    <preference for="Magenest\FbChatbot\Api\MessageRepositoryInterface" type="Magenest\FbChatbot\Model\MessageRepository"/>
+    <preference for="Magenest\FbChatbot\Api\MenuRepositoryInterface" type="Magenest\FbChatbot\Model\MenuRepository"/>
+
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="manage_message_listing_data_source" xsi:type="string">Magenest\FbChatbot\Model\ResourceModel\Message\Grid\Collection</item>
+                <item name="manage_menu_listing_data_source" xsi:type="string">Magenest\FbChatbot\Model\ResourceModel\Menu\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Magenest\FbChatbot\Model\ResourceModel\Message\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">magenest_chatbot_message</argument>
+            <argument name="resourceModel" xsi:type="string">Magenest\FbChatbot\Model\ResourceModel\Message</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magenest\FbChatbot\Model\ResourceModel\Menu\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">magenest_chatbot_menu</argument>
+            <argument name="resourceModel" xsi:type="string">Magenest\FbChatbot\Model\ResourceModel\Menu</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magenest\FbChatbot\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+
+    <type name="Magenest\FbChatbot\Logger\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">ChatbotLogger</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="system" xsi:type="object">Magenest\FbChatbot\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

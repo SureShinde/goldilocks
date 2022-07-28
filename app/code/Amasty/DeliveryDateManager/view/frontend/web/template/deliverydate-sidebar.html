@@ -1,0 +1,14 @@
+<div class="amdelivery-sidebar-container">
+    <div if="getDeliveryDate()">
+        <span class="amdelivery-label" translate="'Delivery Date'"></span>:
+        <span class="amdelivery-value" data-bind="text: getDeliveryDate()"></span>
+    </div>
+    <div if="getDeliveryTime()">
+        <span class="amdelivery-label" translate="'Delivery Time'"></span>:
+        <span class="amdelivery-value" data-bind="text: getDeliveryTime()"></span>
+    </div>
+    <div if="getDeliveryComment()">
+        <span class="amdelivery-label" translate="'Delivery Comment'"></span>:
+        <span class="amdelivery-value -comment" data-bind="text: getDeliveryComment()"></span>
+    </div>
+</div>

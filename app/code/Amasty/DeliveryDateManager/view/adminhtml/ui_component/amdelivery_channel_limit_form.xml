@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd"
+      component="Amasty_DeliveryDateManager/js/view/modal/abstract-modal-form">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider"
+                  xsi:type="string">amdelivery_channel_limit_form.amdelivery_channel_limit_form_data_source
+            </item>
+        </item>
+        <item name="config" xsi:type="array">
+            <item name="deleteConfirmationMessage" translate="true" xsi:type="string">Are you sure you want to delete this order limit?</item>
+            <item name="notSelectedEntityMessage" translate="true" xsi:type="string">Please, select order limit to delete.</item>
+            <item name="idField" xsi:type="string">limit_id</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="cancel" class="Amasty\DeliveryDateManager\Block\Adminhtml\Channel\Modal\CancelButton"/>
+            <button name="delete" class="Amasty\DeliveryDateManager\Block\Adminhtml\Channel\Modal\DeleteButton"/>
+            <button name="save_and_continue" class="Amasty\DeliveryDateManager\Block\Adminhtml\GeneralButtons\SaveAndContinueButton"/>
+            <button name="save" class="Amasty\DeliveryDateManager\Block\Adminhtml\GeneralButtons\SaveButton"/>
+        </buttons>
+        <namespace>amdelivery_channel_limit_form</namespace>
+        <ajaxSave>true</ajaxSave>
+        <ajaxSaveType>simple</ajaxSaveType>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>amdelivery_channel_limit_form.amdelivery_channel_limit_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="amdelivery_channel_limit_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="amasty_deliverydate/channel_limit/save"/>
+        </settings>
+        <dataProvider class="Amasty\DeliveryDateManager\Ui\Component\Form\Channel\Modal\OrderLimitDataProvider"
+                      name="amdelivery_channel_limit_form_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>limit_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general" sortOrder="10">
+        <settings>
+            <label/>
+        </settings>
+        <field name="limit_id" formElement="hidden">
+            <settings>
+                <dataType>text</dataType>
+            </settings>
+        </field>
+        <field name="name" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Title</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="max_text_length" xsi:type="number">50</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="day_limit" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Limit per Day</label>
+                <validation>
+                    <rule name="validate-digits" xsi:type="boolean">true</rule>
+                    <rule name="validate-zero-or-greater" xsi:type="boolean">true</rule>
+                </validation>
+                <notice translate="true">Set the maximum number of deliveries per day in pieces, e.g: 110. Leave blank if unlimited</notice>
+                <tooltip>
+                    <description translate="true"><![CDATA[The setting allows adjusting the max quantity of deliveries per day according to the capacity of your delivery service.<br/>
+                        Once the Limit per Day is reached all the delivery options for a certain day (both the specific date in the calendar and all options in the Time Intervals selector) become unavailable for selection on the storefront.]]></description>
+                </tooltip>
+            </settings>
+        </field>
+        <field name="interval_limit" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Limit per Time Interval</label>
+                <validation>
+                    <rule name="validate-digits" xsi:type="boolean">true</rule>
+                    <rule name="validate-zero-or-greater" xsi:type="boolean">true</rule>
+                </validation>
+                <notice translate="true">Set the maximum number of deliveries per Time Interval in pieces, e.g: 20. Leave blank if no specific limits per Time Interval required</notice>
+                <tooltip>
+                    <description translate="true"><![CDATA[The setting allows adjusting the max quantity of deliveries per specific Time Interval.<br/>
+                    Once the Limit per Time Interval is reached the corresponding option in the Delivery Time Interval selector on the storefront becomes unavailable.<br/><br/>
+                    In case if you have some specific Time Intervals that should have non-typical limitations, the values set by this field can be overridden by the Limits value in the Time Intervals Set settings.]]></description>
+                </tooltip>
+            </settings>
+        </field>
+    </fieldset>
+</form>

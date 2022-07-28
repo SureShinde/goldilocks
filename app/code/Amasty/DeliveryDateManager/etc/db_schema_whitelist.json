@@ -1,0 +1,254 @@
+{
+    "amasty_deliverydate_order_limit": {
+        "column": {
+            "limit_id": true,
+            "name": true,
+            "day_limit": true,
+            "interval_limit": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "amasty_deliverydate_delivery_channel": {
+        "column": {
+            "channel_id": true,
+            "limit_id": true,
+            "config_id": true,
+            "is_active": true,
+            "name": true,
+            "has_order_counter": true,
+            "priority": true
+        },
+        "index": {
+            "AMASTY_DELIVERYDATE_DELIVERY_CHANNEL_LIMIT_ID": true,
+            "AMASTY_DELIVERYDATE_DELIVERY_CHANNEL_CONFIG_ID": true,
+            "AMASTY_DELIVERYDATE_DELIVERY_CHANNEL_HAS_ORDER_COUNTER": true,
+            "AMASTY_DELIVERYDATE_DELIVERY_CHANNEL_PRIORITY": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_5AAC92B95D096ED4634282202D3F849B": true,
+            "FK_0C87BE4BC0C980A1C717CE582753F78F": true
+        }
+    },
+    "amasty_deliverydate_delivery_channel_store": {
+        "column": {
+            "scope_id": true,
+            "channel_id": true,
+            "store_id": true
+        },
+        "index": {
+            "AMASTY_DELIVERYDATE_DELIVERY_CHANNEL_STORE_CHANNEL_ID": true,
+            "AMASTY_DELIVERYDATE_DELIVERY_CHANNEL_STORE_STORE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_CF3BC0D41E830D429F947A9F721B4331": true,
+            "FK_C1977C156F152CDF69D05A7F43C56340": true
+        }
+    },
+    "amasty_deliverydate_delivery_channel_shipping_method": {
+        "column": {
+            "scope_id": true,
+            "channel_id": true,
+            "shipping_method": true
+        },
+        "index": {
+            "AMASTY_DELIVERYDATE_DELIVERY_CHANNEL_SHPP_METHOD_CHANNEL_ID": true,
+            "IDX_5411656394A8241FB77591E4AD954BF0": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_C36D1EE201C9513B80C8FF6BE43E3C32": true
+        }
+    },
+    "amasty_deliverydate_delivery_channel_group": {
+        "column": {
+            "scope_id": true,
+            "channel_id": true,
+            "group_id": true
+        },
+        "index": {
+            "AMASTY_DELIVERYDATE_DELIVERY_CHANNEL_GROUP_CHANNEL_ID": true,
+            "AMASTY_DELIVERYDATE_DELIVERY_CHANNEL_GROUP_GROUP_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_B2485ADBD10D1391E1626911EB91B668": true,
+            "FK_1F1D9512DC63B3FEA270B1E1642ABCDB": true
+        }
+    },
+    "amasty_deliverydate_date_schedule": {
+        "column": {
+            "schedule_id": true,
+            "name": true,
+            "limit_id": true,
+            "type": true,
+            "from": true,
+            "to": true,
+            "is_available": true
+        },
+        "index": {
+            "AMASTY_DELIVERYDATE_DATE_SCHEDULE_LIMIT_ID": true,
+            "AMASTY_DELIVERYDATE_DATE_SCHEDULE_TYPE": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_730521903D2015ED6661510D4078B37A": true
+        }
+    },
+    "amasty_deliverydate_time_interval": {
+        "column": {
+            "interval_id": true,
+            "limit_id": true,
+            "from": true,
+            "to": true,
+            "label": true,
+            "position": true
+        },
+        "index": {
+            "AMASTY_DELIVERYDATE_TIME_INTERVAL_LIMIT_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_209925B0A62E9BEE5782BAADD8A6C89D": true
+        }
+    },
+    "amasty_deliverydate_time_interval_label": {
+        "column": {
+            "interval_id": true,
+            "store_id": true,
+            "label": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_C0AF6ADCEB7A42EC0811057307557141": true,
+            "FK_204FC38B4CB7D1F49CA7E7E3F3A65EC5": true
+        }
+    },
+    "amasty_deliverydate_time_interval_date_schedule": {
+        "column": {
+            "relation_id": true,
+            "date_schedule_id": true,
+            "time_interval_id": true
+        },
+        "index": {
+            "IDX_6D1573925BA8A4755C10DD199231A126": true,
+            "IDX_30C71F34C3D2B38A79A22126104533DD": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_D685B3DEA7351C45631B040CFDFDB273": true,
+            "FK_AC6D6FD3A2270265800FB12547AB7473": true
+        }
+    },
+    "amasty_deliverydate_date_schedule_delivery_channel": {
+        "column": {
+            "relation_id": true,
+            "delivery_channel_id": true,
+            "date_schedule_id": true
+        },
+        "index": {
+            "IDX_3EB538DE0CC6D074C83CC97B081CB517": true,
+            "IDX_7974196A0857BB0560531665F8E14FA9": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_1EC2270154A047BF1B0C5C08FB4BF95C": true,
+            "FK_D1F17B3007E5B09CBB39EEAE83083C87": true
+        }
+    },
+    "amasty_deliverydate_time_interval_delivery_channel": {
+        "column": {
+            "relation_id": true,
+            "delivery_channel_id": true,
+            "time_interval_id": true
+        },
+        "index": {
+            "IDX_ECE8F1657882F6763E4B8E7C640C3362": true,
+            "IDX_C2C2D5B08B42676CC1F748EDFF012A09": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_A8B6E3E157DF46EDEC5DC1B52DCED8E5": true,
+            "FK_5743DB86C58AB82A8FAFD5DD9C63D5C3": true
+        }
+    },
+    "amasty_deliverydate_deliverydate_order": {
+        "column": {
+            "deliverydate_id": true,
+            "counter_id": true,
+            "order_id": true,
+            "increment_id": true,
+            "date": true,
+            "time_from": true,
+            "time_to": true,
+            "comment": true,
+            "reminder": true,
+            "time_interval_id": true
+        },
+        "index": {
+            "AMASTY_DELIVERYDATE_DELIVERYDATE_ORDER_DATE": true,
+            "IDX_3B961BE145ADE87966820B61399327A4": true,
+            "AMASTY_DELIVERYDATE_DELIVERYDATE_ORDER_TIME_INTERVAL_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_813D825755D23C57C17F1B850DBCE386": true,
+            "AMASTY_DELIVERYDATE_DELIVERYDATE_ORDER_ORDER_ID": true
+        }
+    },
+    "amasty_deliverydate_deliverydate_quote": {
+        "column": {
+            "delivery_quote_id": true,
+            "quote_id": true,
+            "quote_address_id": true,
+            "date": true,
+            "comment": true,
+            "time_interval_id": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "AMASTY_DELIVERYDATE_DELIVERYDATE_QUOTE_QUOTE_ADDRESS_ID": true
+        }
+    },
+    "amasty_deliverydate_channel_configuration": {
+        "column": {
+            "id": true,
+            "name": true,
+            "min": true,
+            "max": true,
+            "is_same_day_available": true,
+            "same_day_cutoff": true,
+            "order_time": true,
+            "backorder_time": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "amasty_deliverydate_time_intervals_set": {
+        "column": {
+            "id": true,
+            "name": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "amasty_deliverydate_time_intervals_set_relation": {
+        "column": {
+            "set_id": true,
+            "relation_type": true,
+            "relation_id": true
+        },
+        "index": {
+            "AMASTY_DELIVERYDATE_TIME_INTERVALS_SET_RELATION_SET_ID": true,
+            "IDX_D74B0AB82205F857B6AFA596266C405D": true
+        },
+        "constraint": {
+            "FK_FE2443FF930CED004DD9EEF2C8375880": true
+        }
+    }
+}

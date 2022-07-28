@@ -1,0 +1,73 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+// @codingStandardsIgnoreFile
+
+use Magento\CatalogSearch\Block\Result;
+
+/** These changes need to valid applying filters and configuration before search process is started. */
+
+/** @var $block  Result*/
+/** @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer */
+$productList = $block->getProductListHtml();
+?>
+<?php if ($block->getResultCount()) : ?>
+    <?= /* @noEscape */ $block->getChildHtml('tagged_product_list_rss_link') ?>
+    <div class="search results">
+        <?php if ($messages = $block->getNoteMessages()) : ?>
+        <div class="message notice">
+            <div>
+                <?php foreach ($messages as $message) : ?>
+                    <?= /* @noEscape */ $message ?><br />
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <?php endif; ?>
+        <?= /* @noEscape */ $productList ?>
+    </div>
+    <script type="text/javascript">
+        require(['jquery'], function($){
+            $(".number-product").html('<?= __("%1 products", $block->getResultCount())?>')
+        });
+    </script>
+
+<?php else : ?>
+    <p class="search-result-empty-content">
+        <img src="<?= $block->getViewFileUrl('Magento_CatalogSearch::images/search-result-empty.png') ?>" alt="<?= __('No products found') ?>"/>
+        <?= __('No products found') ?>
+    </p>
+
+    <div class="hide">
+        <?= $block->escapeHtml($block->getNoResultText() ? $block->getNoResultText() : __('Your search returned no results.')) ?>
+        <?= /* @noEscape */ $block->getAdditionalHtml() ?>
+        <?php if ($messages = $block->getNoteMessages()) : ?>
+            <?php foreach ($messages as $message) : ?>
+                <br /><?= /* @noEscape */ $message ?>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
+
+    <?php
+    $styles = <<<STYLE
+        .catalogsearch-result-index .column.main {
+            width: 100%;
+            padding-left: 0;
+            padding-right: 0;
+        }
+        .catalogsearch-result-index .sidebar-main,
+        .catalogsearch-result-index .sidebar-additional,
+        .catalogsearch-result-index h1.page-title .number-product {
+            display: none;
+        }
+    STYLE;
+    $scriptString = <<<script
+        require(['jquery'], function ($) {
+            $('body').addClass('catalogsearch-result-empty');
+        })
+    script;
+    ?>
+    <?= /* @noEscape */ $secureRenderer->renderTag('style', [], $styles, false) ?>
+    <?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false) ?>
+<?php endif; ?>

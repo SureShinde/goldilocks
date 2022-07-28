@@ -1,0 +1,34 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+?>
+<?php /** @var $block \Magento\Checkout\Block\Onepage\Success */ ?>
+<div class="checkout-success">
+    <?php if ($block->getOrderId()) :?>
+        <?php if ($block->getCanViewOrder()) :?>
+            <p><?= $block->escapeHtml(__('Order Number: %1.', sprintf('<a href="%s" class="order-number">%s</a>', $block->escapeUrl($block->getViewOrderUrl()), $block->getOrderId())), ['a']) ?></p>
+        <?php  else :?>
+            <p><?= $block->escapeHtml(__('Order Number: <span class="order-number">%1</span>.', $block->getOrderId()), ['span']) ?></p>
+        <?php endif;?>
+            <p class="title"><?= $block->escapeHtml(__('You\'re all set!')) ?></p>
+            <div class="checkout-success-text">
+                <?= __('Thank you for ordering via Goldilocks Delivery!') ?><br>
+                <?= __('You\'ll receive an email from us confirming your order.') ?><br>
+                <?= __('Should there be concerns, please call our hotline at') ?>
+                <p class="checkout-success-hotline"><a href="tel:88881999">8888-1-999</a></p>
+                <?= __('or email us at ') ?>
+                <p class="checkout-success-mail"><a href="mailto: customercare@goldilocks.com">customercare@goldilocks.com</a></p>
+            </div>
+    <?php endif;?>
+
+    <?= $block->getAdditionalInfoHtml() ?>
+
+    <div class="actions-toolbar">
+        <div class="primary">
+            <a class="action primary continue" href="<?= $block->escapeUrl($block->getContinueUrl()) ?>"><span><?= $block->escapeHtml(__('Continue Shopping')) ?></span></a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <universalanalytics>
+            <product>
+                <impressions>0</impressions>
+            </product>
+            <revenue>
+                <discount>1</discount>
+            </revenue>
+            <item>
+                <discount>1</discount>
+            </item>
+            <price_format>
+                <decimals_precision>4</decimals_precision>
+                <decimals_point>.</decimals_point>
+                <thousands_separator />
+            </price_format>
+        </universalanalytics>
+    </default>
+</config>

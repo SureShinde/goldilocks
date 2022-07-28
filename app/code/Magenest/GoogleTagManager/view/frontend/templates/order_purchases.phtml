@@ -1,0 +1,38 @@
+<?php
+
+?>
+<?php /** @var $block \Magenest\GoogleTagManager\Block\Purchases */ ?>
+<?php
+$order = $block->getOrder();
+$currencyCode = $order->getOrderCurrencyCode();
+$products = $block->jsonEncode($block->getProducts());
+?>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    dataLayer.push(
+        <?php if ($block->getCheckoutStep()) : ?>
+        {
+            'event': 'checkout',
+            'ecommerce': {
+                'currencyCode': '<?php echo $currencyCode ?>',
+                'checkout': {
+                    'actionField': {
+                        'step': '<?php echo $block->getCheckoutStep() ?>'
+                    },
+                    'products': <?php echo $products ?>
+                }
+            }
+        },
+        <?php endif ?>
+        {
+            'event': 'purchase',
+            'ecommerce': {
+                'currencyCode': '<?php echo $currencyCode ?>',
+                'purchase': {
+                    'actionField': <?php echo $block->jsonEncode($block->getOrderDetails()) ?>,
+                    'products': <?php echo $products ?>
+                }
+            }
+        }
+    );
+</script>

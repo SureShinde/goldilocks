@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <magenest_email_wishlist>
+            <setting>
+                <auto_send_email_wishlist>1</auto_send_email_wishlist>
+            </setting>
+        </magenest_email_wishlist>
+    </default>
+</config>

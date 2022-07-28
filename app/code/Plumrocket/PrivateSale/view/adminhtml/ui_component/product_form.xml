@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+
+<!--
+
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket Private Sales and Flash Sales v4.x.x
+ * @copyright   Copyright (c) 2020 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+
+ -->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+
+    <fieldset name="prprivatesale_flashsale_event">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Private Sales &#38; Flash Sales Events</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="sortOrder" xsi:type="number">50</item>
+            </item>
+        </argument>
+        <insertListing name="prprivatesale_category_product_event_listing" component="Magento_Ui/js/form/components/insert-listing">
+            <settings>
+                <dataLinks>
+                    <exports>true</exports>
+                    <imports>true</imports>
+                </dataLinks>
+                <externalProvider>prprivatesale_category_product_event_listing.prprivatesale_category_product_event_listing_data_source</externalProvider>
+                <autoRender>true</autoRender>
+                <dataScope>prprivatesale_category_product_event_listing</dataScope>
+                <ns>prprivatesale_category_product_event_listing</ns>
+                <imports>
+                    <link name="productId">${ $.provider }:data.product.current_product_id</link>
+                </imports>
+                <exports>
+                    <link name="productId">${ $.externalProvider }:params.current_product_id</link>
+                </exports>
+            </settings>
+        </insertListing>
+        <htmlContent name="html_content">
+            <block class="Plumrocket\PrivateSale\Block\Adminhtml\Product\Edit\AddNewEventButton" name="add_new_event" />
+        </htmlContent>
+    </fieldset>
+</form>

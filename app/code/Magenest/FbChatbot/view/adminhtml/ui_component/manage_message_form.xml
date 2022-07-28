@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">manage_message_form.manage_message_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Messages</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="delete" class="Magenest\FbChatbot\Block\Adminhtml\Message\Edit\DeleteButton"/>
+            <button name="save_and_continue"
+                    class="Magenest\FbChatbot\Block\Adminhtml\Message\Edit\SaveAndContinueButton"/>
+            <button name="reset" class="Magenest\FbChatbot\Block\Adminhtml\Message\Edit\ResetButton"/>
+            <button name="save" class="Magenest\FbChatbot\Block\Adminhtml\Message\Edit\SaveButton"/>
+            <button name="back">
+                <url path="*/*/"/>
+                <class>back</class>
+                <label translate="true">Back</label>
+            </button>
+        </buttons>
+        <namespace>manage_message_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>manage_message_form.manage_message_form_data_source</dep>
+        </deps>
+    </settings>
+
+    <dataSource name="manage_message_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="chatbot/message/save"/>
+        </settings>
+        <dataProvider class="Magenest\FbChatbot\Model\Message\DataProvider" name="manage_message_form_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>message_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+
+    <fieldset name="message" sortOrder="10">
+        <settings>
+            <label translate="true">Message Information</label>
+            <collapsible>true</collapsible>
+            <opened>true</opened>
+        </settings>
+        <!-- This field represents form id and is hidden -->
+        <field name="message_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">message</item>
+                </item>
+            </argument>
+        </field>
+
+<!--        <field name="is_active" formElement="checkbox">-->
+<!--            <argument name="data" xsi:type="array">-->
+<!--                <item name="config" xsi:type="array">-->
+<!--                    <item name="source" xsi:type="string">message</item>-->
+<!--                    <item name="default" xsi:type="number">1</item>-->
+<!--                </item>-->
+<!--            </argument>-->
+<!--            <settings>-->
+<!--                <validation>-->
+<!--                    <rule name="required-entry" xsi:type="boolean">true</rule>-->
+<!--                </validation>-->
+<!--                <dataType>boolean</dataType>-->
+<!--                <label translate="true">Active</label>-->
+<!--            </settings>-->
+<!--            <formElements>-->
+<!--                <checkbox>-->
+<!--                    <settings>-->
+<!--                        <valueMap>-->
+<!--                            <map name="false" xsi:type="number">0</map>-->
+<!--                            <map name="true" xsi:type="number">1</map>-->
+<!--                        </valueMap>-->
+<!--                        <prefer>toggle</prefer>-->
+<!--                    </settings>-->
+<!--                </checkbox>-->
+<!--            </formElements>-->
+<!--        </field>-->
+
+        <field name="name" formElement="input" component="Magenest_FbChatbot/js/form/element/message-name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">message</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Name</label>
+                <visible>true</visible>
+                <dataScope>name</dataScope>
+                <imports>
+                    <link name="message_id">${ $.provider}:data.message_id</link>
+                </imports>
+            </settings>
+        </field>
+
+        <field name="description" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">message</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Description</label>
+                <visible>true</visible>
+                <dataScope>description</dataScope>
+            </settings>
+        </field>
+    </fieldset>
+
+    <fieldset name="sender_actions">
+        <settings>
+            <label translate="true">Sender Action</label>
+            <collapsible>true</collapsible>
+            <opened>true</opened>
+        </settings>
+        <field name="typing" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">message</item>
+                    <item name="default" xsi:type="number">1</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>boolean</dataType>
+                <label translate="true">Show typing time</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+
+        <field name="typing_time" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">message</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Bot's typing time (s)</label>
+                <visible>true</visible>
+                <dataScope>typing_time</dataScope>
+                <validation>
+                    <rule name="greater-than-equals-to" xsi:type="number">1</rule>
+                    <rule name="less-than-equals-to" xsi:type="number">5</rule>
+                    <rule name="validate-number" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+    </fieldset>
+
+
+</form>

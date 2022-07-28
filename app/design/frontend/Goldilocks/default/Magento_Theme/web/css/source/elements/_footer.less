@@ -1,0 +1,228 @@
+& when (@media-common = true) {
+    footer.page-footer {
+        color: @color-white;
+        background-color: @theme__color__secondary;
+
+        .widget.block {
+            margin: 0;
+        }
+
+        a,
+        .alink {
+            color: inherit;
+        }
+    }
+
+    .footer.content {
+        margin-top: 0;
+        border-top: none;
+
+        h4 {
+            margin: 0 0 10px;
+        }
+
+        img {
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        .footer-socical {
+            img {
+                vertical-align: bottom;
+            }
+        }
+    }
+
+    .block.newsletter {
+        margin-bottom: 32px;
+
+        .field.newsletter {
+            .control {
+                position: relative;
+
+                &:before {
+                    left: 7px;
+                    font-size: 40px;
+                    line-height: 45px;
+                    color: @color-black;
+                }
+            }
+        }
+
+        input {
+            height: 45px;
+            margin: 0;
+            padding: 2px 8px 0 47px;
+            border: none;
+            .lib-css(border-radius, 8px);
+
+            &::-moz-placeholder {
+                color: @color-black;
+            }
+
+            &::-webkit-input-placeholder {
+                color: @color-black;
+            }
+
+            &:-ms-input-placeholder {
+                color: @color-black;
+            }
+        }
+
+        .action.subscribe {
+            height: 45px;
+            background-color: #CFA157;
+            border-color: #CFA157;
+            .lib-css(border-radius, 8px);
+        }
+    }
+
+    .copyright {
+        display: block;
+        margin: 0;
+        padding: 5px @layout__width-xs-indent 3px;
+        text-align: center;
+        font-size: @font-size__base;
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .footer.content {
+        padding-bottom: 52px;
+
+        .links {
+            display: block;
+            padding: 0;
+            margin: 0;
+        }
+
+        .block {
+            float: none;
+        }
+
+        ul {
+            li {
+                margin-bottom: 10px;
+            }
+        }
+
+        h4 {
+            margin-bottom: 12px;
+            font-size: 17px;
+        }
+
+        .pagebuilder-column-group {
+            .pagebuilder-column {
+                &:not(:last-child) {
+                    padding-right: 10px;
+                }
+            }
+        }
+    }
+
+    .block.newsletter {
+        width: 100%;
+        max-width: none;
+        margin-top: 5px;
+        margin-bottom: 22px;
+
+        .field.newsletter {
+            max-width: 100%;
+            margin-right: 0;
+
+            + .actions {
+                padding-left: 13px;
+            }
+        }
+
+        .action.subscribe {
+            min-width: 125px;
+            font-weight: @font-weight__semibold;
+            .lib-css(border-radius, 8px);
+        }
+    }
+
+    .copyright {
+        background-color: #CFA157;
+        font-weight: @font-weight__semibold;
+    }
+
+    @media (max-width: (@screen__xl - 1)) {
+        .block.newsletter {
+            .field.newsletter {
+                .control {
+                    &:before {
+                        left: 0;
+                    }
+                }
+            }
+
+            input {
+                padding-left: 35px;
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .footer.content {
+        padding-bottom: 5px;
+        font-size: 16px;
+
+        .pagebuilder-column-group {
+            .pagebuilder-column {
+                margin-bottom: 20px;
+
+                &.footer-payment-options {
+                    .lib-vendor-prefix-order(1);
+                }
+            }
+        }
+
+        ul {
+            li {
+                margin-bottom: 5px;
+            }
+        }
+
+        h4 {
+            font-size: 20px;
+        }
+
+        .newsletter-title {
+            font-size: 20px;
+            line-height: 1.1;
+            margin-bottom: 8px;
+        }
+
+        .footer-socical {
+            strong {
+                display: block;
+                font-size: 20px;
+            }
+        }
+    }
+
+    .block.newsletter {
+        .form.subscribe {
+            .lib-vendor-prefix-display(flex);
+            .lib-vendor-prefix-flex-direction(column);
+        }
+
+        .field.newsletter {
+            + .actions {
+                display: block;
+                width: 100%;
+                margin-top: 9px;
+            }
+        }
+
+        .action.subscribe {
+            width: 100%;
+        }
+    }
+
+    .copyright {
+        background-color: #D4914E;
+    }
+}

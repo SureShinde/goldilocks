@@ -1,0 +1,28 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+<?php
+/** @var \Amasty\Preorder\ViewModel\Product\View\Preorder $preorderViewModel */
+$preorderViewModel = $block->getData('preorder_view_model');
+/** @var \Amasty\Preorder\ViewModel\Product\View\PreorderGrouped $preorderGroupedViewModel */
+$preorderGroupedViewModel = $block->getData('preorder_grouped_view_model');
+$groupedProduct = $preorderViewModel->getCurrentProduct();
+/** @var \Amasty\Preorder\Api\Data\ProductInformationInterface $preorderInformation */
+$preorderInformation = $preorderViewModel->getPreorderInformation($groupedProduct);
+?>
+<script type="text/javascript">
+    require(['jquery', 'Amasty_Preorder/js/product/preorder_grouped'], function($) {
+        $widget = $.mage.amastyPreorderGrouped({
+            preOrderNote: '<?= /** @noEscape */ $preorderViewModel->escapeQuote($preorderInformation->getNote())?>',
+            preorder: <?= (int) $preorderInformation->isPreorder() ?>,
+            addToCartLabel: '',
+            map: <?= /** @noEscape */ $preorderGroupedViewModel->getMap($groupedProduct) ?>,
+            preorderNoteTemplate: '<div class="stock available"><span>{preorderNote}</span></div>',
+            originalNote: '<?= $escaper->escapeHtml($preorderViewModel->getOriginalNote($groupedProduct)) ?>'
+
+        });
+    });
+</script>

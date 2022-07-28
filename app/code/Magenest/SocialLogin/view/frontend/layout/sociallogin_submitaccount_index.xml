@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="content">
+            <block class="Magenest\SocialLogin\Block\SubmitMoreInfo\GetMoreInfo" name="magenest_submit_more_info"
+                   template="Magenest_SocialLogin::submitmoreinfo/getmoreinfo.phtml" cacheable="false">
+            </block>
+        </referenceBlock>
+        <referenceContainer name="div.sidebar.additional" remove="true"/>
+    </body>
+</page>

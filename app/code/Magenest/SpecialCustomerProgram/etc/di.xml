@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\SalesRule\Model\Utility">
+        <plugin name="Magenest_SpecialCustomerProgram::disableRuleSpecialCustomerProgram"
+                type="Magenest\SpecialCustomerProgram\Plugin\Model\Utility" sortOrder="0"/>
+    </type>
+    <preference for="Magenest\SpecialCustomerProgram\Api\SetCiInformationInterface"
+                type="Magenest\SpecialCustomerProgram\Model\SetCiInformation"/>
+    <preference for="Magenest\SpecialCustomerProgram\Api\GuestSetCiInformationInterface"
+                type="Magenest\SpecialCustomerProgram\Model\GuestSetCiInformation"/>
+</config>

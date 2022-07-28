@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- Type for api_logging_listing_data_source -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="api_logging_listing_data_source" xsi:type="string">Magenest\WebApiLog\Model\ResourceModel\Grid\ApiLog\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Magenest\WebApiLog\Model\ResourceModel\Grid\ApiLog\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">magenest_api_log</argument>
+            <argument name="resourceModel" xsi:type="string">Magenest\WebApiLog\Model\ResourceModel\ApiLog</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Webapi\Controller\Rest">
+        <plugin name="rest-api-log" type="Magenest\WebApiLog\Plugin\RestApiLog"/>
+    </type>
+
+</config>

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd"
+      component="Amasty_DeliveryDateManager/js/view/modal/abstract-modal-form">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider"
+                  xsi:type="string">amdelivery_channel_interval_form.amdelivery_channel_interval_form_data_source
+            </item>
+        </item>
+        <item name="config" xsi:type="array">
+            <item name="deleteConfirmationMessage" translate="true" xsi:type="string">Are you sure you want to delete this time interval?</item>
+            <item name="notSelectedEntityMessage" translate="true" xsi:type="string">Please, select time interval set to delete.</item>
+            <item name="idField" xsi:type="string">set_id</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="cancel" class="Amasty\DeliveryDateManager\Block\Adminhtml\Channel\Modal\CancelButton"/>
+            <button name="delete" class="Amasty\DeliveryDateManager\Block\Adminhtml\Channel\Modal\DeleteButton"/>
+            <button name="save_and_continue" class="Amasty\DeliveryDateManager\Block\Adminhtml\GeneralButtons\SaveAndContinueButton"/>
+            <button name="save" class="Amasty\DeliveryDateManager\Block\Adminhtml\GeneralButtons\SaveButton"/>
+        </buttons>
+        <namespace>amdelivery_channel_interval_form</namespace>
+        <ajaxSave>true</ajaxSave>
+        <ajaxSaveType>simple</ajaxSaveType>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>amdelivery_channel_interval_form.amdelivery_channel_interval_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="amdelivery_channel_interval_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="amasty_deliverydate/channel_intervalSet/save"/>
+        </settings>
+        <dataProvider class="Amasty\DeliveryDateManager\Ui\Component\Form\Channel\Modal\TimeIntervalSetDataProvider"
+                      name="amdelivery_channel_interval_form_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>set_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+
+    <fieldset name="general" sortOrder="10">
+        <settings>
+            <label/>
+        </settings>
+        <field name="set_id" formElement="hidden">
+            <settings>
+                <dataType>text</dataType>
+            </settings>
+        </field>
+        <field name="name" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Title</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="max_text_length" xsi:type="number">50</rule>
+                </validation>
+            </settings>
+        </field>
+    </fieldset>
+
+    <container name="custom_time_intervals_container">
+        <container name="rows_messages" component="Magento_Ui/js/form/components/html">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="additionalClasses" xsi:type="string">message message-error</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="imports" xsi:type="array">
+                        <item name="content" xsi:type="string">${ $.parentName }.custom_time_intervals:message</item>
+                    </item>
+                    <item name="listens" xsi:type="array">
+                        <item name="content" xsi:type="string">visible</item>
+                    </item>
+                </item>
+            </argument>
+        </container>
+        <dynamicRows name="custom_time_intervals" component="Amasty_DeliveryDateManager/js/view/form/element/time-intervals">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="uniqueMessage" xsi:type="string" translate="true">Time intervals should not have intersections.</item>
+                    <item name="requiredMessage" xsi:type="string" translate="true">At least one Time Interval is required.</item>
+                </item>
+            </argument>
+            <settings>
+                <addButton>true</addButton>
+                <addButtonLabel translate="true">Add New</addButtonLabel>
+                <componentType>dynamicRows</componentType>
+                <dndConfig>
+                    <param name="enabled" xsi:type="boolean">true</param>
+                </dndConfig>
+                <additionalClasses>
+                    <class name="amdelivery-intervals-dynamic">true</class>
+                </additionalClasses>
+            </settings>
+            <container name="record" component="Amasty_DeliveryDateManager/js/view/form/element/time-interval-record">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="isTemplate" xsi:type="boolean">true</item>
+                        <item name="is_collection" xsi:type="boolean">true</item>
+                        <item name="showFallbackReset" xsi:type="boolean">false</item>
+                        <item name="componentType" xsi:type="string">container</item>
+                        <item name="uniqueMessage" xsi:type="string" translate="true">Time intervals should not have intersections.</item>
+                        <item name="fromBiggerThenToMessage" xsi:type="string" translate="true">"From" should be earlier than "To".</item>
+                    </item>
+                </argument>
+                <field name="interval_id" formElement="input">
+                    <settings>
+                        <dataType>text</dataType>
+                        <visible>false</visible>
+                        <dataScope>interval_id</dataScope>
+                    </settings>
+                </field>
+                <field name="from" formElement="date" component="Amasty_DeliveryDateManager/js/view/form/element/time-picker"
+                       class="Amasty\DeliveryDateManager\Ui\Component\Form\Element\DataType\TimePicker"
+                       template="ui/form/field">
+                    <settings>
+                        <dataType>text</dataType>
+                        <dataScope>from</dataScope>
+                        <label translate="true">From</label>
+                        <validation>
+                            <rule name="required-entry" xsi:type="boolean">true</rule>
+                            <rule name="amasty-time" xsi:type="boolean">true</rule>
+                        </validation>
+                    </settings>
+                    <formElements>
+                        <date>
+                            <settings>
+                                <options>
+                                    <option name="showsDate" xsi:type="boolean">false</option>
+                                    <option name="showsTime" xsi:type="boolean">true</option>
+                                    <option name="timeOnly" xsi:type="boolean">true</option>
+                                    <option name="closeText" xsi:type="string" translate="true">OK</option>
+                                </options>
+                            </settings>
+                        </date>
+                    </formElements>
+                </field>
+                <field name="to" formElement="date" component="Amasty_DeliveryDateManager/js/view/form/element/time-picker"
+                       class="Amasty\DeliveryDateManager\Ui\Component\Form\Element\DataType\TimePicker"
+                       template="ui/form/field">
+                    <settings>
+                        <dataType>text</dataType>
+                        <label translate="true">To</label>
+                        <dataScope>to</dataScope>
+                        <validation>
+                            <rule name="required-entry" xsi:type="boolean">true</rule>
+                            <rule name="amasty-time" xsi:type="boolean">true</rule>
+                        </validation>
+                    </settings>
+                    <formElements>
+                        <date>
+                            <settings>
+                                <options>
+                                    <option name="showsDate" xsi:type="boolean">false</option>
+                                    <option name="showsTime" xsi:type="boolean">true</option>
+                                    <option name="timeOnly" xsi:type="boolean">true</option>
+                                    <option name="closeText" xsi:type="string" translate="true">OK</option>
+                                </options>
+                            </settings>
+                        </date>
+                    </formElements>
+                </field>
+                <field name="limit_id" formElement="input">
+                    <settings>
+                        <dataType>text</dataType>
+                        <visible>false</visible>
+                        <dataScope>limit_id</dataScope>
+                    </settings>
+                </field>
+                <field name="interval_limit" formElement="input">
+                    <settings>
+                        <dataType>text</dataType>
+                        <label translate="true">Limits</label>
+                        <validation>
+                            <rule name="validate-number" xsi:type="boolean">true</rule>
+                            <rule name="validate-zero-or-greater" xsi:type="boolean">true</rule>
+                        </validation>
+                        <tooltip>
+                            <description translate="true"><![CDATA[Using this field you can set non-typical Order Limits for certain time intervals.<br/>
+                                The limits per interval set by this field have higher priority than the ones set via Order Limits settings.<br/><br/>
+                                If empty, the limits per intervals will be taken from the Order Limits settings.]]></description>
+                        </tooltip>
+                    </settings>
+                </field>
+                <field name="label" formElement="input">
+                    <settings>
+                        <dataType>text</dataType>
+                        <label translate="true">Label</label>
+                        <dataScope>label</dataScope>
+                        <tooltip>
+                            <description translate="true"><![CDATA[Set labels that will be shown next to the corresponding time intervals on the storefront.<br/>
+                                You can use the labels to highlight details of certain time intervals, e.g.: 'Express Delivery' or 'Peak hours - delays possible']]></description>
+                        </tooltip>
+                    </settings>
+                </field>
+                <actionDelete>
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="componentType" xsi:type="string">actionDelete</item>
+                            <item name="dataType" xsi:type="string">text</item>
+                            <item name="fit" xsi:type="boolean">false</item>
+                            <item name="label" xsi:type="string">Action</item>
+                            <item name="additionalClasses" xsi:type="string">data-grid-actions-cell</item>
+                            <item name="template" xsi:type="string">Magento_Backend/dynamic-rows/cells/action-delete
+                            </item>
+                        </item>
+                    </argument>
+                </actionDelete>
+                <field name="position" formElement="input">
+                    <settings>
+                        <dataType>number</dataType>
+                        <visible>false</visible>
+                        <dataScope>position</dataScope>
+                    </settings>
+                </field>
+            </container>
+        </dynamicRows>
+    </container>
+</form>

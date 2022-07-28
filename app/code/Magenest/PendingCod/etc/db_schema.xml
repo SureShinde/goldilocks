@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="magenest_pending_cod_order" resource="default" engine="innodb" comment="Magenest Message">
+        <column xsi:type="int" name="pending_cod_order_id" unsigned="true" nullable="false" identity="false" comment="Pending COD order ID"/>
+        <column xsi:type="smallint" name="email_sent" unsigned="true" nullable="true" identity="false" comment="Email Sent"/>
+        <column xsi:type="smallint" name="send_email" unsigned="true" nullable="true" identity="false" comment="Send Email"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="pending_cod_order_id"/>
+        </constraint>
+    </table>
+</schema>

@@ -1,0 +1,14 @@
+<div class="amdelivery-cell-detailed data-grid-cell-expanded-content">
+    <!-- ko foreach: { data: $col.getDetailedInfoData($row()), as: 'detailed' } -->
+        <div if="$col.hasData(detailed)" class="amdelivery-column detailed-info">
+            <!-- ko foreach: { data: $col.detailedDataMap, as: 'mapItem' } -->
+            <div class="amdelivery-item info-item">
+                <if args="mapItem.label">
+                    <span class="amdelivery-label info-item-label" if="mapItem.label" text="mapItem.label"></span>:
+                </if>
+                <span class="amdelivery-value info-item-value" text="$col.getInfoValue(detailed[mapItem.index], mapItem)"></span>
+            </div>
+            <!-- /ko -->
+        </div>
+    <!-- /ko -->
+</div>

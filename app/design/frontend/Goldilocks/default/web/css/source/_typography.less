@@ -1,0 +1,72 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+
+//
+//  Common
+//  _____________________________________________
+& when (@media-common = true) {
+    .lib-font-face(
+        @family-name: 'MohrRounded',
+        @font-path: '@{baseDir}fonts/Mohr_Rounded/MohrRounded-Black',
+        @font-weight: 800,
+        @font-style: normal,
+        @font-display: swap,
+        @font-format: 'ttf',
+        @font-type: 'truetype'
+    );
+
+    .lib-font-face(
+        @family-name: 'MohrRounded',
+        @font-path: '@{baseDir}fonts/Mohr_Rounded/MohrRounded-Bold',
+        @font-weight: 700,
+        @font-style: normal,
+        @font-display: swap,
+        @font-format: 'ttf',
+        @font-type: 'truetype'
+    );
+
+    .lib-font-face(
+        @family-name: 'MohrRounded',
+        @font-path: '@{baseDir}fonts/Mohr_Rounded/MohrRounded-SemiBold',
+        @font-weight: 600,
+        @font-style: normal,
+        @font-display: swap,
+        @font-format: 'ttf',
+        @font-type: 'truetype'
+    );
+
+    .lib-font-face(
+        @family-name: 'MohrRounded',
+        @font-path: '@{baseDir}fonts/Mohr_Rounded/MohrRounded-Medium',
+        @font-weight: 500,
+        @font-style: normal,
+        @font-display: swap,
+        @font-format: 'ttf',
+        @font-type: 'truetype'
+    );
+
+    .lib-font-face(
+        @family-name: 'MohrRounded',
+        @font-path: '@{baseDir}fonts/Mohr_Rounded/MohrRounded-Regular',
+        @font-weight: 400,
+        @font-style: normal,
+        @font-display: swap,
+        @font-format: 'ttf',
+        @font-type: 'truetype'
+    );
+
+    @font-face {
+        font-family: 'goldilock-icon';
+        src:  url('@{baseDir}fonts/goldilock-icon/icomoon.eot?y0q8i');
+        src:  url('@{baseDir}fonts/goldilock-icon/icomoon.eot?y0q8i#iefix') format('embedded-opentype'),
+        url('@{baseDir}fonts/goldilock-icon/icomoon.ttf?y0q8i') format('truetype'),
+        url('@{baseDir}fonts/goldilock-icon/icomoon.woff?y0q8i') format('woff'),
+        url('@{baseDir}fonts/goldilock-icon/icomoon.svg?y0q8i#icomoon') format('svg');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
+}

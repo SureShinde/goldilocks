@@ -1,0 +1,90 @@
+{
+    "name": "vaimo/module-google-tag-manager",
+    "type": "magento2-module",
+    "description": "Google Tag Manager for Magento 2 CE/EE (Includes some extended features for EE)",
+    "license": "proprietary",
+    "require": {
+        "magento/framework": ">=100.0.0",
+        "magento/module-store": ">=100.0.0",
+        "magento/module-catalog": ">=100.0.0",
+        "magento/module-checkout": ">=100.0.0",
+        "magento/module-configurable-product": ">=100.0.0",
+        "vaimo/module-runtime-flags": "^2.0.6"
+    },
+    "require-dev":{
+        "vaimo/patches-compatibility": "^1.0.1",
+        "vaimo/code-quality": "^4.0.0",
+        "vaimo/code-quality-linters-backend": "^4.0.0",
+        "vaimo/code-quality-linters-frontend": "^1.0.0",
+        "vaimo/module-testing-tools": "^5.0.0",
+        "vaimo/composer-changelogs": "^0.15.5"
+    },
+    "config": {
+        "platform": {
+            "php": "7.0.33"
+        }
+    },
+    "support": {
+        "email": "product@vaimo.com",
+        "source": "https://bitbucket.org/vaimo/module-google-tag-manager",
+        "docs": "https://docs.vaimo.com/module-google-tag-manager",
+        "issues": "https://bitbucket.org/vaimo/module-google-tag-manager/issues"
+    },
+    "authors": [
+        {
+            "name": "Pablo Ivulic",
+            "email": "pablo.ivulic@vaimo.com"
+        },
+        {
+            "name": "Glyn Myers",
+            "email": "glyn.myers@vaimo.com"
+        },
+        {
+            "name": "Allan Paiste",
+            "email": "allan.paiste@vaimo.com"
+        },
+        {
+            "name": "Mads Nielsen",
+            "email": "mads.nielsen@vaimo.com"
+        }
+    ],
+    "keywords": [
+        "gtm",
+        "google",
+        "user tracking",
+        "navigation tracking",
+        "enterprise support",
+        "impressions",
+        "tracking",
+        "cart tracking",
+        "product page tracking",
+        "tracking script",
+        "business intelligence",
+        "google analytics"
+    ],
+    "extra": {
+        "vaimo-module-category": "SEO",
+        "changelog": {
+            "source": "changelog.json",
+            "output": {
+                "sphinx": "docs/changelog.rst"
+            }
+        }
+    },
+    "autoload": {
+        "files": ["registration.php"],
+        "psr-4": {
+            "Vaimo\\GoogleTagManager\\": ""
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://repo.magento.com/"
+        },
+        {
+            "type": "composer",
+            "url": "https://packagist.org/"
+        }
+    ]
+}

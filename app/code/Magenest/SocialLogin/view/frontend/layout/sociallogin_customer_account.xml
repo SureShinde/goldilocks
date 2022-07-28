@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2019 Magenest. All rights reserved.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+    <head>
+        <css src="Magenest_SocialLogin/css/account.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Magenest\SocialLogin\Block\Customer\Account" name="sociallogin_customer_account" template="Magenest_SocialLogin::customer/account.phtml" cacheable="false">
+                <block class="Magenest\SocialLogin\Block\SocialNetwork\Facebook" name="magenest_facebook_login_button"
+                       template="socialnetwork/facebook.phtml" cacheable="false">
+                </block>
+                <block class="Magenest\SocialLogin\Block\SocialNetwork\Google" name="magenest_google_login_button"
+                       template="socialnetwork/google.phtml" cacheable="false">
+                </block>
+                <block class="Magenest\SocialLogin\Block\SocialNetwork\Amazon" name="magenest_amazon_login_button"
+                       template="socialnetwork/amazon.phtml" cacheable="false">
+                </block>
+                <block class="Magenest\SocialLogin\Block\SocialNetwork\Twitter" name="magenest_twitter_login_button"
+                       template="socialnetwork/twitter.phtml" cacheable="false">
+                </block>
+                <block class="Magenest\SocialLogin\Block\SocialNetwork\Instagram" name="magenest_instagram_login_button"
+                       template="socialnetwork/instagram.phtml" cacheable="false">
+                </block>
+                <block class="Magenest\SocialLogin\Block\SocialNetwork\Linkedin" name="magenest_linkedin_login_button"
+                       template="socialnetwork/linkedin.phtml" cacheable="false">
+                </block>
+                <block class="Magenest\SocialLogin\Block\SocialNetwork\Pinterest" name="magenest_pinterest_login_button"
+                       template="socialnetwork/pinterest.phtml" cacheable="false">
+                </block>
+                <block class="Magenest\SocialLogin\Block\SocialNetwork\Reddit" name="magenest_reddit_login_button"
+                       template="socialnetwork/reddit.phtml" cacheable="false">
+                </block>
+                <block class="Magenest\SocialLogin\Block\SocialNetwork\Line" name="magenest_line_login_button"
+                       template="socialnetwork/line.phtml" cacheable="false">
+                </block>
+                <block class="Magenest\SocialLogin\Block\SocialNetwork\Zalo" name="magenest_zalo_login_button"
+                       template="socialnetwork/zalo.phtml" cacheable="false">
+                </block>
+                <block class="Magenest\SocialLogin\Block\SocialNetwork\Apple" name="magenest_apple_login_button"
+                       template="socialnetwork/apple.phtml" cacheable="false">
+                </block>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

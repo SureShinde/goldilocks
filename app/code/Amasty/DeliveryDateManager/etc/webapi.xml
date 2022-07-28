@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/guest-carts/:cartId/quote-address-id/:quoteAddressId/get-delivery-date" method="GET">
+        <service class="Amasty\DeliveryDateManager\Api\DeliveryGuestQuoteServiceInterface" method="getFromQuoteAddressId"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/carts/mine/get-delivery-date" method="GET">
+        <service class="Amasty\DeliveryDateManager\Api\DeliveryQuoteServiceInterface" method="getFromQuoteAddressId"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="quoteId" force="true">%cart_id%</parameter>
+            <parameter name="quoteAddressId">null</parameter>
+        </data>
+    </route>
+
+    <route url="/V1/guest-carts/:cartId/set-delivery-date" method="POST">
+        <service class="Amasty\DeliveryDateManager\Api\DeliveryGuestQuoteServiceInterface" method="saveForQuoteAddress"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/carts/mine/set-delivery-date" method="POST">
+        <service class="Amasty\DeliveryDateManager\Api\DeliveryQuoteServiceInterface" method="saveForQuoteAddress"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="quoteId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
+
+    <route url="/V1/guest-carts/:cartId/validate-delivery-date" method="POST">
+        <service class="Amasty\DeliveryDateManager\Api\DeliveryGuestQuoteServiceInterface" method="validate"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/carts/mine/validate-delivery-date" method="POST">
+        <service class="Amasty\DeliveryDateManager\Api\DeliveryQuoteServiceInterface" method="validate"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="quoteId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
+</routes>

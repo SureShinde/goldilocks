@@ -1,0 +1,25 @@
+<div class="amdelivery-description amdelivery-cell-description">
+    <if args="hasData(descriptionData())">
+        <table class="amdelivery-intervals-table">
+            <thead>
+                <tr>
+                    <th data-bind="i18n: 'From:'"></th>
+                    <th data-bind="i18n: 'To:'"></th>
+                    <th data-bind="i18n: 'Limits:'"></th>
+                    <th data-bind="i18n: 'Label:'"></th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: {data: descriptionData().time_intervals, as: 'timeInterval'}">
+                <tr>
+                    <td data-bind="html: timeInterval.from ? timeInterval.from : '-'"></td>
+                    <td data-bind="html: timeInterval.to ? timeInterval.to : '-'"></td>
+                    <td data-bind="html: timeInterval.interval_limit ? timeInterval.interval_limit : '-'"></td>
+                    <td data-bind="text: timeInterval.label ? timeInterval.label : '-'"></td>
+                </tr>
+            </tbody>
+        </table>
+    </if>
+    <ifnot args="hasData(descriptionData())">
+        <span translate="'No Time Intervals Specified'"></span>
+    </ifnot>
+</div>

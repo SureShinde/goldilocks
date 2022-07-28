@@ -1,0 +1,54 @@
+<?php
+/**
+ * Copyright (c) Magenest, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magenest\FbChatbot\Block\Chatbox\FacebookSupport $block */
+$locale = $block->getCurrentStore()->getCode();
+if ($locale == "vn") {
+    $locale = "vi_VN";
+} else {
+    $locale = "en_US";
+}
+?>
+<?php if ($block->isEnabledChatBox()) : ?>
+    <script>
+        function initFBchat(){
+            require(['jquery'], function ($) {
+                FB.init({
+                    appId           : '<?=$block->getAppId()?>',
+                    autoLogAppEvents: true,
+                    xfbml           : true,
+                    version         : 'v10.0'
+                });
+            });
+        }
+        window.fbAsyncInit = function () {
+            require(['jquery'], function ($) {
+                $( document ).ready(function() {
+                    initFBchat();
+                });
+            });
+        };
+    </script>
+    <?php if ($block->isUseCode()): ?>
+        <?= $block->getCode() ?>
+    <?php else: ?>
+        <!-- Load Facebook SDK for JavaScript -->
+        <div id="fb-root"></div>
+        <script>
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = 'https://connect.facebook.net/<?= $locale ?>/sdk/xfbml.customerchat.js';
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
+        <!-- Your customer chat code -->
+        <div class="fb-customerchat" attribution="setup_tool" page_id="<?= $block->getPageId() ?>" <?= $block->getSettingsHtml() ?> >
+        </div>
+    <?php endif ?>
+<?php endif ?>

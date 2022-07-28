@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket_PrivateSale
+ * @copyright   Copyright (c) 2020 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ -->
+
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">prprivatesale_discount_listing.prprivatesale_discount_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="add" class="Plumrocket\PrivateSale\Block\Adminhtml\Event\Grid\AddButton" />
+        </buttons>
+        <spinner>privatesale_discount</spinner>
+        <deps>
+            <dep>prprivatesale_discount_listing.prprivatesale_discount_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="prprivatesale_discount_listing_data_source" component="Plumrocket_PrivateSale/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">entity_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <dataProvider class="Plumrocket\PrivateSale\Ui\DataProvider\Discount\Listing\DataProvider" name="prprivatesale_discount_listing_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>entity_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <filters name="listing_filters" />
+        <columnsControls name="columns_controls"/>
+        <paging name="listing_paging"/>
+        <exportButton name="import_button" class="Plumrocket\PrivateSale\Ui\Component\ImportButton" component="Plumrocket_PrivateSale/js/grid/import" template="Plumrocket_PrivateSale/grid/import-button">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submitUrl" xsi:type="string">prprivatesale/flashsale/import</item>
+                </item>
+            </argument>
+            <settings>
+                <options>
+                    <option name="validation" xsi:type="array">
+                        <item name="type" xsi:type="string">select</item>
+                        <item name="name" xsi:type="string">validation</item>
+                        <item name="options" xsi:type="array">
+                            <item name="1" xsi:type="array">
+                                <item name="value" xsi:type="string">validation-skip-errors</item>
+                                <item name="label" xsi:type="string" translate="true">Skip error entries</item>
+                            </item>
+                            <item name="2" xsi:type="array">
+                                <item name="value" xsi:type="string">validation-stop-on-errors</item>
+                                <item name="label" xsi:type="string" translate="true">Stop on Error</item>
+                            </item>
+                        </item>
+                        <item name="label" xsi:type="string" translate="true">Validation Strategy</item>
+                    </option>
+                    <option name="field_separator" xsi:type="array">
+                        <item name="name" xsi:type="string">field_separator</item>
+                        <item name="type" xsi:type="string">text</item>
+                        <item name="label" xsi:type="string" translate="true">Field Separator</item>
+                        <item name="default" xsi:type="string">,</item>
+                    </option>
+                    <option name="file" xsi:type="array">
+                        <item name="name" xsi:type="string">file</item>
+                        <item name="type" xsi:type="string">file</item>
+                        <item name="label" xsi:type="string" translate="true">Select File to Import</item>
+                        <item name="additionalAttributes" xsi:type="array">
+                            <item name="accept" xsi:type="string">text/csv, text/plain</item>
+                            <item name="class" xsi:type="string">required-entry</item>
+                        </item>
+                    </option>
+                </options>
+            </settings>
+        </exportButton>
+        <exportButton name="export_button" class="Plumrocket\PrivateSale\Ui\Component\ExportButton">
+            <settings>
+                <additionalParams>
+                    <param xsi:type="string" name="uid">${ $.provider}:params.event_id</param>
+                </additionalParams>
+                <options>
+                    <option name="csv" xsi:type="array">
+                        <item name="value" xsi:type="string">csv</item>
+                        <item name="label" xsi:type="string" translate="true">CSV</item>
+                        <item name="url" xsi:type="string">prprivatesale/flashsale/gridToCsv</item>
+                    </option>
+                    <option name="xml" xsi:type="array">
+                        <item name="disabled" xsi:type="boolean">true</item>
+                    </option>
+                    <option name="cvs" xsi:type="array">
+                        <item name="disabled" xsi:type="boolean">true</item>
+                    </option>
+                </options>
+            </settings>
+        </exportButton>
+        <massaction name="listing_massaction" component="Plumrocket_PrivateSale/js/grid/input-massactions">
+            <argument name="data" xsi:type="array">
+                <item name="js_config" xsi:type="array">
+                    <item name="submenuTemplate" xsi:type="string">Plumrocket_PrivateSale/grid/input-submenu</item>
+                </item>
+            </argument>
+            <action name="discount_amount_percent">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="inputLabel" xsi:type="string" translate="true">Discount:</item>
+                        <item name="columnActions" xsi:type="array">
+                            <item name="0" xsi:type="array">
+                                <item name="dep" xsi:type="string">sale_price</item>
+                                <item name="callback" xsi:type="string">updateSalePrice</item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <type>discount_amount_percent</type>
+                    <label translate="true">Update Discount Amount</label>
+                    <actions>
+                        <action name="0">
+                            <url path="prprivatesale/flashSale_massAction/updateDiscountAmount"/>
+                            <type>discount_amount_percent</type>
+                            <label translate="true">Update Discount Amount</label>
+                        </action>
+                    </actions>
+                </settings>
+            </action>
+            <action name="sale_price">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="inputLabel" xsi:type="string" translate="true">New Price:</item>
+                        <item name="columnActions" xsi:type="array">
+                            <item name="0" xsi:type="array">
+                                <item name="dep" xsi:type="string">discount_amount_percent</item>
+                                <item name="callback" xsi:type="string">updateDiscount</item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <type>sale_price</type>
+                    <label translate="true">Update Flash Sale Price</label>
+                    <actions>
+                        <action name="0">
+                            <url path="prprivatesale/flashSale_massAction/updateFlashSalePrice"/>
+                            <type>sale_price</type>
+                            <label translate="true">Update Flash Sale Price</label>
+                        </action>
+                    </actions>
+                </settings>
+            </action>
+            <action name="flash_sale_qty_limit">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="inputLabel" xsi:type="string" translate="true">Flash Sale QTY:</item>
+                    </item>
+                </argument>
+                <settings>
+                    <type>flash_sale_qty_limit</type>
+                    <label translate="true">Update Flash Sale QTY Limit</label>
+                    <actions>
+                        <action name="0">
+                            <url path="prprivatesale/flashSale_massAction/updateFlashSaleQtyLimit"/>
+                            <type>flash_sale_qty_limit</type>
+                            <label translate="true">Update Flash Sale QTY Limit</label>
+                        </action>
+                    </actions>
+                </settings>
+            </action>
+            <action name="round">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="showAdditionalInfo" xsi:type="boolean">true</item>
+                        <item name="additionalInfoTemplate" xsi:type="string">Plumrocket_PrivateSale/grid/mass-additional-info</item>
+                        <item name="inputLabel" xsi:type="string" translate="true">Round To:</item>
+                        <item name="columnActions" xsi:type="array">
+                            <item name="0" xsi:type="array">
+                                <item name="dep" xsi:type="string">sale_price</item>
+                                <item name="callback" xsi:type="string">roundPrice</item>
+                            </item>
+                            <item name="1" xsi:type="array">
+                                <item name="dep" xsi:type="string">discount_amount_percent</item>
+                                <item name="callback" xsi:type="string">updateDiscount</item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <type>round</type>
+                    <label translate="true">Round Flash Sale Price</label>
+                    <actions>
+                        <action name="0">
+                            <url path="prprivatesale/flashSale_massAction/roundSalePrice"/>
+                            <type>round</type>
+                            <label translate="true">Round Flash Sale Price</label>
+                        </action>
+                    </actions>
+                </settings>
+            </action>
+        </massaction>
+    </listingToolbar>
+    <columns name="privatesale_discount">
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>entity_id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="entity_id" sortOrder="10">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        <actionsColumn name="name" class="Plumrocket\PrivateSale\Ui\Component\Listing\Columns\ProductName" sortOrder="20">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">entity_id</item>
+                    <item name="viewUrlPath" xsi:type="string">catalog/product/edit</item>
+                    <item name="urlEntityParamName" xsi:type="string">id</item>
+                    <item name="label" xsi:type="string" translate="true">Name</item>
+                </item>
+            </argument>
+        </actionsColumn>
+        <column name="sku" sortOrder="30">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">SKU</label>
+            </settings>
+        </column>
+        <column name="price" class="Magento\Catalog\Ui\Component\Listing\Columns\Price" sortOrder="40">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Price</label>
+            </settings>
+        </column>
+        <column name="discount_amount_percent" sortOrder="50" component="Plumrocket_PrivateSale/js/grid/columns/input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="afterSymbol" xsi:type="string">%</item>
+                    <item name="dep" xsi:type="string">sale_price</item>
+                    <item name="callback" xsi:type="string">updateSalePrice</item>
+                </item>
+            </argument>
+            <settings>
+                <bodyTmpl>Plumrocket_PrivateSale/grid/cells/input</bodyTmpl>
+                <filter>false</filter>
+                <label translate="true">Discount Amount</label>
+            </settings>
+        </column>
+        <column name="sale_price" class="Plumrocket\PrivateSale\Ui\Component\Listing\Columns\FlashSalePrice" component="Plumrocket_PrivateSale/js/grid/columns/input" sortOrder="60">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dep" xsi:type="string">discount_amount_percent</item>
+                    <item name="callback" xsi:type="string">updateDiscount</item>
+                </item>
+            </argument>
+            <settings>
+                <bodyTmpl>Plumrocket_PrivateSale/grid/cells/input</bodyTmpl>
+                <filter>false</filter>
+                <label translate="true">Flash Sale Price</label>
+            </settings>
+        </column>
+        <column name="salable_quantity" sortOrder="70" class="Plumrocket\PrivateSale\Ui\Component\Listing\Columns\SalableQuantity" component="Plumrocket_PrivateSale/js/grid/columns/salable-quantity">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Qty</label>
+            </settings>
+        </column>
+        <column name="flash_sale_qty_limit" class="Plumrocket\PrivateSale\Ui\Component\Listing\Columns\FlashSaleQuantity" component="Plumrocket_PrivateSale/js/grid/columns/input" sortOrder="80">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="highlight" xsi:type="boolean">true</item>
+                </item>
+            </argument>
+            <settings>
+                <bodyTmpl>Plumrocket_PrivateSale/grid/cells/input</bodyTmpl>
+                <filter>false</filter>
+                <label translate="true">Flash Sale QTY Limit</label>
+            </settings>
+        </column>
+    </columns>
+</listing>

@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!--
+
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket Private Sales and Flash Sales v4.x.x
+ * @copyright   Copyright (c) 2020 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+
+ -->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Plumrocket_PrivateSale::css/privatesale.css" />
+        <css src="Plumrocket_PrivateSale::css/homepage.css" />
+        <css src="Plumrocket_PrivateSale::css/privatesale-custom.css" />
+    </head>
+    <body>
+        <referenceContainer name="after.body.start">
+            <block class="Plumrocket\PrivateSale\Block\Init" name="privatesale.init" template="Plumrocket_PrivateSale::init.phtml" />
+        </referenceContainer>
+
+        <!-- Insert promo banner top of the page -->
+        <referenceContainer name="head.additional">
+            <block class="Plumrocket\PrivateSale\Block\Promo\Banner\Top" name="top.banner" template="Plumrocket_PrivateSale::page/banner.phtml">
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="banner-content-top" xsi:type="array">
+                                <item name="component" xsi:type="string">Plumrocket_PrivateSale/js/banner/top</item>
+                                <item name="template" xsi:type="string">Plumrocket_PrivateSale/banner</item>
+                                <item name="config" xsi:type="array">
+                                    <item name="position" xsi:type="string">0</item>
+                                    <item name="ajaxUrl" xsi:type="url" path="prprivatesale/promo_banner/load"/>
+                                    <item name="previewDate" xsi:type="helper" helper="Plumrocket\PrivateSale\Helper\Preview::getPreviewDate"/>
+                                    <item name="psPreviewMode" xsi:type="helper" helper="Plumrocket\PrivateSale\Helper\Preview::getPreviewMode"/>
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+
+        <!-- Insert promo banner above footer -->
+        <referenceContainer name="page.wrapper">
+            <block class="Plumrocket\PrivateSale\Block\Promo\Banner\Bottom" name="bottom.banner" template="Plumrocket_PrivateSale::page/banner.phtml" before="footer">
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="banner-content-bottom" xsi:type="array">
+                                <item name="component" xsi:type="string">Plumrocket_PrivateSale/js/banner/bottom</item>
+                                <item name="template" xsi:type="string">Plumrocket_PrivateSale/banner</item>
+                                <item name="config" xsi:type="array">
+                                    <item name="position" xsi:type="string">1</item>
+                                    <item name="ajaxUrl" xsi:type="url" path="prprivatesale/promo_banner/load"/>
+                                    <item name="previewDate" xsi:type="helper" helper="Plumrocket\PrivateSale\Helper\Preview::getPreviewDate"/>
+                                    <item name="psPreviewMode" xsi:type="helper" helper="Plumrocket\PrivateSale\Helper\Preview::getPreviewMode"/>
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

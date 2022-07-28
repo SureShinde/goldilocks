@@ -1,0 +1,126 @@
+<?php
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket Private Sales and Flash Sales
+ * @copyright   Copyright (c) 2020 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+
+use Plumrocket\PrivateSale\Helper\Timer as TimerHelper;
+
+?>
+
+<?php
+/** @var \Plumrocket\PrivateSale\Block\Event\Item $block */
+$event = $block->getEvent();
+$eventLink = $block->getEventLinkModel();
+?>
+
+<?php if ($event) : ?>
+    <?php
+        $lockedItem = $eventLink->isLocked($event);
+        $class = 'pps-col-4';
+        $uniqVideoId = $block->uniqId($event);
+        $timerLayout = $block->getTimerLayout();
+    ?>
+    <figure class="pps-item <?= $block->escapeHtmlAttr($class) ?>" id="event-<?= $block->escapeHtmlAttr($event->getId()) ?>">
+        <?php if ($eventLink->isAvailable($event)) : ?>
+            <a class="pps-item-link <?= $block->escapeHtmlAttr($eventLink->getPopupLoginClass($event)) ?>"
+               href="<?= $block->escapeUrl($eventLink->getLink($event)) ?>"
+               <?= $eventLink->getPopupLoginAttributesHtml($event) ?>
+            >
+        <?php else: ?>
+            <a class="pps-item-link">
+        <?php endif; ?>
+        <div class="pr-event-video" id="event-wrap-<?= $uniqVideoId ?>"></div>
+        <?php
+            $videoId = $block->getVideoId($event);
+        ?>
+        <?php if ($lockedItem) : ?>
+            <span class="pps-img-wrap-lock">
+        <?php endif; ?>
+
+        <?php if ($videoId): ?>
+            <script>
+                require(['jquery', 'okvideo'], function ($) {
+                    var target = $('#event-wrap-<?= $uniqVideoId ?>');
+
+                    if (! target) {
+                        return;
+                    }
+
+                    $.okvideo({
+                        source: '<?= $videoId ?>',
+                        video: '<?= $videoId ?>',
+                        controls: false,
+                        disablekeyControl: false,
+                        volume: 0,
+                        loop: true,
+                        hd: true,
+                        adproof: true,
+                        annotations: false,
+                        autoplay: false,
+                        newtarget: 'event-wrap-<?= $uniqVideoId ?>',
+                        prSmallImage: '<?= $block->getSmallImage($event) ?>',
+                        prImage: '<?= $block->getEventImage($event, true) ?>'
+                    });
+                });
+            </script>
+        <?php else: ?>
+            <picture>
+              <source media="(max-width: 640px)" srcset="<?php echo $block->getSmallImage($event) ?>">
+              <img src="<?php echo $block->getEventImage($event) ?>" loading="lazy" alt="Event background" />
+            </picture>
+        <?php endif; ?>
+
+        <?php if ($lockedItem) : ?>
+        <span class="pps-img-locktext"><?= __('Become a member to shop this event') ?></span>
+            </span>
+        <?php endif; ?>
+
+        <figcaption>
+            <h4 class="pps-item-title"><?php echo $event->getName(); ?></h4>
+            <?php if ($block->showCountdown($event)) : ?>
+                <div class="pps-item-time privatesale-countdown-timer" data-item="<?php echo $event->getId(); ?>" style="display: none;" >
+                    <?php if ($block->getComingSoon()) : ?>
+                        <?= __('Opens in') ?>
+                        <span class="timer"></span>
+                        <?php $timerLayout = TimerHelper::COUNTDOWN_ALL; ?>
+                    <?php else: ?>
+                        <?php if ($block->isStaticDate()): ?>
+                            <span class="static-date">
+                                <span><?= __('Until') ?></span>
+                                <?= ' ' . $block->staticDateFormat($event->getActiveTo()) ?>
+                            </span>
+                        <?php else: ?>
+                            <span><?= $block->escapeHtml($block->getTimerLabel()) ?></span>
+                            <span class="timer"></span>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
+        </figcaption>
+        </a>
+
+        <script type="text/javascript">
+            require(['jquery', 'privatesaleEvent'], function ($) {
+                var time = "<?= $block->getComingSoon() ? strtotime($event->getActiveFrom()) : strtotime($event->getActiveTo()) ?>";
+                $.plumrocket.privatesaleEvent.prototype.addItem(
+                    <?= $block->escapeJs($event->getId()) ?>,
+                    time,
+                    '<?= $block->escapeJs($timerLayout) ?>',
+                    'homepage'
+                );
+            });
+        </script>
+    </figure>
+<?php endif; ?>

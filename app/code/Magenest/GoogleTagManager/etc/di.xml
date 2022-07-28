@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magenest\GoogleTagManager\Api\OrderDetailsGeneratorInterface"
+                type="Magenest\GoogleTagManager\Model\Generators\OrderDetailsGenerator" />
+
+    <type name="Magenest\GoogleTagManager\Model\Checkout">
+        <arguments>
+            <argument name="checkoutSession" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+
+    <type name="Magenest\GoogleTagManager\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">Magenest_GoogleTagManager</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="system" xsi:type="object">Magenest\GoogleTagManager\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magenest\GoogleTagManager\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+
+    <type name="Magenest\GoogleTagManager\Model\Bootstrap">
+        <arguments>
+            <argument name="targetedHandleGroups" xsi:type="array">
+                <item name="vrun-ee::ee" xsi:type="array">
+                    <item name="catalog_product_view" xsi:type="boolean">true</item>
+                    <item name="catalog_category_view" xsi:type="boolean">true</item>
+                    <item name="checkout_cart_index" xsi:type="boolean">true</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magenest\GoogleTagManager\Model\Generators\OrderDetailsGenerator">
+        <arguments>
+            <argument name="dataCollectors" xsi:type="array">
+                <item name="summary" xsi:type="object">Magenest\GoogleTagManager\Model\DataCollectors\Order\SummaryCollector</item>
+                <item name="gift_wrap" xsi:type="object">Magenest\GoogleTagManager\Model\DataCollectors\Order\GiftWrapCollector</item>
+                <item name="customer" xsi:type="object">Magenest\GoogleTagManager\Model\DataCollectors\Order\CustomerCollector</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Runtime flags -->
+<!--    <type name="Vaimo\RuntimeFlags\Api\ConfigInterface">
+        <arguments>
+            <argument name="dynamicItems" xsi:type="array">
+                <item name="Magenest\GoogleTagManager\Model\Bootstrap" xsi:type="boolean">true</item>
+            </argument>
+        </arguments>
+    </type>-->
+
+    <preference for="Magenest\GoogleTagManager\Api\ProductObjectGeneratorInterface"
+                type="Magenest\GoogleTagManager\Model\Generators\ProductObjectGenerator" />
+
+    <type name="Magento\Quote\Model\Quote\Item\Compare">
+        <plugin name="ignore_purchase_category_on_compare" type="Magenest\GoogleTagManager\Plugin\Quote\Item\IgnorePurchaseCategoryOnCompare" />
+    </type>
+</config>

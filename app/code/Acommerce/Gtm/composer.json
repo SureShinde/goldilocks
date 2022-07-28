@@ -1,0 +1,25 @@
+{
+    "name": "acommerce/gtm",
+    "description": "",
+    "authors": [
+        {
+            "name": "Supornchai Wattanavitsakul",
+            "email": "supornchai.w@acommerce.asia"
+        }
+    ],
+    "type": "magento-library",
+    "version": "2.0.1.1",
+    "require": {
+        "php": ">=5.4",
+        "composer/installers": "~1.0",
+        "acommerce/all": "~2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Acommerce\\Gtm\\": "code/Acommerce/Gtm"
+        }
+    }
+}

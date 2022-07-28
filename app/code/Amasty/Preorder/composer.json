@@ -1,0 +1,27 @@
+{
+    "name": "amasty/preorder",
+    "description": "Pre Order By Amasty",
+    "require": {
+        "php": ">=7.3",
+        "amasty/base": ">=1.13.4"
+    },
+    "suggest": {
+        "amasty/module-pre-order-graphql": "Install module-pre-order-graphql module to activate GraphQl and Pre Order integration.",
+        "amasty/module-preorder-mftf-2": "Install preorder-mftf-2 module to be able to run Preorder MFTF tests for Magento 2.3.5+ version",
+        "amasty/module-preorder-mftf-3": "Install preorder-mftf-3 module to be able to run Preorder MFTF tests for Magento 2.4.0+ version",
+        "amasty/module-preorder-to-builder": "Install Amasty_PreorderToBuilder module to activate the integration with Custom Reports Builder extension and create valuable reports about your preorders."
+    },
+    "type": "magento2-module",
+    "version": "2.0.6",
+    "license": [
+        "Commercial"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Amasty\\Preorder\\": ""
+        }
+    }
+}

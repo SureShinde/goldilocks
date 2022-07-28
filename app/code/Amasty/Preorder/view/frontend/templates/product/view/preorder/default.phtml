@@ -1,0 +1,25 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+<?php
+/** @var \Amasty\Preorder\ViewModel\Product\View\Preorder $preorderViewModel */
+$preorderViewModel = $block->getData('preorder_view_model');
+/** @var \Amasty\Preorder\Api\Data\ProductInformationInterface $preorderInformation */
+$preorderInformation = $preorderViewModel->getPreorderInformation($preorderViewModel->getCurrentProduct());
+?>
+
+<?php if ($preorderInformation->isPreorder()): ?>
+<script type="text/javascript">
+    require(['jquery', 'Amasty_Preorder/js/product/preorder'], function ($) {
+        var $widget = $.mage.amastyPreorder({
+            availabilityElement: '<?= $escaper->escapeHtml($preorderViewModel->getPreorderNotePosition()) ?>',
+            preOrderNote: '<?= /** @noEscape */  $preorderViewModel->escapeQuote($preorderInformation->getNote()) ?>',
+            addToCartLabel: '<?= /** @noEscape */ $preorderViewModel->escapeQuote($preorderInformation->getCartLabel()) ?>'
+        });
+        $widget.enable();
+    });
+</script>
+<?php endif; ?>

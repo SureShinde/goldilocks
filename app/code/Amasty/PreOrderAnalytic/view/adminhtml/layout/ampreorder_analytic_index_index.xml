@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <uiComponent name="amasty_preorder_analytic_form"/>
+            <block name="amasty_preorder_message" template="Amasty_PreOrderAnalytic::empty_data_message.phtml">
+                <arguments>
+                    <argument name="preorder_analytic_view_model" xsi:type="object">Amasty\PreOrderAnalytic\ViewModel\PreorderAnalytic</argument>
+                </arguments>
+            </block>
+            <uiComponent name="amasty_preorder_last_listing"/>
+            <uiComponent name="amasty_preorder_bestseller_listing"/>
+            <block name="amasty_preorder_analytic_banner" template="Amasty_PreOrderAnalytic::footer_banner.phtml"/>
+            <referenceBlock name="amasty_preorder_analytic_banner" remove="true"/>
+        </referenceContainer>
+    </body>
+</page>

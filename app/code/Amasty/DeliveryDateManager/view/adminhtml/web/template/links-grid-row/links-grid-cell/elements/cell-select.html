@@ -1,0 +1,16 @@
+<select class="admin__control-select amdelivery-select"
+        data-bind="
+            attr: {
+                id: uid,
+                name: inputName
+            },
+            options: options,
+            optionsValue: optionsValue,
+            optionsText: optionsText,
+            optionsCaption: caption,
+            hasFocus: focused,
+            value: value">
+</select>
+
+<label class="admin__field-error" if="error" attr="for: uid" text="error"></label>
+

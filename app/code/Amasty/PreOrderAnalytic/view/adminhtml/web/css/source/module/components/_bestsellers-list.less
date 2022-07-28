@@ -1,0 +1,27 @@
+//
+//  Last Orders list Component
+//  ______________________________________________
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    .ampreorderan-bestsellers-container {
+        margin: 40px 0 0;
+        padding: @ampreorderan__indent__l 0 0;
+        border-radius: 10px;
+        background: #fff;
+        box-shadow: 0 2px 8px rgba(166, 181, 218, .25), 0 10px 30px rgba(166, 181, 218, .25);
+    }
+}
+
+//
+//  Desktop
+//  ----------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl) {
+    .ampreorderan-bestsellers-container {
+        margin: 0 0 0 40px;
+    }
+}

@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="ampreorder">
+            <group id="release_date" translate="label" type="text" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Release Date</label>
+                <frontend_model>Amasty\PreOrderRelease\Block\Adminhtml\System\Config\ReleaseDate</frontend_model>
+
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Use Release Date</label>
+                    <comment>Set 'Yes' to use {release_date} variable in Pre-Oder Notes in product configuration.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="attribute" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Release Date Attribute</label>
+                    <comment>Select date attribute that will be used for the {release_date} variable value.</comment>
+                    <source_model>Amasty\PreOrderRelease\Model\Source\ReleaseDateAttribute</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="format" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Release Date Format</label>
+                    <source_model>Amasty\PreOrderRelease\Model\Source\ReleaseDateFormat</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="change_backorders" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Change Product Backorders Value on Release Date</label>
+                    <source_model>Amasty\PreOrderRelease\Model\Source\ChangeBackorders</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="note_state" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Pre-Order Note State on Release Date</label>
+                    <source_model>Amasty\PreOrderRelease\Model\Source\NoteState</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                        <field id="change_backorders">102</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="release_notification" translate="label" type="text" sortOrder="35" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Pre-Order Release Notification</label>
+
+                <field id="order_status" translate="label comment" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Order Status</label>
+                    <comment><![CDATA[Notifications will be sent only for orders in chosen statuses.<br/>
+                        Please note, that to send notifications:<br/>
+                        1) Configure the settings in the current fieldset and modify the template if required<br/>
+                        2) Go to product grid<br/>
+                        3) Choose products to send notifications for (product backorder status must be other than ‘Allow Pre-Orders’)<br/>
+                        4) Launch notification sending by choosing the appropriate option in massaction section and confirm the action.]]></comment>
+                    <source_model>Amasty\PreOrderRelease\Model\Source\OrderStatus</source_model>
+                    <frontend_model>Amasty\PreOrderRelease\Block\Adminhtml\System\Config\Element\Multiselect</frontend_model>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+
+                <field id="email_template" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Notification Template</label>
+                    <source_model>Amasty\PreOrderRelease\Model\Source\Email\ReleaseNotification</source_model>
+                </field>
+
+                <field id="email_sender" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email Sender</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

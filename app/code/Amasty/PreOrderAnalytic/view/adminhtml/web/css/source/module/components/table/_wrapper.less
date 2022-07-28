@@ -1,0 +1,125 @@
+//
+//  Table Component
+//  ______________________________________________
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    .ampreorderan-table-wrapper {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .ampreorderan-table-header {
+        & {
+            height: 68px;
+            color: #a9afb9;
+            vertical-align: bottom;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .ampreorderan-item {
+            & {
+                padding: 0 @ampreorderan__indent__l @ampreorderan__indent__m @ampreorderan__indent__l;
+            }
+
+            &.-preorder_count {
+                width: 120px;
+            }
+
+            &.-created_at {
+                width: 130px;
+            }
+
+            &.-revenue,
+            &.-preorder_revenue {
+                width: 165px;
+                text-align: right;
+            }
+        }
+    }
+
+    .ampreorderan-table-body {
+        & {
+            vertical-align: middle;
+        }
+
+        .ampreorderan-table-row {
+            &:nth-child(odd) {
+                background: #fafbfd;
+            }
+        }
+
+        .ampreorderan-item {
+            & {
+                padding: 0 @ampreorderan__indent__l;
+                height: 68px;
+                color: #303030;
+                font-weight: 400;
+            }
+
+            &.-increment_id .ampreorderan-text:before {
+                content: '#';
+            }
+
+            &.-revenue,
+            &.-preorder_revenue {
+                text-align: right;
+                font-weight: 600;
+            }
+
+            &.-status .ampreorderan-text {
+                padding: 5px 10px;
+                border-radius: 4px;
+                text-transform: capitalize;
+                font-weight: 600;
+            }
+        }
+
+        .ampreorderan-item.-status {
+            &.-holded .ampreorderan-text,
+            &.-on_hold .ampreorderan-text {
+                background: #e9dbff;
+                color: #5817ab;
+            }
+
+            &.-payment_review .ampreorderan-text {
+                background: #dbebff;
+                color: #004cbd;
+            }
+
+            &.-pending_payment .ampreorderan-text {
+                background: #ffe8db;
+                color: #e97911;
+            }
+
+            &.-closed .ampreorderan-text {
+                background: #ebebeb;
+                color: #848484;
+            }
+
+            &.-processing .ampreorderan-text {
+                background: #dbfff6;
+                color: #10bca7;
+            }
+
+            &.-complete .ampreorderan-text {
+                background: #deffdb;
+                color: #1aab17;
+            }
+
+            &.-canceled .ampreorderan-text {
+                background: #ffdbdb;
+                color: #ab1717;
+            }
+
+            &.-pending .ampreorderan-text {
+                background: #fff7db;
+                color: #edb118;
+            }
+        }
+    }
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Acommerce Team
+ * @copyright Copyright (c) 2017 Amasty (https://www.Acommerce.asia)
+ * @package Acommerce_All
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="Acommerce" translate="label" sortOrder="100000" class="Acommerce-extensions-tab">
+            <label>Acommerce Extensions</label>
+        </tab>
+    </system>
+</config>

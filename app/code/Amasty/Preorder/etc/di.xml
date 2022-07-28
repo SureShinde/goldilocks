@@ -1,0 +1,214 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Amasty\Preorder\Api\Data\ProductInformationInterface" type="Amasty\Preorder\Model\Data\ProductInformation" />
+    <preference for="Amasty\Preorder\Api\Data\CartItemInformationInterface" type="Amasty\Preorder\Model\Data\CartItemInformation" />
+    <preference for="Amasty\Preorder\Api\Data\OrderInformationInterface" type="Amasty\Preorder\Model\OrderPreorder" />
+    <preference for="Amasty\Preorder\Api\Data\OrderItemInformationInterface" type="Amasty\Preorder\Model\OrderItemPreorder" />
+
+    <preference for="Amasty\Preorder\Model\Product\Detect\IsProductPreorderInterface" type="Amasty\Preorder\Model\Product\Detect\IsProductPreorderByIndex" />
+
+    <preference for="Amasty\Preorder\Model\OrderItemPreorder\Command\SaveInterface" type="Amasty\Preorder\Model\OrderItemPreorder\Command\Save" />
+    <preference for="Amasty\Preorder\Model\OrderItemPreorder\Query\GetNewInterface" type="Amasty\Preorder\Model\OrderItemPreorder\Query\GetNew" />
+    <preference for="Amasty\Preorder\Model\OrderItemPreorder\Query\GetByItemIdInterface" type="Amasty\Preorder\Model\OrderItemPreorder\Query\GetByItemId" />
+
+    <preference for="Amasty\Preorder\Model\OrderPreorder\Command\SaveInterface" type="Amasty\Preorder\Model\OrderPreorder\Command\Save" />
+    <preference for="Amasty\Preorder\Model\OrderPreorder\Query\GetNewInterface" type="Amasty\Preorder\Model\OrderPreorder\Query\GetNew" />
+    <preference for="Amasty\Preorder\Model\OrderPreorder\Query\GetByOrderIdInterface" type="Amasty\Preorder\Model\OrderPreorder\Query\GetByOrderId" />
+    <preference for="Amasty\Preorder\Model\OrderPreorder\Query\IsExistForOrderInterface" type="Amasty\Preorder\Model\OrderPreorder\Query\IsExistForOrder" />
+
+    <preference for="Amasty\Preorder\Model\Order\ProcessNew\GetOrderItemNoteInterface" type="\Amasty\Preorder\Model\Order\ProcessNew\GetOrderItemNote" />
+    <preference for="Amasty\Preorder\Model\Order\ProcessNew\IsOrderItemPreorderInterface" type="\Amasty\Preorder\Model\Order\ProcessNew\IsOrderItemPreorder" />
+    <preference for="Amasty\Preorder\Model\Order\ProcessNew\SaveOrderFlagInterface" type="\Amasty\Preorder\Model\Order\ProcessNew\SaveOrderFlag" />
+    <preference for="Amasty\Preorder\Model\Order\ProcessNew\SaveOrderItemFlagInterface" type="\Amasty\Preorder\Model\Order\ProcessNew\SaveOrderItemFlag" />
+
+    <type name="Magento\CatalogInventory\Model\Source\Backorders">
+        <plugin name="Amasty_Preorder::add-amasty-option" type="Amasty\Preorder\Plugin\CatalogInventory\Model\Source\Backorders\AddOption" />
+    </type>
+
+    <type name="Magento\CatalogInventory\Model\StockStateProvider">
+        <plugin name="Amasty_Preorder::check-qty" type="Amasty\Preorder\Plugin\CatalogInventory\Model\StockStateProvider\CheckQty" />
+        <plugin name="Amasty_Preorder::verify-stock-based-on-backorder" type="Amasty\Preorder\Plugin\CatalogInventory\Model\StockStateProvider\VerifyStock" sortOrder="999" />
+        <plugin name="Amasty_Preorder::check-item-with-amasty-backorder" type="Amasty\Preorder\Plugin\CatalogInventory\Model\StockStateProvider\CheckQuoteItemQty" />
+    </type>
+
+    <type name="Magento\Sales\Model\Order\Item">
+        <plugin name="Amasty_Preorder::addPreorderLabel" type="Amasty\Preorder\Plugin\Sales\Model\Order\Item\ModifyName" />
+    </type>
+    <virtualType name="Magento\CatalogSearch\Block\SearchResult\ListProduct" type="Magento\Catalog\Block\Product\ListProduct">
+        <arguments>
+            <argument name="catalogLayer" xsi:type="object">Magento\Catalog\Model\Layer\Search</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Email\Model\Template">
+        <plugin name="Amasty_Preorder::display-email-warning" type="Amasty\Preorder\Plugin\Email\Model\Template\AddNoteToOrderEmail" />
+    </type>
+
+    <!-- make for indexer product salable if amasty backorder uses -->
+    <type name="Magento\InventorySales\Model\ResourceModel\IsStockItemSalableCondition\BackordersCondition">
+        <plugin name="Amasty_Preorder::msi-backorders"
+                type="Amasty\Preorder\Plugin\InventorySales\Model\ResourceModel\IsStockItemSalableCondition\BackordersCondition\ModifyCondition" />
+    </type>
+
+    <!-- if product uses amasty backorder that not mean that product in stock -->
+    <type name="Magento\InventorySales\Model\IsProductSalableCondition\BackOrderCondition">
+        <plugin name="Amasty_Preorder::msi-backorder-not-affect-stockstatus"
+                type="Amasty\Preorder\Plugin\InventorySales\Model\IsProductSalableCondition\BackOrderCondition\CheckForStock" />
+    </type>
+
+    <!-- add warning message to cart when part of product preorder -->
+    <type name="Magento\InventorySales\Plugin\StockState\CheckQuoteItemQtyPlugin">
+        <plugin name="Amasty_Preorder::msi-check-quote-item"
+                type="Amasty\Preorder\Plugin\InventorySales\Plugin\StockState\CheckQuoteItemQtyPlugin\CheckQuoteItemQty" />
+    </type>
+
+    <type name="Magento\ScalableOms\Console\Command\SplitSales">
+        <arguments>
+            <argument name="tables" xsi:type="array">
+                <item name="amasty_preorder_order_preorder" xsi:type="string">amasty_preorder_order_preorder</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Preorder\Model\Product\AdditionalData\PreorderAdditionalData">
+        <arguments>
+            <argument name="additionalDataSetters" xsi:type="array">
+                <item name="cartLabel" xsi:type="object">\Amasty\Preorder\Model\Product\AdditionalData\DataProcessor\CartLabel</item>
+                <item name="note" xsi:type="object">\Amasty\Preorder\Model\Product\AdditionalData\DataProcessor\Note</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Quote\Model\Cart\Totals\ItemConverter">
+        <plugin name="Amasty_Preorder::info-for-total-items" type="Amasty\Preorder\Plugin\Quote\Model\Cart\Totals\ItemConverterPlugin" />
+    </type>
+
+    <type name="Magento\Catalog\Model\ProductRepository">
+        <plugin name="Amasty_Preorder::info-for-product-items" type="Amasty\Preorder\Plugin\Catalog\Model\ProductRepository\AddInfoToProducts" />
+        <plugin name="Amasty_Preorder::info-for-product" type="Amasty\Preorder\Plugin\Catalog\Model\ProductRepository\AddInfoToProduct" />
+    </type>
+
+    <type name="Magento\Quote\Model\Quote\Item\Repository">
+        <plugin name="Amasty_Preorder::info-for-quote-items" type="Amasty\Preorder\Plugin\Quote\Model\Quote\Item\Repository\AddInfoToItems" />
+    </type>
+
+    <type name="Magento\Sales\Model\OrderRepository">
+        <plugin name="Amasty_Preorder::info-for-order" type="Amasty\Preorder\Plugin\Sales\Model\OrderRepository\AddInfoToOrder" />
+    </type>
+
+    <type name="Magento\Sales\Model\Order\ItemRepository">
+        <plugin name="Amasty_Preorder::info-for-order-item" type="Amasty\Preorder\Plugin\Sales\Model\Order\ItemRepository\AddInfoToItem" />
+    </type>
+
+    <type name="Amasty\Preorder\Model\Product\RetrieveNote\DefaultValuePool">
+        <arguments>
+            <argument name="pool" xsi:type="array">
+                <item name="amasty_preorder_note" xsi:type="object">Amasty\Preorder\Model\Product\RetrieveNote\DefaultValue\Note</item>
+                <item name="amasty_preorder_cart_label" xsi:type="object">Amasty\Preorder\Model\Product\RetrieveNote\DefaultValue\CartLabel</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Preorder\Model\Product\Detect\IsCompositeProductPreorder">
+        <arguments>
+            <argument name="pool" xsi:type="array">
+                <item name="grouped" xsi:type="object">Amasty\Preorder\Model\Product\Detect\IsGroupedPreorder</item>
+                <item name="configurable" xsi:type="object">Amasty\Preorder\Model\Product\Detect\IsConfigurablePreorder</item>
+                <item name="bundle" xsi:type="object">Amasty\Preorder\Model\Product\Detect\IsBundlePreorder</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Amasty\Preorder\Model\Indexer\Product\Detect\IsProductPreorderInterfaceFactory" type="Amasty\Preorder\Model\Product\Detect\IsProductPreorderInterfaceFactory">
+        <arguments>
+            <argument name="instanceName" xsi:type="string">Amasty\Preorder\Model\Indexer\Product\Detect\IsProductPreorder</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Amasty\Preorder\Model\Indexer\Product\Action\DoReindex">
+        <arguments>
+            <argument name="isProductPreorderFactory" xsi:type="object">Amasty\Preorder\Model\Indexer\Product\Detect\IsProductPreorderInterfaceFactory</argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Preorder\Model\Order\ProcessNew\IsOrderItemPreorderInterface">
+        <arguments>
+            <argument name="isProductPreorder" xsi:type="object">Amasty\Preorder\Model\Product\Detect\IsSimplePreorder</argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Preorder\Model\Product\Detect\IsProductPreorder">
+        <arguments>
+            <argument name="isCompositeProductPreorder" xsi:type="object">Amasty\Preorder\Model\Product\Detect\IsCompositeProductPreorder</argument>
+            <argument name="isSimplePreorder" xsi:type="object">Amasty\Preorder\Model\Product\Detect\IsSimplePreorder</argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Preorder\Model\Product\Detect\IsBundlePreorder">
+        <arguments>
+            <argument name="isSimplePreorder" xsi:type="object">Amasty\Preorder\Model\Product\Detect\IsSimplePreorder</argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Preorder\Model\Product\Detect\IsGroupedPreorder">
+        <arguments>
+            <argument name="isSimplePreorder" xsi:type="object">Amasty\Preorder\Model\Product\Detect\IsSimplePreorder</argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Preorder\Model\Product\Detect\IsConfigurablePreorder">
+        <arguments>
+            <argument name="isSimplePreorder" xsi:type="object">Amasty\Preorder\Model\Product\Detect\IsSimplePreorder</argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Preorder\Model\Quote\Item\IsPreorder">
+        <arguments>
+            <argument name="isSimplePreorder" xsi:type="object">Amasty\Preorder\Model\Product\Detect\IsSimplePreorder</argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Xsearch\Block\Search\Product">
+        <plugin name="Amasty_Preorder::changeCartXsearchPopup" type="Amasty\Preorder\Plugin\Xsearch\Block\Search\Product\ChangeCartLabel" />
+    </type>
+
+    <type name="Amasty\Preorder\Model\Condition\SalesRule\Preorder">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="getPreorderInformation" xsi:type="object">Amasty\Preorder\Model\Quote\Item\GetPreorderInformation</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Amasty\Preorder\Model\Condition\CatalogRule\Preorder">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="isProductPreorder" xsi:type="object">Amasty\Preorder\Model\Product\Detect\IsProductPreorderByIndex</item>
+                <item name="productRepository" xsi:type="object">Magento\Catalog\Api\ProductRepositoryInterface</item>
+                <item name="joinToProductCollection" xsi:type="object">Amasty\Preorder\Model\ResourceModel\Product\PreorderIndex\JoinToProductCollection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\CatalogRule\Model\ResourceModel\Product\ConditionsToCollectionApplier">
+        <plugin name="Amasty_Preorder::removePreorderCondition" type="Amasty\Preorder\Plugin\CatalogRule\Model\ResourceModel\Product\ConditionsToCollectionApplier\DisableValidateCondition" />
+    </type>
+
+    <virtualType name="Amasty\Preorder\Model\Product\RetrieveNote\FormatPreorderNote" type="Amasty\Preorder\Model\Product\RetrieveNote\FormatNote" />
+    <virtualType name="Amasty\Preorder\Model\Product\RetrieveNote\RetrievePreorderNote" type="Amasty\Preorder\Model\Product\RetrieveNote\RetrieveAttributeValue">
+        <arguments>
+            <argument name="formatNote" xsi:type="object">Amasty\Preorder\Model\Product\RetrieveNote\FormatPreorderNote</argument>
+        </arguments>
+    </virtualType>
+    <type name="Amasty\Preorder\Model\Product\RetrieveNote\GetNote">
+        <arguments>
+            <argument name="retrieveAttributeValue" xsi:type="object">Amasty\Preorder\Model\Product\RetrieveNote\RetrievePreorderNote</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Sales\Model\Service\OrderService">
+        <plugin name="Amasty_Preorder::saveOrder" type="Amasty\Preorder\Plugin\Sales\Model\Service\OrderService\ProcessNewOrder" />
+    </type>
+    <type name="Magento\Sales\Model\Order\Item">
+        <plugin name="Amasty_Preorder::saveOrderItem" type="Amasty\Preorder\Plugin\Sales\Model\Order\Item\ProcessNew" />
+    </type>
+</config>

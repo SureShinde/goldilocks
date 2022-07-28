@@ -1,0 +1,32 @@
+<div class="amdelivery-description amdelivery-cell-description -general">
+    <div class="amdelivery-column">
+        <div class="amdelivery-item">
+            <span class="amdelivery-label" data-bind="i18n: 'Min Delivery period (days): '"></span>
+            <span class="amdelivery-value" data-bind="html: descriptionData().min ? descriptionData().min : '-'"></span>
+        </div>
+        <div class="amdelivery-item">
+            <span class="amdelivery-label" data-bind="i18n: 'Max Delivery period (days): '"></span>
+            <span class="amdelivery-value" data-bind="html: descriptionData().max ? descriptionData().max : '-'"></span>
+        </div>
+    </div>
+    <div class="amdelivery-column">
+        <div class="amdelivery-item">
+            <span class="amdelivery-label" data-bind="i18n: 'Allow same day delivery: '"></span>
+            <span class="amdelivery-value" data-bind="html: descriptionData().is_same_day_available ? getItemValue('is_same_day_available', descriptionData().is_same_day_available) : '-'"></span>
+        </div>
+        <div class="amdelivery-item" if="+descriptionData().is_same_day_available">
+            <span class="amdelivery-label" data-bind="i18n: 'Same day pickup cut-off time: '"></span>
+            <span class="amdelivery-value" data-bind="html: descriptionData().same_day_cutoff ? descriptionData().same_day_cutoff : '-'"></span>
+        </div>
+    </div>
+    <div class="amdelivery-column">
+        <div class="amdelivery-item" if="+descriptionData().is_same_day_available">
+            <span class="amdelivery-label" data-bind="i18n: 'Time required to handle order (min.): '"></span>
+            <span class="amdelivery-value" data-bind="html: descriptionData().order_time ? descriptionData().order_time : '-'"></span>
+        </div>
+        <div class="amdelivery-item" if="+descriptionData().is_same_day_available">
+            <span class="amdelivery-label" data-bind="i18n: 'Time required to handle backorder (min.): '"></span>
+            <span class="amdelivery-value" data-bind="html: descriptionData().backorder_time ? descriptionData().backorder_time : '-'"></span>
+        </div>
+    </div>
+</div>

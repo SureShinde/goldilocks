@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Amasty\PreOrderRelease\Model\Source\Email\ReleaseNotification" type="Amasty\PreOrderRelease\Model\Source\EmailTemplate">
+        <arguments>
+            <argument name="origTemplateCode" xsi:type="string">amasty_preorder_release_notification_template</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\View\Element\Message\MessageConfigurationsPool">
+        <arguments>
+            <argument name="configurationsMap" xsi:type="array">
+                <item name="addReleaseNotificationErrorMessage" xsi:type="array">
+                    <item name="renderer" xsi:type="const">Magento\Framework\View\Element\Message\Renderer\BlockRenderer::CODE</item>
+                    <item name="data" xsi:type="array">
+                        <item name="template" xsi:type="string">Amasty_PreOrderRelease::messages/release_notification_error.phtml</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="amastyPreorderReleaseDate" xsi:type="array">
+                    <item name="class" xsi:type="string">Amasty\PreOrderRelease\Ui\DataProvider\Catalog\Product\Form\Modifier\ReleaseDate</item>
+                    <item name="sortOrder" xsi:type="number">900</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Config\Model\Config\Structure\Element\Field">
+        <plugin name="Amasty_PreOrderRelease::check-depends" type="Amasty\PreOrderRelease\Plugin\Config\Model\Config\Structure\Element\Field\CheckDepends" />
+    </type>
+</config>

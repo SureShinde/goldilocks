@@ -1,0 +1,42 @@
+"Could not create products collection.","Could not create products collection."
+No,No
+"%1 (Default)","%1 (Default)"
+Hidden,Hidden
+"Replaced with default note","Replaced with default note"
+"Magento Default","Magento Default"
+"Some products do not meet the notification criteria.<br/>The notification has been sent for the following products:","Some products do not meet the notification criteria.<br/>The notification has been sent for the following products:"
+"%product_name have arrived!","%product_name have arrived!"
+"Hey there!","Hey there!"
+"You've preordered %name at %store_name. The product is out.","You've preordered %name at %store_name. The product is out."
+"You can check your order in <a href=""%orders_url"">My Orders</a> tab in your account on our site.","You can check your order in <a href=""%orders_url"">My Orders</a> tab in your account on our site."
+"Pre Order Release Notification","Pre Order Release Notification"
+"Release Date","Release Date"
+"Use Release Date","Use Release Date"
+"Set 'Yes' to use {release_date} variable in Pre-Oder Notes in product configuration.","Set 'Yes' to use {release_date} variable in Pre-Oder Notes in product configuration."
+"Release Date Attribute","Release Date Attribute"
+"Select date attribute that will be used for the {release_date} variable value.","Select date attribute that will be used for the {release_date} variable value."
+"Release Date Format","Release Date Format"
+"Change Product Backorders Value on Release Date","Change Product Backorders Value on Release Date"
+"Pre-Order Note State on Release Date","Pre-Order Note State on Release Date"
+"Pre-Order Release Notification","Pre-Order Release Notification"
+"Order Status","Order Status"
+"Notifications will be sent only for orders in chosen statuses.<br/>
+                        Please note, that to send notifications:<br/>
+                        1) Configure the settings in the current fieldset and modify the template if required<br/>
+                        2) Go to product grid<br/>
+                        3) Choose products to send notifications for (product backorder status must be other than ‘Allow Pre-Orders’)<br/>
+                        4) Launch notification sending by choosing the appropriate option in massaction section and confirm the action.","Notifications will be sent only for orders in chosen statuses.<br/>
+                        Please note, that to send notifications:<br/>
+                        1) Configure the settings in the current fieldset and modify the template if required<br/>
+                        2) Go to product grid<br/>
+                        3) Choose products to send notifications for (product backorder status must be other than ‘Allow Pre-Orders’)<br/>
+                        4) Launch notification sending by choosing the appropriate option in massaction section and confirm the action."
+"Notification Template","Notification Template"
+"Email Sender","Email Sender"
+"Send Pre-Order Notification","Send Pre-Order Notification"
+"Send notification","Send notification"
+"You are going to send emails to the customers who placed a Preorder for the selected product(s).
+                            Notifications will be sent only for products that are not in ‘Allow Pre-Orders’ status right now.
+                            Are you sure you would like to send notifications?","You are going to send emails to the customers who placed a Preorder for the selected product(s).
+                            Notifications will be sent only for products that are not in ‘Allow Pre-Orders’ status right now.
+                            Are you sure you would like to send notifications?"

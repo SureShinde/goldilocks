@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework-message-queue:etc/queue.xsd">
+    <broker topic="chatbot.sendMail" exchange="magento-db" type="db">
+        <queue name="chatbot.sendMail" consumer="chatbotSendMailProcessor" consumerInstance="Magento\Framework\MessageQueue\Consumer" handler="Magenest\FbChatbot\Model\HumanSupport\Consumer::process"/>
+    </broker>
+    <broker topic="chatbot.createOrder" exchange="magento-db" type="db">
+        <queue name="chatbot.createOrder" consumer="chatbotCreateOrderProcessor" consumerInstance="Magento\Framework\MessageQueue\Consumer" handler="Magenest\FbChatbot\Model\CreateOrder\Consumer::process"/>
+    </broker>
+</config>

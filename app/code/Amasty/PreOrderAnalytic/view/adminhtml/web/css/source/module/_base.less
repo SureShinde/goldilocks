@@ -1,0 +1,84 @@
+//
+//  Base Styles
+//  ______________________________________________
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    .ampreorder_analytic-index-index {
+        .page-wrapper {
+            background: #f4f7fc;
+        }
+
+        .admin__action-dropdown {
+            background: transparent;
+        }
+
+        .page-footer {
+            margin-top: @ampreorderan__indent__m * 2;
+        }
+    }
+    .ampreorderan-last-container,
+    .ampreorderan-bestsellers-container {
+        .ampreorderan-title-block {
+            & {
+                .ampreorderan-flex(space-between, center);
+
+                padding: 0 @ampreorderan__indent__l @ampreorderan__indent__l;
+            }
+
+            .ampreorderan-title {
+                margin: 0;
+                color: #303030;
+                font-weight: 700;
+                font-size: 20px;
+            }
+        }
+    }
+
+    .ampreorderan-banner-container {
+        .ampreorderan-flex(center);
+
+        margin: 40px 0 20px;
+        width: 100%;
+    }
+
+    .ampreorderan-link {
+        & {
+            color: #007bdb;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+//
+//  Desktop
+//  ----------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl) {
+    .ampreorder_analytic-index-index .main-col {
+        & {
+            .ampreorderan-flex(none, none, wrap);
+        }
+
+        > div:nth-child(1) {
+            flex-basis: 100%;
+        }
+
+        > div:nth-child(2) {
+            flex-basis: 70%;
+        }
+
+        > div:nth-child(3) {
+            flex-basis: 30%;
+        }
+    }
+}

@@ -1,0 +1,1697 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">amdelivery_channel_form.amdelivery_channel_form_data_source</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="back">
+                <url path="*/*/"/>
+                <class>back</class>
+                <label translate="true">Back</label>
+            </button>
+            <button name="delete" class="Amasty\DeliveryDateManager\Block\Adminhtml\Channel\DeleteButton"/>
+            <button name="reset" class="Amasty\DeliveryDateManager\Block\Adminhtml\GeneralButtons\ResetButton"/>
+            <button name="duplicate" class="Amasty\DeliveryDateManager\Block\Adminhtml\Channel\DuplicateButton"/>
+            <button name="save_and_continue" class="Amasty\DeliveryDateManager\Block\Adminhtml\GeneralButtons\SaveAndContinueButton"/>
+            <button name="save" class="Amasty\DeliveryDateManager\Block\Adminhtml\GeneralButtons\SaveButton"/>
+        </buttons>
+        <namespace>amdelivery_channel_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>amdelivery_channel_form.amdelivery_channel_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="amdelivery_channel_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="amasty_deliverydate/channel/save"/>
+        </settings>
+        <dataProvider class="Amasty\DeliveryDateManager\Ui\Component\Form\Channel\DataProvider"
+                      name="amdelivery_channel_form_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>channel_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general" sortOrder="10">
+        <settings>
+            <collapsible>true</collapsible>
+            <opened>true</opened>
+            <label translate="true">General</label>
+        </settings>
+        <field name="is_active" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">amdelivery_channel</item>
+                    <item name="default" xsi:type="string">1</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Enable Delivery Channel</label>
+                <visible>true</visible>
+                <dataScope>is_active</dataScope>
+                <dataType>boolean</dataType>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="string">0</map>
+                            <map name="true" xsi:type="string">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="name" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">amdelivery_channel</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Title</label>
+                <visible>true</visible>
+                <dataScope>name</dataScope>
+            </settings>
+        </field>
+        <field name="priority" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">amdelivery_channel</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="validate-digits" xsi:type="boolean">true</rule>
+                    <rule name="validate-zero-or-greater" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Priority</label>
+                <visible>true</visible>
+                <dataScope>priority</dataScope>
+                <notice translate="true">The lower the value the higher the priority</notice>
+            </settings>
+        </field>
+    </fieldset>
+    <fieldset name="scope" sortOrder="20">
+        <settings>
+            <collapsible>true</collapsible>
+            <opened>true</opened>
+            <label translate="true">Configuration Applicability Scope</label>
+        </settings>
+        <field name="storeview_ids" formElement="multiselect">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">amdelivery_channel</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>number</dataType>
+                <label translate="true">Store Views</label>
+                <dataScope>storeview_ids</dataScope>
+                <notice translate="true">Leave blank or select everything for all Store Views</notice>
+            </settings>
+            <formElements>
+                <multiselect>
+                    <settings>
+                        <options class="Amasty\DeliveryDateManager\Ui\Component\Form\Channel\ConfigurationWebsitesProvider"/>
+                    </settings>
+                </multiselect>
+            </formElements>
+        </field>
+        <field name="shipping_methods" formElement="multiselect">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">amdelivery_channel</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>number</dataType>
+                <label translate="true">Shipping Methods</label>
+                <dataScope>shipping_methods</dataScope>
+                <notice translate="true">Leave blank or select everything for all Shipping Methods</notice>
+            </settings>
+            <formElements>
+                <multiselect>
+                    <settings>
+                        <options
+                            class="Amasty\DeliveryDateManager\Ui\Component\Form\Channel\ConfigurationShippingMethodsProvider"/>
+                    </settings>
+                </multiselect>
+            </formElements>
+        </field>
+        <field name="customer_groups" formElement="multiselect">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">amdelivery_channel</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>number</dataType>
+                <label translate="true">Customer Groups</label>
+                <dataScope>customer_groups</dataScope>
+                <notice translate="true">Leave blank or select everything for all Customer Groups</notice>
+            </settings>
+            <formElements>
+                <multiselect>
+                    <settings>
+                        <options
+                            class="Amasty\DeliveryDateManager\Ui\Component\Form\Channel\ConfigurationCustomerGroupsProvider"/>
+                    </settings>
+                </multiselect>
+            </formElements>
+        </field>
+    </fieldset>
+    <fieldset name="relations" sortOrder="30">
+        <settings>
+            <collapsible>false</collapsible>
+            <opened>true</opened>
+            <label/>
+        </settings>
+
+        <container name="amdeliveryGeneralOptions" component="Amasty_DeliveryDateManager/js/view/links-grid">
+
+            <container name="container" component="Amasty_DeliveryDateManager/js/view/links-grid-row/links-grid-row">
+
+                <container name="wrapper" component="Amasty_DeliveryDateManager/js/view/links-grid-row/links-grid-cell/links-grid-cell">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="externalProvider" xsi:type="string">amdelivery_channel_config_list.amdelivery_config_data_source</item>
+                            <item name="options" xsi:type="array">
+                                <item name="title" xsi:type="string" translate="true">General Delivery Options</item>
+                                <item name="additionalClasses" xsi:type="string">required -big</item>
+                            </item>
+                        </item>
+                    </argument>
+                    <container name="selectWrapper" component="uiCollection" template="Amasty_DeliveryDateManager/wrapper">
+                        <argument name="data" xsi:type="array">
+                            <item name="config" xsi:type="array">
+                                <item name="additionalClasses"
+                                      xsi:type="string">amdelivery-wrapper amdelivery-select-actions
+                                </item>
+                                <item name="indexField" xsi:type="string">id</item>
+                                <item name="exports" xsi:type="array">
+                                    <item name="selectValue" xsi:type="string">${ $.parentName }:selectValue</item>
+                                </item>
+                            </item>
+                        </argument>
+                        <field name="config_id" formElement="select"
+                               component="Amasty_DeliveryDateManager/js/view/links-grid-row/links-grid-cell/elements/cell-select"
+                               template="Amasty_DeliveryDateManager/links-grid-row/links-grid-cell/elements/cell-select">
+                            <argument name="data" xsi:type="array">
+                                <item name="config" xsi:type="array">
+                                    <item name="indexField" xsi:type="string">id</item>
+                                    <item name="externalProvider" xsi:type="string">amdelivery_channel_config_list.amdelivery_config_data_source</item>
+                                </item>
+                            </argument>
+                            <settings>
+                                <dataScope>config_id</dataScope>
+                                <validation>
+                                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                                </validation>
+                                <imports>
+                                    <link name="parentCellName">${ $.parentName }:parentName</link>
+                                </imports>
+                            </settings>
+                        </field>
+                        <container name="actions"
+                                   component="Amasty_DeliveryDateManager/js/view/links-grid-row/links-grid-cell/elements/cell-actions">
+                            <button name="add" component="Amasty_DeliveryDateManager/js/view/links-grid-row/links-grid-cell/elements/cell-actions/button">
+                                <argument name="data" xsi:type="array">
+                                    <item name="config" xsi:type="array">
+                                        <item name="targetElementName" xsi:type="string">${ $.parentName.substr(0, $.parentName.indexOf('.actions')) }.config_id</item>
+                                        <item name="actions" xsi:type="array">
+                                            <item name="0" xsi:type="array">
+                                                <item name="targetName"
+                                                      xsi:type="string">index = amdelivery_channel_config_form_modal
+                                                </item>
+                                                <item name="actionName" xsi:type="string">toggleModal</item>
+                                                <item name="params" xsi:type="array">
+                                                    <item name="0" xsi:type="string">add</item>
+                                                </item>
+                                            </item>
+                                            <item name="1" xsi:type="array">
+                                                <item name="targetName"
+                                                      xsi:type="string">index = amdelivery_channel_config_form_loader
+                                                </item>
+                                                <item name="actionName" xsi:type="string">set</item>
+                                                <item name="params" xsi:type="array">
+                                                    <item name="0" xsi:type="string">targetElementName</item>
+                                                    <item name="1" xsi:type="string">${ $.$data.targetElementName }</item>
+                                                </item>
+                                            </item>
+                                            <item name="2" xsi:type="array">
+                                                <item name="targetName"
+                                                      xsi:type="string">index = amdelivery_channel_config_form_loader
+                                                </item>
+                                                <item name="actionName" xsi:type="string">clearForm</item>
+                                            </item>
+                                        </item>
+                                        <item name="title" xsi:type="string" translate="true">Add</item>
+                                        <item name="buttonClasses" xsi:type="string"
+                                              translate="true">amdelivery-button
+                                        </item>
+                                    </item>
+                                </argument>
+                            </button>
+                            <button name="edit" component="Amasty_DeliveryDateManager/js/view/links-grid-row/links-grid-cell/elements/cell-actions/button">
+                                <argument name="data" xsi:type="array">
+                                    <item name="config" xsi:type="array">
+                                        <item name="targetElementName" xsi:type="string">${ $.parentName.substr(0, $.parentName.indexOf('.actions')) }.config_id</item>
+                                        <item name="actions" xsi:type="array">
+                                            <item name="0" xsi:type="array">
+                                                <item name="targetName"
+                                                      xsi:type="string">index = amdelivery_channel_config_form_loader
+                                                </item>
+                                                <item name="actionName" xsi:type="string">set</item>
+                                                <item name="params" xsi:type="array">
+                                                    <item name="0" xsi:type="string">id</item>
+                                                    <item name="1" xsi:type="string">${ $.$data.selectValue }</item>
+                                                </item>
+                                            </item>
+                                            <item name="1" xsi:type="array">
+                                                <item name="targetName"
+                                                      xsi:type="string">index = amdelivery_channel_config_form_loader
+                                                </item>
+                                                <item name="actionName" xsi:type="string">set</item>
+                                                <item name="params" xsi:type="array">
+                                                    <item name="0" xsi:type="string">targetElementName</item>
+                                                    <item name="1" xsi:type="string">${ $.$data.targetElementName }</item>
+                                                </item>
+                                            </item>
+                                            <item name="2" xsi:type="array">
+                                                <item name="targetName"
+                                                      xsi:type="string">index = amdelivery_channel_config_form_loader
+                                                </item>
+                                                <item name="actionName" xsi:type="string">updateData</item>
+                                            </item>
+                                            <item name="3" xsi:type="array">
+                                                <item name="targetName"
+                                                      xsi:type="string">index = amdelivery_channel_config_form_modal
+                                                </item>
+                                                <item name="actionName" xsi:type="string">toggleModal</item>
+                                                <item name="params" xsi:type="array">
+                                                    <item name="0" xsi:type="string">edit</item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                        <item name="title" xsi:type="string" translate="true">Edit</item>
+                                        <item name="buttonClasses" xsi:type="string">amdelivery-button -edit</item>
+                                        <item name="disabled" xsi:type="boolean">true</item>
+                                        <item name="listens" xsi:type="array">
+                                            <item name="selectValue" xsi:type="string">toggleDisabled</item>
+                                        </item>
+                                    </item>
+                                </argument>
+                                <settings>
+                                    <imports>
+                                        <link name="selectValue">${ $.parentName }:selectValue</link>
+                                    </imports>
+                                </settings>
+                            </button>
+                            <button name="duplicate" component="Amasty_DeliveryDateManager/js/view/links-grid-row/links-grid-cell/elements/cell-actions/duplicate-button">
+                                <argument name="data" xsi:type="array">
+                                    <item name="config" xsi:type="array">
+                                        <item name="targetElementName" xsi:type="string">${ $.parentName.substr(0, $.parentName.indexOf('.actions')) }.config_id</item>
+                                        <item name="duplicateUrl" xsi:type="url" path="amasty_deliverydate/channel/modalDuplicate" />
+                                        <item name="modalType" xsi:type="string">configuration</item>
+                                        <item name="actions" xsi:type="array">
+                                            <item name="0" xsi:type="array">
+                                                <item name="targetName" xsi:type="string">${ $.$data.targetElementName }</item>
+                                                <item name="actionName" xsi:type="string">setExternalValue</item>
+                                                <item name="params" xsi:type="array">
+                                                    <item name="0" xsi:type="string">${ $.$data.selectValue }</item>
+                                                </item>
+                                            </item>
+                                            <item name="1" xsi:type="array">
+                                                <item name="targetName"
+                                                      xsi:type="string">index = amdelivery_channel_config_form_modal
+                                                </item>
+                                                <item name="actionName" xsi:type="string">toggleModal</item>
+                                                <item name="params" xsi:type="array">
+                                                    <item name="0" xsi:type="string">edit</item>
+                                                </item>
+                                            </item>
+                                            <item name="2" xsi:type="array">
+                                                <item name="targetName"
+                                                      xsi:type="string">index = amdelivery_channel_config_form_loader
+                                                </item>
+                                                <item name="actionName" xsi:type="string">set</item>
+                                                <item name="params" xsi:type="array">
+                                                    <item name="0" xsi:type="string">id</item>
+                                                    <item name="1" xsi:type="string">${ $.$data.selectValue }</item>
+                                                </item>
+                                            </item>
+                                            <item name="3" xsi:type="array">
+                                                <item name="targetName"
+                                                      xsi:type="string">index = amdelivery_channel_config_form_loader
+                                                </item>
+                                                <item name="actionName" xsi:type="string">set</item>
+                                                <item name="params" xsi:type="array">
+                                                    <item name="0" xsi:type="string">targetElementName</item>
+                                                    <item name="1" xsi:type="string">${ $.$data.targetElementName }</item>
+                                                </item>
+                                            </item>
+                                            <item name="4" xsi:type="array">
+                                                <item name="targetName"
+                                                      xsi:type="string">index = amdelivery_channel_config_form_loader
+                                                </item>
+                                                <item name="actionName" xsi:type="string">updateData</item>
+                                            </item>
+                                        </item>
+                                        <item name="title" xsi:type="string" translate="true">Сору</item>
+                                        <item name="buttonClasses" xsi:type="string">amdelivery-button -copy</item>
+                                        <item name="disabled" xsi:type="boolean">true</item>
+                                        <item name="listens" xsi:type="array">
+                                            <item name="selectValue" xsi:type="string">toggleDisabled</item>
+                                        </item>
+                                    </item>
+                                </argument>
+                                <settings>
+                                    <imports>
+                                        <link name="selectValue">${ $.parentName }:selectValue</link>
+                                    </imports>
+                                </settings>
+                            </button>
+                        </container>
+                    </container>
+                    <container name="descriptionWrapper" component="uiCollection"
+                               template="Amasty_DeliveryDateManager/wrapper">
+                        <argument name="data" xsi:type="array">
+                            <item name="config" xsi:type="array">
+                                <item name="additionalClasses" xsi:type="string">amdelivery-wrapper</item>
+                                <item name="indexField" xsi:type="string">id</item>
+                                <item name="externalProvider" xsi:type="string">amdelivery_channel_config_list.amdelivery_config_data_source</item>
+                                <item name="listens" xsi:type="array">
+                                    <item name="${ $.parentName }:selectValue" xsi:type="string">selectValue</item>
+                                </item>
+                            </item>
+                        </argument>
+                        <component
+                            name="description"
+                            component="Amasty_DeliveryDateManager/js/view/links-grid-row/links-grid-cell/elements/cell-description"
+                            template="Amasty_DeliveryDateManager/links-grid-row/links-grid-cell/elements/descriptions/general-options">
+                            <argument name="data" xsi:type="array">
+                                <item name="config" xsi:type="array">
+                                    <item name="indexField" xsi:type="string">id</item>
+                                    <item name="externalProvider"
+                                          xsi:type="string">amdelivery_channel_config_list.amdelivery_config_data_source
+                                    </item>
+                                    <item name="optionsMap" xsi:type="array">
+                                        <item name="is_same_day_available" xsi:type="array">
+                                            <item name="0" xsi:type="string" translate="true">No</item>
+                                            <item name="1" xsi:type="string" translate="true">Yes</item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </argument>
+                        </component>
+                    </container>
+                </container>
+            </container>
+        </container>
+
+        <container name="amdeliveryLinksGrid" component="Amasty_DeliveryDateManager/js/view/links-grid">
+
+            <fieldset name="schedules_fieldset" sortOrder="200">
+                <settings>
+                    <collapsible>true</collapsible>
+                    <opened>true</opened>
+                    <additionalClasses>
+                        <class name="amdelivery-admin-fieldset">true</class>
+                    </additionalClasses>
+                    <label>Schedules</label>
+                </settings>
+                <dynamicRows name="schedules">
+                    <settings>
+                        <addButtonLabel translate="true">Add Schedule</addButtonLabel>
+                        <dndConfig>
+                            <param name="enabled" xsi:type="boolean">false</param>
+                        </dndConfig>
+                        <defaultRecord>true</defaultRecord>
+                        <componentType>dynamicRows</componentType>
+                        <additionalClasses>
+                            <class name="amdelivery-dynamic-links">true</class>
+                        </additionalClasses>
+                    </settings>
+                    <container name="record" component="Magento_Ui/js/dynamic-rows/record">
+                        <argument name="data" xsi:type="array">
+                            <item name="config" xsi:type="array">
+                                <item name="disabled" xsi:type="boolean">false</item>
+                                <item name="visible" xsi:type="boolean">true</item>
+                                <item name="componentType" xsi:type="string">container</item>
+                                <item name="isTemplate" xsi:type="boolean">true</item>
+                                <item name="is_collection" xsi:type="boolean">true</item>
+                            </item>
+                        </argument>
+                        <container name="links_row"
+                                   component="Amasty_DeliveryDateManager/js/view/links-grid-row/links-grid-row">
+                            <container name="schedule_container"
+                                       component="Amasty_DeliveryDateManager/js/view/links-grid-row/links-grid-cell/links-grid-cell">
+                                <argument name="data" xsi:type="array">
+                                    <item name="config" xsi:type="array">
+                                        <item name="options" xsi:type="array">
+                                            <item name="title" xsi:type="string">Schedule</item>
+                                            <item name="additionalClasses" xsi:type="string">-small</item>
+                                        </item>
+                                        <item name="indexField" xsi:type="string">schedule_id</item>
+                                        <item name="externalProvider"
+                                              xsi:type="string">amdelivery_channel_schedule_list.amdelivery_schedule_data_source
+                                        </item>
+                                    </item>
+                                </argument>
+
+                                <field name="schedule_id" formElement="select"
+                                       component="Amasty_DeliveryDateManager/js/view/links-grid-row/links-grid-cell/elements/cell-select/schedules"
+                                       template="Amasty_DeliveryDateManager/links-grid-row/links-grid-cell/elements/cell-select">
+                                    <argument name="data" xsi:type="array">
+                                        <item name="config" xsi:type="array">
+                                            <item name="optionsValue" xsi:type="string">schedule_id</item>
+                                            <item name="externalProvider"
+                                                  xsi:type="string">amdelivery_channel_schedule_list.amdelivery_schedule_data_source
+                                            </item>
+                                        </item>
+                                    </argument>
+                                    <settings>
+                                        <validation>
+                                            <rule name="required-entry" xsi:type="boolean">true</rule>
+                                        </validation>
+                                        <switcherConfig>
+                                            <enabled>true</enabled>
+                                            <property>valueEmpty</property>
+                                            <rules>
+                                                <rule name="0">
+                                                    <value>1</value>
+                                                    <actions>
+                                                        <action name="0">
+                                                            <target>${ $.parentName.substr(0, $.parentName.indexOf('.schedule_container')) }.order_limits</target>
+                                                            <callback>disabled</callback>
+                                                            <params>
+                                                                <param name="0" xsi:type="boolean">true</param>
+                                                            </params>
+                                                        </action>
+                                                        <action name="1">
+                                                            <target>${ $.parentName.substr(0, $.parentName.indexOf('.schedule_container')) }.order_limits</target>
+                                                            <callback>clear</callback>
+                                                        </action>
+                                                        <action name="2">
+                                                            <target>${ $.parentName.substr(0, $.parentName.indexOf('.schedule_container')) }.time_sets</target>
+                                                            <callback>disabled</callback>
+                                                            <params>
+                                                                <param name="0" xsi:type="boolean">true</param>
+                                                            </params>
+                                                        </action>
+                                                        <action name="3">
+                                                            <target>${ $.parentName.substr(0, $.parentName.indexOf('.schedule_container')) }.time_sets</target>
+                                                            <callback>clear</callback>
+                                                        </action>
+                                                    </actions>
+                                                </rule>
+                                                <rule name="1">
+                                                    <value>0</value>
+                                                    <actions>
+                                                        <action name="0">
+                                                            <target>${ $.parentName.substr(0, $.parentName.indexOf('.schedule_container')) }.order_limits</target>
+                                                            <callback>disabled</callback>
+                                                            <params>
+                                                                <param name="0" xsi:type="boolean">false</param>
+                                                            </params>
+                                                        </action>
+                                                        <action name="1">
+                                                            <target>${ $.name }</target>
+                                                            <callback>setDependentFieldsValue</callback>
+                                                            <params>
+                                                                <param name="0" xsi:type="string">${ $.parentName.substr(0, $.parentName.indexOf('.schedule_container')) }.order_limits.limit_id</param>
+                                                            </params>
+                                                        </action>
+                                                        <action name="2">
+                                                            <target>${ $.parentName.substr(0, $.parentName.indexOf('.schedule_container')) }.time_sets</target>
+                                                            <callback>disabled</callback>
+                                                            <params>
+                                                                <param name="0" xsi:type="boolean">false</param>
+                                                            </params>
+                                                        </action>
+                                                        <action name="3">
+                                                            <target>${ $.name }</target>
+                                                            <callback>setDependentFieldsValue</callback>
+                                                            <params>
+                                                                <param name="0" xsi:type="string">${ $.parentName.substr(0, $.parentName.indexOf('.schedule_container')) }.time_sets.time_set_id</param>
+                                                            </params>
+                                                        </action>
+                                                    </actions>
+                                                </rule>
+                                            </rules>
+                                        </switcherConfig>
+                                    </settings>
+                                </field>
+                                <container name="actions"
+                                           component="Amasty_DeliveryDateManager/js/view/links-grid-row/links-grid-cell/elements/cell-actions">
+
+                                    <button name="add" component="Amasty_DeliveryDateManager/js/view/links-grid-row/links-grid-cell/elements/cell-actions/button">
+                                        <argument name="data" xsi:type="array">
+                                            <item name="config" xsi:type="array">
+                                                <item name="targetElementName" xsi:type="string">${ $.parentName.substr(0, $.parentName.indexOf('.actions')) }.schedule_id</item>
+                                                <item name="actions" xsi:type="array">
+                                                    <item name="0" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_schedule_form_modal
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">toggleModal</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">add</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="1" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_schedule_form_loader
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">set</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">targetElementName</item>
+                                                            <item name="1" xsi:type="string">${ $.$data.targetElementName }</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="2" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_schedule_form_loader
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">clearForm</item>
+                                                    </item>
+                                                    <item name="3" xsi:type="array">
+                                                        <item name="targetName" xsi:type="string">
+                                                            amdelivery_channel_schedule_form.amdelivery_channel_schedule_form.general.is_available
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">value</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="number">1</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="4" xsi:type="array">
+                                                        <item name="targetName" xsi:type="string">
+                                                            index = amdelivery_channel_schedule_form_modal
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">set</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">title</item>
+                                                            <item name="1" xsi:type="string" translate="true">Manage Delivery Channel Schedule</item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                                <item name="title" xsi:type="string" translate="true">Add</item>
+                                                <item name="buttonClasses" xsi:type="string">amdelivery-button</item>
+                                            </item>
+                                        </argument>
+                                    </button>
+                                    <button name="edit" component="Amasty_DeliveryDateManager/js/view/links-grid-row/links-grid-cell/elements/cell-actions/button">
+                                        <argument name="data" xsi:type="array">
+                                            <item name="config" xsi:type="array">
+                                                <item name="targetElementName" xsi:type="string">${ $.parentName.substr(0, $.parentName.indexOf('.actions')) }.schedule_id</item>
+                                                <item name="actions" xsi:type="array">
+                                                    <item name="0" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_schedule_form_loader
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">set</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">id</item>
+                                                            <item name="1" xsi:type="string">${ $.$data.selectValue }</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="1" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_schedule_form_loader
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">set</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">targetElementName</item>
+                                                            <item name="1" xsi:type="string">${ $.$data.targetElementName }</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="2" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_schedule_form_loader
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">updateData</item>
+                                                    </item>
+                                                    <item name="3" xsi:type="array">
+                                                        <item name="targetName" xsi:type="string">
+                                                            amdelivery_channel_schedule_form.amdelivery_channel_schedule_form.general.is_available
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">value</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="number">1</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="4" xsi:type="array">
+                                                        <item name="targetName" xsi:type="string">
+                                                            index = amdelivery_channel_schedule_form_modal
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">set</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">title</item>
+                                                            <item name="1" xsi:type="string" translate="true">Manage Delivery Channel Schedule</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="5" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_schedule_form_modal
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">toggleModal</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">edit</item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                                <item name="title" xsi:type="string" translate="true">Edit</item>
+                                                <item name="buttonClasses" xsi:type="string">amdelivery-button -edit</item>
+                                                <item name="disabled" xsi:type="boolean">true</item>
+                                                <item name="listens" xsi:type="array">
+                                                    <item name="selectValue" xsi:type="string">toggleDisabled</item>
+                                                </item>
+                                            </item>
+                                        </argument>
+                                        <settings>
+                                            <imports>
+                                                <link name="selectValue">${ $.parentName }:selectValue</link>
+                                            </imports>
+                                        </settings>
+                                    </button>
+                                    <button name="duplicate" component="Amasty_DeliveryDateManager/js/view/links-grid-row/links-grid-cell/elements/cell-actions/duplicate-button">
+                                        <argument name="data" xsi:type="array">
+                                            <item name="config" xsi:type="array">
+                                                <item name="targetElementName" xsi:type="string">${ $.parentName.substr(0, $.parentName.indexOf('.actions')) }.schedule_id</item>
+                                                <item name="duplicateUrl" xsi:type="url" path="amasty_deliverydate/channel/modalDuplicate" />
+                                                <item name="modalType" xsi:type="string">schedule</item>
+                                                <item name="actions" xsi:type="array">
+                                                    <item name="0" xsi:type="array">
+                                                        <item name="targetName" xsi:type="string">${ $.$data.targetElementName }</item>
+                                                        <item name="actionName" xsi:type="string">setExternalValue</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">${ $.$data.selectValue }</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="1" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_schedule_form_loader
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">set</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">id</item>
+                                                            <item name="1" xsi:type="string">${ $.$data.selectValue }</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="2" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_schedule_form_loader
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">set</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">targetElementName</item>
+                                                            <item name="1" xsi:type="string">${ $.$data.targetElementName }</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="3" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_schedule_form_loader
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">updateData</item>
+                                                    </item>
+                                                    <item name="4" xsi:type="array">
+                                                        <item name="targetName" xsi:type="string">
+                                                            amdelivery_channel_schedule_form.amdelivery_channel_schedule_form.general.is_available
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">value</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="number">1</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="5" xsi:type="array">
+                                                        <item name="targetName" xsi:type="string">
+                                                            index = amdelivery_channel_schedule_form_modal
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">set</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">title</item>
+                                                            <item name="1" xsi:type="string" translate="true">Manage Delivery Channel Schedule</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="6" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_schedule_form_modal
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">toggleModal</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">edit</item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                                <item name="title" xsi:type="string" translate="true">Сору</item>
+                                                <item name="buttonClasses" xsi:type="string">amdelivery-button -copy</item>
+                                                <item name="disabled" xsi:type="boolean">true</item>
+                                                <item name="listens" xsi:type="array">
+                                                    <item name="selectValue" xsi:type="string">toggleDisabled</item>
+                                                </item>
+                                            </item>
+                                        </argument>
+                                        <settings>
+                                            <imports>
+                                                <link name="selectValue">${ $.parentName }:selectValue</link>
+                                            </imports>
+                                        </settings>
+                                    </button>
+                                </container>
+                                <container name="description"
+                                           component="Amasty_DeliveryDateManager/js/view/links-grid-row/links-grid-cell/elements/cell-description"
+                                           template="Amasty_DeliveryDateManager/links-grid-row/links-grid-cell/elements/descriptions/schedule">
+                                    <argument name="data" xsi:type="array">
+                                        <item name="config" xsi:type="array">
+                                            <item name="indexField" xsi:type="string">schedule_id</item>
+                                            <item name="externalProvider"
+                                                  xsi:type="string">amdelivery_channel_schedule_list.amdelivery_schedule_data_source
+                                            </item>
+                                            <item name="optionsMap" xsi:type="array">
+                                                <item name="is_available" xsi:type="array">
+                                                    <item name="0" xsi:type="string" translate="true">Prohibit delivery</item>
+                                                    <item name="1" xsi:type="string" translate="true">Allow delivery</item>
+                                                </item>
+                                                <item name="type" xsi:type="array">
+                                                    <item name="0" xsi:type="string" translate="true">Specific Date Range</item>
+                                                    <item name="1" xsi:type="string" translate="true">Days of Year</item>
+                                                    <item name="2" xsi:type="string" translate="true">Days of Month</item>
+                                                    <item name="3" xsi:type="string" translate="true">Days of Week</item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </argument>
+                                </container>
+                            </container>
+                            <container name="order_limits"
+                                       component="Amasty_DeliveryDateManager/js/view/links-grid-row/links-grid-cell/links-grid-cell">
+                                <argument name="data" xsi:type="array">
+                                    <item name="config" xsi:type="array">
+                                        <item name="options" xsi:type="array">
+                                            <item name="title" xsi:type="string">Order Limits</item>
+                                            <item name="additionalClasses" xsi:type="string">-small</item>
+                                        </item>
+                                        <item name="indexField" xsi:type="string">limit_id</item>
+                                        <item name="externalProvider"
+                                              xsi:type="string">amdelivery_channel_limit_list.amdelivery_limit_data_source
+                                        </item>
+                                    </item>
+                                </argument>
+                                <field name="limit_id" formElement="select"
+                                       component="Amasty_DeliveryDateManager/js/view/links-grid-row/links-grid-cell/elements/cell-select"
+                                       template="Amasty_DeliveryDateManager/links-grid-row/links-grid-cell/elements/cell-select">
+                                    <argument name="data" xsi:type="array">
+                                        <item name="config" xsi:type="array">
+                                            <item name="indexField" xsi:type="string">limit_id</item>
+                                            <item name="externalProvider"
+                                                  xsi:type="string">amdelivery_channel_limit_list.amdelivery_limit_data_source
+                                            </item>
+                                        </item>
+                                    </argument>
+                                </field>
+                                <container name="actions"
+                                           component="Amasty_DeliveryDateManager/js/view/links-grid-row/links-grid-cell/elements/cell-actions">
+                                    <button name="add" component="Amasty_DeliveryDateManager/js/view/links-grid-row/links-grid-cell/elements/cell-actions/button">
+                                        <argument name="data" xsi:type="array">
+                                            <item name="config" xsi:type="array">
+                                                <item name="targetElementName" xsi:type="string">${ $.parentName.substr(0, $.parentName.indexOf('.actions')) }.limit_id</item>
+                                                <item name="actions" xsi:type="array">
+                                                    <item name="0" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_limit_form_modal
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">toggleModal</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">add</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="1" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_limit_form_loader
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">set</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">targetElementName</item>
+                                                            <item name="1" xsi:type="string">${ $.$data.targetElementName }</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="2" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_limit_form_loader
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">clearForm</item>
+                                                    </item>
+                                                </item>
+                                                <item name="title" xsi:type="string" translate="true">Add</item>
+                                                <item name="buttonClasses" xsi:type="string"
+                                                      translate="true">amdelivery-button
+                                                </item>
+                                            </item>
+                                        </argument>
+                                    </button>
+                                    <button name="edit" component="Amasty_DeliveryDateManager/js/view/links-grid-row/links-grid-cell/elements/cell-actions/button">
+                                        <argument name="data" xsi:type="array">
+                                            <item name="config" xsi:type="array">
+                                                <item name="targetElementName" xsi:type="string">${ $.parentName.substr(0, $.parentName.indexOf('.actions')) }.limit_id</item>
+                                                <item name="actions" xsi:type="array">
+                                                    <item name="0" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_limit_form_loader
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">set</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">id</item>
+                                                            <item name="1" xsi:type="string">${ $.$data.selectValue }</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="1" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_limit_form_loader
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">set</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">targetElementName</item>
+                                                            <item name="1" xsi:type="string">${ $.$data.targetElementName }</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="2" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_limit_form_loader
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">updateData</item>
+                                                    </item>
+                                                    <item name="3" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_limit_form_modal
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">toggleModal</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">edit</item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                                <item name="title" xsi:type="string" translate="true">Edit</item>
+                                                <item name="buttonClasses" xsi:type="string">amdelivery-button -edit</item>
+                                                <item name="disabled" xsi:type="boolean">true</item>
+                                                <item name="listens" xsi:type="array">
+                                                    <item name="selectValue" xsi:type="string">toggleDisabled</item>
+                                                </item>
+                                            </item>
+                                        </argument>
+                                        <settings>
+                                            <imports>
+                                                <link name="selectValue">${ $.parentName }:selectValue</link>
+                                            </imports>
+                                        </settings>
+                                    </button>
+                                    <button name="duplicate" component="Amasty_DeliveryDateManager/js/view/links-grid-row/links-grid-cell/elements/cell-actions/duplicate-button">
+                                        <argument name="data" xsi:type="array">
+                                            <item name="config" xsi:type="array">
+                                                <item name="targetElementName" xsi:type="string">${ $.parentName.substr(0, $.parentName.indexOf('.actions')) }.limit_id</item>
+                                                <item name="duplicateUrl" xsi:type="url" path="amasty_deliverydate/channel/modalDuplicate" />
+                                                <item name="modalType" xsi:type="string">order_limit</item>
+                                                <item name="actions" xsi:type="array">
+                                                    <item name="0" xsi:type="array">
+                                                        <item name="targetName" xsi:type="string">${ $.$data.targetElementName }</item>
+                                                        <item name="actionName" xsi:type="string">setExternalValue</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">${ $.$data.selectValue }</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="1" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_limit_form_loader
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">set</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">id</item>
+                                                            <item name="1" xsi:type="string">${ $.$data.selectValue }</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="2" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_limit_form_loader
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">set</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">targetElementName</item>
+                                                            <item name="1" xsi:type="string">${ $.$data.targetElementName }</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="3" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_limit_form_loader
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">updateData</item>
+                                                    </item>
+                                                    <item name="4" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_limit_form_modal
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">toggleModal</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">edit</item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                                <item name="title" xsi:type="string" translate="true">Сору</item>
+                                                <item name="buttonClasses" xsi:type="string">amdelivery-button -copy</item>
+                                                <item name="disabled" xsi:type="boolean">true</item>
+                                                <item name="listens" xsi:type="array">
+                                                    <item name="selectValue" xsi:type="string">toggleDisabled</item>
+                                                </item>
+                                            </item>
+                                        </argument>
+                                        <settings>
+                                            <imports>
+                                                <link name="selectValue">${ $.parentName }:selectValue</link>
+                                            </imports>
+                                        </settings>
+                                    </button>
+                                </container>
+                                <container name="description"
+                                           component="Amasty_DeliveryDateManager/js/view/links-grid-row/links-grid-cell/elements/cell-description"
+                                           template="Amasty_DeliveryDateManager/links-grid-row/links-grid-cell/elements/descriptions/order-limits">
+                                    <argument name="data" xsi:type="array">
+                                        <item name="config" xsi:type="array">
+                                            <item name="indexField" xsi:type="string">limit_id</item>
+                                            <item name="externalProvider"
+                                                  xsi:type="string">amdelivery_channel_limit_list.amdelivery_limit_data_source
+                                            </item>
+                                        </item>
+                                    </argument>
+                                </container>
+                            </container>
+                            <container name="time_sets"
+                                       component="Amasty_DeliveryDateManager/js/view/links-grid-row/links-grid-cell/links-grid-cell">
+                                <argument name="data" xsi:type="array">
+                                    <item name="config" xsi:type="array">
+                                        <item name="options" xsi:type="array">
+                                            <item name="title" xsi:type="string">Time Intervals Set</item>
+                                            <item name="additionalClasses" xsi:type="string">-small</item>
+                                        </item>
+                                        <item name="externalProvider"
+                                              xsi:type="string">amdelivery_channel_interval_list.amdelivery_time_set_data_source
+                                        </item>
+                                    </item>
+                                </argument>
+                                <field name="time_set_id" formElement="select"
+                                       component="Amasty_DeliveryDateManager/js/view/links-grid-row/links-grid-cell/elements/cell-select"
+                                       template="Amasty_DeliveryDateManager/links-grid-row/links-grid-cell/elements/cell-select">
+                                    <argument name="data" xsi:type="array">
+                                        <item name="config" xsi:type="array">
+                                            <item name="indexField" xsi:type="string">id</item>
+                                            <item name="externalProvider"
+                                                  xsi:type="string">amdelivery_channel_interval_list.amdelivery_time_set_data_source
+                                            </item>
+                                        </item>
+                                    </argument>
+                                </field>
+                                <container name="actions"
+                                           component="Amasty_DeliveryDateManager/js/view/links-grid-row/links-grid-cell/elements/cell-actions">
+                                    <button name="add" component="Amasty_DeliveryDateManager/js/view/links-grid-row/links-grid-cell/elements/cell-actions/button">
+                                        <argument name="data" xsi:type="array">
+                                            <item name="config" xsi:type="array">
+                                                <item name="targetElementName" xsi:type="string">${ $.parentName.substr(0, $.parentName.indexOf('.actions')) }.time_set_id</item>
+                                                <item name="actions" xsi:type="array">
+                                                    <item name="0" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_interval_form_modal
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">toggleModal</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">add</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="1" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_interval_form_loader
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">set</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">targetElementName</item>
+                                                            <item name="1" xsi:type="string">${ $.$data.targetElementName }</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="2" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_interval_form_loader
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">clearForm</item>
+                                                    </item>
+                                                </item>
+                                                <item name="title" xsi:type="string" translate="true">Add</item>
+                                                <item name="buttonClasses" xsi:type="string"
+                                                      translate="true">amdelivery-button
+                                                </item>
+                                            </item>
+                                        </argument>
+                                    </button>
+                                    <button name="edit" component="Amasty_DeliveryDateManager/js/view/links-grid-row/links-grid-cell/elements/cell-actions/button">
+                                        <argument name="data" xsi:type="array">
+                                            <item name="config" xsi:type="array">
+                                                <item name="targetElementName" xsi:type="string">${ $.parentName.substr(0, $.parentName.indexOf('.actions')) }.time_set_id</item>
+                                                <item name="actions" xsi:type="array">
+                                                    <item name="0" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_interval_form_loader
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">set</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">id</item>
+                                                            <item name="1" xsi:type="string">${ $.$data.selectValue }</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="1" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_interval_form_loader
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">set</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">targetElementName</item>
+                                                            <item name="1" xsi:type="string">${ $.$data.targetElementName }</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="2" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_interval_form_loader
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">updateData</item>
+                                                    </item>
+                                                    <item name="3" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_interval_form_modal
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">toggleModal</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">edit</item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                                <item name="title" xsi:type="string" translate="true">Edit</item>
+                                                <item name="buttonClasses" xsi:type="string">amdelivery-button -edit</item>
+                                                <item name="disabled" xsi:type="boolean">true</item>
+                                                <item name="listens" xsi:type="array">
+                                                    <item name="selectValue" xsi:type="string">toggleDisabled</item>
+                                                </item>
+                                            </item>
+                                        </argument>
+                                        <settings>
+                                            <imports>
+                                                <link name="selectValue">${ $.parentName }:selectValue</link>
+                                            </imports>
+                                        </settings>
+                                    </button>
+                                    <button name="duplicate" component="Amasty_DeliveryDateManager/js/view/links-grid-row/links-grid-cell/elements/cell-actions/duplicate-button">
+                                        <argument name="data" xsi:type="array">
+                                            <item name="config" xsi:type="array">
+                                                <item name="targetElementName" xsi:type="string">${ $.parentName.substr(0, $.parentName.indexOf('.actions')) }.time_set_id</item>
+                                                <item name="duplicateUrl" xsi:type="url" path="amasty_deliverydate/channel/modalDuplicate" />
+                                                <item name="modalType" xsi:type="string">time_interval</item>
+                                                <item name="actions" xsi:type="array">
+                                                    <item name="0" xsi:type="array">
+                                                        <item name="targetName" xsi:type="string">${ $.$data.targetElementName }</item>
+                                                        <item name="actionName" xsi:type="string">setExternalValue</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">${ $.$data.selectValue }</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="1" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_interval_form_loader
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">set</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">id</item>
+                                                            <item name="1" xsi:type="string">${ $.$data.selectValue }</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="2" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_interval_form_loader
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">set</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">targetElementName</item>
+                                                            <item name="1" xsi:type="string">${ $.$data.targetElementName }</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="3" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_interval_form_loader
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">updateData</item>
+                                                    </item>
+                                                    <item name="4" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_interval_form_modal
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">toggleModal</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">edit</item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                                <item name="title" xsi:type="string" translate="true">Сору</item>
+                                                <item name="buttonClasses" xsi:type="string">amdelivery-button -copy</item>
+                                                <item name="disabled" xsi:type="boolean">true</item>
+                                                <item name="listens" xsi:type="array">
+                                                    <item name="selectValue" xsi:type="string">toggleDisabled</item>
+                                                </item>
+                                            </item>
+                                        </argument>
+                                        <settings>
+                                            <imports>
+                                                <link name="selectValue">${ $.parentName }:selectValue</link>
+                                            </imports>
+                                        </settings>
+                                    </button>
+                                </container>
+                                <container name="description"
+                                           component="Amasty_DeliveryDateManager/js/view/links-grid-row/links-grid-cell/elements/cell-description"
+                                           template="Amasty_DeliveryDateManager/links-grid-row/links-grid-cell/elements/descriptions/time-intervals">
+                                    <argument name="data" xsi:type="array">
+                                        <item name="config" xsi:type="array">
+                                            <item name="externalProvider"
+                                                  xsi:type="string">amdelivery_channel_interval_list.amdelivery_time_set_data_source
+                                            </item>
+                                        </item>
+                                    </argument>
+                                </container>
+                            </container>
+                        </container>
+                        <actionDelete template="Magento_Backend/dynamic-rows/cells/action-delete">
+                            <argument name="data" xsi:type="array">
+                                <item name="config" xsi:type="array">
+                                    <item name="fit" xsi:type="boolean">false</item>
+                                </item>
+                            </argument>
+                            <settings>
+                                <additionalClasses>
+                                    <class name="some-class">true</class>
+                                </additionalClasses>
+                                <dataType>text</dataType>
+                                <componentType>actionDelete</componentType>
+                            </settings>
+                        </actionDelete>
+                    </container>
+                </dynamicRows>
+            </fieldset>
+
+            <fieldset name="exceptions_fieldset">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Exceptions</item>
+                        <item name="collapsible" xsi:type="boolean">true</item>
+                        <item name="sortOrder" xsi:type="number">220</item>
+                        <item name="opened" xsi:type="boolean">true</item>
+                        <item name="additionalClasses" xsi:type="string">amdelivery-admin-fieldset</item>
+                    </item>
+                </argument>
+                <dynamicRows name="exceptions">
+                    <settings>
+                        <addButtonLabel translate="true">Add Exception</addButtonLabel>
+                        <dndConfig>
+                            <param name="enabled" xsi:type="boolean">false</param>
+                        </dndConfig>
+                        <defaultRecord>true</defaultRecord>
+                        <componentType>dynamicRows</componentType>
+                        <additionalClasses>
+                            <class name="amdelivery-dynamic-links">true</class>
+                            <class name="-exceptions">true</class>
+                        </additionalClasses>
+                    </settings>
+                    <container name="record" component="Magento_Ui/js/dynamic-rows/record">
+                        <argument name="data" xsi:type="array">
+                            <item name="config" xsi:type="array">
+                                <item name="label" xsi:type="string" translate="true">Record Example</item>
+                                <item name="disabled" xsi:type="boolean">false</item>
+                                <item name="visible" xsi:type="boolean">true</item>
+                                <item name="componentType" xsi:type="string">container</item>
+                                <item name="isTemplate" xsi:type="boolean">true</item>
+                                <item name="is_collection" xsi:type="boolean">true</item>
+                            </item>
+                        </argument>
+                        <container name="links_row"
+                                   component="Amasty_DeliveryDateManager/js/view/links-grid-row/links-grid-row">
+                            <container name="schedule"
+                                       component="Amasty_DeliveryDateManager/js/view/links-grid-row/links-grid-cell/links-grid-cell">
+                                <argument name="data" xsi:type="array">
+                                    <item name="config" xsi:type="array">
+                                        <item name="options" xsi:type="array">
+                                            <item name="title" xsi:type="string">Exception</item>
+                                            <item name="additionalClasses" xsi:type="string">-small</item>
+                                        </item>
+                                        <item name="dataName" xsi:type="string">schedules</item>
+                                    </item>
+                                </argument>
+                                <field name="schedule_id" formElement="select"
+                                       component="Amasty_DeliveryDateManager/js/view/links-grid-row/links-grid-cell/elements/cell-select/schedules"
+                                       template="Amasty_DeliveryDateManager/links-grid-row/links-grid-cell/elements/cell-select">
+                                    <argument name="data" xsi:type="array">
+                                        <item name="config" xsi:type="array">
+                                            <item name="optionsValue" xsi:type="string">schedule_id</item>
+                                            <item name="allValuesDataScope" xsi:type="string">data.exceptions</item>
+                                            <item name="externalProvider"
+                                                  xsi:type="string">amdelivery_channel_exception_list.amdelivery_exception_data_source
+                                            </item>
+                                        </item>
+                                    </argument>
+                                </field>
+                                <container name="actions"
+                                           component="Amasty_DeliveryDateManager/js/view/links-grid-row/links-grid-cell/elements/cell-actions">
+                                    <button name="add" component="Amasty_DeliveryDateManager/js/view/links-grid-row/links-grid-cell/elements/cell-actions/button">
+                                        <argument name="data" xsi:type="array">
+                                            <item name="config" xsi:type="array">
+                                                <item name="targetElementName" xsi:type="string">${ $.parentName.substr(0, $.parentName.indexOf('.actions')) }.schedule_id</item>
+                                                <item name="actions" xsi:type="array">
+                                                    <item name="0" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_schedule_form_modal
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">toggleModal</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">add</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="1" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_schedule_form_loader
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">set</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">targetElementName</item>
+                                                            <item name="1" xsi:type="string">${ $.$data.targetElementName }</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="2" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_schedule_form_loader
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">clearForm</item>
+                                                    </item>
+                                                    <item name="3" xsi:type="array">
+                                                        <item name="targetName" xsi:type="string">
+                                                            amdelivery_channel_schedule_form.amdelivery_channel_schedule_form.general.is_available
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">value</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="number">0</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="4" xsi:type="array">
+                                                        <item name="targetName" xsi:type="string">
+                                                            index = amdelivery_channel_schedule_form_modal
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">set</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">title</item>
+                                                            <item name="1" xsi:type="string" translate="true">Manage Delivery Channel Exception</item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                                <item name="title" xsi:type="string" translate="true">Add</item>
+                                                <item name="buttonClasses" xsi:type="string"
+                                                      translate="true">amdelivery-button
+                                                </item>
+                                            </item>
+                                        </argument>
+                                    </button>
+                                    <button name="edit" component="Amasty_DeliveryDateManager/js/view/links-grid-row/links-grid-cell/elements/cell-actions/button">
+                                        <argument name="data" xsi:type="array">
+                                            <item name="config" xsi:type="array">
+                                                <item name="targetElementName" xsi:type="string">${ $.parentName.substr(0, $.parentName.indexOf('.actions')) }.schedule_id</item>
+                                                <item name="actions" xsi:type="array">
+                                                    <item name="0" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_schedule_form_loader
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">set</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">id</item>
+                                                            <item name="1" xsi:type="string">${ $.$data.selectValue }</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="1" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_schedule_form_loader
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">set</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">targetElementName</item>
+                                                            <item name="1" xsi:type="string">${ $.$data.targetElementName }</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="2" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_schedule_form_loader
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">updateData</item>
+                                                    </item>
+                                                    <item name="3" xsi:type="array">
+                                                        <item name="targetName" xsi:type="string">
+                                                            amdelivery_channel_schedule_form.amdelivery_channel_schedule_form.general.is_available
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">value</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="number">0</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="4" xsi:type="array">
+                                                        <item name="targetName" xsi:type="string">
+                                                            index = amdelivery_channel_schedule_form_modal
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">set</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">title</item>
+                                                            <item name="1" xsi:type="string" translate="true">Manage Delivery Channel Exception</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="5" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_schedule_form_modal
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">toggleModal</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">edit</item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                                <item name="title" xsi:type="string" translate="true">Edit</item>
+                                                <item name="buttonClasses" xsi:type="string">amdelivery-button -edit</item>
+                                                <item name="disabled" xsi:type="boolean">true</item>
+                                                <item name="listens" xsi:type="array">
+                                                    <item name="selectValue" xsi:type="string">toggleDisabled</item>
+                                                </item>
+                                            </item>
+                                        </argument>
+                                        <settings>
+                                            <imports>
+                                                <link name="selectValue">${ $.parentName }:selectValue</link>
+                                            </imports>
+                                        </settings>
+                                    </button>
+                                    <button name="duplicate" component="Amasty_DeliveryDateManager/js/view/links-grid-row/links-grid-cell/elements/cell-actions/duplicate-button">
+                                        <argument name="data" xsi:type="array">
+                                            <item name="config" xsi:type="array">
+                                                <item name="targetElementName" xsi:type="string">${ $.parentName.substr(0, $.parentName.indexOf('.actions')) }.schedule_id</item>
+                                                <item name="duplicateUrl" xsi:type="url" path="amasty_deliverydate/channel/modalDuplicate" />
+                                                <item name="modalType" xsi:type="string">schedule</item>
+                                                <item name="actions" xsi:type="array">
+                                                    <item name="0" xsi:type="array">
+                                                        <item name="targetName" xsi:type="string">${ $.$data.targetElementName }</item>
+                                                        <item name="actionName" xsi:type="string">setExternalValue</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">${ $.$data.selectValue }</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="1" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_schedule_form_loader
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">set</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">id</item>
+                                                            <item name="1" xsi:type="string">${ $.$data.selectValue }</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="2" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_schedule_form_loader
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">set</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">targetElementName</item>
+                                                            <item name="1" xsi:type="string">${ $.$data.targetElementName }</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="3" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_schedule_form_loader
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">updateData</item>
+                                                    </item>
+                                                    <item name="4" xsi:type="array">
+                                                        <item name="targetName" xsi:type="string">
+                                                            amdelivery_channel_schedule_form.amdelivery_channel_schedule_form.general.is_available
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">value</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="number">0</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="5" xsi:type="array">
+                                                        <item name="targetName" xsi:type="string">
+                                                            index = amdelivery_channel_schedule_form_modal
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">set</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">title</item>
+                                                            <item name="1" xsi:type="string" translate="true">Manage Delivery Channel Exception</item>
+                                                        </item>
+                                                    </item>
+                                                    <item name="6" xsi:type="array">
+                                                        <item name="targetName"
+                                                              xsi:type="string">index = amdelivery_channel_schedule_form_modal
+                                                        </item>
+                                                        <item name="actionName" xsi:type="string">toggleModal</item>
+                                                        <item name="params" xsi:type="array">
+                                                            <item name="0" xsi:type="string">edit</item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                                <item name="title" xsi:type="string" translate="true">Сору</item>
+                                                <item name="buttonClasses" xsi:type="string">amdelivery-button -copy</item>
+                                                <item name="disabled" xsi:type="boolean">true</item>
+                                                <item name="listens" xsi:type="array">
+                                                    <item name="selectValue" xsi:type="string">toggleDisabled</item>
+                                                </item>
+                                            </item>
+                                        </argument>
+                                        <settings>
+                                            <imports>
+                                                <link name="selectValue">${ $.parentName }:selectValue</link>
+                                            </imports>
+                                        </settings>
+                                    </button>
+                                </container>
+                                <container name="description"
+                                           component="Amasty_DeliveryDateManager/js/view/links-grid-row/links-grid-cell/elements/cell-description"
+                                           template="Amasty_DeliveryDateManager/links-grid-row/links-grid-cell/elements/descriptions/schedule">
+                                    <argument name="data" xsi:type="array">
+                                        <item name="config" xsi:type="array">
+                                            <item name="indexField" xsi:type="string">schedule_id</item>
+                                            <item name="externalProvider"
+                                                  xsi:type="string">amdelivery_channel_exception_list.amdelivery_exception_data_source
+                                            </item>
+                                            <item name="optionsMap" xsi:type="array">
+                                                <item name="is_available" xsi:type="array">
+                                                    <item name="0" xsi:type="string" translate="true">Prohibit delivery</item>
+                                                    <item name="1" xsi:type="string" translate="true">Allow delivery</item>
+                                                </item>
+                                                <item name="type" xsi:type="array">
+                                                    <item name="0" xsi:type="string" translate="true">Specific Date Range</item>
+                                                    <item name="1" xsi:type="string" translate="true">Days of Year</item>
+                                                    <item name="2" xsi:type="string" translate="true">Days of Month</item>
+                                                    <item name="3" xsi:type="string" translate="true">Days of Week</item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </argument>
+                                </container>
+                            </container>
+                        </container>
+                        <actionDelete template="Magento_Backend/dynamic-rows/cells/action-delete">
+                            <argument name="data" xsi:type="array">
+                                <item name="config" xsi:type="array">
+                                    <item name="fit" xsi:type="boolean">false</item>
+                                </item>
+                            </argument>
+                            <settings>
+                                <additionalClasses>
+                                    <class name="some-class">true</class>
+                                </additionalClasses>
+                                <dataType>text</dataType>
+                                <componentType>actionDelete</componentType>
+                            </settings>
+                        </actionDelete>
+                    </container>
+                </dynamicRows>
+            </fieldset>
+        </container>
+
+        <modal name="amdelivery_channel_config_form_modal">
+            <settings>
+                <componentType>modal</componentType>
+                <options>
+                    <option name="type" xsi:type="string">slide</option>
+                    <option name="title" xsi:type="string" translate="true">Manage General Delivery Options</option>
+                </options>
+            </settings>
+            <insertForm name="amdelivery_channel_config_form_loader"
+                        component="Amasty_DeliveryDateManager/js/view/modal/channel-modal-component">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="modalProvider" xsi:type="string">${ $.parentName }</item>
+                        <item name="externalProvider" xsi:type="string">${ $.ns }.${ $.ns }_data_source</item>
+                    </item>
+                </argument>
+                <settings>
+                    <formSubmitType>ajax</formSubmitType>
+                    <renderUrl path="mui/index/render_handle">
+                        <param name="handle">amdelivery_channel_config_form</param>
+                        <param name="buttons">1</param>
+                    </renderUrl>
+                    <exports>
+                        <link name="id">params.id</link>
+                    </exports>
+                    <loading>false</loading>
+                    <autoRender>true</autoRender>
+                    <toolbarContainer>${ $.parentName }</toolbarContainer>
+                    <ns>amdelivery_channel_config_form</ns>
+                    <exports>
+                        <link name="id">params.id</link>
+                    </exports>
+                    <imports>
+                        <link name="onDelete">${ $.ns }.${ $.ns }:deleteAction</link>
+                    </imports>
+                </settings>
+            </insertForm>
+        </modal>
+
+        <modal name="amdelivery_channel_schedule_form_modal">
+            <settings>
+                <componentType>modal</componentType>
+                <options>
+                    <option name="type" xsi:type="string">slide</option>
+                    <option name="title" xsi:type="string" translate="true">Manage Delivery Channel Schedule</option>
+                </options>
+            </settings>
+            <insertForm name="amdelivery_channel_schedule_form_loader"
+                        component="Amasty_DeliveryDateManager/js/view/modal/channel-modal-component">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="modalProvider" xsi:type="string">${ $.parentName }</item>
+                        <item name="externalProvider" xsi:type="string">${ $.ns }.${ $.ns }_data_source</item>
+                    </item>
+                </argument>
+                <settings>
+                    <formSubmitType>ajax</formSubmitType>
+                    <renderUrl path="mui/index/render_handle">
+                        <param name="handle">amdelivery_channel_schedule_form</param>
+                        <param name="buttons">1</param>
+                    </renderUrl>
+                    <exports>
+                        <link name="id">params.id</link>
+                    </exports>
+                    <loading>false</loading>
+                    <autoRender>true</autoRender>
+                    <toolbarContainer>${ $.parentName }</toolbarContainer>
+                    <ns>amdelivery_channel_schedule_form</ns>
+                    <exports>
+                        <link name="id">params.id</link>
+                    </exports>
+                    <imports>
+                        <link name="onDelete">${ $.ns }.${ $.ns }:deleteAction</link>
+                    </imports>
+                </settings>
+            </insertForm>
+        </modal>
+
+        <modal name="amdelivery_channel_limit_form_modal">
+            <settings>
+                <componentType>modal</componentType>
+                <options>
+                    <option name="type" xsi:type="string">slide</option>
+                    <option name="title" xsi:type="string" translate="true">Manage Order Limits</option>
+                </options>
+            </settings>
+            <insertForm name="amdelivery_channel_limit_form_loader"
+                        component="Amasty_DeliveryDateManager/js/view/modal/channel-modal-component">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="modalProvider" xsi:type="string">${ $.parentName }</item>
+                        <item name="externalProvider" xsi:type="string">${ $.ns }.${ $.ns }_data_source</item>
+                    </item>
+                </argument>
+                <settings>
+                    <formSubmitType>ajax</formSubmitType>
+                    <renderUrl path="mui/index/render_handle">
+                        <param name="handle">amdelivery_channel_limit_form</param>
+                        <param name="buttons">1</param>
+                    </renderUrl>
+                    <exports>
+                        <link name="id">params.id</link>
+                    </exports>
+                    <loading>false</loading>
+                    <autoRender>true</autoRender>
+                    <toolbarContainer>${ $.parentName }</toolbarContainer>
+                    <ns>amdelivery_channel_limit_form</ns>
+                    <exports>
+                        <link name="id">params.id</link>
+                    </exports>
+                    <imports>
+                        <link name="onDelete">${ $.ns }.${ $.ns }:deleteAction</link>
+                    </imports>
+                </settings>
+            </insertForm>
+        </modal>
+
+        <modal name="amdelivery_channel_interval_form_modal">
+            <settings>
+                <componentType>modal</componentType>
+                <options>
+                    <option name="type" xsi:type="string">slide</option>
+                    <option name="title" xsi:type="string" translate="true">Manage Time Intervals Set</option>
+                </options>
+            </settings>
+            <insertForm name="amdelivery_channel_interval_form_loader"
+                        component="Amasty_DeliveryDateManager/js/view/modal/channel-modal-component">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="modalProvider" xsi:type="string">${ $.parentName }</item>
+                        <item name="externalProvider" xsi:type="string">${ $.ns }.${ $.ns }_data_source</item>
+                    </item>
+                </argument>
+                <settings>
+                    <formSubmitType>ajax</formSubmitType>
+                    <renderUrl path="mui/index/render_handle">
+                        <param name="handle">amdelivery_channel_interval_form</param>
+                        <param name="buttons">1</param>
+                    </renderUrl>
+                    <loading>false</loading>
+                    <autoRender>true</autoRender>
+                    <toolbarContainer>${ $.parentName }</toolbarContainer>
+                    <externalProvider>${ $.ns }.amdelivery_channel_interval_form_data_source</externalProvider>
+                    <ns>amdelivery_channel_interval_form</ns>
+                    <exports>
+                        <link name="id">params.id</link>
+                    </exports>
+                    <imports>
+                        <link name="onDelete">${ $.ns }.${ $.ns }:deleteAction</link>
+                    </imports>
+                </settings>
+            </insertForm>
+        </modal>
+    </fieldset>
+</form>

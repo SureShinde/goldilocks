@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Ipay88\Ipay88\Controller\Index\Index" type="Magenest\Ipay88\Controller\Index\Index"/>
+    <type name="Magento\Framework\Session\SessionStartChecker">
+        <plugin name="ipay88_session_checker" type="Magenest\Ipay88\Plugin\Ipay88SessionChecker"/>
+    </type>
+    <type name="Magento\Framework\App\Request\CsrfValidator">
+        <plugin name="csrf_bypass" type="Magenest\Ipay88\Plugin\Framework\App\Request\CsrfByPass" sortOrder="0"/>
+    </type>
+</config>

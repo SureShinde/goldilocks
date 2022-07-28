@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="config" xsi:type="array">
+            <item name="component" xsi:type="string">Amasty_PreOrderAnalytic/js/components/last-list</item>
+        </item>
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">
+                amasty_preorder_last_listing.amasty_preorder_last_listing_data_source
+            </item>
+            <item name="deps" xsi:type="string">
+                amasty_preorder_last_listing.amasty_preorder_last_listing_data_source
+            </item>
+            <item name="view_all_url" xsi:type="url" path="sales/order">
+                <param name="is_preorder">1</param>
+            </item>
+        </item>
+    </argument>
+    <dataSource name="amasty_preorder_last_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">
+                Amasty\PreOrderAnalytic\Ui\DataProvider\LastPreorder\Listing\DataProvider
+            </argument>
+            <argument name="name" xsi:type="string">amasty_preorder_last_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">id</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">uiComponent</item>
+            </item>
+        </argument>
+    </dataSource>
+    <component name="amasty_preorder_table">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="isDisabled" xsi:type="boolean">true</item>
+                <item name="component" xsi:type="string">Amasty_PreOrderAnalytic/js/components/table</item>
+            </item>
+        </argument>
+    </component>
+    <columns name="amasty_preorder_last_columns">
+        <column name="increment_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Order</item>
+                    <item name="sortable" xsi:type="boolean">false</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+        </column>
+        <column name="customer_name" class="Amasty\PreOrderAnalytic\Ui\Component\Listing\Column\CustomerName">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Customer</item>
+                    <item name="sortable" xsi:type="boolean">false</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                </item>
+            </argument>
+        </column>
+        <column name="amasty_preorder_status_deps" component="Magento_Ui/js/grid/columns/select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Status</item>
+                    <item name="sortable" xsi:type="boolean">false</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
+                </item>
+                <item name="options" xsi:type="object">Magento\Sales\Ui\Component\Listing\Column\Status\Options</item>
+            </argument>
+        </column>
+        <column name="created_at" class="Amasty\PreOrderAnalytic\Ui\Component\Listing\Column\Date"
+                component="Magento_Ui/js/grid/columns/date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Date</item>
+                    <item name="sortable" xsi:type="boolean">false</item>
+                    <item name="sortOrder" xsi:type="number">40</item>
+                </item>
+            </argument>
+        </column>
+        <column name="preorder_count">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Pre-order Items</item>
+                    <item name="sortable" xsi:type="boolean">false</item>
+                    <item name="sortOrder" xsi:type="number">50</item>
+                </item>
+            </argument>
+        </column>
+        <column name="preorder_revenue" class="Amasty\PreOrderAnalytic\Ui\Component\Listing\Column\LastOrders\Price">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Pre-order Revenue</item>
+                    <item name="sortable" xsi:type="boolean">false</item>
+                    <item name="sortOrder" xsi:type="number">60</item>
+                </item>
+            </argument>
+        </column>
+    </columns>
+</listing>

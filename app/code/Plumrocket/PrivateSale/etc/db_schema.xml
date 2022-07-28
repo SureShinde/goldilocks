@@ -1,0 +1,218 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="plumrocket_privatesale_event_eav_attribute" resource="default" engine="innodb"
+           comment="Plumrocket PrivateSale EAV Attributes">
+        <column xsi:type="smallint" name="attribute_id" padding="5" unsigned="true" nullable="false" identity="true"
+                comment="Attribute ID"/>
+        <column xsi:type="smallint" name="is_global" padding="5" unsigned="true" nullable="false" identity="false"
+                comment="Is Global"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="attribute_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="PLUMROCKET_PRIVATESALE_EVENT_EAV_ATTR_ATTR_ID_EAV_ATTR_ATTR_ID" table="plumrocket_privatesale_event_eav_attribute"
+                    column="attribute_id" referenceTable="eav_attribute" referenceColumn="attribute_id" onDelete="CASCADE"/>
+    </table>
+    <table name="plumrocket_privatesale_product_event_indexer" resource="default" engine="innodb"
+           comment="Active Events Indexer">
+        <column xsi:type="int" name="product_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Product Identifier"/>
+        <column xsi:type="smallint" name="website_id" padding="5" unsigned="true" nullable="false" identity="false"
+                comment="Website Identifier"/>
+        <column xsi:type="int" name="event_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Event Identifier"/>
+        <column xsi:type="boolean" name="is_private" nullable="false" comment="Event Identifier"/>
+        <column xsi:type="datetime" name="start_date" nullable="true" on_update="false" comment="Event Start Date"/>
+        <column xsi:type="datetime" name="end_date" nullable="true" on_update="false" comment="Event End Date"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="product_id"/>
+            <column name="website_id"/>
+        </constraint>
+        <index referenceId="PLUMROCKET_PRIVATESALE_PRODUCT_EVENT_INDEXER_EVENT_ID" indexType="btree">
+            <column name="event_id"/>
+        </index>
+        <index referenceId="PLUMROCKET_PRIVATESALE_PRODUCT_EVENT_INDEXER_WEBSITE_ID" indexType="btree">
+            <column name="website_id"/>
+        </index>
+        <constraint xsi:type="foreign" referenceId="PLUMROCKET_PRIVATESALE_PRODUCT_EVENT_INDEXER_PRODUCT_ID" table="plumrocket_privatesale_product_event_indexer"
+                    column="product_id" referenceTable="catalog_product_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="PLUMROCKET_PRIVATESALE_PRODUCT_EVENT_INDEXER_WEBSITE_ID" table="plumrocket_privatesale_product_event_indexer"
+                    column="website_id" referenceTable="store_website" referenceColumn="website_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="PLUMROCKET_PRIVATESALE_PRODUCT_EVENT_INDEXER_EVENT_ID" table="plumrocket_privatesale_product_event_indexer"
+                    column="event_id" referenceTable="plumrocket_privatesale_event_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
+    </table>
+    <table name="plumrocket_privatesale_product_upcoming_event_indexer" resource="default" engine="innodb"
+           comment="Upcoming Events Indexer">
+        <column xsi:type="int" name="product_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Product Identifier"/>
+        <column xsi:type="smallint" name="website_id" padding="5" unsigned="true" nullable="false" identity="false"
+                comment="Website Identifier"/>
+        <column xsi:type="int" name="event_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Event Identifier"/>
+        <column xsi:type="boolean" name="is_private" nullable="false" comment="Event Identifier"/>
+        <column xsi:type="datetime" name="start_date" nullable="true" on_update="false" comment="Event Start Date"/>
+        <column xsi:type="datetime" name="end_date" nullable="true" on_update="false" comment="Event End Date"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="product_id"/>
+            <column name="website_id"/>
+        </constraint>
+        <index referenceId="PLUMROCKET_PRIVATESALE_PRODUCT_UPCOMING_EVENT_INDEXER_EVENT_ID" indexType="btree">
+            <column name="event_id"/>
+        </index>
+        <index referenceId="PLUMROCKET_PRIVATESALE_PRODUCT_UPCOMING_EVENT_INDEXER_WEBSITE_ID" indexType="btree">
+            <column name="website_id"/>
+        </index>
+        <constraint xsi:type="foreign" referenceId="PLUMROCKET_PRIVATESALE_PRODUCT_UPCOMING_EVENT_INDEXER_EVENT_ID" table="plumrocket_privatesale_product_upcoming_event_indexer"
+                    column="event_id" referenceTable="plumrocket_privatesale_event_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="PLUMROCKET_PRIVATESALE_PRODUCT_UPCOMING_EVENT_INDEXER_WEBSITE_ID" table="plumrocket_privatesale_product_upcoming_event_indexer"
+                    column="website_id" referenceTable="store_website" referenceColumn="website_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="PLUMROCKET_PRIVATESALE_PRODUCT_UPCOMING_EVENT_INDEXER_PRODUCT_ID" table="plumrocket_privatesale_product_upcoming_event_indexer"
+                    column="product_id" referenceTable="catalog_product_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
+    </table>
+    <table name="plumrocket_privatesale_product_ended_event_indexer" resource="default" engine="innodb"
+           comment="Ended Events Indexer">
+        <column xsi:type="int" name="product_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Product Identifier"/>
+        <column xsi:type="smallint" name="website_id" padding="5" unsigned="true" nullable="false" identity="false"
+                comment="Website Identifier"/>
+        <column xsi:type="int" name="event_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Event Identifier"/>
+        <column xsi:type="boolean" name="is_private" nullable="false" comment="Event Identifier"/>
+        <column xsi:type="datetime" name="start_date" nullable="true" on_update="false" comment="Event Start Date"/>
+        <column xsi:type="datetime" name="end_date" nullable="true" on_update="false" comment="Event End Date"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="product_id"/>
+            <column name="website_id"/>
+        </constraint>
+        <index referenceId="PLUMROCKET_PRIVATESALE_PRODUCT_ENDED_EVENT_INDEXER_EVENT_ID" indexType="btree">
+            <column name="event_id"/>
+        </index>
+        <index referenceId="PLUMROCKET_PRIVATESALE_PRODUCT_ENDED_EVENT_INDEXER_WEBSITE_ID" indexType="btree">
+            <column name="website_id"/>
+        </index>
+        <constraint xsi:type="foreign" referenceId="PLUMROCKET_PRIVATESALE_PRODUCT_ENDED_EVENT_INDEXER_EVENT_ID" table="plumrocket_privatesale_product_ended_event_indexer"
+                    column="event_id" referenceTable="plumrocket_privatesale_event_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="PLUMROCKET_PRIVATESALE_PRODUCT_ENDED_EVENT_INDEXER_WEBSITE_ID" table="plumrocket_privatesale_product_ended_event_indexer"
+                    column="website_id" referenceTable="store_website" referenceColumn="website_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="PLUMROCKET_PRIVATESALE_PRODUCT_ENDED_EVENT_INDEXER_PRODUCT_ID" table="plumrocket_privatesale_product_ended_event_indexer"
+                    column="product_id" referenceTable="catalog_product_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
+    </table>
+    <table name="plumrocket_privatesale_special_price_storage" resource="default" engine="innodb"
+           comment="Special Price Storage">
+        <column xsi:type="int" name="price_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Price ID"/>
+        <column xsi:type="varchar" name="sku" nullable="true" length="64" comment="SKU"/>
+        <column xsi:type="decimal" name="special_price_value" unsigned="true" nullable="true"
+                comment="Origin Special Price"/>
+        <column xsi:type="int" name="website_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Website ID"/>
+        <column xsi:type="datetime" name="date_from" nullable="true" on_update="false" comment="Date From"/>
+        <column xsi:type="datetime" name="date_to" nullable="true" on_update="false" comment="Date To"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="price_id"/>
+        </constraint>
+        <index referenceId="PLUMROCKET_PRIVATESALE_SPECIAL_PRICE_STORAGE_SKU" indexType="btree">
+            <column name="sku"/>
+        </index>
+        <constraint xsi:type="foreign" referenceId="PLUMROCKET_PRIVATESALE_SPECIAL_PRICE_STORAGE_SKU_CATALOG_PRODUCT_ENTITY_SKU" table="plumrocket_privatesale_special_price_storage"
+                    column="sku" referenceTable="catalog_product_entity" referenceColumn="sku" onDelete="CASCADE"/>
+    </table>
+    <table name="plumrocket_privatesale_event_statistics" resource="default" engine="innodb" comment="Event Statistics">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Unique identifier"/>
+        <column xsi:type="int" name="event_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Event Identifier"/>
+        <column xsi:type="int" name="customer_id" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Customer Identifier"/>
+        <column xsi:type="int" name="order_id" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Order Identifier"/>
+        <column xsi:type="int" name="item_id" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Item Identifier"/>
+        <column xsi:type="datetime" name="created_date" nullable="false" on_update="false" comment="Created Date"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+    </table>
+    <table name="plumrocket_privatesale_flash_sale" resource="default" engine="innodb" comment="Flash Sale">
+        <column xsi:type="int" name="sale_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Unique identifier"/>
+        <column xsi:type="int" name="product_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Product Identifier"/>
+        <column xsi:type="int" name="event_id" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Event Identifier"/>
+        <column xsi:type="decimal" name="discount_amount_percent" unsigned="false" nullable="true" scale="2" precision="10"
+                comment="Discount Amount Percent"/>
+        <column xsi:type="decimal" name="sale_price" unsigned="false" nullable="true"  scale="2" precision="10"
+                comment="Flash Sale Price"/>
+        <column xsi:type="int" name="flash_sale_qty_limit" padding="11" unsigned="false" nullable="true" identity="false"
+            comment="Flash Sale QTY Limit" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="sale_id"/>
+        </constraint>
+        <index referenceId="PLUMROCKET_PRIVATESALE_FLASH_SALE_PRODUCT_ID" indexType="btree">
+            <column name="product_id"/>
+        </index>
+        <index referenceId="PLUMROCKET_PRIVATESALE_FLASH_SALE_EVENT_ID" indexType="btree">
+            <column name="event_id"/>
+        </index>
+        <constraint xsi:type="foreign" referenceId="PLUMROCKET_PRIVATESALE_FLASH_SALE_PRODUCT_ID_PRODUCT_ID_CATALOG_PRODUCT_ENTITY_ENTITY_ID" table="plumrocket_privatesale_flash_sale"
+                    column="product_id" referenceTable="catalog_product_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="PLUMROCKET_PRIVATESALE_FLASH_SALE_EVENT_ID_PRODUCT_ID_PRIVATESALE_EVENT_ENTITY_ENTITY_ID" table="plumrocket_privatesale_flash_sale"
+                    column="event_id" referenceTable="plumrocket_privatesale_event_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
+    </table>
+    <table name="plumrocket_privatesale_event_entity" resource="default" engine="innodb"
+           comment="Plumrocket PrivateSale Event Entities">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="int" name="event_type" unsigned="false" nullable="false" identity="false"
+                comment="Event Type"/>
+        <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP" comment="Creation Time"/>
+        <column xsi:type="timestamp" name="updated_at" nullable="false" default="CURRENT_TIMESTAMP" on_update="true" comment="Update Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+    </table>
+    <table name="plumrocket_privatesale_emailtemplates" resource="default" engine="innodb"
+           comment="Plumrocket Private Sales Preview Access Codes">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="ID"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Name"/>
+        <column xsi:type="int" name="store_id" unsigned="false" nullable="true" identity="false" comment="Store Id"/>
+        <column xsi:type="datetime" name="date" nullable="true" on_update="false" comment="Date"/>
+        <column xsi:type="varchar" name="events_ids" nullable="true" length="255" comment="Events Ids"/>
+        <column xsi:type="varchar" name="title" nullable="false" length="255" comment="Title"/>
+        <column xsi:type="varchar" name="period_text" nullable="false" length="255" comment="Period Text"/>
+        <column xsi:type="text" name="template" nullable="false" comment="Template"/>
+        <column xsi:type="varchar" name="template_date_format" nullable="false" length="255"
+                comment="Template Date Format"/>
+        <column xsi:type="int" name="list_layout" padding="11" unsigned="false" nullable="true" identity="false"
+                comment="List Layout"/>
+        <column xsi:type="text" name="list_template" comment="List Template"/>
+        <column xsi:type="varchar" name="list_template_date_format" length="255" nullable="false"
+                comment="list_template_date_format"/>
+        <column xsi:type="datetime" name="created_at" nullable="true" comment="created_at"/>
+        <column xsi:type="datetime" name="updated_at" nullable="true" comment="updated_at"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+    <table name="plumrocket_privatesale_image" resource="default" engine="innodb"
+           comment="Plumrocket PrivateSale Images">
+        <column xsi:type="int" name="image_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Image Id"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Name of image"/>
+        <column xsi:type="datetime" name="active_from" nullable="true" on_update="false" comment="Active from"/>
+        <column xsi:type="datetime" name="active_to" nullable="true" on_update="false" comment="Active To"/>
+        <column xsi:type="smallint" name="sort_order" padding="6" unsigned="false" nullable="false" identity="false" default="0"
+                comment="Sort order"/>
+        <column xsi:type="smallint" name="exclude" padding="6" unsigned="false" nullable="false" identity="false" default="0"
+                comment="Exclude"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="image_id"/>
+        </constraint>
+    </table>
+    <table name="plumrocket_privatesale_preview_access" resource="default" engine="innodb"
+           comment="Plumrocket Private Sales Preview Access Codes">
+        <column xsi:type="varchar" name="code" nullable="false" length="255" comment="Code"/>
+        <column xsi:type="datetime" name="active_to" nullable="true" on_update="false" comment="Active To"/>
+    </table>
+</schema>

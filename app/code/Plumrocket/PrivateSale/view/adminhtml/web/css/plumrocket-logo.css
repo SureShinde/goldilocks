@@ -1,0 +1,21 @@
+.admin__menu .parent .submenu .item-privatesale-marketing .submenu-group-title {
+  position: relative;
+  padding-left: 50px;
+}
+
+.admin__menu .submenu .item-privatesale-marketing .submenu-group-title::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 23px;
+  background-image: url(../images/plumrocket-logo.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.admin__menu .submenu li .item-privatesale-marketing {
+  min-width: 26.85rem;
+}

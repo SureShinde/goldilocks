@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+    <update handle="page_calendar"/>
+    <body>
+        <referenceContainer name="content">
+            <block class="Amasty\DeliveryDateManager\Block\Deliverydate\Edit"
+                   name="deliverydate_edit"
+                   cacheable="false"
+                   template="Amasty_DeliveryDateManager::edit.phtml">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Amasty\DeliveryDateManager\ViewModel\DeliveryDate\Edit</argument>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="amasty-delivery-date" xsi:type="array">
+                                <item name="component" xsi:type="string">Amasty_DeliveryDateManager/js/view/fieldset</item>
+                                <item name="displayArea" xsi:type="string">amasty-delivery-date</item>
+                                <item name="dataScope" xsi:type="const">\Amasty\DeliveryDateManager\Block\Checkout\LayoutProcessor::DATA_SCOPE_NS</item>
+                                <item name="provider" xsi:type="string">checkoutProvider</item>
+                                <item name="config" xsi:type="array">
+                                    <item name="template" xsi:type="string">Amasty_DeliveryDateManager/deliverydate</item>
+                                </item>
+                                <item name="children" xsi:type="array">
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <listingToolbar name="listing_top">
+        <massaction name="listing_massaction">
+            <action name="preorder_release_notification">
+                <settings>
+                    <label translate="true">Send Pre-Order Notification</label>
+                    <confirm>
+                        <title translate="true">Send notification</title>
+                        <message translate="true">You are going to send emails to the customers who placed a Preorder for the selected product(s).
+                            Notifications will be sent only for products that are not in ‘Allow Pre-Orders’ status right now.
+                            Are you sure you would like to send notifications?</message>
+                    </confirm>
+                    <url path="ampreorder_release/notification/send" />
+                    <type>preorder-release-notification</type>
+                </settings>
+            </action>
+        </massaction>
+    </listingToolbar>
+</listing>
